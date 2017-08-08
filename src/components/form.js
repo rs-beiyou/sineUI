@@ -1,4 +1,5 @@
 let obj = {
-  name:"zhangming"
+  name:"zhangming",
+  age:24
 };
 export default obj;

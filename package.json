@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --config webpack.dev.config.js",
+    "dev": "webpack-dev-server --open --config webpack.dev.config.js",
     "build": "webpack --progress --hide-modules --config webpack.pro.config.js"
   },
   "repository": {
@@ -15,7 +15,7 @@
     "framework"
   ],
   "author": "zhangming",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/zjhcsoft/bs/issues"
   },

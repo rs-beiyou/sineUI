@@ -34,7 +34,7 @@ module.exports = {
         test: /\.less/,
         use: ExtractTextPlugin.extract({
           use: [
-            'autoprefixer-loader', 'less-loader'
+            'css-loader?minimize','autoprefixer-loader', 'less-loader?minimize'
           ],
           fallback: 'style-loader'
         })
@@ -49,7 +49,7 @@ module.exports = {
   },
   resolve: {
     alias: {},
-    extensions: ['.js', '.css', '.png', '.jpg']
+    extensions: ['.js', '.css', '.png', '.jpg' ,'.less']
   },
   //添加了此项，则表明从外部引入，内部不会打包合并进去
   externals: {

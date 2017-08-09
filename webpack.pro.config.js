@@ -8,6 +8,12 @@ module.exports = merge(webpackBaseConfig, {
       compress: {
         warnings: false
       }
-    })
+    }),
+    plugins:[
+      new ExtractTextPlugin({
+          filename: '[name].[hash].css',
+          allChunks: true
+      })
+    ]
   ],
 });

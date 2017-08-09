@@ -1,3 +1,5 @@
+require('./form.less');
+require('./form.css');
 let obj = {
   name:"zhangming",
   age:24,

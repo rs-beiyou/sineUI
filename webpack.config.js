@@ -1,12 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 module.exports = {
   devtool: "#source-map",
   // 入口：要进行处理的实例（js）
   entry: {
-    bs: "./src/js/bs.js"
+    bs: "./src/bs.js",
+    bootstrap:'./src/bootstrap.config.js'
   },
   output: {
     path: path.join(__dirname, './dist'),

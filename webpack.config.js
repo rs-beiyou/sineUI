@@ -39,8 +39,11 @@ module.exports = {
           fallback: 'style-loader'
         })
       }, {
-        test: /\.(gif|jpg|jpeg|png|woff|svg|eot|ttf)\??.*$/,
-        loader: 'url-loader?limit=1024'
+        test: /\.(gif|jpg|jpeg|png)\??.*$/,
+        loader: 'url-loader?limit=10240'
+      }, {
+        test: /\.(woff|woff2|svg|eot|ttf)\??.*$/,
+        loader: 'url-loader?limit=1000000'
       }, {
         test: /\.(html|tpl)$/,
         loader: 'html-loader'

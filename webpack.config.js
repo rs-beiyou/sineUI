@@ -64,6 +64,7 @@ module.exports = {
   },
   //添加了此项，则表明从外部引入，内部不会打包合并进去
   externals: {
-    jquery: 'window.jQuery'
+    jquery: 'window.jQuery',
+    $:'window.jQuery'
   }
 };

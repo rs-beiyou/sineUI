@@ -1,4 +1,4 @@
-require('../libs/bootstrap/less/bootstrap.less');
+require('../libs/bootstrap/sass/bootstrap.scss');
 
 require('../libs/bootstrap/js/alert');
 require('../libs/bootstrap/js/tooltip');

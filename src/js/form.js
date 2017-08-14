@@ -1,1 +1,1 @@
-require('../less/form.less');
+require('../sass/bs.scss');

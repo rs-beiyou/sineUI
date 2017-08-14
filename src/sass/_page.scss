@@ -1,0 +1,17 @@
+.page{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $page-background-color;
+}
+.sidebar{
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: $sidebar-width;
+  transition: all .2s;
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)
+}

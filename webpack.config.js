@@ -5,7 +5,7 @@ module.exports = {
   devtool: "#source-map",
   // 入口：要进行处理的实例（js）
   entry: {
-    bs: "./src/js/bs.js",
+    sine: "./src/js/sine.js",
     bootstrap:'./src/bootstrap.config.js'
   },
   output: {
@@ -17,7 +17,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: 'babel-loader?cacheDirectory=true',
         exclude: /node_modules/,
         query: {
           presets: ['es2015']
@@ -64,6 +64,7 @@ module.exports = {
   },
   //添加了此项，则表明从外部引入，内部不会打包合并进去
   externals: {
-    jquery: 'window.jQuery'
+    jquery: 'window.jQuery',
+    $:'window.jQuery'
   }
 };

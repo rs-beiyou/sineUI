@@ -6,16 +6,98 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="renderer" content="webkit">
-  <title>bs</title>
+  <title>sineUI</title>
   <link rel="stylesheet" href="./dist/bootstrap.min.css">
-  <link rel="stylesheet" href="./dist/bs.min.css">
+  <link rel="stylesheet" href="./dist/sine.min.css">
   <link rel="stylesheet" href="./pages/css/index.css">
 </head>
 
 <body>
+  <div class="bs-loading-bar bs-loading-bar-color-primary"></div>
   <div class="page">
-    <div class="sidebar">
-
+    <div class="sidebar" data-background-color="white" data-active-color="orange">
+      <div class="logo">
+        <a href="" class="simple-text">creative bs</a>
+      </div>
+      <div class="sidebar-wrapper">
+        <div class="user">
+          <div class="photo center-block">
+            <img src="./src/image/bs.png" alt="BS-PHOTO">
+          </div>
+          <div class="link">
+            <a href="http://bs.zhangmings.com" title="API文档" data-toggle="tooltip" data-placement="bottom" target="_blank">
+              <i class="fa fa-book" aria-hidden="true"></i>
+            </a>
+            <a href="https://github.com/zjhcsoft/bs" title="Github" data-toggle="tooltip" data-placement="bottom" target="_blank">
+              <i class="fa fa-github" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+        <ul class="nav">
+          <li class="active">
+            <a href="#layout" data-toggle="collapse"><i class="fa fa-th-large"></i><p>布局<b class="caret"></b></p></a>
+            <div class="collapse" id="layout">
+              <ul class="nav">
+                <li><a href="">item1</a></li>
+                <li class="active">
+                  <a href="">表格</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#widgets" data-toggle="collapse"><i class="fa fa-th"></i><p>窗口部件<b class="caret"></b></p></a>
+            <div class="collapse" id="widgets">
+              <ul class="nav">
+                <li><a href="">item1</a></li>
+                <li><a href="">item2</a></li>
+                <li><a href="">item3</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#component" data-toggle="collapse"><i class="fa fa-th-large"></i><p>组件<b class="caret"></b></p></a>
+            <div class="collapse" id="component">
+              <ul class="nav">
+                <li><a href="">item1</a></li>
+                <li><a href="">item2</a></li>
+                <li><a href="">item3</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#form" data-toggle="collapse"><i class="fa fa-edit"></i><p>表单<b class="caret"></b></p></a>
+            <div class="collapse" id="form">
+              <ul class="nav">
+                <li><a href="">item1</a></li>
+                <li><a href="">item2</a></li>
+                <li><a href="">item3</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#table" data-toggle="collapse"><i class="fa fa-table"></i><p>表格<b class="caret"></b></p></a>
+            <div class="collapse" id="table">
+              <ul class="nav">
+                <li><a href="">item1</a></li>
+                <li><a href="">item2</a></li>
+                <li><a href="">item3</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a href="#others" data-toggle="collapse"><i class="fa fa-folder"></i><p>其他拓展<b class="caret"></b></p></a>
+            <div class="collapse" id="others">
+              <ul class="nav">
+                <li><a href="">item1</a></li>
+                <li><a href="">item2</a></li>
+                <li><a href="">item3</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="sidebar-background"></div>
     </div>
     <div class="main-panel">
 
@@ -23,7 +105,7 @@
   </div>
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="./dist/bootstrap.min.js"></script>
-  <script src="./dist/bs.min.js"></script>
+  <script src="./dist/sine.min.js"></script>
   <script src="./pages/js/index.js"></script>
 </body>
 

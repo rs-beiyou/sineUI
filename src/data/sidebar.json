@@ -1,0 +1,38 @@
+{
+  'id': '1',
+  name: '布局',
+  pid: '-1',
+  url: '',
+  icon: ''
+  children: [{
+    'id': '10',
+    name: '布局1',
+    pid: '1',
+    url: '',
+    icon: ''
+  },{
+    'id': '11',
+    name: '布局2',
+    pid: '1',
+    url: '',
+    icon: ''
+  }],
+  'id': '2',
+  name: '窗口部件',
+  pid: '-1',
+  url: '',
+  icon: ''
+  children: [{
+    'id': '20',
+    name: '窗口部件1',
+    pid: '1',
+    url: '',
+    icon: ''
+  },{
+    'id': '21',
+    name: '窗口部件2',
+    pid: '1',
+    url: '',
+    icon: ''
+  }]
+}

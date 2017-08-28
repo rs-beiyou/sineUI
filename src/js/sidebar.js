@@ -6,7 +6,7 @@
     this.$element = $(el);
   }
   Sidebar.prototype.setBackground = function(){
-
+    
   }
 
   function Plugin(option, _relatedTarget) {
@@ -18,6 +18,10 @@
       if (!data) $this.data('bs.sidebar', (data = new Sidebar(this, options)))
       if (typeof option == 'string') data[option](_relatedTarget)
     })
+  }
+
+  Sidebar.DEFAULTS = {
+
   }
 
   var old = $.fn.sidebar

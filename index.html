@@ -13,8 +13,9 @@
 </head>
 
 <body>
+  <div class="bs-loading-bar bs-loading-bar-color-primary"></div>
   <div class="page">
-    <div class="sidebar" data-background-color="white">
+    <div class="sidebar" data-background-color="white" data-active-color="orange">
       <div class="logo">
         <a href="" class="simple-text">creative bs</a>
       </div>
@@ -33,20 +34,13 @@
           </div>
         </div>
         <ul class="nav">
-          <li>
+          <li class="active">
             <a href="#layout" data-toggle="collapse"><i class="fa fa-th-large"></i><p>布局<b class="caret"></b></p></a>
             <div class="collapse" id="layout">
               <ul class="nav">
                 <li><a href="">item1</a></li>
-                <li>
-                  <a href="#aaa" data-toggle="collapse">表格<b class="caret"></b></a>
-                  <div class="collapse" id="aaa">
-                    <ul class="nav">
-                      <li><a href="">item1</a></li>
-                      <li><a href="">item2</a></li>
-                      <li><a href="">item3</a></li>
-                    </ul>
-                  </div>
+                <li class="active">
+                  <a href="">表格</a>
                 </li>
               </ul>
             </div>
@@ -103,9 +97,7 @@
           </li>
         </ul>
       </div>
-      <div class="sidebar-background">
-
-      </div>
+      <div class="sidebar-background"></div>
     </div>
     <div class="main-panel">
 

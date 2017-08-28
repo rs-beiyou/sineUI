@@ -11,6 +11,20 @@ a{
 .caret{
   transition: all 150ms ease-in;
 }
+.bs-loading-bar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  z-index: 2000;
+  transition: width .5s linear;
+  &.bs-loading-bar-color-primary{
+    background-color: $bs-primary;
+  }
+  &.bs-loading-bar-color-orange{
+    background-color: $bs-orange;
+  }
+}
 .page{
   position: absolute;
   top: 0;
@@ -29,14 +43,8 @@ a{
   overflow: scroll;
   transition: all .2s linear;
   z-index: 3;
-  background-color: $sidebar-background-color;
+  background-color: $sidebar-background-color-white;
   box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
-  &[data-background-color="black"]{
-    background-color: #191919;
-    .simple-text{
-      color: #ffffff;
-    }
-  }
   &::before{
     content: '';
     display: block;
@@ -46,7 +54,19 @@ a{
     top: 0;
     left: 0;
     z-index: 0;
-    // background: #000;
+  }
+  &[data-background-color="black"]{
+    background-color: $sidebar-background-color-black;
+    .simple-text{
+      color: #ffffff;
+    }
+  }
+  &[data-active-color="orange"]{
+    li.active>a{
+      background-color: $sidebar-active-color-orange;
+      box-shadow: $sidebar-active-shadow-orange;
+      color: $sidebar-active-font-color;
+    }
   }
   .logo{
     position: relative;
@@ -130,19 +150,42 @@ a{
         transition: all 150ms ease-in;
       }
       li{
+        &>a{
+          margin: 10px 15px 0;
+          color: $sidebar-font-color;
+          border-radius: 3px;
+        }
         &:first-child>a{
           margin: 0 15px;
         }
+        &.active{
+          &>a{
+            color: $sidebar-active-font-color;
+          }
+          &:hover{
+            &>a{
+              background-color: $sidebar-active-color-orange;
+            }
+            &>[data-toggle="collapse"]{
+              color: $sidebar-font-color;
+              background-color: rgba(200, 200, 200, 0.2);
+              box-shadow: none;
+            }
+          }
+          &>[data-toggle="collapse"]{
+            color: $sidebar-font-color;
+            background-color: rgba(200, 200, 200, 0.2);
+            box-shadow: none;
+            i{
+              color: $sidebar-icon-color;
+            }
+          }
+          i{
+            color: $sidebar-active-font-color;
+          }
+        }
         &:hover>a{
           background-color: rgba(200, 200, 200, 0.2);
-        }
-        &>a{
-          margin: 10px 15px 0;
-          color: #3C4858;
-          border-radius: 3px;
-          &:hover{
-            background-color: rgba(200, 200, 200, 0.2);
-          }
         }
       }
       p{
@@ -168,7 +211,7 @@ a{
         line-height: 30px;
         width: 30px;
         text-align: center;
-        color: #a9afbb;
+        color: $sidebar-icon-color;
       }
     }
   }

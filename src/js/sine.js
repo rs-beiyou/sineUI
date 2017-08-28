@@ -1,3 +1,3 @@
-require('../sass/bs.scss');
+require('../sass/sine.scss');
 require('./form');
 require('./sidebar');

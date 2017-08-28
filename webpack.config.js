@@ -5,7 +5,7 @@ module.exports = {
   devtool: "#source-map",
   // 入口：要进行处理的实例（js）
   entry: {
-    bs: "./src/js/bs.js",
+    sine: "./src/js/sine.js",
     bootstrap:'./src/bootstrap.config.js'
   },
   output: {

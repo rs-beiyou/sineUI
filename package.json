@@ -2,7 +2,7 @@
   "name": "sineUI",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "dev": "webpack-dev-server --open --config webpack.dev.config.js",
     "build": "webpack --progress --hide-modules --config webpack.pro.config.js",

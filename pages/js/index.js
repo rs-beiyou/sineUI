@@ -1,13 +1,19 @@
-$(function(){
+$(function() {
+  console.log(si.load())
   $('[data-toggle="tooltip"]').tooltip();
-  $('.sidebar-background').css('background','url(./src/image/sidebar-4.jpg)')
+  $('.sidebar-background').css('background', 'url(./src/image/sidebar-4.jpg)')
   $.ajax({
-    url:'./src/data/sidebar.json',
-    method:'get',
-    dataType:'json',
-    success:function(data){
+    url: './pages/data/sidebar.json',
+    method: 'get',
+    dataType: 'json',
+    success: function(data) {
       $(".sidebar .sidebar-wrapper").sidebar({
-        data:data
+        data: data,
+        click:function(key){
+          if(key.url){
+            $(".main-panel").load(key.url);
+          }
+        }
       });
     }
   })

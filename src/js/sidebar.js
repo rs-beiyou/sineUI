@@ -1,42 +1,42 @@
 +function ($) {
-  'use strict';
+  class Sidebar {
+    constructor(el,options){
+      this.options = options;
+      this.$element = $(el);
+    }
+    setBackground(){
 
-  var Sidebar   = function (el, options) {
-    this.options = options;
-    this.$element = $(el);
+    }
   }
-  Sidebar.prototype.setBackground = function(){
-    
-  }
+  function Plugin (option, _relatedTarget){
+    return this.each( function(){
+      let $this = $(this);
+      let data  = $this.data('bs.sidebar');
+      let options = $.extend({}, Sidebar.DEFAULTS, $this.data(), typeof option == 'object' && option);
 
-  function Plugin(option, _relatedTarget) {
-    return this.each(function () {
-      var $this = $(this)
-      var data  = $this.data('bs.sidebar')
-      var options = $.extend({}, Sidebar.DEFAULTS, $this.data(), typeof option == 'object' && option)
-
-      if (!data) $this.data('bs.sidebar', (data = new Sidebar(this, options)))
-      if (typeof option == 'string') data[option](_relatedTarget)
-    })
+      if (!data) $this.data('bs.sidebar', (data = new Sidebar(this, options)));
+      if (typeof option == 'string') data[option](_relatedTarget);
+    });
   }
 
   Sidebar.DEFAULTS = {
 
-  }
+  };
 
-  var old = $.fn.sidebar
+  const old = $.fn.sidebar;
 
-  $.fn.sidebar             = Plugin
-  $.fn.sidebar.Constructor = Sidebar
+  $.fn.sidebar             = Plugin;
+  $.fn.sidebar.defaults    = Sidebar.DEFAULTS;
+  $.fn.sidebar.Constructor = Sidebar;
 
 
   // ALERT NO CONFLICT
   // =================
 
   $.fn.sidebar.noConflict = function () {
-    $.fn.sidebar = old
-    return this
-  }
+    $.fn.sidebar = old;
+    return this;
+  };
 
 
 }(jQuery);

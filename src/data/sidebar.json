@@ -1,38 +1,86 @@
-{
-  'id': '1',
-  name: '布局',
-  pid: '-1',
-  url: '',
-  icon: ''
-  children: [{
-    'id': '10',
-    name: '布局1',
-    pid: '1',
-    url: '',
-    icon: ''
-  },{
-    'id': '11',
-    name: '布局2',
-    pid: '1',
-    url: '',
-    icon: ''
-  }],
-  'id': '2',
-  name: '窗口部件',
-  pid: '-1',
-  url: '',
-  icon: ''
-  children: [{
-    'id': '20',
-    name: '窗口部件1',
-    pid: '1',
-    url: '',
-    icon: ''
-  },{
-    'id': '21',
-    name: '窗口部件2',
-    pid: '1',
-    url: '',
-    icon: ''
-  }]
-}
+[
+  {
+    "id": "1",
+    "name": "布局",
+    "pid": "-1",
+    "url": "",
+    "icon": "",
+    "children" :[{
+      "id": "10",
+      "name": "布局1",
+      "pid": "1",
+      "url": "",
+      "icon": ""
+    }]
+  },
+  {
+    "id": "2",
+    "name": "窗口部件",
+    "pid": "-1",
+    "url": "",
+    "icon": "",
+    "children" :[{
+      "id": "10",
+      "name": "窗口部件1",
+      "pid": "2",
+      "url": "",
+      "icon": ""
+    }]
+  },
+  {
+    "id": "3",
+    "name": "组件",
+    "pid": "-1",
+    "url": "",
+    "icon": "",
+    "children" :[{
+      "id": "10",
+      "name": "组件1",
+      "pid": "3",
+      "url": "",
+      "icon": ""
+    }]
+  },
+  {
+    "id": "4",
+    "name": "表格",
+    "pid": "-1",
+    "url": "",
+    "icon": "",
+    "children" :[{
+      "id": "10",
+      "name": "表格1",
+      "pid": "4",
+      "url": "",
+      "icon": ""
+    }]
+  },
+  {
+    "id": "5",
+    "name": "表单",
+    "pid": "-1",
+    "url": "",
+    "icon": "",
+    "children" :[{
+      "id": "10",
+      "name": "表单1",
+      "pid": "5",
+      "url": "",
+      "icon": ""
+    }]
+  },
+  {
+    "id": "6",
+    "name": "其他拓展",
+    "pid": "-1",
+    "url": "",
+    "icon": "",
+    "children" :[{
+      "id": "10",
+      "name": "其他拓展1",
+      "pid": "6",
+      "url": "",
+      "icon": ""
+    }]
+  }
+]

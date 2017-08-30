@@ -11,17 +11,17 @@ a{
 .caret{
   transition: all 150ms ease-in;
 }
-.bs-loading-bar{
+.si-loading-bar{
   position: fixed;
   top: 0;
   left: 0;
   height: 2px;
   z-index: 2000;
   transition: width .5s linear;
-  &.bs-loading-bar-color-primary{
+  &.si-loading-bar-color-primary{
     background-color: $bs-primary;
   }
-  &.bs-loading-bar-color-orange{
+  &.si-loading-bar-color-orange{
     background-color: $bs-orange;
   }
 }
@@ -43,7 +43,8 @@ a{
   overflow: scroll;
   transition: all .2s linear;
   z-index: 3;
-  background-color: $sidebar-background-color-white;
+  background-color: $sidebar-background-color;
+  color: $sidebar-font-color;
   box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
   &::before{
     content: '';
@@ -54,19 +55,6 @@ a{
     top: 0;
     left: 0;
     z-index: 0;
-  }
-  &[data-background-color="black"]{
-    background-color: $sidebar-background-color-black;
-    .simple-text{
-      color: #ffffff;
-    }
-  }
-  &[data-active-color="orange"]{
-    li.active>a{
-      background-color: $sidebar-active-color-orange;
-      box-shadow: $sidebar-active-shadow-orange;
-      color: $sidebar-active-font-color;
-    }
   }
   .logo{
     position: relative;
@@ -82,14 +70,13 @@ a{
       background-color: rgba(180, 180, 180, 0.3);
     }
     .simple-text{
-      text-transform: uppercase;
       padding: 5px 0;
       display: block;
       font-size: 18px;
-      color: #3C4858;
       text-align: center;
       font-weight: 400;
       line-height: 30px;
+      color: $sidebar-font-color;
     }
   }
   .user{
@@ -129,7 +116,7 @@ a{
       padding: 0 5px;
       line-height: 23px;
       &:hover{
-        color: #3C4858;
+        color: $sidebar-font-color;
         font-size: 22px;
       }
     }
@@ -224,6 +211,23 @@ a{
     left: 0;
     background-size: cover;
     background-position: center;
+    &:after{
+      position: absolute;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      content: '';
+      background-color: $sidebar-background-color;
+      display: block;
+      opacity: .9;
+    }
+  }
+  &[data-active-color="orange"]{
+    li.active>a{
+      background-color: $sidebar-active-color-orange;
+      box-shadow: $sidebar-active-shadow-orange;
+      color: $sidebar-active-font-color;
+    }
   }
 }
 .main-panel{

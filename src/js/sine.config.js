@@ -1,5 +1,5 @@
 require('../sass/sine.scss');
 
 require('./sine');
-require('./form');
+require('./load');
 require('./sidebar');

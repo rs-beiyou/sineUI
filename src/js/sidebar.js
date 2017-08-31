@@ -9,7 +9,6 @@
       setTimeout(()=>{
         $(this.$element).css('opacity','1');
       },Number.parseFloat($(this.$element).css('transition-duration'))*1000)
-
     }
     getNodes(d){
       let _this = this;
@@ -36,9 +35,8 @@
           $(node).append(link).append(c);
         }else{
           $(link).attr('href','javascript:;').text(key.name).click(function(){
-            if($(this).data('click')) return;
-            $(this).data('click',true);
-            if(_this.activedNode)$(_this.activedNode).removeData('click').parents('li').removeClass("active");
+            if($(this).parent('li').hasClass('active')) return;
+            if(_this.activedNode)$(_this.activedNode).parents('li').removeClass("active");
             $(this).parents('li').addClass("active");
             _this.activedNode = this;
             _this.options.click&&_this.options.click(key);

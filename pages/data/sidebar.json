@@ -9,7 +9,7 @@
       "id": "10",
       "name": "布局1",
       "pid": "1",
-      "url": "",
+      "url": "./pages/views/index.html",
       "icon": ""
     }]
   },

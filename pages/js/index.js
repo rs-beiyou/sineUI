@@ -1,4 +1,5 @@
 $(function() {
+  si.init();
   $('[data-toggle="tooltip"]').tooltip();
   $('.sidebar-background').css('background', 'url(./src/image/sidebar-4.jpg)')
   $.ajax({
@@ -10,7 +11,7 @@ $(function() {
         data: data,
         click:function(key){
           if(key.url){
-            si.load(key.url,$('.main-panel'));
+            si.load(key.url);
           }
         }
       });

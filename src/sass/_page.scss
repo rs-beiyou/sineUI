@@ -21,15 +21,9 @@ a {
   left: 0;
   height: 2px;
   z-index: 2000;
-  transition: width 0.5s linear;
-
-  &.si-loading-bar-color-primary {
-    background-color: $bs-primary;
-  }
-
-  &.si-loading-bar-color-orange {
-    background-color: $bs-orange;
-  }
+  opacity: 0;
+  background-color: $si-loading-bar-color;
+  transition: all 200ms linear;
 }
 
 .page {
@@ -150,7 +144,7 @@ a {
 
     .nav {
       margin-top: 15px;
-      transition: all 150ms ease-in;
+      transition: all 300ms ease-in;
 
       [data-toggle="collapse"] ~ div > ul > li > a {
         padding-left: 60px;
@@ -269,13 +263,14 @@ a {
   }
 }
 
-.main-panel {
+.page-content {
   position: absolute;
   top: 0;
   left: $sidebar-width;
   bottom: 0;
   right: 0;
-  padding: 5px;
+  padding: 10px;
+  opacity: 0;
   transform: translate3d(0px ,0 ,0);
-  transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
+  transition: all 300ms linear;
 }

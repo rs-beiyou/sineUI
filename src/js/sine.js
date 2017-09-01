@@ -6,7 +6,7 @@
       this.currPageUrl = null;
       this.$body = $('body');
       this.$page = $('.page');
-      this.$content = $('.page-content');
+      this.$content = $('.si-main-panel');
     }
     init(){
       this.initLoadingBar();
@@ -16,9 +16,11 @@
       let bar = document.createElement('div');
       $(bar).addClass('si-loading-bar');
       this.$loadingBar = $(bar);
+      this.loadingPercent = 0;
       this.$body.prepend(bar);
     }
     showLoadingBar(w){
+      this.loadingPercent = w?w:this.loadingPercent;
       this.$loadingBar.css({
         width:w,
         opacity:1
@@ -27,16 +29,23 @@
         this.$content.css({
           opacity:0
         })
-        setTimeout(()=>{
-          this.$content.css({
+        if(w == '100%'){
+          this.$content.addClass('si-loading').css({
             opacity:1
           })
-        },Number.parseFloat(this.$content.css('transition-duration'))*1000);
+          setTimeout(()=>{
+            this.$content.removeClass('si-loading');
+          },Number.parseFloat(this.$content.css('transition-duration'))*1000);
+        }
       }else{
-        this.$content.css({
+        this.$content.addClass('si-loading').css({
           opacity:1
         })
+        setTimeout(()=>{
+          this.$content.removeClass('si-loading');
+        },Number.parseFloat(this.$content.css('transition-duration'))*1000);
       }
+      return this.loadingPercent;
     }
     hideLoadingBar(){
       this.$loadingBar.css({

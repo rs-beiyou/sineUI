@@ -7,11 +7,11 @@ $(function() {
     method: 'get',
     dataType: 'json',
     success: function(data) {
-      $(".sidebar .sidebar-wrapper").sidebar({
+      $(".sidebar-wrapper").sidebar({
         data: data,
         click:function(key){
           if(key.url){
-            si.load(key.url);
+            si.load(key);
           }
         }
       });

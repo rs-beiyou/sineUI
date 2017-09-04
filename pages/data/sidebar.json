@@ -15,13 +15,13 @@
   },
   {
     "id": "2",
-    "name": "窗口部件",
+    "name": "组件",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-th",
     "children": [{
       "id": "20",
-      "name": "窗口部件1",
+      "name": "组件1",
       "pid": "2",
       "url": "",
       "icon": ""
@@ -29,20 +29,6 @@
   },
   {
     "id": "3",
-    "name": "组件",
-    "pid": "-1",
-    "url": "",
-    "icon": "fa fa-th-large",
-    "children": [{
-      "id": "30",
-      "name": "Buttons",
-      "pid": "3",
-      "url": "./pages/views/components/buttons.html",
-      "icon": ""
-    }]
-  },
-  {
-    "id": "4",
     "name": "表格",
     "pid": "-1",
     "url": "",
@@ -50,13 +36,13 @@
     "children": [{
       "id": "40",
       "name": "表格1",
-      "pid": "4",
+      "pid": "3",
       "url": "",
       "icon": ""
     }]
   },
   {
-    "id": "5",
+    "id": "4",
     "name": "表单",
     "pid": "-1",
     "url": "",
@@ -64,13 +50,13 @@
     "children": [{
       "id": "50",
       "name": "表单1",
-      "pid": "5",
+      "pid": "4",
       "url": "./pages/views/form/general.html",
       "icon": ""
     }]
   },
   {
-    "id": "6",
+    "id": "5",
     "name": "其他拓展",
     "pid": "-1",
     "url": "",
@@ -78,7 +64,7 @@
     "children": [{
       "id": "60",
       "name": "其他拓展1",
-      "pid": "6",
+      "pid": "5",
       "url": "",
       "icon": ""
     }]

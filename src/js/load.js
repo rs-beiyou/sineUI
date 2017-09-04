@@ -3,7 +3,7 @@
   si.fn.load = function(from ,to){
     from = from?from:this.$page.data('url');
     let url = typeof from === 'object'?from.url:from;
-    to=to?to:this.$content;
+    to=to?to:this.$container;
     $.ajax({
       url:url,
       method:'get',
@@ -42,7 +42,7 @@
         }else{
           to.html(content);
         }
-        if(to===this.$content)this.currPageUrl = url;
+        if(to===this.$container)this.currPageUrl = url;
       }
     })
   }

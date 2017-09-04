@@ -5,8 +5,9 @@
       this.version = '1.0.0';
       this.currPageUrl = null;
       this.$body = $('body');
-      this.$page = $('.page');
+      this.$page = $('.si-page');
       this.$content = $('.si-main-panel');
+      this.$container = $('.si-container');
     }
     init(){
       this.initLoadingBar();

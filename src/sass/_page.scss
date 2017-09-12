@@ -169,7 +169,7 @@ a {
       transition: all 300ms linear;
 
       [data-toggle="collapse"] ~ div > ul > li > a {
-        padding-left: 60px;
+        padding-left: 50px;
       }
 
       a {
@@ -215,7 +215,7 @@ a {
             }
           }
 
-          i {
+          & > a > i {
             color: $sidebar-active-font-color;
           }
         }
@@ -252,6 +252,12 @@ a {
         width: 30px;
         text-align: center;
         color: $sidebar-icon-color;
+
+        &.sub-icon {
+          margin-right: 5px;
+          font-size: 16px;
+          line-height: normal;
+        }
       }
     }
   }

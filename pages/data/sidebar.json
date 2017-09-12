@@ -7,70 +7,80 @@
     "icon": "fa fa-th-large",
     "children": [{
       "id": "10",
-      "name": "Typography",
+      "name": "Layout",
       "pid": "1",
       "url": "./pages/views/index.html",
-      "icon": ""
+      "icon": "fa fa-delicious"
+    }, {
+      "id": "10",
+      "name": "Grid",
+      "pid": "1",
+      "url": "./pages/views/grid.html",
+      "icon": "fa fa-hashtag"
     }]
   },
   {
     "id": "2",
-    "name": "窗口部件",
+    "name": "组件",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-th",
     "children": [{
       "id": "20",
-      "name": "窗口部件1",
+      "name": "Button",
       "pid": "2",
-      "url": "",
+      "url": "./pages/views/components/button.html",
       "icon": ""
+    }, {
+      "id": "21",
+      "name": "Icon",
+      "pid": "2",
+      "url": "./pages/views/components/icon.html",
+      "icon": ""
+    }, {
+      "id": "22",
+      "name": "Color",
+      "pid": "2",
+      "url": "./pages/views/components/color.html",
+      "icon": "fa fa-tachometer"
+    }, {
+      "id": "23",
+      "name": "Font",
+      "pid": "2",
+      "url": "./pages/views/components/font.html",
+      "icon": "fa fa-font"
     }]
   },
   {
     "id": "3",
-    "name": "组件",
-    "pid": "-1",
-    "url": "",
-    "icon": "fa fa-th-large",
-    "children": [{
-      "id": "30",
-      "name": "Buttons",
-      "pid": "3",
-      "url": "./pages/views/components/buttons.html",
-      "icon": ""
-    }]
-  },
-  {
-    "id": "4",
     "name": "表格",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-table",
     "children": [{
       "id": "40",
-      "name": "表格1",
-      "pid": "4",
+      "name": "Table",
+      "pid": "3",
       "url": "",
       "icon": ""
     }]
   },
   {
-    "id": "5",
+    "id": "4",
     "name": "表单",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-edit",
     "children": [{
       "id": "50",
-      "name": "表单1",
-      "pid": "5",
+      "name": "普通表单",
+      "pid": "4",
       "url": "./pages/views/form/general.html",
       "icon": ""
     }]
   },
   {
-    "id": "6",
+    "id": "5",
     "name": "其他拓展",
     "pid": "-1",
     "url": "",
@@ -78,7 +88,7 @@
     "children": [{
       "id": "60",
       "name": "其他拓展1",
-      "pid": "6",
+      "pid": "5",
       "url": "",
       "icon": ""
     }]

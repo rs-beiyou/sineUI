@@ -47,9 +47,6 @@ class Sidebar {
     }
     return nodes;
   }
-  setBackground(){
-
-  }
 }
 function Plugin (option, _relatedTarget){
   return this.each( function(){

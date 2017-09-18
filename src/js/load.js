@@ -28,18 +28,13 @@ const load = function(from ,to){
       let regEx_body = new RegExp('<body[^>]*>([\\s\\S]*)<\\/body>');
       let regEx_script_incloud = new RegExp('<script\\b[^<]*(?:(?!<\\/script>)<[^<]*)*<\\/script>','g');
       let content = regEx_body.test(re)?regEx_body.exec(re)[1]:re;
-      if(regEx_style.test(content)){
-        content = content.replace(regEx_style,'');
-      }
-      if(regEx_script.test(content)){
-        to.html(content.replace(regEx_script_incloud,''));
-        let script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.innerHTML = regEx_script.exec(re)[1];
-        this.$body.append(script);
-        $(script).remove();
-      }else{
-        to.html(content);
+      content = regEx_style.test(content)?content.replace(regEx_style,''):content;
+      let container = '<div>'+content+'</div>';
+      let scriptArr = $(container).find('script');
+      to.html(content.replace(regEx_script,''));
+      for(let i=0,len=scriptArr.length;i<len;i++){
+        this.$body.append(scriptArr[i]);
+        $(scriptArr[i]).remove();
       }
       if(to===this.$container)this.currPageUrl = url;
     }

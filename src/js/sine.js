@@ -1,7 +1,6 @@
 import load from './load';
 class sine{
   constructor(){
-    this.fn = this.constructor.prototype;
     this.currPageUrl = null;
     this.$body = $('body');
     this.$page = $('.si-page');

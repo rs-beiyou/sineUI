@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
-  devtool: "#source-map",
   // 入口：要进行处理的实例（js）
   entry: {
     sine: "./src/main.js",

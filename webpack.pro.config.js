@@ -5,6 +5,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = merge(webpackBaseConfig, {
+  output: {
+    path: path.join(__dirname, './dist'),
+    publicPath: './',
+    filename: '[name].min.js'
+  },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compress: {

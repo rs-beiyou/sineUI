@@ -7,11 +7,6 @@ module.exports = {
     sine: "./src/main.js",
     bootstrap:'./src/bootstrap.config.js'
   },
-  output: {
-    path: path.join(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: '[name].min.js'
-  },
   module: {
     rules: [
       {
@@ -19,7 +14,7 @@ module.exports = {
         loader: 'babel-loader?cacheDirectory=true',
         exclude: /node_modules/,
         query: {
-          presets: ['es2015']
+          presets: ['env']
         }
       }, {
         test: /\.css$/,

@@ -2,16 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
-  devtool: "#source-map",
   // 入口：要进行处理的实例（js）
   entry: {
     sine: "./src/main.js",
     bootstrap:'./src/bootstrap.config.js'
-  },
-  output: {
-    path: path.join(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: '[name].min.js'
   },
   module: {
     rules: [
@@ -20,7 +14,7 @@ module.exports = {
         loader: 'babel-loader?cacheDirectory=true',
         exclude: /node_modules/,
         query: {
-          presets: ['es2015']
+          presets: ['env']
         }
       }, {
         test: /\.css$/,

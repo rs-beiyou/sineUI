@@ -1,21 +1,65 @@
-<div class="container-fluid">
-  <div class="card">
-    <div class="row">
-      <div class="col-md-6">
-        <button class="btn btn-default">Default</button>
-        <button class="btn btn-primary">Primary</button>
-        <button class="btn btn-success">Success</button>
-        <button class="btn btn-info">Info</button>
-        <button class="btn btn-link">Link</button>
-        <button class="btn btn-danger">Danger</button>
-        <button class="btn btn-warning">Warning</button>
-      </div>
-      <div class="col-md-6">
-        <button class="btn btn-primary btn-lg">large</button>
-        <button class="btn btn-primary">default</button>
-        <button class="btn btn-primary btn-sm">small</button>
-        <button class="btn btn-primary btn-xs">x-small</button>
-      </div>
+<div class="container-fluid" id="button-page">
+  <div class="row">
+    <div class="col-md-6">
+      <section class="code-box">
+        <section class="code-box-demo">
+          <button class="btn btn-default">Default</button>
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-success">Success</button>
+          <button class="btn btn-info">Info</button>
+          <button class="btn btn-link">Link</button>
+          <button class="btn btn-danger">Danger</button>
+          <button class="btn btn-warning">Warning</button>
+        </section>
+        <section class="code-box-meta">
+          <div class="code-box-title">按钮类型</div>
+          <div>
+            <p>按钮有七种类型：默认按钮、首选按钮、成功按钮、信息按钮、链接按钮、危险按钮、警告按钮。</p>
+            <p>七种类型对应<code>class</code>分别为：<code>btn-default</code><code>btn-primary</code>
+              <code>btn-success</code><code>btn-info</code><code>btn-link</code><code>btn-danger</code>
+              <code>btn-warning</code>。</p>
+          </div>
+          <span class="code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+        </section>
+        <section class="code-box-wrapper">
+          <pre><code>&lt;button class="btn btn-default"&gt;Default&lt;/button&gt;
+&lt;button class="btn btn-primary"&gt;Primary&lt;/button&gt;
+&lt;button class="btn btn-success"&gt;Success&lt;/button&gt;
+&lt;button class="btn btn-info"&gt;Info&lt;/button&gt;
+&lt;button class="btn btn-link"&gt;Link&lt;/button&gt;
+&lt;button class="btn btn-danger"&gt;Danger&lt;/button&gt;
+&lt;button class="btn btn-warning"&gt;Warning&lt;/button&gt;</code></pre>
+        </section>
+      </section>
+    </div>
+    <div class="col-md-6">
+      <section class="code-box">
+        <section class="code-box-demo">
+          <button class="btn btn-primary btn-lg">large</button>
+          <button class="btn btn-primary">default</button>
+          <button class="btn btn-primary btn-sm">small</button>
+          <button class="btn btn-primary btn-xs">x-small</button>
+        </section>
+        <section class="code-box-meta">
+          <div class="code-box-title">按钮尺寸</div>
+          <div>
+            <p>按钮有大、中、小、超小四种尺寸。</p>
+            <p>通过设置<code>class</code>为<code>btn-lg</code><code>btn-sm</code>
+              <code>btn-xs</code>分别把按钮设为大、小、超小尺寸。若不设置
+              <code>class</code>，则尺寸为中。</p>
+          </div>
+          <span class="code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+        </section>
+        <section class="code-box-wrapper">
+          <pre><code>&lt;button class="btn btn-primary btn-lg"&gt;large&lt;/button&gt;
+&lt;button class="btn btn-primary"&gt;default&lt;/button&gt;
+&lt;button class="btn btn-primary btn-sm"&gt;small&lt;/button&gt;
+&lt;button class="btn btn-primary btn-xs"&gt;x-small&lt;/button&gt;</code></pre>
+        </section>
+      </section>
     </div>
   </div>
 </div>
+<script>
+  $('#button-page [data-toggle="tooltip"]').tooltip();
+</script>

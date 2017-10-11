@@ -300,4 +300,17 @@ a {
   opacity: 0;
   background-color: $si-main-panel-bg;
   transform: translate3d(0px ,0 ,0);
+
+  .si-nav-bar {
+    padding: 20px 15px;
+  }
+
+  .si-nav-title {
+    font-size: 16px;
+    padding-left: 15px;
+  }
+
+  .si-container {
+    padding: 0 15px;
+  }
 }

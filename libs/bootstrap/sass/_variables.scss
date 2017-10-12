@@ -10,11 +10,11 @@ $gray-dark: lighten($gray-base, 20%) !default; // #333
 $gray: lighten($gray-base, 33.5%) !default; // #555
 $gray-light: lighten($gray-base, 46.7%) !default; // #777
 $gray-lighter: lighten($gray-base, 93.5%) !default; // #eee
-$brand-primary: #55acee !default; // #337ab7
-$brand-success: #5cb85c !default;
-$brand-info: #00bcd4 !default;
-$brand-warning: #f0ad4e !default;
-$brand-danger: #d9534f !default; //== Scaffolding
+$brand-primary: #3ea7f7 !default; // #337ab7
+$brand-success: #5cb860 !default;
+$brand-info: #00d3ee !default;
+$brand-warning: #ff9800 !default;
+$brand-danger: #f55a4e !default; //== Scaffolding
 //
 //## Settings for some of the most global styles.
 //** Background color for `<body>`.

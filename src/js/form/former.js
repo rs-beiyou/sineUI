@@ -1,5 +1,5 @@
-import Util from '../libs/util';
-import {Textbox,TextboxPlugin} from './form/textbox';
+import Util from '../../libs/util';
+import {Textbox,TextboxPlugin} from './textbox';
 const formPlugins = ['textbox','selectbox','datebox','checkbox','radiobox',
 'treebox','combobox','switchbox','filebox','daterangebox','passwordbox'];
 // form操作器

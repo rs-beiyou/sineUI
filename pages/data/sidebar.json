@@ -2,18 +2,21 @@
   {
     "id": "1",
     "name": "布局",
+    "subName": "",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-th-large",
     "children": [{
       "id": "10",
       "name": "Layout",
+      "subName": "",
       "pid": "1",
       "url": "./pages/views/index.html",
       "icon": "fa fa-delicious"
     }, {
       "id": "10",
       "name": "Grid",
+      "subName": "",
       "pid": "1",
       "url": "./pages/views/grid.html",
       "icon": "fa fa-hashtag"
@@ -22,30 +25,35 @@
   {
     "id": "2",
     "name": "组件",
+    "subName": "",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-th",
     "children": [{
       "id": "20",
       "name": "Button",
+      "subName": "",
       "pid": "2",
       "url": "./pages/views/components/buttons.html",
       "icon": ""
     }, {
       "id": "21",
       "name": "Icon",
+      "subName": "",
       "pid": "2",
       "url": "./pages/views/components/icon.html",
       "icon": ""
     }, {
       "id": "22",
       "name": "Color",
+      "subName": "",
       "pid": "2",
       "url": "./pages/views/components/color.html",
       "icon": "fa fa-tachometer"
     }, {
       "id": "23",
       "name": "Font",
+      "subName": "",
       "pid": "2",
       "url": "./pages/views/components/font.html",
       "icon": "fa fa-font"
@@ -54,6 +62,7 @@
   {
     "id": "3",
     "name": "表格",
+    "subName": "",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-table",
@@ -68,12 +77,14 @@
   {
     "id": "4",
     "name": "表单",
+    "subName": "",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-edit",
     "children": [{
       "id": "50",
       "name": "普通表单",
+      "subName": "",
       "pid": "4",
       "url": "./pages/views/form/general.html",
       "icon": ""
@@ -82,12 +93,14 @@
   {
     "id": "5",
     "name": "其他拓展",
+    "subName": "",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-folder",
     "children": [{
       "id": "60",
       "name": "其他拓展1",
+      "subName": "",
       "pid": "5",
       "url": "",
       "icon": ""

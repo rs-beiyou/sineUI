@@ -311,6 +311,12 @@ a {
   }
 
   .si-container {
-    padding: 0 15px;
+    position: absolute;
+    top: 62px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 5px 15px;
+    overflow: auto;
   }
 }

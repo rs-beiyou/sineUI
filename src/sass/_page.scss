@@ -176,12 +176,53 @@ a {
         transition: all 150ms ease-in;
       }
 
+      p {
+        margin: 0;
+        line-height: 30px;
+        transition: all 300ms linear;
+        white-space: nowrap;
+
+        .caret {
+          margin-top: 13px;
+          position: absolute;
+          right: 18px;
+        }
+      }
+
+      .caret {
+        margin-top: 8px;
+        position: absolute;
+        right: 18px;
+      }
+
+      i {
+        font-size: 24px;
+        float: left;
+        margin-right: 15px;
+        line-height: 30px;
+        width: 30px;
+        text-align: center;
+        color: $sidebar-icon-color;
+
+        &.sub-icon {
+          margin-right: 5px;
+          font-size: 16px;
+          line-height: normal;
+        }
+      }
+
+      .sub-name {
+        margin-left: 5px;
+        font-size: 13px;
+        color: rgba(0,0,0,.5);
+      }
+
       li {
         & > a {
           margin: 10px 15px 0;
           color: $sidebar-font-color;
           border-radius: 3px;
-          transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
+          transition: all 0.3s cubic-bezier(0.685, 0.0473, 0.346, 1);
         }
 
         &:first-child > a {
@@ -218,45 +259,14 @@ a {
           & > a > i {
             color: $sidebar-active-font-color;
           }
+
+          & > a > .sub-name {
+            color: $sidebar-active-font-color;
+          }
         }
 
         &:hover > a {
           background-color: rgba(200, 200, 200, 0.2);
-        }
-      }
-
-      p {
-        margin: 0;
-        line-height: 30px;
-        transition: all 300ms linear;
-        white-space: nowrap;
-
-        .caret {
-          margin-top: 13px;
-          position: absolute;
-          right: 18px;
-        }
-      }
-
-      .caret {
-        margin-top: 8px;
-        position: absolute;
-        right: 18px;
-      }
-
-      i {
-        font-size: 24px;
-        float: left;
-        margin-right: 15px;
-        line-height: 30px;
-        width: 30px;
-        text-align: center;
-        color: $sidebar-icon-color;
-
-        &.sub-icon {
-          margin-right: 5px;
-          font-size: 16px;
-          line-height: normal;
         }
       }
     }

@@ -5,8 +5,8 @@ const load = function(from ,to){
   to=to?to:this.$container;
   $.ajax({
     url:url,
-    method:'get',
-    dataType:'html',
+    dataType:'text',
+    timeout:20000,
     beforeSend:(xhr)=>{
       this.showLoadingBar('30%');
       loadTimer = setInterval(()=>{
@@ -33,8 +33,12 @@ const load = function(from ,to){
       let scriptArr = $(container).find('script');
       to.html(content.replace(regEx_script,''));
       for(let i=0,len=scriptArr.length;i<len;i++){
-        this.$body.append(scriptArr[i]);
-        $(scriptArr[i]).remove();
+        if(scriptArr[i].src==''){
+          this.$body.append(scriptArr[i]);
+          $(scriptArr[i]).remove();
+        }else{
+          $.getScript(scriptArr[i].src);
+        }
       }
       if(to===this.$container)this.currPageUrl = url;
     }

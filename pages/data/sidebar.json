@@ -2,73 +2,67 @@
   {
     "id": "1",
     "name": "布局",
-    "subName": "",
+    "subName": "Layout",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-th-large",
     "children": [{
       "id": "10",
-      "name": "Layout",
-      "subName": "",
+      "name": "布局",
+      "subName": "Layout",
       "pid": "1",
-      "url": "./pages/views/index.html",
-      "icon": "fa fa-delicious"
+      "url": "./pages/views/layout/layout.html",
+      "icon": "fa fa-hashtag"
     }, {
-      "id": "10",
-      "name": "Grid",
-      "subName": "",
+      "id": "11",
+      "name": "栅格",
+      "subName": "Grid",
       "pid": "1",
-      "url": "./pages/views/grid.html",
+      "url": "./pages/views/layout/grid.html",
       "icon": "fa fa-hashtag"
     }]
   },
   {
     "id": "2",
     "name": "组件",
-    "subName": "",
+    "subName": "Components",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-th",
     "children": [{
       "id": "20",
-      "name": "Button",
-      "subName": "",
+      "name": "按钮",
+      "subName": "Button",
       "pid": "2",
       "url": "./pages/views/components/buttons.html",
       "icon": ""
     }, {
       "id": "21",
-      "name": "Icon",
-      "subName": "",
+      "name": "图标",
+      "subName": "Icons",
       "pid": "2",
-      "url": "./pages/views/components/icon.html",
+      "url": "./pages/views/components/icons.html",
       "icon": ""
     }, {
       "id": "22",
-      "name": "Color",
-      "subName": "",
+      "name": "颜色",
+      "subName": "Color",
       "pid": "2",
       "url": "./pages/views/components/color.html",
       "icon": "fa fa-tachometer"
-    }, {
-      "id": "23",
-      "name": "Font",
-      "subName": "",
-      "pid": "2",
-      "url": "./pages/views/components/font.html",
-      "icon": "fa fa-font"
     }]
   },
   {
     "id": "3",
     "name": "表格",
-    "subName": "",
+    "subName": "Table",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-table",
     "children": [{
       "id": "40",
-      "name": "Table",
+      "name": "普通表格",
+      "subName": "General",
       "pid": "3",
       "url": "",
       "icon": ""
@@ -77,14 +71,14 @@
   {
     "id": "4",
     "name": "表单",
-    "subName": "",
+    "subName": "Form",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-edit",
     "children": [{
       "id": "50",
       "name": "普通表单",
-      "subName": "",
+      "subName": "General",
       "pid": "4",
       "url": "./pages/views/form/general.html",
       "icon": ""
@@ -93,7 +87,7 @@
   {
     "id": "5",
     "name": "其他拓展",
-    "subName": "",
+    "subName": "Others",
     "pid": "-1",
     "url": "",
     "icon": "fa fa-folder",

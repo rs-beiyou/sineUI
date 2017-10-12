@@ -3,7 +3,6 @@ $('.sidebar-background').css('background', 'url(./src/image/sidebar-4.jpg)');
 var $navTitle = $(".si-nav-title");
 $.ajax({
   url: './pages/data/sidebar.json',
-  method: 'get',
   dataType: 'json',
   success: function(data) {
     $(".sidebar-wrapper").sidebar({

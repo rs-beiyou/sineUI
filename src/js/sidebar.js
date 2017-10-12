@@ -17,14 +17,16 @@ class Sidebar {
     for(let key of d){
       let node = document.createElement('li');
       let link = document.createElement('a');
+      let subName = document.createElement('span');
       let i = document.createElement('i');
+      $(subName).addClass("sub-name").text(key.subName);
       $(i).addClass(key.icon);
       if(key.children&&key.children.length>0){
         let b = document.createElement('b');
         let c = document.createElement('div');
         let p = document.createElement('p');
         $(b).addClass('caret');
-        $(p).text(key.name).append(b);
+        $(p).text(key.name).append(subName).append(b);
         $(link).attr({
           'data-toggle': 'collapse',
           'href': '#si-nav-'+key.id
@@ -34,7 +36,7 @@ class Sidebar {
         $(node).append(link).append(c);
       }else{
         $(i).addClass('sub-icon');
-        $(link).attr('href','javascript:;').text(key.name).prepend(i).click(function(){
+        $(link).attr('href','javascript:;').text(key.name).prepend(i).append(subName).click(function(){
           if($(this).parent('li').hasClass('active')) return;
           if(_this.activedNode)$(_this.activedNode).parents('li').removeClass("active");
           $(this).parents('li').addClass("active");

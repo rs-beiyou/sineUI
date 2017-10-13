@@ -63,7 +63,9 @@ Form.DEFAULTS = {
   title:'查询条件',
   inline:true,
   labelPosition:'left',
-  labelWidth:60
+  labelWidth:60,
+  list:[],
+  button:[]
 };
 
 export {

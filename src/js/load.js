@@ -1,5 +1,5 @@
 let loadTimer = null;
-const load = function(from ,to){
+const load = function(from ,to, loadSuccess){
   from = from?from:this.$page.data('url');
   let url = typeof from === 'object'?from.url:from;
   to=to?to:this.$container;
@@ -18,6 +18,7 @@ const load = function(from ,to){
       },100)
     },
     complete:()=>{
+      loadSuccess&&typeof loadSuccess==='function'&&loadSuccess();
       clearInterval(loadTimer);
       this.showLoadingBar('100%');
       setTimeout(()=>{this.hideLoadingBar();},Number.parseFloat(this.$loadingBar.css('transition-duration'))*1000)

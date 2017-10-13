@@ -31,37 +31,6 @@
   </section>
   <section class="code-box">
     <section class="code-box-demo">
-      <div class="btn-group">
-        <button type="button" class="btn btn-info">Left</button>
-        <button type="button" class="btn btn-info">Middle</button>
-        <button type="button" class="btn btn-info">Right</button>
-      </div>
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary btn-lg">Left</button>
-        <button type="button" class="btn btn-primary btn-lg">Right</button>
-      </div>
-    </section>
-    <section class="code-box-meta">
-      <div class="code-box-title">按钮组合</div>
-      <div>
-        <p>可以将多个<code>button</code>放入<code>.btn-group</code>的容器中。</p>
-      </div>
-      <span class="code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-    </section>
-    <section class="code-box-wrapper">
-      <pre class="language-markup"><code class="language-markup">&lt;div class="btn-group"&gt;
-  &lt;button type="button" class="btn btn-info"&gt;Left&lt;/button&gt;
-  &lt;button type="button" class="btn btn-info"&gt;Middle&lt;/button&gt;
-  &lt;button type="button" class="btn btn-info"&gt;Right&lt;/button&gt;
-&lt;/div&gt;
-&lt;div class="btn-group"&gt;
-  &lt;button type="button" class="btn btn-primary btn-lg"&gt;Left&lt;/button&gt;
-  &lt;button type="button" class="btn btn-primary btn-lg"&gt;Right&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-    </section>
-  </section>
-  <section class="code-box">
-    <section class="code-box-demo">
       <button class="btn btn-primary btn-lg">large</button>
       <button class="btn btn-primary">default</button>
       <button class="btn btn-primary btn-sm">small</button>
@@ -84,11 +53,48 @@
 &lt;button class="btn btn-primary btn-xs"&gt;x-small&lt;/button&gt;</code></pre>
     </section>
   </section>
+  <section class="code-box">
+    <section class="code-box-demo">
+      <div class="btn-group">
+        <button type="button" class="btn btn-info">Left</button>
+        <button type="button" class="btn btn-info">Middle</button>
+        <button type="button" class="btn btn-info">Right</button>
+      </div>
+      <div class="btn-group btn-group-lg">
+        <button type="button" class="btn btn-primary">Left</button>
+        <button type="button" class="btn btn-primary">Right</button>
+      </div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary">1</button>
+        <button type="button" class="btn btn-primary">2</button>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown<span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Dropdown link</a></li>
+            <li><a href="#">Dropdown link</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="code-box-meta">
+      <div class="code-box-title">按钮组合</div>
+      <div>
+        <p>可以将多个<code>button</code>放入<code>.btn-group</code>的容器中。</p>
+      </div>
+      <span class="code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+    </section>
+    <section class="code-box-wrapper">
+      <pre class="language-markup"><code class="language-markup">&lt;div class="btn-group"&gt;
+  &lt;button type="button" class="btn btn-info"&gt;Left&lt;/button&gt;
+  &lt;button type="button" class="btn btn-info"&gt;Middle&lt;/button&gt;
+  &lt;button type="button" class="btn btn-info"&gt;Right&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="btn-group btn-group-lg"&gt;
+  &lt;button type="button" class="btn btn-primary"&gt;Left&lt;/button&gt;
+  &lt;button type="button" class="btn btn-primary"&gt;Right&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+  </section>
 </div>
-<script>
-  $('#button-page [data-toggle="tooltip"]').tooltip();
-  // 完成代码高亮
-  $('#button-page code').map(function() {
-    Prism.highlightElement(this);
-  });
-</script>

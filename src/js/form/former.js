@@ -1,7 +1,7 @@
 import Util from '../../libs/util';
 import {Textbox,TextboxPlugin} from './textbox';
 const formPlugins = ['textbox','selectbox','datebox','checkbox','radiobox',
-'treebox','combobox','switchbox','filebox','daterangebox','passwordbox'];
+'treebox','combobox','filebox','daterangebox','passwordbox'];
 // form操作器
 class Former{
   constructor(el, op){
@@ -10,12 +10,36 @@ class Former{
     this.init();
   }
   init(){
+    console.log(this.options)
+  }
+  textbox(){
 
   }
-  load(){
+  passwordbox(){
 
   }
-  data(){
+  selectbox(){
+
+  }
+  datebox(){
+
+  }
+  daterangebox(){
+
+  }
+  checkbox(){
+
+  }
+  radiobox(){
+
+  }
+  treebox(){
+
+  }
+  combobox(){
+
+  }
+  filebox(){
 
   }
 }
@@ -29,10 +53,6 @@ function Plugin (option, _relatedTarget){
     if (typeof option == 'string') data[option](_relatedTarget);
   });
 }
-
-Former.DEFAULTS = {
-
-};
 
 export {
   Former as Former,

@@ -11,14 +11,14 @@
       "name": "布局",
       "subName": "Layout",
       "pid": "1",
-      "url": "./pages/views/layout/layout.html",
+      "url": "/layout/layout",
       "icon": "fa fa-hashtag"
     }, {
       "id": "11",
       "name": "栅格",
       "subName": "Grid",
       "pid": "1",
-      "url": "./pages/views/layout/grid.html",
+      "url": "/layout/grid",
       "icon": "fa fa-hashtag"
     }]
   },
@@ -34,21 +34,21 @@
       "name": "按钮",
       "subName": "Button",
       "pid": "2",
-      "url": "./pages/views/components/buttons.html",
+      "url": "/components/buttons",
       "icon": ""
     }, {
       "id": "21",
       "name": "图标",
       "subName": "Icons",
       "pid": "2",
-      "url": "./pages/views/components/icons.html",
+      "url": "/components/icons",
       "icon": ""
     }, {
       "id": "22",
       "name": "颜色",
       "subName": "Color",
       "pid": "2",
-      "url": "./pages/views/components/color.html",
+      "url": "/components/color",
       "icon": "fa fa-tachometer"
     }]
   },
@@ -80,7 +80,7 @@
       "name": "普通表单",
       "subName": "General",
       "pid": "4",
-      "url": "./pages/views/form/general.html",
+      "url": "/form/general",
       "icon": ""
     }]
   },

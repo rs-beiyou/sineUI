@@ -1,7 +1,4 @@
-import Util from '../../libs/util';
-import {Textbox,TextboxPlugin} from './textbox';
-const formPlugins = ['textbox','selectbox','datebox','checkbox','radiobox',
-'treebox','combobox','switchbox','filebox','daterangebox','passwordbox'];
+import {Former,FormerPlugin} from './former';
 // form操作器
 class Form{
   constructor(el, op){
@@ -13,6 +10,9 @@ class Form{
   init(){
     let op = this.options;
     this.panel = op.type==='panel'||op.hasPanel?this._getPanel():null;
+    for(let i=0,len = op.list.length;i<len;i++){
+      new Former(this.$element,op.list[i]);
+    }
   }
   getOption(){
     return this.options.list;

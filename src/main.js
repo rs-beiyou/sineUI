@@ -1,4 +1,5 @@
 import './sass/sine.scss';
+import './libs/define';
 import Sine from './js/sine';
 import {Sidebar,SidebarPlugin} from './js/sidebar';
 import {Textbox,TextboxPlugin} from './js/form/textbox';

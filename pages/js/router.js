@@ -1,26 +1,38 @@
 var $container = $(".si-container");
 si.config({
   router:[{
-    path:'/home',
+    path:'home',
     page:'pages/views/index.html'
   },{
-    path:'/layout',
-    page:'pages/views/layout/layout.html'
+    path:'layout',
+    page:'',
+    children:[{
+      path:'layout',
+      page:'pages/views/layout/layout.html'
+    },{
+      path:'grid',
+      page:'pages/views/layout/grid.html'
+    }]
   },{
-    path:'/layout/grid',
-    page:'pages/views/layout/grid.html'
+    path:'form',
+    page:'',
+    children:[{
+      path:'general',
+      page:'pages/views/form/general.html'
+    }]
   },{
-    path:'/form/general',
-    page:'pages/views/form/general.html'
-  },{
-    path:'/components/buttons',
-    page:'pages/views/components/buttons.html'
-  },{
-    path:'/components/color',
-    page:'pages/views/components/color.html'
-  },{
-    path:'/components/icons',
-    page:'pages/views/components/icons.html'
+    path:'components',
+    page:'',
+    children:[{
+      path:'buttons',
+      page:'pages/views/components/buttons.html'
+    },{
+      path:'color',
+      page:'pages/views/components/color.html'
+    },{
+      path:'icons',
+      page:'pages/views/components/icons.html'
+    }]
   }],
   afterEach:function(){
     $container.find('[data-toggle="tooltip"]').tooltip();

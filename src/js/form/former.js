@@ -10,7 +10,7 @@ class Former{
     this.init();
   }
   init(){
-    console.log(this.options)
+
   }
   textbox(){
 

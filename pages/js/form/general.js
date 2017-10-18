@@ -1,6 +1,6 @@
 $('#form1').form({
   hasPanel:true,
-  title:"带有panel的表单",
+  title:"panel标题",
   list:[{
     name:"aa",
     id:"aa"

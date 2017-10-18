@@ -107,9 +107,8 @@ a {
   }
 
   .user {
-    padding-bottom: 10px;
+    padding: 10px 0;
     position: relative;
-    margin: 20px auto 0;
 
     &::after {
       content: '';
@@ -119,20 +118,6 @@ a {
       left: 10%;
       width: 80%;
       background-color: rgba(180, 180, 180, 0.3);
-    }
-
-    .photo {
-      transition: all 300ms linear;
-      width: 80px;
-      height: 80px;
-      overflow: hidden;
-      border-radius: 50%;
-      box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
-
-      img {
-        margin: 15%;
-        width: 70%;
-      }
     }
 
     .link {
@@ -309,7 +294,6 @@ a {
   right: 0;
   opacity: 0;
   background-color: $si-main-panel-bg;
-  transform: translate3d(0px ,0 ,0);
 
   .si-nav-bar {
     padding: 20px 15px;

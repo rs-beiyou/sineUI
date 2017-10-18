@@ -12,7 +12,6 @@ class Sine{
   init(){
     this._initLoadingBar();
     this.options.router!=null?this._initRouter():null;
-    this.load();
     return this;
   }
   config(options){
@@ -24,6 +23,42 @@ class Sine{
     this.$loadingBar = $(bar);
     this.loadingPercent = 0;
     this.$body.prepend(bar);
+  }
+  _initRouter(){
+    this.hasRouter = true;
+    this._router();
+    $(window).on('hashchange',this._router.bind(this));
+  }
+  _router(){
+    let router = this.options.router;
+    let hash = window.location.hash;
+    if(hash==''){
+      this.load();
+      return;
+    }
+    let hashArr = hash.replace(/#([^#]*)(#.*)?/, '$1').split('/');
+    this._localHash(hashArr,router);
+  }
+  _localHash(hashArr,router){
+    for(var i=0,len = router.length;i<len;i++){
+      if(router[i].path==hashArr.join('/')){
+        if(router[i].page){
+          this.load(router[i].page);
+          this.currPageUrl = window.location.hash;
+          break;
+        }else{
+          throw new Error('No router page for '+hashArr[0]+' available.')
+        }
+      }
+      if(router[i].path.split('/')[0] == hashArr[0]){
+        hashArr.shift();
+        if(Array.isArray(router[i].children)){
+          this._localHash(hashArr,router[i].children);
+        }else{
+          throw new Error('Router children for '+hashArr[0]+' must be an array.')
+        }
+      }
+    }
   }
   load(from = this.$page.data('url') , to = this.$container, loadSuccess){
     if(!from.includes('.')){
@@ -69,7 +104,6 @@ class Sine{
             $.getScript(scriptArr[i].src);
           }
         }
-        if(to===this.$container)this.currPageUrl = from;
       }
     })
   }
@@ -118,20 +152,6 @@ class Sine{
       return new ActiveXObject('Microsoft.XMLHTTP');
     }else{
       throw new Error('No XHR object available.')
-    }
-  }
-  _initRouter(){
-    this.hasRouter = true;
-    $(window).on('hashchange',this._router.bind(this));
-  }
-  _router(){
-    let router = this.options.router;
-    let path = window.location.hash.replace(/#([^#]*)(#.*)?/, '$1');
-    for(let i=0,len = router.length;i<len;i++){
-      if(path==router[i].path){
-        this.load(router[i].page);
-        break;
-      }
     }
   }
 }

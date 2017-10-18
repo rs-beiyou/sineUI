@@ -7,7 +7,28 @@ class Sidebar {
     $(el).append(this.$element);
     setTimeout(()=>{
       $(this.$element).css('opacity','1');
-    },Number.parseFloat($(this.$element).css('transition-duration'))*1000)
+    },Number.parseFloat($(this.$element).css('transition-duration'))*1000);
+    si.hasRouter?this.addRouter():null;
+  }
+  addRouter(){
+    this._initRouter();
+    $(window).on('hashchange',this._initRouter.bind(this));
+  }
+  _initRouter(){
+    let hash = window.location.hash.replace(/#([^#]*)(#.*)?/, '$1');
+    let da = this.options.data;
+    this._getHashNode(hash,da);
+  }
+  _getHashNode(hash,arr){
+    for(let i=0,len=arr.length;i<len;i++){
+      if(arr[i].url==hash){
+        arr[i].$dom.click();
+        break;
+      }
+      if(arr[i].children){
+        this._getHashNode(hash,arr[i].children);
+      }
+    }
   }
   getNodes(d){
     let _this = this;
@@ -37,14 +58,15 @@ class Sidebar {
       }else{
         $(i).addClass('sub-icon');
         $(link).attr('href','javascript:;').text(key.name).prepend(i).append(subName).click(function(){
-          if($(this).parent('li').hasClass('active')) return;
-          if(_this.activedNode)$(_this.activedNode).parents('li').removeClass("active");
-          $(this).parents('li').addClass("active");
-          _this.activedNode = this;
+          if($(this).parent().hasClass('active')) return;
+          if(_this.activedNode!=null)_this.activedNode.parents('li').removeClass('active');
+          $(this).parents('li').addClass('active');
+          _this.activedNode = $(this);
           _this.options.click&&_this.options.click(key);
         });
         $(node).append(link);
       }
+      key.$dom = $(link);
       $(nodes).append(node);
     }
     return nodes;

@@ -4,7 +4,6 @@ import Sine from './js/sine';
 import {Sidebar,SidebarPlugin} from './js/sidebar';
 import {Textbox,TextboxPlugin} from './js/form/textbox';
 import {Form,FormPlugin} from './js/form/form';
-import './js/table';
 
 import Util from './libs/util';
 

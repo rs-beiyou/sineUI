@@ -19,24 +19,51 @@ module.exports = {
       }, {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          use: [
-            'css-loader?minimize', 'postcss-loader'
+          use: [{
+                  loader: 'css-loader',
+                  options:{
+                      minimize: true
+                  }
+              },
+              {
+                  loader: 'postcss-loader'
+              }
           ],
           fallback: 'style-loader'
         })
       }, {
         test: /\.less/,
         use: ExtractTextPlugin.extract({
-          use: [
-            'css-loader?minimize','postcss-loader', 'less-loader'
+          use: [{
+                  loader: 'css-loader',
+                  options:{
+                      minimize: true
+                  }
+              },
+              {
+                  loader: 'postcss-loader'
+              },
+              {
+                  loader: 'less-loader'
+              }
           ],
           fallback: 'style-loader'
         })
       }, {
         test: /\.scss/,
         use: ExtractTextPlugin.extract({
-          use: [
-            'css-loader?minimize','postcss-loader', 'sass-loader'
+          use: [{
+                  loader: 'css-loader',
+                  options:{
+                      minimize: true
+                  }
+              },
+              {
+                  loader: 'postcss-loader'
+              },
+              {
+                  loader: 'sass-loader'
+              }
           ],
           fallback: 'style-loader'
         })

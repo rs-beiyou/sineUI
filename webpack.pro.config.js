@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.config.js');
@@ -19,12 +20,6 @@ module.exports = merge(webpackBaseConfig, {
     new ExtractTextPlugin({
         filename: '[name].min.css',
         allChunks: true
-    }),
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.optimize\.css$/g,
-      cssProcessor: require('cssnano'),
-      cssProcessorOptions: { discardComments: {removeAll: true } },
-      canPrint: true
     })
   ],
 });

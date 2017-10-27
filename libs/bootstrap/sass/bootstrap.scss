@@ -3,28 +3,20 @@
  * Copyright 2011-2016 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/blob/master/LICENSE)
  */
-
 // Core variables and mixins
 @import "variables";
 @import "../../../src/bootstrap.config.scss";
-@import "mixins";
-
-// Reset and dependencies
+@import "mixins"; // Reset and dependencies
 @import "normalize";
-@import "print";
-// @import "glyphicons";
-@import "../../fontAwesome/sass/font-awesome.scss";
-
-// Core CSS
+@import "print"; // @import "glyphicons";
+@import "../../fontAwesome/sass/font-awesome.scss"; // Core CSS
 @import "scaffolding";
 @import "type";
 @import "code";
 @import "grid";
 @import "tables";
 @import "forms";
-@import "buttons";
-
-// Components
+@import "buttons"; // Components
 @import "component-animations";
 @import "dropdowns";
 @import "button-groups";
@@ -45,14 +37,10 @@
 @import "panels";
 @import "responsive-embed";
 @import "wells";
-@import "close";
-
-// Components w/ JavaScript
+@import "close"; // Components w/ JavaScript
 @import "modals";
 @import "tooltip";
 @import "popovers";
-@import "carousel";
-
-// Utility classes
+@import "carousel"; // Utility classes
 @import "utilities";
 @import "responsive-utilities";

@@ -1,9 +1,9 @@
 import './sass/sine.scss';
 import './libs/define';
-import Sine from './js/sine';
-import './js/sidebar';
-import './js/form/textbox';
-import './js/form/form';
+import Sine from './components/sine';
+import './components/sidebar';
+import './components/form/textbox';
+import './components/form/form';
 
 import Util from './libs/util';
 

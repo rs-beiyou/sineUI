@@ -58,9 +58,8 @@ code{
   background: #fff;
   font-weight: bold;
 }
-.code-expand-icon{
+.code-icon{
   position: absolute;
-  right: 16px;
   cursor: pointer;
   color: #848181;
   line-height: 16px;
@@ -68,11 +67,18 @@ code{
   -o-transition: scale .3s linear;
   transition: scale .3s linear;
 }
-.code-expand-icon:hover{
+.code-icon:hover{
   color: #000000;
   -webkit-transform: scale(1.2);
   -ms-transform: scale(1.2);
   transform: scale(1.2);
+}
+.code-expand-icon{
+  right: 16px;
+}
+.code-copy-icon{
+  font-size: 13px;
+  right: 40px;
 }
 .code-box-wrapper{
   display: none;

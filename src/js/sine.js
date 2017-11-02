@@ -33,17 +33,17 @@ class Sine{
     let router = this.options.router;
     let hash = window.location.hash;
     if(hash==''){
-      this.load();
+      this.load(this.options.redirect);
       return;
     }
-    let hashArr = hash.replace(/#([^#]*)(#.*)?/, '$1').split('/');
+    let hashArr = hash[1]==='/'?hash.replace(/#\/(^#\/)*/, '$1').split('/'):hash.replace(/#([^#]*)(#.*)?/, '$1').split('/');
     this._localHash(hashArr,router);
   }
   _localHash(hashArr,router){
     for(var i=0,len = router.length;i<len;i++){
       if(router[i].path==hashArr.join('/')){
         if(router[i].page){
-          this.load(router[i].page);
+          this.load(router[i]);
           this.currPageUrl = window.location.hash;
           break;
         }else{
@@ -61,15 +61,17 @@ class Sine{
     }
   }
   load(from = this.$page.data('url') , to = this.$container, loadSuccess){
-    if(!from.includes('.')){
-      this.options.beforeEach&&this.options.beforeEach();
+    let url = typeof from==='string'?from:typeof from=='object'?from.page:null;
+    if(url===null)return;
+    if(url.indexOf('.')==-1){
+      this.options.beforeEach&&this.options.beforeEach(from);
       window.location.hash = '#'+from;
       return;
     }
     $.ajax({
-      url:from,
+      url:url,
       dataType:'text',
-      beforeSend:(xhr)=>{
+      beforeSend:xhr=>{
         this._showLoadingBar('30%');
         this.loadTimer = setInterval(()=>{
           if(parseFloat(this._showLoadingBar())<80){
@@ -79,14 +81,19 @@ class Sine{
           }
         },100)
       },
-      complete:()=>{
-        this.hasRouter?this.options.afterEach&&this.options.afterEach():false;
-        loadSuccess&&typeof loadSuccess==='function'&&loadSuccess();
+      complete:(xhr,status)=>{
+        if(xhr.status===404){
+          this.load(this.options.lost?this.options.lost:this.options.redirect);
+        }
+        this.hasRouter?this.options.afterEach&&this.options.afterEach(from):false;
+        if(status=='success'){
+          loadSuccess&&typeof loadSuccess==='function'&&loadSuccess();
+        }
         clearInterval(this.loadTimer);
         this._showLoadingBar('100%');
         setTimeout(()=>{this._hideLoadingBar();},Number.parseFloat(this.$loadingBar.css('transition-duration'))*1000)
       },
-      success:(re)=>{
+      success:re=>{
         let regEx_script = new RegExp('<script[^>]*>([\\s\\S]*)<\\/script>','g');
         let regEx_style = new RegExp('<style[^>]*>([\\s\\S]*)<\\/style>','g');
         let regEx_body = new RegExp('<body[^>]*>([\\s\\S]*)<\\/body>');
@@ -158,6 +165,7 @@ class Sine{
 Sine.DEFAULTS = {
   router:null,
   beforeEach:null,
-  afterEach:null
+  afterEach:null,
+  redirect:null
 }
 export default Sine;

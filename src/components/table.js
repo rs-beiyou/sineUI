@@ -1,6 +1,3 @@
-import './table/bsTable';
-import './table/editable';
-import './table/bsTable.cn';
 (function($) {
   Array.prototype.findObjIndex = function(obj) {
     for (var i = 0, len = this.length; i < len; i++) {

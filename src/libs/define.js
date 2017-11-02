@@ -89,6 +89,32 @@
     }());
   }
   /*
+  String.includes
+  */
+  if (!String.prototype.includes) {
+    (function(){
+      var includes = function(search, start){
+        if (typeof start !== 'number') {
+          start = 0;
+        }
+        if (start + search.length > this.length) {
+          return false;
+        } else {
+          return this.indexOf(search, start) !== -1;
+        }
+      }
+      if (defineProperty) {
+        defineProperty(String.prototype, 'includes', {
+          'value': includes,
+          'configurable': true,
+          'writable': true
+        });
+      } else {
+        String.prototype.includes = includes;
+      }
+    }());
+  }
+  /*
   Array.isArray
   */
   if (!Array.prototype.isArray) {

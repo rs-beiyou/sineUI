@@ -1,64 +1,64 @@
 import './textbox';
-(function($){
+(function($) {
   // form操作器
-  class Former{
-    constructor(el, op){
-      this.element = el;
+  class Former {
+    constructor(el, op) {
       this.$element = $(el);
       this.options = op;
       this.init();
     }
-    init(){
+    init() {
+      this.$element[this.options.type](this.options);
+    }
+    textbox() {
 
     }
-    textbox(){
+    passwordbox() {
 
     }
-    passwordbox(){
+    selectbox() {
 
     }
-    selectbox(){
+    datebox() {
 
     }
-    datebox(){
+    daterangebox() {
 
     }
-    daterangebox(){
+    checkbox() {
 
     }
-    checkbox(){
+    radiobox() {
 
     }
-    radiobox(){
+    treebox() {
 
     }
-    treebox(){
+    combobox() {
 
     }
-    combobox(){
-
-    }
-    filebox(){
+    filebox() {
 
     }
   }
-  function Plugin (option, _relatedTarget){
-    return this.each( function(){
+
+  function Plugin(option, _relatedTarget) {
+    return this.each(function() {
       let $this = $(this);
-      let former  = $this.data('si.form');
+      let former = $this.data('si.form');
       let options = $.extend({}, Former.DEFAULTS, $this.data(), typeof option == 'object' && option);
 
       if (!former) $this.data('si.form', (former = new Former(this, options)));
       if (typeof option == 'string') former[option](_relatedTarget);
     });
   }
-  let old = $.fn.former
+  let old = $.fn.former;
 
-  $.fn.former             = Plugin
-  $.fn.former.Constructor = Former
+  $.fn.former = Plugin;
+  $.fn.former.Constructor = Former;
 
-  $.fn.former.noConflict = function () {
-    $.fn.former = old
-    return this
-  }
+  $.fn.former.noConflict = function() {
+    $.fn.former = old;
+    return this;
+  };
 })(jQuery);

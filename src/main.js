@@ -1,6 +1,6 @@
 import './sass/sine.scss';
 import './libs/define';
-import './components/sidebar';
+import './components/sidebar/sidebar';
 import './components/form/form';
 
 import Sine from './components/sine';

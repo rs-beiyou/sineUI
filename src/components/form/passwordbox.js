@@ -1,14 +1,14 @@
 import InputInline from './input-inline';
 (function($) {
-  class Textbox extends InputInline {
+  class Passwordbox extends InputInline {
     constructor(el, options) {
       super(el, options);
-      this._init();
+      this.init();
     }
-    _init() {
+    init() {
       let _fragemnet = document.createDocumentFragment();
       this.labelDom = super.setLabel();
-      let group = super.setInputGroup('text');
+      let group = super.setInputGroup('password');
       this.inputGroupDom = group.inputGroup;
       this.inputDom = group.input;
       $(_fragemnet).append(this.labelDom).append(this.inputGroupDom);
@@ -22,34 +22,30 @@ import InputInline from './input-inline';
   function Plugin(option, _relatedTarget) {
     return this.each(function() {
       let $this = $(this);
-      let data = $this.data('si.textbox');
-      let options = $.extend({}, Textbox.DEFAULTS, $this.data(), typeof option == 'object' && option);
+      let data = $this.data('si.passwordbox');
+      let options = $.extend({}, Passwordbox.DEFAULTS, $this.data(), typeof option == 'object' && option);
 
       if (!data) {
-        if (typeof option !== 'object') {
-          console.error('请先初始化textbox，再执行其他操作！\n textbox初始化：$().textbox(Object);');
-          return;
-        }
-        data = new Textbox(this, options);
-        $(data.inputDom).data('si.textbox', data);
+        data = new Passwordbox(this, options);
+        $(data.inputDom).data('si.passwordbox', data);
       } else {
         if (typeof option == 'object') data['set'](option);
       }
       if (typeof option == 'string') data[option](_relatedTarget);
     });
   }
-  let old = $.fn.textbox;
+  let old = $.fn.passwordbox;
 
-  $.fn.textbox = Plugin;
-  $.fn.textbox.Constructor = Textbox;
+  $.fn.passwordbox = Plugin;
+  $.fn.passwordbox.Constructor = Passwordbox;
 
-  $.fn.textbox.noConflict = function() {
-    $.fn.textbox = old;
+  $.fn.passwordbox.noConflict = function() {
+    $.fn.passwordbox = old;
     return this;
   };
 
 
-  Textbox.DEFAULTS = {
+  Passwordbox.DEFAULTS = {
     label: '',
     id: '',
     name: '',

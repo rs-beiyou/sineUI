@@ -1,61 +1,22 @@
 import './textbox';
+import './selectbox';
 (function($) {
-  // form操作器
-  class Former {
-    constructor(el, op) {
-      this.$element = $(el);
-      this.options = op;
-      this.init();
-    }
-    init() {
-      this.$element[this.options.type](this.options);
-    }
-    textbox() {
-
-    }
-    passwordbox() {
-
-    }
-    selectbox() {
-
-    }
-    datebox() {
-
-    }
-    daterangebox() {
-
-    }
-    checkbox() {
-
-    }
-    radiobox() {
-
-    }
-    treebox() {
-
-    }
-    combobox() {
-
-    }
-    filebox() {
-
-    }
-  }
-
-  function Plugin(option, _relatedTarget) {
+  function former(option, _relatedTarget) {
     return this.each(function() {
-      let $this = $(this);
-      let former = $this.data('si.form');
-      let options = $.extend({}, Former.DEFAULTS, $this.data(), typeof option == 'object' && option);
-
-      if (!former) $this.data('si.form', (former = new Former(this, options)));
-      if (typeof option == 'string') former[option](_relatedTarget);
+      if (typeof option !== 'string') {
+        console.error('The first argument of $.fn.former must be a String');
+        return;
+      }
+      if (typeof _relatedTarget !== 'object') {
+        console.error('The second argument of $.fn.former must be an Object');
+        return;
+      }
+      $(this)[option](_relatedTarget || {});
     });
   }
   let old = $.fn.former;
 
-  $.fn.former = Plugin;
-  $.fn.former.Constructor = Former;
+  $.fn.former = former;
 
   $.fn.former.noConflict = function() {
     $.fn.former = old;

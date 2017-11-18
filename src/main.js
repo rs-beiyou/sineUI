@@ -1,10 +1,10 @@
 import './sass/sine.scss';
-import './libs/define';
+import 'core-js/fn/object/assign';
+import 'core-js/fn/array/is-array';
 import './components/sidebar/sidebar';
 import './components/form/form';
 
 import Sine from './components/sine';
-import Util from './libs/util';
 
 window.sine = new Sine();
-window.si = sine;
+window.si = window.sine;

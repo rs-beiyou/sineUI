@@ -1,28 +1,29 @@
-(function(){
+(function() {
   'use strict'; // needed to support `apply`/`call` with `undefined`/`null`
-  var defineProperty = (function() {
+  let defineProperty = (function() {
     // IE 8 only supports `Object.defineProperty` on DOM elements
+    let result;
     try {
-      var object = {};
-      var $defineProperty = Object.defineProperty;
-      var result = $defineProperty(object, object, object) && $defineProperty;
-    } catch(error) {}
+      let object = {};
+      let $defineProperty = Object.defineProperty;
+      result = $defineProperty(object, object, object) && $defineProperty;
+    } catch (error) {}
     return result;
   }());
-  /*
-  Object.assign
-  */
+    /*
+    Object.assign
+    */
   if (typeof Object.assign != 'function') {
-    (function(){
-      var assign = function(target, varArgs){
+    (function() {
+      let assign = function(target, varArgs) {
         if (target == null) {
           throw new TypeError('Cannot convert undefined or null to object');
         }
-        var to = Object(target);
-        for (var index = 1; index < arguments.length; index++) {
-          var nextSource = arguments[index];
+        let to = Object(target);
+        for (let index = 1; index < arguments.length; index++) {
+          let nextSource = arguments[index];
           if (nextSource != null) {
-            for (var nextKey in nextSource) {
+            for (let nextKey in nextSource) {
               // Avoid bugs when hasOwnProperty is shadowed
               if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
                 to[nextKey] = nextSource[nextKey];
@@ -31,9 +32,9 @@
           }
         }
         return to;
-      }
-      if(defineProperty){
-        defineProperty(Object, "assign", {
+      };
+      if (defineProperty) {
+        defineProperty(Object, 'assign', {
           value: assign,
           writable: true,
           configurable: true
@@ -42,34 +43,34 @@
     }());
   }
   /*
-  String.startsWith
-  */
+                    String.startsWith
+                    */
   if (!String.prototype.startsWith) {
     (function() {
-      var toString = {}.toString;
-      var startsWith = function(search) {
+      let toString = {}.toString;
+      let startsWith = function(search) {
         if (this == null) {
           throw TypeError();
         }
-        var string = String(this);
+        let string = String(this);
         if (search && toString.call(search) == '[object RegExp]') {
           throw TypeError();
         }
-        var stringLength = string.length;
-        var searchString = String(search);
-        var searchLength = searchString.length;
-        var position = arguments.length > 1 ? arguments[1] : undefined;
+        let stringLength = string.length;
+        let searchString = String(search);
+        let searchLength = searchString.length;
+        let position = arguments.length > 1 ? arguments[1] : undefined;
         // `ToInteger`
-        var pos = position ? Number(position) : 0;
+        let pos = position ? Number(position) : 0;
         if (pos != pos) { // better `isNaN`
           pos = 0;
         }
-        var start = Math.min(Math.max(pos, 0), stringLength);
+        let start = Math.min(Math.max(pos, 0), stringLength);
         // Avoid the `indexOf` call if no match is possible
         if (searchLength + start > stringLength) {
           return false;
         }
-        var index = -1;
+        let index = -1;
         while (++index < searchLength) {
           if (string.charCodeAt(start + index) != searchString.charCodeAt(index)) {
             return false;
@@ -89,11 +90,11 @@
     }());
   }
   /*
-  String.includes
-  */
+                    String.includes
+                    */
   if (!String.prototype.includes) {
-    (function(){
-      var includes = function(search, start){
+    (function() {
+      let includes = function(search, start) {
         if (typeof start !== 'number') {
           start = 0;
         }
@@ -102,7 +103,7 @@
         } else {
           return this.indexOf(search, start) !== -1;
         }
-      }
+      };
       if (defineProperty) {
         defineProperty(String.prototype, 'includes', {
           'value': includes,
@@ -115,11 +116,11 @@
     }());
   }
   /*
-  Array.isArray
-  */
+                    Array.isArray
+                    */
   if (!Array.prototype.isArray) {
-    (function(){
-      var isArray = function(arg) {
+    (function() {
+      let isArray = function(arg) {
         return Object.prototype.toString.call(arg) === '[object Array]';
       };
       if (defineProperty) {
@@ -128,26 +129,26 @@
           'configurable': true,
           'writable': true
         });
-      }else{
+      } else {
         Array.prototype.isArray = isArray;
       }
     }());
   }
   /*
-  Array.includes
-  */
+                    Array.includes
+                    */
   if (!Array.prototype.includes) {
-    (function(){
-      var includes = function(searchElement, fromIndex) {
+    (function() {
+      let includes = function(searchElement, fromIndex) {
         // 1. Let O be ? ToObject(this value).
         if (this == null) {
           throw new TypeError('"this" is null or not defined');
         }
 
-        var o = Object(this);
+        let o = Object(this);
 
         // 2. Let len be ? ToLength(? Get(O, "length")).
-        var len = o.length >>> 0;
+        let len = o.length >>> 0;
 
         // 3. If len is 0, return false.
         if (len === 0) {
@@ -156,14 +157,14 @@
 
         // 4. Let n be ? ToInteger(fromIndex).
         //    (If fromIndex is undefined, this step produces the value 0.)
-        var n = fromIndex | 0;
+        let n = fromIndex | 0;
 
         // 5. If n ≥ 0, then
         //  a. Let k be n.
         // 6. Else n < 0,
         //  a. Let k be len + n.
         //  b. If k < 0, let k be 0.
-        var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+        let k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
 
         function sameValueZero(x, y) {
           return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
@@ -181,13 +182,13 @@
         // 8. Return false
         return false;
       };
-      if(defineProperty){
+      if (defineProperty) {
         defineProperty(Array.prototype, 'includes', {
           'value': includes,
           'configurable': true,
           'writable': true
         });
-      }else{
+      } else {
         Array.prototype.includes = includes;
       }
     }());

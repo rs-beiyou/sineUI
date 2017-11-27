@@ -72,7 +72,7 @@ class Sine {
       url: url,
       dataType: 'text',
       beforeSend: () => {
-        this._showLoadingBar('30%');
+        this._showLoadingBar('50%');
         this.loadTimer = setInterval(() => {
           if (parseFloat(this._showLoadingBar()) < 80) {
             this._showLoadingBar(parseFloat(this._showLoadingBar()) + 10 + '%');

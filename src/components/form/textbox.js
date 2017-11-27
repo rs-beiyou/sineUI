@@ -1,21 +1,53 @@
-import InputInline from './input-inline';
+import BaseForm from './form-base';
 (function($) {
-  class Textbox extends InputInline {
+  class Textbox extends BaseForm {
     constructor(el, options) {
-      super(el, options);
+      super(el, options, Textbox.DEFAULTS);
       this._init();
     }
     _init() {
-      let _fragemnet = document.createDocumentFragment();
-      this.labelDom = super.setLabel();
-      let group = super.setInputGroup('text');
-      this.inputGroupDom = group.inputGroup;
-      this.inputDom = group.input;
-      $(_fragemnet).append(this.labelDom).append(this.inputGroupDom);
-      this.$element.after(_fragemnet).remove();
+      super._initForm();
+      Object.assign(this.options, this.lastOptions);
+      this.$element.after(this.$fragment[0]).remove();
+    }
+    //无hidden情况
+    _setTextbox(item) {
+      let op = this.options;
+      let $input;
+      if (!this.$input) {
+        let _input = op.multiline ? document.createElement('textarea') : document.createElement('input');
+        $input = $(_input);
+        $input.addClass('form-control');
+        op.multiline ? null : op.password ? $input.attr('type', 'password') : $input.attr('type', 'text');
+        this.$input = $input;
+        this.$formBlock.append(_input);
+      } else {
+        $input = this.$input;
+      }
+      switch (item) {
+        case 'id':
+        case 'name':
+        case 'placeholder':
+        case 'readonly':
+        case 'disabled':
+          $input.attr(item, op[item]);
+          break;
+        case 'rows':
+        case 'cols':
+          if (op.multiline) {
+            $input.attr(item, op[item]);
+          }
+          break;
+        case 'value':
+          $input.val(op.value);
+          break;
+        case 'width':
+          $input.css('width', op.width);
+          break;
+      }
     }
     set(option) {
-      super.set(option);
+      Object.assign(this.options, option || {});
     }
   }
 
@@ -23,7 +55,7 @@ import InputInline from './input-inline';
     return this.each(function() {
       let $this = $(this);
       let data = $this.data('si.textbox');
-      let options = $.extend({}, Textbox.DEFAULTS, $this.data(), typeof option == 'object' && option);
+      let options = $.extend({}, Textbox.DEFAULTS, $this.data(), typeof option === 'object' && option);
 
       if (!data) {
         if (typeof option !== 'object') {
@@ -31,11 +63,11 @@ import InputInline from './input-inline';
           return;
         }
         data = new Textbox(this, options);
-        $(data.inputDom).data('si.textbox', data);
+        data.$input.data('si.textbox', data);
       } else {
-        if (typeof option == 'object') data['set'](option);
+        if (typeof option === 'object') data['set'](option);
       }
-      if (typeof option == 'string') data[option](_relatedTarget);
+      if (typeof option === 'string') data[option](_relatedTarget);
     });
   }
   let old = $.fn.textbox;
@@ -50,6 +82,7 @@ import InputInline from './input-inline';
 
 
   Textbox.DEFAULTS = {
+    hasSurface: false,
     label: '',
     id: '',
     name: '',

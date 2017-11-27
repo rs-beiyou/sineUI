@@ -7,189 +7,78 @@
       let object = {};
       let $defineProperty = Object.defineProperty;
       result = $defineProperty(object, object, object) && $defineProperty;
-    } catch (error) {}
+    } catch (error) {
+      console.warn('defineProperty 方法出现问题！');
+    }
     return result;
   }());
     /*
-    Object.assign
+    Array.compare
+    a1: Array数组
+    b1: Array数组
+    flag: Boolean true表示a1比b1多的部分；false反之。
     */
-  if (typeof Object.assign != 'function') {
+  if (typeof Array.compare != 'function') {
     (function() {
-      let assign = function(target, varArgs) {
-        if (target == null) {
-          throw new TypeError('Cannot convert undefined or null to object');
+      let compare = function(a1, b1, flag) {
+        let a = a1;
+        let d = a1;
+        let b = b1;
+        let e = b1;
+        let c = [];
+        let addstr = [];
+        let dels = [];
+        a.sort();
+        b.sort();
+        let i = 0;
+        let j = 0;
+        while (i < a.length && j < b.length) {
+          if (a[i] < b[j]) {
+            c.push(a[i]);
+            i++;
+          } else if (b[j] < a[i]) {
+            c.push(b[j]);
+            j++;
+          } else {
+            i++;
+            j++;
+          }
         }
-        let to = Object(target);
-        for (let index = 1; index < arguments.length; index++) {
-          let nextSource = arguments[index];
-          if (nextSource != null) {
-            for (let nextKey in nextSource) {
-              // Avoid bugs when hasOwnProperty is shadowed
-              if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
-                to[nextKey] = nextSource[nextKey];
+        while (i < a.length) {
+          c.push(a[i]);
+          i++;
+        }
+        while (j < b.length) {
+          c.push(b[j]);
+          j++;
+        }
+        if (!flag) {
+          for (let i = 0; i < c.length; i++) {
+            for (let j = 0; j < e.length; j++) {
+              if (e[j] == c[i]) {
+                addstr.push(e[j]);
               }
             }
           }
+          return addstr;
+        } else {
+          for (let i = 0; i < c.length; i++) {
+            for (let j = 0; j < d.length; j++) {
+              if (d[j] == c[i]) {
+                dels.push(d[j]);
+              }
+            }
+          }
+
+          return dels;
         }
-        return to;
       };
       if (defineProperty) {
-        defineProperty(Object, 'assign', {
-          value: assign,
+        defineProperty(Array, 'compare', {
+          value: compare,
           writable: true,
           configurable: true
         });
-      }
-    }());
-  }
-  /*
-                    String.startsWith
-                    */
-  if (!String.prototype.startsWith) {
-    (function() {
-      let toString = {}.toString;
-      let startsWith = function(search) {
-        if (this == null) {
-          throw TypeError();
-        }
-        let string = String(this);
-        if (search && toString.call(search) == '[object RegExp]') {
-          throw TypeError();
-        }
-        let stringLength = string.length;
-        let searchString = String(search);
-        let searchLength = searchString.length;
-        let position = arguments.length > 1 ? arguments[1] : undefined;
-        // `ToInteger`
-        let pos = position ? Number(position) : 0;
-        if (pos != pos) { // better `isNaN`
-          pos = 0;
-        }
-        let start = Math.min(Math.max(pos, 0), stringLength);
-        // Avoid the `indexOf` call if no match is possible
-        if (searchLength + start > stringLength) {
-          return false;
-        }
-        let index = -1;
-        while (++index < searchLength) {
-          if (string.charCodeAt(start + index) != searchString.charCodeAt(index)) {
-            return false;
-          }
-        }
-        return true;
-      };
-      if (defineProperty) {
-        defineProperty(String.prototype, 'startsWith', {
-          'value': startsWith,
-          'configurable': true,
-          'writable': true
-        });
-      } else {
-        String.prototype.startsWith = startsWith;
-      }
-    }());
-  }
-  /*
-                    String.includes
-                    */
-  if (!String.prototype.includes) {
-    (function() {
-      let includes = function(search, start) {
-        if (typeof start !== 'number') {
-          start = 0;
-        }
-        if (start + search.length > this.length) {
-          return false;
-        } else {
-          return this.indexOf(search, start) !== -1;
-        }
-      };
-      if (defineProperty) {
-        defineProperty(String.prototype, 'includes', {
-          'value': includes,
-          'configurable': true,
-          'writable': true
-        });
-      } else {
-        String.prototype.includes = includes;
-      }
-    }());
-  }
-  /*
-                    Array.isArray
-                    */
-  if (!Array.prototype.isArray) {
-    (function() {
-      let isArray = function(arg) {
-        return Object.prototype.toString.call(arg) === '[object Array]';
-      };
-      if (defineProperty) {
-        defineProperty(Array.prototype, 'startsWith', {
-          'value': isArray,
-          'configurable': true,
-          'writable': true
-        });
-      } else {
-        Array.prototype.isArray = isArray;
-      }
-    }());
-  }
-  /*
-                    Array.includes
-                    */
-  if (!Array.prototype.includes) {
-    (function() {
-      let includes = function(searchElement, fromIndex) {
-        // 1. Let O be ? ToObject(this value).
-        if (this == null) {
-          throw new TypeError('"this" is null or not defined');
-        }
-
-        let o = Object(this);
-
-        // 2. Let len be ? ToLength(? Get(O, "length")).
-        let len = o.length >>> 0;
-
-        // 3. If len is 0, return false.
-        if (len === 0) {
-          return false;
-        }
-
-        // 4. Let n be ? ToInteger(fromIndex).
-        //    (If fromIndex is undefined, this step produces the value 0.)
-        let n = fromIndex | 0;
-
-        // 5. If n ≥ 0, then
-        //  a. Let k be n.
-        // 6. Else n < 0,
-        //  a. Let k be len + n.
-        //  b. If k < 0, let k be 0.
-        let k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
-
-        function sameValueZero(x, y) {
-          return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
-        }
-        // 7. Repeat, while k < len
-        while (k < len) {
-          // a. Let elementK be the result of ? Get(O, ! ToString(k)).
-          // b. If SameValueZero(searchElement, elementK) is true, return true.
-          // c. Increase k by 1.
-          if (sameValueZero(o[k], searchElement)) {
-            return true;
-          }
-          k++;
-        }
-        // 8. Return false
-        return false;
-      };
-      if (defineProperty) {
-        defineProperty(Array.prototype, 'includes', {
-          'value': includes,
-          'configurable': true,
-          'writable': true
-        });
-      } else {
-        Array.prototype.includes = includes;
       }
     }());
   }

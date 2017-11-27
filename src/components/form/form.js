@@ -1,4 +1,7 @@
-import './former';
+import './textbox';
+import './passwordbox';
+import './checkbox';
+import './radiobox';
 // form操作器
 (function($) {
   class Form {
@@ -6,30 +9,17 @@ import './former';
       this.$element = $(el);
       this.options = op;
       this.panel = null;
-      this.init();
+      this._init();
     }
-    init() {
+    _init() {
       let op = this.options;
       this.panel = op.type === 'panel' || op.hasPanel ? this._getPanel() : null;
       for (let i = 0, len = op.list.length; i < len; i++) {
-        this._getLabel(op.list[i].label);
-        this.$element.former(op.list[i]);
+        this._getFormGroup(op.list[i]);
       }
-    }
-    getOption() {
-      return this.options.list;
-    }
-    load() {
-
-    }
-    data() {
-
-    }
-    clear() {
-
-    }
-    clone() {
-
+      for (let i = 0, len = op.button.length; i < len; i++) {
+        this._getFormBtn(op.button[i]);
+      }
     }
     //私有方法
     _getPanel() {
@@ -43,10 +33,18 @@ import './former';
       this.$element.wrap(panelBody).parent().wrap(panel).parent().prepend(panelHeader);
       return panel;
     }
-    _getLabel() {
+    _getFormGroup(el) {
+      let formGroup = document.createElement('div');
+      let input = document.createElement('input');
+      $(formGroup).addClass('form-group').append(input);
+      $(input)[el.type ? el.type : 'textbox'](el).css('opacity', '1');
+      this.$element.append(formGroup);
+    }
+    _getFormBtn() {
 
     }
   }
+
 
   function Plugin(option, _relatedTarget) {
     return this.each(function() {

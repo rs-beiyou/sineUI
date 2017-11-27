@@ -1,9 +1,9 @@
 import BaseForm from './form-base';
 (function($) {
-  class Textbox extends BaseForm {
+  class Passwordbox extends BaseForm {
     constructor(el, options) {
-      super(el, options, Textbox.DEFAULTS);
-      this.className = 'Textbox';
+      super(el, options, Passwordbox.DEFAULTS);
+      this.className = 'Passwordbox';
       this._init();
     }
     _init() {
@@ -12,14 +12,14 @@ import BaseForm from './form-base';
       this.$element.after(this.$fragment[0]).remove();
     }
     //无hidden情况
-    _setTextbox(item) {
+    _setPasswordbox(item) {
       let op = this.options;
       let $input;
       if (!this.$input) {
-        let _input = op.multiline ? document.createElement('textarea') : document.createElement('input');
+        let _input = document.createElement('input');
         $input = $(_input);
         $input.addClass('form-control');
-        op.multiline ? null : op.password ? $input.attr('type', 'password') : $input.attr('type', 'text');
+        $input.attr('type', 'password');
         this.$input = $input;
         this.$formBlock.append(_input);
       } else {
@@ -55,35 +55,34 @@ import BaseForm from './form-base';
   function Plugin(option, _relatedTarget) {
     return this.each(function() {
       let $this = $(this);
-      let data = $this.data('si.textbox');
-      let options = $.extend({}, Textbox.DEFAULTS, $this.data(), typeof option === 'object' && option);
+      let data = $this.data('si.passwordbox');
+      let options = $.extend({}, Passwordbox.DEFAULTS, $this.data(), typeof option == 'object' && option);
 
       if (!data) {
         if (typeof option !== 'object') {
-          console.error('请先初始化textbox，再执行其他操作！\n textbox初始化：$().textbox(Object);');
+          console.error('请先初始化passwordbox，再执行其他操作！\n passwordbox初始化：$().passwordbox(Object);');
           return;
         }
-        data = new Textbox(this, options);
-        data.$input.data('si.textbox', data);
+        data = new Passwordbox(this, options);
+        $(data.inputDom).data('si.passwordbox', data);
       } else {
-        if (typeof option === 'object') data['set'](option);
+        if (typeof option == 'object') data['set'](option);
       }
-      if (typeof option === 'string') data[option](_relatedTarget);
+      if (typeof option == 'string') data[option](_relatedTarget);
     });
   }
-  let old = $.fn.textbox;
+  let old = $.fn.passwordbox;
 
-  $.fn.textbox = Plugin;
-  $.fn.textbox.Constructor = Textbox;
+  $.fn.passwordbox = Plugin;
+  $.fn.passwordbox.Constructor = Passwordbox;
 
-  $.fn.textbox.noConflict = function() {
-    $.fn.textbox = old;
+  $.fn.passwordbox.noConflict = function() {
+    $.fn.passwordbox = old;
     return this;
   };
 
 
-  Textbox.DEFAULTS = {
-    hasSurface: false,
+  Passwordbox.DEFAULTS = {
     label: '',
     id: '',
     name: '',

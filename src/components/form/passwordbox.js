@@ -3,6 +3,7 @@ import BaseForm from './form-base';
   class Passwordbox extends BaseForm {
     constructor(el, options) {
       super(el, options, Passwordbox.DEFAULTS);
+      this.className = 'Passwordbox';
       this._init();
     }
     _init() {

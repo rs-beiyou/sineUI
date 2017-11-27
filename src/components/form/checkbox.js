@@ -3,6 +3,7 @@ import BaseForm from './form-base';
   class Checkbox extends BaseForm {
     constructor(el, options) {
       super(el, options, Checkbox.DEFAULTS);
+      this.className = 'Checkbox';
       this._init();
     }
     _init() {

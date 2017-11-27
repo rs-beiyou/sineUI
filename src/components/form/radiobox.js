@@ -3,6 +3,7 @@ import BaseForm from './form-base';
   class Radiobox extends BaseForm {
     constructor(el, options) {
       super(el, options, Radiobox.DEFAULTS);
+      this.className = 'Radiobox';
       this._init();
     }
     _init() {

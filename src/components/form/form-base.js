@@ -4,7 +4,6 @@ export default class BaseForm {
     this.lastOptions = options;
     this.options = Object.assign({}, DEFAULTS);
     this.optionCache = Object.assign({}, DEFAULTS);
-    this.className = this.constructor.name;
   }
   _initForm() {
     this._setObserver();

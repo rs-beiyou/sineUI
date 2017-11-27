@@ -3,6 +3,7 @@ import BaseForm from './form-base';
   class Textbox extends BaseForm {
     constructor(el, options) {
       super(el, options, Textbox.DEFAULTS);
+      this.className = 'Textbox';
       this._init();
     }
     _init() {

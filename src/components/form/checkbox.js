@@ -36,17 +36,65 @@ import BaseForm from './form-base';
           $input.attr(item, op[item]);
           break;
         case 'readonly':
+          this._setReadonly();
           break;
         case 'disabled':
-          $input.attr(item, op[item]);
+          this._setDisabled();
           break;
         case 'value':
           this._setValue();
           break;
         case 'data':
           this._setAttachList();
-          this._setValue();
+          op.value !== '' && this._setValue();
+          op.readonly !== false && this._setReadonly();
+          op.disabled !== false && this._setDisabled();
           break;
+      }
+    }
+    _setReadonly() {
+      if (this.checkboxDom) {
+        let op = this.options,
+          rl = op.readonly,
+          cbd = this.checkboxDom,
+          rla = this.readonlyArr || [],
+          newRla;
+        if (typeof rl === 'boolean') {
+          newRla = rl ? Object.keys(cbd) : [];
+        }
+        if (typeof rl === 'string') {
+          newRla = rl ? rl.split(',') : [];
+        }
+        let arr1 = Array.compare(newRla, rla, true);
+        let arr2 = Array.compare(newRla, rla, false);
+        arr1.forEach(key => {
+          cbd[key] && cbd[key].$input.attr('disabled', true) && cbd[key].$checkbox.addClass('si-checkbox-disabled');
+        });
+        arr2.forEach(key => {
+          cbd[key] && cbd[key].$input.removeAttr('disabled') && cbd[key].$checkbox.removeClass('si-checkbox-disabled');
+        });
+        this.readonlyArr = newRla;
+      }
+    }
+    _setDisabled() {
+      if (this.checkboxDom) {
+        let da = this.options.disabled,
+          cbd = this.checkboxDom,
+          $input = this.$input;
+        if (typeof da === 'boolean') {
+          let newDaa = Object.keys(cbd);
+          if (da) {
+            newDaa.forEach(key => {
+              cbd[key] && cbd[key].$input.attr('disabled', true) && cbd[key].$checkbox.addClass('si-checkbox-disabled');
+            });
+            $input.attr('disabled', true);
+          } else {
+            newDaa.forEach(key => {
+              cbd[key] && cbd[key].$input.removeAttr('disabled') && cbd[key].$checkbox.removeClass('si-checkbox-disabled');
+            });
+            $input.removeAttr('disabled');
+          }
+        }
       }
     }
     _setValue() {
@@ -57,17 +105,12 @@ import BaseForm from './form-base';
           cbd = this.checkboxDom;
         let arr1 = Array.compare(va, vac, true);
         let arr2 = Array.compare(va, vac, false);
-        try {
-          arr1.length > 0 && arr1.forEach(key => {
-            cbd[key].$checkbox.addClass('si-checkbox-checked');
-          });
-          arr2.length > 0 && arr2.forEach(key => {
-            cbd[key].$checkbox.removeClass('si-checkbox-checked');
-          });
-        } catch (e) {
-          console.warn('Checkbox[name=' + op.name + ']的value设置不正确！');
-          return;
-        }
+        arr1.forEach(key => {
+          cbd[key] && cbd[key].$checkbox.addClass('si-checkbox-checked');
+        });
+        arr2.forEach(key => {
+          cbd[key] && cbd[key].$checkbox.removeClass('si-checkbox-checked');
+        });
         this.valueArrCache = va;
         this.$input.val(op.value).trigger('change');
       }
@@ -75,7 +118,7 @@ import BaseForm from './form-base';
     _setAttachList() {
       this.checkboxDom = {};
       let op = this.options;
-      this.valueArr = op.value && op.value.split(',') || [];
+      this.valueArr = op.value ? op.value.split(',') : [];
       let valueArr = this.valueArr,
         checkboxDom = this.checkboxDom,
         data = op.data,
@@ -97,7 +140,8 @@ import BaseForm from './form-base';
         $(label).addClass('si-checkbox-item').append(checkbox).append(data[i][keyField]);
         fragment.appendChild(label);
         checkboxDom[data[i][valueField]] = {
-          $checkbox: $(checkbox)
+          $checkbox: $(label),
+          $input: $(input)
         };
         $(input).on('change', function() {
           let val = this.value;
@@ -115,9 +159,6 @@ import BaseForm from './form-base';
         });
       }
       $checkbox.html(fragment);
-    }
-    set(option) {
-      Object.assign(this.options, option || {});
     }
   }
 
@@ -161,6 +202,8 @@ import BaseForm from './form-base';
     readonly: false,
     disabled: false,
     placeholder: '',
+    helpText: '',
+    size: '',
     keyField: 'key',
     valueField: 'value',
     data: [],

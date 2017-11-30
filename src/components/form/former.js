@@ -1,4 +1,7 @@
 import './textbox';
+import './passwordbox';
+import './checkbox';
+import './radiobox';
 import './selectbox';
 (function($) {
   function former(option, _relatedTarget) {

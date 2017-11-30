@@ -2,6 +2,7 @@ import './textbox';
 import './passwordbox';
 import './checkbox';
 import './radiobox';
+import './selectbox';
 // form操作器
 (function($) {
   class Form {

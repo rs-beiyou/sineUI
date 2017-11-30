@@ -47,9 +47,6 @@ import BaseForm from './form-base';
           break;
       }
     }
-    set(option) {
-      Object.assign(this.options, option || {});
-    }
   }
 
   function Plugin(option, _relatedTarget) {
@@ -93,6 +90,8 @@ import BaseForm from './form-base';
     disabled: false,
     value: '',
     placeholder: '',
+    size: '',
+    helpText: '',
     multiline: false,
     rows: '',
     cols: '',

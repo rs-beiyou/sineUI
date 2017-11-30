@@ -4,15 +4,18 @@ $.ajax({
   url: './pages/data/sidebar.json',
   dataType: 'json',
   success: function(data) {
-    $(".sidebar-wrapper").sidebar({
+    $('.sidebar-wrapper').sidebar({
       data: data
     });
   }
 });
 //code-box
-$(document).on("click",".code-expand-icon",function(){
-  var $codeBox = $(this).parents(".code-box");
-  var $codeWrapper= $codeBox.children(".code-box-wrapper");
-  $codeBox.toggleClass("expend");
-  $codeWrapper.toggleClass("expend");
-})
+$(document).on('click', '.code-expand-icon', function() {
+  let $codeBox = $(this).parents('.code-box');
+  $codeBox.toggleClass('expend');
+});
+//code-box
+$(document).on('click', '.code-box-wrapper-close', function() {
+  let $codeBox = $(this).parents('.code-box');
+  $codeBox.toggleClass('expend');
+});

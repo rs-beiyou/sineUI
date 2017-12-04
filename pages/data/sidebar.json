@@ -1,103 +1,130 @@
-[
-  {
-    "id": "1",
-    "name": "布局",
-    "subName": "Layout",
-    "pid": "-1",
-    "url": "",
-    "icon": "fa fa-th-large",
-    "children": [{
-      "id": "10",
-      "name": "布局",
-      "subName": "Layout",
-      "pid": "1",
-      "url": "layout/layout",
-      "icon": "fa fa-hashtag"
-    }, {
-      "id": "11",
-      "name": "栅格",
-      "subName": "Grid",
-      "pid": "1",
-      "url": "layout/grid",
-      "icon": "fa fa-hashtag"
-    }]
-  },
-  {
-    "id": "2",
-    "name": "组件",
-    "subName": "Components",
-    "pid": "-1",
-    "url": "",
-    "icon": "fa fa-th",
-    "children": [{
-      "id": "20",
-      "name": "按钮",
-      "subName": "Button",
-      "pid": "2",
-      "url": "components/buttons",
-      "icon": ""
-    }, {
-      "id": "21",
-      "name": "图标",
-      "subName": "Icons",
-      "pid": "2",
-      "url": "components/icons",
-      "icon": ""
-    }, {
-      "id": "22",
-      "name": "颜色",
-      "subName": "Color",
-      "pid": "2",
-      "url": "components/color",
-      "icon": "fa fa-tachometer"
-    }]
-  },
-  {
-    "id": "3",
-    "name": "表格",
-    "subName": "Table",
-    "pid": "-1",
-    "url": "",
-    "icon": "fa fa-table",
-    "children": [{
-      "id": "40",
-      "name": "普通表格",
-      "subName": "General",
-      "pid": "3",
-      "url": "",
-      "icon": ""
-    }]
-  },
-  {
-    "id": "4",
-    "name": "表单",
-    "subName": "Form",
-    "pid": "-1",
-    "url": "",
-    "icon": "fa fa-edit",
-    "children": [{
-      "id": "50",
-      "name": "普通表单",
-      "subName": "General",
-      "pid": "4",
-      "url": "form/general",
-      "icon": ""
-    }]
-  },
-  {
-    "id": "5",
-    "name": "其他拓展",
-    "subName": "Others",
-    "pid": "-1",
-    "url": "",
-    "icon": "fa fa-folder",
-    "children": [{
-      "id": "60",
-      "name": "其他拓展1",
-      "subName": "",
-      "pid": "5",
-      "url": "",
-      "icon": ""
-    }]
-  }
+[{
+        "id": "1",
+        "name": "布局",
+        "subName": "Layout",
+        "pid": "-1",
+        "url": "",
+        "icon": "fa fa-th-large",
+        "children": [{
+            "id": "10",
+            "name": "布局",
+            "subName": "Layout",
+            "pid": "1",
+            "url": "layout/layout",
+            "icon": "fa fa-hashtag"
+        }, {
+            "id": "11",
+            "name": "栅格",
+            "subName": "Grid",
+            "pid": "1",
+            "url": "layout/grid",
+            "icon": "fa fa-hashtag"
+        }]
+    },
+    {
+        "id": "2",
+        "name": "组件",
+        "subName": "Components",
+        "pid": "-1",
+        "url": "",
+        "icon": "fa fa-th",
+        "children": [{
+            "id": "20",
+            "name": "按钮",
+            "subName": "Button",
+            "pid": "2",
+            "url": "components/buttons",
+            "icon": ""
+        }, {
+            "id": "21",
+            "name": "图标",
+            "subName": "Icons",
+            "pid": "2",
+            "url": "components/icons",
+            "icon": ""
+        }, {
+            "id": "22",
+            "name": "颜色",
+            "subName": "Color",
+            "pid": "2",
+            "url": "components/color",
+            "icon": "fa fa-tachometer"
+        }]
+    },
+    {
+        "id": "3",
+        "name": "表格",
+        "subName": "Table",
+        "pid": "-1",
+        "url": "",
+        "icon": "fa fa-table",
+        "children": [{
+            "id": "40",
+            "name": "普通表格",
+            "subName": "General",
+            "pid": "3",
+            "url": "",
+            "icon": ""
+        }]
+    },
+    {
+        "id": "4",
+        "name": "表单",
+        "subName": "Form",
+        "pid": "-1",
+        "url": "",
+        "icon": "fa fa-edit",
+        "children": [{
+            "id": "50",
+            "name": "表单",
+            "subName": "Form",
+            "pid": "4",
+            "url": "form/form",
+            "icon": ""
+        }, {
+            "id": "51",
+            "name": "输入框",
+            "subName": "Textbox",
+            "pid": "4",
+            "url": "form/textbox",
+            "icon": ""
+        }, {
+            "id": "52",
+            "name": "选择器",
+            "subName": "Selectbox",
+            "pid": "4",
+            "url": "form/selectbox",
+            "icon": ""
+        }, {
+            "id": "53",
+            "name": "单选框",
+            "subName": "Radiobox",
+            "pid": "4",
+            "url": "form/radiobox",
+            "icon": ""
+        }, {
+            "id": "54",
+            "name": "多选框",
+            "subName": "Checkbox",
+            "pid": "4",
+            "url": "form/checkbox",
+            "icon": ""
+        }]
+    },
+    {
+        "id": "5",
+        "name": "其他拓展",
+        "subName": "Others",
+        "pid": "-1",
+        "url": "",
+        "icon": "fa fa-folder",
+        "children": [{
+            "id": "60",
+            "name": "其他拓展1",
+            "subName": "",
+            "pid": "5",
+            "url": "",
+            "icon": ""
+        }]
+    }
 ]

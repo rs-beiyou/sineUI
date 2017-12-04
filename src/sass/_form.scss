@@ -1,3 +1,10 @@
+.form-horizontal {
+    .si-checkbox,
+    .si-radiobox {
+        padding-top: 7px;
+    }
+}
+
 .form-block {
     display: inline-block;
     position: relative;
@@ -18,11 +25,27 @@ input[type="checkbox"] {
 }
 
 .form-control {
+    outline: 0;
     -webkit-box-shadow: none;
     box-shadow: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
     &:hover {
         border-color: $input-border-focus;
     }
+    &[disabled]:hover {
+        border-color: $input-bg-disabled;
+    }
+    &[readonly] {
+        background-color: $input-bg;
+        cursor: $cursor-disabled;
+    }
+}
+
+.form-block .help-block {
+    position: absolute;
+    margin: 0;
+    font-size: $font-size-small;
 }
 
 .si-checkbox,
@@ -150,5 +173,228 @@ input[type="checkbox"] {
             -ms-transform: scale(1);
             transform: scale(1);
         }
+    }
+}
+
+.si-checkbox .si-checkbox-disabled {
+    cursor: $cursor-disabled;
+    color: $gray-light;
+    .si-checkbox-inner {
+        border-color: $input-bg-disabled;
+        background-color: $input-bg-disabled;
+        &::after {
+            -webkit-animation-name: none;
+            animation-name: none;
+        }
+    }
+}
+
+.si-radiobox .si-radiobox-disabled {
+    cursor: $cursor-disabled;
+    color: $gray-light;
+    .si-radiobox-inner {
+        border-color: $input-bg-disabled;
+        &::after {
+            background-color: $input-bg-disabled;
+            -webkit-animation-name: none;
+            animation-name: none;
+        }
+    }
+}
+
+.si-selectbox {
+    position: relative;
+    &.si-selectbox-readonly {
+        .si-selectbox-selection {
+            cursor: $cursor-disabled;
+        }
+    }
+    &.si-selectbox-disabled {
+        .si-selectbox-selection {
+            cursor: $cursor-disabled;
+            background-color: $input-bg-disabled;
+            &:hover {
+                border-color: $input-bg-disabled;
+            }
+        }
+    }
+}
+
+.si-selectbox-selected-value,
+.si-selectbox-placeholder {
+    height: 100%;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.si-selectbox-placeholder {
+    color: $input-color-placeholder;
+}
+
+.form-control.si-selectbox-selection {
+    cursor: pointer;
+    padding-right: 24px;
+    position: relative;
+}
+
+.si-selectbox-arrow {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    line-height: 1;
+    font-size: $font-size-base;
+    margin-top: -$font-size-base/2;
+    color: #666;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+.si-selectbox-dropdown {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow: auto;
+    margin: 5px 0;
+    padding: 5px 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: $zindex-dropdown;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+    background-color: $dropdown-bg;
+}
+
+.si-selectbox-visible {
+    .si-selectbox-arrow {
+        -webkit-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+}
+
+.si-selectbox-item {
+    margin: 0;
+    padding: 7px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: normal;
+    color: $dropdown-link-color;
+    overflow: hidden;
+    -webkit-transition: background .2s ease-in-out;
+    -o-transition: background .2s ease-in-out;
+    transition: background .2s ease-in-out;
+    &:hover {
+        background: $dropdown-link-hover-bg;
+    }
+    &.si-selectbox-item-disabled {
+        color: $input-color-placeholder;
+        cursor: $cursor-disabled;
+        &:hover {
+            background-color: $dropdown-bg;
+        }
+    }
+}
+
+.si-selectbox-item-selected {
+    background: $dropdown-link-active-bg;
+    color: $dropdown-link-active-color;
+    &:hover {
+        background: $dropdown-link-active-bg;
+    }
+    &.si-selectbox-item-disabled {
+        background-color: $gray-blue;
+        &:hover {
+            background-color: $gray-blue;
+        }
+    }
+}
+
+.slide-up-in {
+    -webkit-animation-name: siSlideUpIn;
+    animation-name: siSlideUpIn;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.slide-up-out {
+    -webkit-animation-name: siSlideUpOut;
+    animation-name: siSlideUpIn;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes siSlideUpIn {
+    0% {
+        opacity: 0;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(.8);
+        transform: scaleY(.8);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+}
+
+@keyframes siSlideUpIn {
+    0% {
+        opacity: 0;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(.8);
+        transform: scaleY(.8);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+}
+
+@-webkit-keyframes siSlideUpOut {
+    0% {
+        opacity: 1;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(.8);
+        transform: scaleY(.8);
+    }
+}
+
+@keyframes siSlideUpOut {
+    0% {
+        opacity: 1;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(.8);
+        transform: scaleY(.8);
     }
 }

@@ -1,0 +1,144 @@
+<div class="container-fluid" id="general-form-page">
+    <article class="si-article">
+        <p class="si-info">具有数据收集、校验和提交功能的表单，包含复选框、单选框、输入框、下拉选择框等元素。</p>
+        <div class="si-callout info">
+            <div class="si-callout-title">我们为表单提供了以下三种排列方式：</div>
+            <ul>
+                <li>水平排列：标签和表单控件水平排列；（默认）</li>
+                <li>垂直排列：标签和表单控件上下垂直排列；</li>
+                <li>行内排列：表单项水平行内排列。</li>
+            </ul>
+        </div>
+        <h4>代码示例<i class="fa fa-code"></i></h4>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input class="btsp-textbox" data-options="id:'a',name:'a'">
+                    </div>
+                    <div class="form-group">
+                        <input class="btsp-selectbox" data-options="id:'c',name:'c',width:'170px',data:[{key:'请选择',value:''},{key:'选项1',value:'1'},{key:'选项2',value:'2'}]">
+                    </div>
+                    <div class="form-group">
+                        <input class="btsp-checkbox" data-options="id:'b',name:'b',data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]">
+                    </div>
+                </form>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    行内元素
+                </div>
+                <div>
+                    <p>
+                        给<code>form</code>设置<code>class</code>属性<code>form-inline</code>，表单元素可以水平排列。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;form class="form-inline"&gt;
+    &lt;div class="form-group"&gt;
+        &lt;input class="btsp-textbox" data-options="id:'a',name:'a'"&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+        &lt;input class="btsp-selectbox" data-options="id:'c',name:'c',width:'150px',data:[{key:'请选择',value:''},{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+        &lt;input class="btsp-checkbox" data-options="id:'b',name:'b',data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+    &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <form id="form1" class="form-horizontal"></form>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    JS生成表单
+                </div>
+                <div>
+                    <p>
+                        通过js方法和一个form标签来生成简单的表单。
+                    </p>
+                    <p>
+                        <code>hasPanel</code>决定是否带有外层panel，默认<code>false</code>，
+                        <code>title</code>则表示panel标题。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">&lt;form id="form1"&gt;&lt;/form&gt;</code>
+                                          <code class="language-javascript">
+$('#form1').form({
+    list: [{
+        label: 'textbox：',
+        name: 'aa',
+        id: 'aa',
+        type: 'textbox',
+        labelWidth: 'col-sm-2',
+        inputWidth: 'col-sm-5'
+    }, {
+        label: 'checkbox：',
+        name: 'bb',
+        id: 'bb',
+        type: 'checkbox',
+        value: '2,3',
+        labelWidth: 'col-sm-2',
+        inputWidth: 'col-sm-5',
+        url: 'https://easy-mock.com/mock/58ff251d5e43ae5dbea5f48c/sineUI/list'
+    }, {
+        label: 'radiobox：',
+        name: 'cc',
+        id: 'cc',
+        type: 'radiobox',
+        value: '1',
+        labelWidth: 'col-sm-2',
+        inputWidth: 'col-sm-5',
+        url: 'https://easy-mock.com/mock/58ff251d5e43ae5dbea5f48c/sineUI/list'
+    }, {
+        label: 'selectbox：',
+        name: 'dd',
+        id: 'dd',
+        type: 'selectbox',
+        value: '1',
+        labelWidth: 'col-sm-2',
+        inputWidth: 'col-sm-5',
+        url: 'https://easy-mock.com/mock/58ff251d5e43ae5dbea5f48c/sineUI/list'
+    }]
+});</code></pre>
+                <div class="code-box-wrapper-close">
+                    <i class="fa fa-angle-double-up"></i>
+                </div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <!-- 组件demo -->
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    <!-- 组件名 -->
+                </div>
+                <div>
+                    <p>
+                        <!-- 组件描述 -->
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code>
+                        <!-- 组件代码 -->
+                      </code></pre>
+                <div class="code-box-wrapper-close">
+                    <i class="fa fa-angle-double-up"></i>
+                </div>
+            </section>
+        </section>
+    </article>
+</div>
+<script src="pages/js/form/general.js" charset="utf-8"></script>

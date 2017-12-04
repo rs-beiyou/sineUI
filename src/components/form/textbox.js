@@ -1,4 +1,5 @@
 import BaseForm from './form-base';
+import _ from '../../libs/util';
 (function($) {
   class Textbox extends BaseForm {
     constructor(el, options) {
@@ -8,6 +9,9 @@ import BaseForm from './form-base';
     }
     _init() {
       super._initForm();
+      if (this.lastOptions.name === '' && this.lastOptions.id === '') {
+        this.lastOptions.id = _.randomString(10);
+      }
       Object.assign(this.options, this.lastOptions);
       this.$element.after(this.$fragment[0]).remove();
     }
@@ -47,9 +51,6 @@ import BaseForm from './form-base';
           break;
       }
     }
-    set(option) {
-      Object.assign(this.options, option || {});
-    }
   }
 
   function Plugin(option, _relatedTarget) {
@@ -85,6 +86,7 @@ import BaseForm from './form-base';
   Textbox.DEFAULTS = {
     hasSurface: false,
     label: '',
+    multiline: false,
     id: '',
     name: '',
     labelWidth: '',
@@ -93,7 +95,8 @@ import BaseForm from './form-base';
     disabled: false,
     value: '',
     placeholder: '',
-    multiline: false,
+    size: '',
+    helpText: '',
     rows: '',
     cols: '',
     width: ''

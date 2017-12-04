@@ -11,6 +11,8 @@ import './components/form/form';
 import './components/form/former';
 
 import Sine from './components/sine';
+import _ from './libs/util';
 
 window.sine = new Sine();
 window.si = window.sine;
+window._si = _;

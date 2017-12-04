@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="renderer" content="webkit">
     <title></title>
@@ -11,14 +11,14 @@
     <link rel="stylesheet" href="./dist/bootstrap.min.css">
     <link rel="stylesheet" href="./dist/sine.min.css">
     <link rel="stylesheet" href="./pages/css/prism.css">
-    <link rel="stylesheet" href="./pages/css/index.css">
+    <link rel="stylesheet" href="./pages/css/doc.css">
 </head>
 
 <body>
     <div class="si-page">
         <div class="si-sidebar" data-active-color="orange">
             <div class="logo">
-                <a href="#home" class="simple-text">SineUI</a>
+                <a href="#home" id="home-page" class="simple-text">SineUI</a>
             </div>
             <div class="sidebar-wrapper">
                 <div class="user">
@@ -36,9 +36,15 @@
         </div>
         <div class="si-main-panel">
             <nav class="si-nav-bar">
+                <div class="si-strap">
+                    <i class="fa fa-bars"></i>
+                </div>
                 <div class="si-nav-title"></div>
             </nav>
             <div class="si-container"></div>
+            <div class="si-back-top">
+                <i class="fa fa-angle-up"></i>
+            </div>
         </div>
     </div>
     <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js" charset="utf-8"></script>
@@ -49,7 +55,7 @@
     <script>
         si.init();
     </script>
-    <script src="./pages/js/index.js"></script>
+    <script src="./pages/js/doc.js"></script>
 </body>
 
 </html>

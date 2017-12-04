@@ -8,7 +8,6 @@ export default class BaseForm {
   _initForm() {
     this._setObserver();
     this._setFragment();
-    this._setLabel();
     this._setFormBlock();
   }
   _setObserver() {
@@ -26,7 +25,8 @@ export default class BaseForm {
         return cache[key];
       },
       set(val) {
-        if (typeof val !== 'object' && val === cache[key] || Array.isArray(val) && val.length === 0) return;
+        if (!cache.hasOwnProperty(key)) return;
+        if (val === cache[key] || Array.isArray(val) && val.length === 0) return;
         cache[key] = val;
         switch (key) {
           case 'label':
@@ -39,7 +39,13 @@ export default class BaseForm {
           case 'placeholder':
           case 'readonly':
           case 'disabled':
+          case 'search':
+          case 'multiple':
+          case 'width':
             _this['_set' + _this.className](key);
+            break;
+          case 'helpText':
+            _this._setHelpText(key);
             break;
           case 'data':
             setTimeout(() => {
@@ -72,7 +78,7 @@ export default class BaseForm {
       $label.addClass('control-label');
       this.$label = $label;
       if (this.$input) {
-        this.$formInline.before(_label);
+        this.$formBlock.before(_label);
       } else {
         this.$fragment.prepend(_label);
       }
@@ -104,46 +110,20 @@ export default class BaseForm {
       op.inputWidth.includes('col-') ? $formBlock.addClass(op.inputWidth) : op.inputWidth.includes('px') ? $formBlock.css('width', op.inputWidth) : $formBlock.css('width', op.inputWidth + 'px');
     }
   }
-  //有hidden情况
-  _setSurfaceInput(item) {
+  _setHelpText(item) {
     let op = this.options;
-    let $input, $surfaceInput;
-    if (!this.$surfaceInput) {
-      let _input = this.inputDom ? this.inputDom : document.createElement('input');
-      let _surfaceInput = this.surfaceDom ? this.surfaceDom : document.createElement('input');
-      $input = $(_input);
-      $surfaceInput = $(_surfaceInput);
-      $surfaceInput.addClass('form-control');
-      $input.attr('type', 'hidden');
-      this.$formBlock.append(_surfaceInput);
-      this.$formBlock.append(_input);
-      this.$surfaceInput = $surfaceInput;
-      this.$input = $input;
+    let $helpText;
+    if (!this.$helpText) {
+      let _helpText = document.createElement('span');
+      $helpText = $(_helpText);
+      $helpText.addClass('help-block');
+      this.$formBlock.append(_helpText);
+      this.$helpText = $helpText;
     } else {
-      $input = this.$input;
-      $surfaceInput = this.$surfaceInput;
+      $helpText = this.$helpText;
     }
-    switch (item) {
-      case 'id':
-      case 'name':
-        $input.attr(item, op[item]);
-        break;
-      case 'placeholder':
-        $surfaceInput.attr(item, op[item]);
-        break;
-      case 'readonly':
-        $surfaceInput.attr(item, op[item]);
-        break;
-      case 'disabled':
-        $input.attr(item, op[item]);
-        $surfaceInput.attr(item, op[item]);
-        break;
-      case 'value':
-        $input.val(op.value);
-        break;
-      case 'width':
-        $surfaceInput.css('width', op.width);
-        break;
+    if (item) {
+      $helpText.text(op.helpText);
     }
   }
   _setFormAttach() {
@@ -166,5 +146,8 @@ export default class BaseForm {
 
       }
     });
+  }
+  set(option) {
+    Object.assign(this.options, option || {});
   }
 }

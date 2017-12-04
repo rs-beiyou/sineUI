@@ -33,12 +33,6 @@ import BaseForm from './form-base';
         case 'disabled':
           $input.attr(item, op[item]);
           break;
-        case 'rows':
-        case 'cols':
-          if (op.multiline) {
-            $input.attr(item, op[item]);
-          }
-          break;
         case 'value':
           $input.val(op.value);
           break;
@@ -46,9 +40,6 @@ import BaseForm from './form-base';
           $input.css('width', op.width);
           break;
       }
-    }
-    set(option) {
-      Object.assign(this.options, option || {});
     }
   }
 
@@ -90,11 +81,10 @@ import BaseForm from './form-base';
     inputWidth: '',
     readonly: false,
     disabled: false,
+    helpText: '',
+    size: '',
     value: '',
     placeholder: '',
-    multiline: false,
-    rows: '',
-    cols: '',
     width: ''
   };
 })(jQuery);

@@ -1,3 +1,5 @@
+import './form/parser';
+
 class Sine {
   constructor() {
     this.currPageUrl = null;
@@ -85,6 +87,7 @@ class Sine {
         if (xhr.status === 404) {
           this.load(this.options.lost ? this.options.lost : this.options.redirect);
         }
+        $.parser.parse(to); //动态解析页面元素
         this.hasRouter ? this.options.afterEach && this.options.afterEach(from) : false;
         if (status == 'success') {
           loadSuccess && typeof loadSuccess === 'function' && loadSuccess();

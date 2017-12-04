@@ -1,20 +1,83 @@
-+(function($) {
+import _ from '../../libs/util'; +
+(function($) {
   class Sidebar {
     constructor(el, options) {
       this.options = options;
-      this.$element = this.getNodes(this.options.data);
+      this.$el = $(el);
+      this.$wrapper = this.$el.children('.sidebar-wrapper');
+      let nav = this.getNodes(this.options.data);
+      let $nav = $(nav);
+      this.$wrapper.append();
       this.activedNode = null;
       this.hasActive = false;
-      $(this.$element).css('opacity', '0');
-      $(el).append(this.$element);
+      $nav.css('opacity', '0');
+      this.$wrapper.append(nav);
+      this._setFolder();
       setTimeout(() => {
-        $(this.$element).css('opacity', '1');
-      }, Number.parseFloat($(this.$element).css('transition-duration')) * 1000);
+        $nav.css('opacity', '1');
+      }, Number.parseFloat($nav.css('transition-duration')) * 1000);
       window.sine ? window.sine.hasRouter ? this.addRouter() : null : null;
+      this.options.controler && this.addControler();
     }
     addRouter() {
       this._initRouter();
       $(window).on('hashchange', this._initRouter.bind(this));
+    }
+    addControler() {
+      let $document = $(document);
+      let $controler = $(this.options.controler);
+      let folded = this.folded,
+        _this = this;
+      Object.defineProperties(this, {
+        folded: {
+          get: () => {
+            return folded;
+          },
+          set: (val) => {
+            if (val === folded) return;
+            folded = val;
+            if (val) {
+              _this.$el.removeClass('si-sidebar-unfolded').addClass('si-sidebar-folded');
+            } else {
+              _this.$el.removeClass('si-sidebar-folded').addClass('si-sidebar-unfolded');
+            }
+          }
+        }
+      });
+      $controler && $controler.on('click', (e) => {
+        this.folded = !this.folded;
+        e.stopPropagation();
+      });
+      $document.on('click', (e) => {
+        let elem = e.target || e.srcElement;
+        while (elem) {
+          if (elem.className && elem.className.indexOf('si-sidebar') > -1) {
+            return;
+          }
+          elem = elem.parentNode;
+        }
+        if (this.hasFolder) {
+          this.folded = true;
+        }
+      });
+      $(window).on('resize',
+        _.throttle(() => {
+          this.hasFolder = $document.width() > 768 ? false : true;
+          if (this.hasFolder) {
+            this.folded = true;
+          } else {
+            this.folded = false;
+          }
+        })
+      );
+    }
+    _setFolder() {
+      this.hasFolder = $(document).width() > 768 ? false : true;
+      if (this.hasFolder) {
+        this.$el.addClass('si-sidebar-folded');
+      } else {
+        this.$el.addClass('si-sidebar-unfolded');
+      }
     }
     _initRouter() {
       let hash = window.location.hash;
@@ -70,6 +133,7 @@
         } else {
           $(i).addClass('sub-icon');
           $(link).attr('href', this._formatUrl(key.url)).text(key.name).prepend(i).append(subName).click(function() {
+            if (_this.hasFolder) _this.folded = true;
             if ($(this).parent().hasClass('active')) return;
             if (_this.activedNode != null) _this.activedNode.parents('li').removeClass('active');
             $(this).parents('li').addClass('active');
@@ -107,6 +171,7 @@
   };
 
   Sidebar.DEFAULTS = {
-
+    controler: '',
+    data: []
   };
 })(jQuery);

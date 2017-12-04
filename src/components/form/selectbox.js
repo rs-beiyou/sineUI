@@ -141,13 +141,17 @@ import BaseForm from './form-base';
     }
     _addEvent() {
       let $selection = this.$selection;
-      $selection.on('click', () => {
+      $(document).on('click', () => {
+        this._close();
+      });
+      $selection.on('click', (e) => {
         if (this.options.readonly === true || this.options.disabled === true) return;
         if (this.opened) {
           this._close();
         } else {
           this._open();
         }
+        e.stopPropagation();
       });
     }
     _open() {
@@ -225,6 +229,7 @@ import BaseForm from './form-base';
         if (this.readonlyArr.includes(val)) return;
         op.value = val;
         this.opened && this._close();
+        e.stopPropagation();
       });
       $dropdown.html(ul);
     }

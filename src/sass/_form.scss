@@ -210,6 +210,9 @@ input[type="checkbox"] {
         .si-selectbox-selection {
             cursor: $cursor-disabled;
             background-color: $input-bg-disabled;
+            &:hover {
+                border-color: $input-bg-disabled;
+            }
         }
     }
 }
@@ -298,6 +301,12 @@ input[type="checkbox"] {
     color: $dropdown-link-active-color;
     &:hover {
         background: $dropdown-link-active-bg;
+    }
+    &.si-selectbox-item-disabled {
+        background-color: $gray-blue;
+        &:hover {
+            background-color: $gray-blue;
+        }
     }
 }
 

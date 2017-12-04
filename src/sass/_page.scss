@@ -67,15 +67,15 @@ a {
     top: 0;
     bottom: 0;
     width: $sidebar-width;
-    overflow: hidden;
-    -webkit-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    transition: all 0.2s linear;
+    -webkit-transition: margin-left 0.3s linear;
+    -o-transition: margin-left 0.3s linear;
+    transition: margin-left 0.3s linear;
     z-index: 3;
     background-color: $sidebar-bg;
     color: $sidebar-font-color;
-    -webkit-box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    z-index: $zindex-sidebar;
+    -webkit-box-shadow: $sidebar-box-shadow;
+    box-shadow: $sidebar-box-shadow;
     &::before {
         content: '';
         display: block;
@@ -278,26 +278,134 @@ a {
 .si-main-panel {
     position: absolute;
     top: 0;
-    left: $sidebar-width;
+    left: 0;
     bottom: 0;
     right: 0;
     opacity: 0;
+    overflow: auto;
     background-color: $si-main-panel-bg;
+    -webkit-transition: margin-left .3s ease-in-out;
+    -o-transition: margin-left .3s ease-in-out;
+    transition: margin-left .3s ease-in-out;
     .si-nav-bar {
-        padding: 20px 15px;
+        position: fixed;
+        font-size: $font-size-large;
+        padding: 15px 15px;
+        width: 100%;
+        background-color: #f8f8f8;
+        z-index: 10;
+        -webkit-box-shadow: 0px 4px 12px -8px rgba(0, 0, 0, .25);
+        box-shadow: 0px 4px 12px -8px rgba(0, 0, 0, .25);
+        -webkit-transition: all .4s cubic-bezier(.22, .58, .12, .98);
+        -o-transition: all .4s cubic-bezier(.22, .58, .12, .98);
+        transition: all .4s cubic-bezier(.22, .58, .12, .98);
+        &.hiden {
+            -webkit-transform: translateY(-100%);
+            -ms-transform: translateY(-100%);
+            transform: translateY(-100%);
+        }
+    }
+    .si-strap {
+        position: absolute;
+        font-weight: normal;
+        color: #666;
+        cursor: pointer;
     }
     .si-nav-title {
-        font-size: $font-size-large;
-        padding-left: 15px;
+        padding-left: 20px;
         font-weight: bold;
     }
     .si-container {
-        position: absolute;
-        top: 62px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        padding: 10px 0;
+        padding: 65px 0 10px;
         overflow: auto;
+        margin: 0 auto;
+        max-width: 1000px;
+    }
+    .si-back-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        line-height: 35px;
+        text-align: center;
+        font-size: 25px;
+        display: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 3px;
+        color: #fff;
+        cursor: pointer;
+        z-index: $zindex-navbar-fixed;
+        background-color: rgba(0, 0, 0, .6);
+        &:hover {
+            background-color: rgba(0, 0, 0, .7);
+        }
+    }
+}
+
+.si-sidebar-unfolded {
+    margin-left: 0;
+    +.si-main-panel {
+        margin-left: $sidebar-width;
+    }
+}
+
+.si-sidebar-folded {
+    margin-left: -$sidebar-width;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    +.si-main-panel {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: $screen-sm-min+1) {
+    .si-main-panel {
+        margin-left: $sidebar-width;
+        .si-strap {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: $screen-sm-min) {
+    html * {
+        &::-webkit-scrollbar {
+            width: $si-scrollbar-width/2;
+            height: $si-scrollbar-width/2;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-top: 5px solid rgba(255, 255, 255, 0);
+            border-bottom: 5px solid rgba(255, 255, 255, 0);
+            border-right: 4px solid rgba(255, 255, 255, 0);
+            border-radius: 2px;
+        }
+    }
+    .si-sidebar {
+        margin-left: -$sidebar-width;
+    }
+    .si-sidebar-unfolded {
+        margin-left: 0;
+        +.si-main-panel {
+            margin-left: 0;
+        }
+    }
+    .si-sidebar-folded {
+        +.si-main-panel {
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+    }
+    .si-main-panel {
+        .si-nav-bar {
+            padding: 10px 15px;
+        }
+        .si-nav-title {
+            padding-left: 0;
+            text-align: center;
+            font-weight: 500;
+        }
+        .si-container {
+            padding-top: 55px;
+        }
     }
 }

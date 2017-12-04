@@ -1,4 +1,5 @@
 import './form/parser';
+
 class Sine {
   constructor() {
     this.currPageUrl = null;

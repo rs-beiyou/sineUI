@@ -25,7 +25,7 @@ $document.on('touchstart', function(e) {
   if (e.touches.length > 1) {
     e.preventDefault();
   }
-}, false); +
+}); +
 (function() {
   let $backToTop = $('.si-back-top');
   let $mainPanel = $('.si-main-panel');

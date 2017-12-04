@@ -169,6 +169,6 @@ code {
     color: #a6d0f8;
 }
 
-.pre[class*="language-"] {
+pre[class*="language-"] {
     overflow: scroll;
 }

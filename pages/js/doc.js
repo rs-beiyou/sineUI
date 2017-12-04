@@ -20,11 +20,6 @@ $document.on('click', '.code-expand-icon', function() {
 $document.on('click', '.code-box-wrapper-close', function() {
   let $codeBox = $(this).parents('.code-box');
   $codeBox.toggleClass('expend');
-});
-$document.on('touchstart', function(e) {
-  if (e.touches.length > 1) {
-    e.preventDefault();
-  }
 }); +
 (function() {
   let $backToTop = $('.si-back-top');

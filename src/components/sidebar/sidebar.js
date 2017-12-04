@@ -45,7 +45,7 @@ import _ from '../../libs/util'; +
         }
       });
       $controler && $controler.on('click', (e) => {
-        this.folded = !this.folded;
+        this.folded = this.folded !== undefined ? !this.folded : false;
         e.stopPropagation();
       });
       $document.on('click', (e) => {

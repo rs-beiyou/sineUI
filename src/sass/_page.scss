@@ -370,7 +370,6 @@ a {
 
 @media (max-width: $screen-sm-min) {
     html * {
-        cursor: pointer;
         &::-webkit-scrollbar {
             width: $si-scrollbar-width/2;
             height: $si-scrollbar-width/2;

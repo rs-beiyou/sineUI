@@ -24,6 +24,7 @@ import _ from '../../libs/util'; +
       $(window).on('hashchange', this._initRouter.bind(this));
     }
     addControler() {
+      let $page = $('.si-page');
       let $document = $(document);
       let $controler = $(this.options.controler);
       let folded = this.folded,
@@ -48,7 +49,7 @@ import _ from '../../libs/util'; +
         this.folded = this.folded !== undefined ? !this.folded : false;
         e.stopPropagation();
       });
-      $document.on('click', (e) => {
+      $page.on('click', (e) => {
         let elem = e.target || e.srcElement;
         while (elem) {
           if (elem.className && elem.className.indexOf('si-sidebar') > -1) {

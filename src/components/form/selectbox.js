@@ -141,7 +141,7 @@ import BaseForm from './form-base';
     }
     _addEvent() {
       let $selection = this.$selection;
-      $(document).on('click', () => {
+      $('.si-page').on('click', () => {
         this._close();
       });
       $selection.on('click', (e) => {

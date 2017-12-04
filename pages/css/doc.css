@@ -168,3 +168,7 @@ code {
 .code-box-wrapper-close:hover {
     color: #a6d0f8;
 }
+
+.pre[class*="language-"] {
+    overflow: scroll;
+}

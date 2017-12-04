@@ -25,6 +25,7 @@ input[type="checkbox"] {
 }
 
 .form-control {
+    outline: none;
     -webkit-box-shadow: none;
     box-shadow: none;
     &:hover {

@@ -228,8 +228,8 @@ import BaseForm from './form-base';
         let val = $(e.target).data('value');
         if (this.readonlyArr.includes(val)) return;
         op.value = val;
-        this.opened && this._close();
-        e.stopPropagation();
+        // this.opened && this._close();
+        // e.stopPropagation();
       });
       $dropdown.html(ul);
     }

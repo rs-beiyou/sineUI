@@ -48,7 +48,7 @@ import _ from '../../libs/util'; +
         this.folded = this.folded !== undefined ? !this.folded : false;
         e.stopPropagation();
       });
-      $document.on('click touchstart', (e) => {
+      $document.on('click', (e) => {
         let elem = e.target || e.srcElement;
         while (elem) {
           if (elem.className && elem.className.indexOf('si-sidebar') > -1) {

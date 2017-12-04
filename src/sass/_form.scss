@@ -28,6 +28,7 @@ input[type="checkbox"] {
     outline: none;
     -webkit-box-shadow: none;
     box-shadow: none;
+    -webkit-appearance: none;
     &:hover {
         border-color: $input-border-focus;
     }

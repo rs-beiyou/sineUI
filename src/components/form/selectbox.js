@@ -144,17 +144,21 @@ import BaseForm from './form-base';
       $('.si-page').on('click', () => {
         this._close();
       });
-      $selection.on('click', (e) => {
+      $selection.on('click', () => {
         if (this.options.readonly === true || this.options.disabled === true) return;
         if (this.opened) {
-          this._close();
+          setTimeout(() => {
+            this._close();
+          });
         } else {
-          this._open();
+          setTimeout(() => {
+            this._open();
+          });
         }
-        e.stopPropagation();
       });
     }
     _open() {
+      if (this.opened) return;
       this.opened = true;
       let $selectbox = this.$selectbox;
       let $dropdown = this.$dropdown;
@@ -165,6 +169,7 @@ import BaseForm from './form-base';
       }, Number.parseFloat($dropdown.css('animation-duration')) * 1000);
     }
     _close() {
+      if (!this.opened) return;
       this.opened = false;
       let $selectbox = this.$selectbox;
       let $dropdown = this.$dropdown;
@@ -228,8 +233,8 @@ import BaseForm from './form-base';
         let val = $(e.target).data('value');
         if (this.readonlyArr.includes(val)) return;
         op.value = val;
-        // this.opened && this._close();
-        // e.stopPropagation();
+        this.opened && this._close();
+        e.stopPropagation();
       });
       $dropdown.html(ul);
     }
@@ -239,8 +244,9 @@ import BaseForm from './form-base';
     return this.each(function() {
       let $this = $(this);
       let data = $this.data('si.selectbox');
-      let options = $.extend({}, Selectbox.DEFAULTS, $this.data(), typeof option == 'object' && option);
-
+      let dataSet = $this.data();
+      dataSet.data ? dataSet.data = JSON.parse(dataSet.data) : false;
+      let options = $.extend({}, Selectbox.DEFAULTS, dataSet, typeof option == 'object' && option);
       if (!data) {
         if (typeof option !== 'object') {
           console.error('请先初始化selectbox，再执行其他操作！\n selectbox初始化：$().selectbox(Object);');

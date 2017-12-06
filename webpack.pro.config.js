@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = merge(webpackBaseConfig, {
   output: {
@@ -18,8 +17,8 @@ module.exports = merge(webpackBaseConfig, {
       }
     }),
     new ExtractTextPlugin({
-        filename: '[name].min.css',
-        allChunks: true
+      filename: '[name].min.css',
+      allChunks: true
     })
   ],
 });

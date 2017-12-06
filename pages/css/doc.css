@@ -18,6 +18,10 @@ code {
     font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
 }
 
+.btn {
+    margin-bottom: 5px;
+}
+
 .si-article h4 {
     margin: 15px 0;
     color: #555;

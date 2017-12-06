@@ -66,10 +66,10 @@ module.exports = {
       })
     }, {
       test: /\.(gif|jpg|jpeg|png)\??.*$/,
-      loader: 'url-loader?limit=10*1024'
+      loader: 'url-loader?limit=10*1024&name=images/[name].[ext]'
     }, {
       test: /\.(woff|woff2|svg|eot|ttf)\??.*$/,
-      loader: 'url-loader?limit=600*1024'
+      loader: 'url-loader?limit=600*1024&name=fonts/[name].[ext]'
     }, {
       test: /\.(html|tpl)$/,
       loader: 'html-loader'

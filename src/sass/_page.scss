@@ -68,9 +68,9 @@ a {
     top: 0;
     bottom: 0;
     width: $sidebar-width;
-    -webkit-transition: margin-left 0.3s linear;
-    -o-transition: margin-left 0.3s linear;
-    transition: margin-left 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition: all 0.3s linear;
     z-index: 3;
     background-color: $sidebar-bg;
     color: $sidebar-font-color;
@@ -382,10 +382,14 @@ a {
         }
     }
     .si-sidebar {
-        margin-left: -$sidebar-width;
+        -webkit-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
+        transform: translateX(-100%);
     }
     .si-sidebar-unfolded {
-        margin-left: 0;
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        transform: translateX(0);
         +.si-main-panel {
             margin-left: 0;
         }

@@ -1,0 +1,105 @@
+<div class="container-fluid" id="checkbox-page">
+    <article class="si-article">
+        <p class="si-info">多选框，用于在一组可选项中进行多项选择。</p>
+        <div class="si-callout warning">
+            <div class="si-callout-title">使用注意</div>
+            <ul>
+                <li>单独使用（只有一个选项时）可以表示两种状态之间的切换，和
+                    <a href="#/form/switchbox"> Switchbox </a>类似。区别在于切换<code>switchbox</code>会直接触发状态改变，而<code>checkbox</code>一般用于状态标记，需要和提交操作配合。</li>
+            </ul>
+        </div>
+        <h4>代码示例<i class="fa fa-code"></i></h4>
+        <div class="col-sm-6">
+            <section class="code-box">
+                <section class="code-box-demo">
+                    <input class="btsp-checkbox" data-value="1" data-options="data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]">
+                </section>
+                <section class="code-box-meta">
+                    <div class="code-box-title">
+                        基础用法
+                    </div>
+                    <div>
+                        <p>
+                            <code>value</code>只接受字符串类型，组件会自动根据<code>data</code>的value来选中数据。
+                        </p>
+                    </div>
+                    <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+                </section>
+                <section class="code-box-wrapper">
+                    <pre><code class="language-markup">
+    &lt;!-- data-options定义属性 --&gt;
+    &lt;input class="btsp-checkbox" data-options="data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+    或者
+    &lt;!-- data-api单独定义属性 --&gt;
+    &lt;input class="btsp-checkbox" data-data="[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+                                  </code></pre>
+                    <div class="code-box-wrapper-close">
+                        <i class="fa fa-angle-double-up"></i>
+                    </div>
+                </section>
+            </section>
+            <section class="code-box">
+                <section class="code-box-demo">
+                    <input class="btsp-checkbox" data-readonly=true data-options="data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]">
+                    <input class="btsp-checkbox" data-readonly="1" data-options="data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]">
+                </section>
+                <section class="code-box-meta">
+                    <div class="code-box-title">
+                        只读
+                    </div>
+                    <div>
+                        <p>
+                            <code>readonly</code>接受布尔类型和字符串类型。
+                        </p>
+                        <p>
+                            布尔类型<code>true</code>或<code>false</code>表示整个checkbox的所有选项是否只读化。
+                        </p>
+                        <p>
+                            字符串是checkbox的<code>value</code>以<code> , </code>隔开，组件会自动根据<code>data</code>的value来判断数据中的只读项。
+                        </p>
+                    </div>
+                    <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+                </section>
+                <section class="code-box-wrapper">
+                    <pre><code class="language-markup">
+        &lt;input class="btsp-checkbox" data-options="readonly:true,data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+        &lt;input class="btsp-checkbox" data-readonly="1" data-data="[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+                                              </code></pre>
+                    <div class="code-box-wrapper-close">
+                        <i class="fa fa-angle-double-up"></i>
+                    </div>
+                </section>
+            </section>
+        </div>
+        <div class="col-sm-6">
+            <section class="code-box">
+                <section class="code-box-demo">
+                    <input class="btsp-checkbox" data-value="1" data-disabled=true data-options="data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]">
+                </section>
+                <section class="code-box-meta">
+                    <div class="code-box-title">
+                        禁用
+                    </div>
+                    <div>
+                        <p>
+                            <code>disabled</code>只接受布尔类型<code>true</code>或<code>false</code>，禁用后该元素将不参与表单取值。
+                        </p>
+                    </div>
+                    <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+                </section>
+                <section class="code-box-wrapper">
+                    <pre><code class="language-markup">
+    &lt;!-- data-options定义属性 --&gt;
+    &lt;input class="btsp-checkbox" data-options="value:'1',disabled:true,data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+    或者
+    &lt;!-- data-api单独定义属性 --&gt;
+    &lt;input class="btsp-checkbox" data-value="1" data-disabled=true data-data="[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+                                          </code></pre>
+                    <div class="code-box-wrapper-close">
+                        <i class="fa fa-angle-double-up"></i>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </article>
+</div>

@@ -8,6 +8,7 @@ import BaseForm from './form-base';
     }
     _init() {
       super._initForm();
+      this._setRadiobox();
       Object.assign(this.options, this.lastOptions);
       this.$element.after(this.$fragment[0]).remove();
     }
@@ -61,11 +62,14 @@ import BaseForm from './form-base';
         if (typeof rl === 'boolean') {
           newRla = rl ? Object.keys(cbd) : [];
         }
+        if (typeof rl === 'number') {
+          newRla = String(rl).split(',');
+        }
         if (typeof rl === 'string') {
           newRla = rl ? rl.split(',') : [];
         }
-        let arr1 = Array.compare(newRla, rla, true);
-        let arr2 = Array.compare(newRla, rla, false);
+        let arr1 = Array.compare(newRla, rla);
+        let arr2 = Array.compare(rla, newRla);
         arr1.forEach(key => {
           cbd[key] && cbd[key].$input.attr('disabled', true) && cbd[key].$radiobox.addClass('si-radiobox-disabled');
         });

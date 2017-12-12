@@ -9,6 +9,7 @@ import BaseForm from './form-base';
     _init() {
       super._initForm();
       Object.assign(this.options, this.lastOptions);
+      this._setPasswordbox();
       this.$element.after(this.$fragment[0]).remove();
     }
     //无hidden情况

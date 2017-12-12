@@ -54,7 +54,7 @@ code {
 .si-callout .si-callout-title {
     font-size: 16px;
     font-weight: bold;
-    margin: 10px 0;
+    margin: 0 0 10px;
 }
 
 .si-callout.warning {
@@ -63,6 +63,14 @@ code {
 
 .si-callout.info {
     border-left-color: #84bdf9;
+}
+
+.si-callout li {
+    margin-bottom: 5px;
+}
+
+.si-callout li:last-of-type {
+    margin-bottom: 0;
 }
 
 .code-box {
@@ -96,6 +104,16 @@ code {
 .code-box-demo {
     border-bottom: 1px solid #e9e9e9;
     padding: 20px 16px 40px;
+}
+
+.code-box-demo::before,
+.code-box-demo::after {
+    content: "";
+    display: table;
+}
+
+.code-box-demo::after {
+    clear: both;
 }
 
 .code-box-meta {

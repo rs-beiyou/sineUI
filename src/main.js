@@ -6,6 +6,7 @@ import 'core-js/fn/array/includes';
 import 'core-js/fn/array/find-index';
 import 'core-js/fn/string/includes';
 import './libs/define';
+import './components/component/tag';
 import './components/sidebar/sidebar';
 import './components/form/form';
 import './components/form/former';

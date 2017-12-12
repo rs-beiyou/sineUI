@@ -4,37 +4,102 @@
         <div class="si-callout warning">
             <div class="si-callout-title">使用注意</div>
             <ul>
-                <li>需要一个多选器时；</li>
-                <li>当选项少于5项时，建议直接将选项平铺，使用<a href="/#/form/radiobox"> Radio </a>是更好的选择。</li>
+                <li>提供多选功能和选项搜索过滤功能；</li>
+                <li>当选项少于 5 项时，建议直接将选项平铺，使用<a href="#/form/radiobox"> Radio </a>是更好的选择。</li>
             </ul>
         </div>
         <h4>代码示例<i class="fa fa-code"></i></h4>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <input class="btsp-selectbox" data-name="select" data-data="[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]">
+        <div class="col-sm-6">
+            <section class="code-box">
+                <section class="code-box-demo">
+                    <input class="btsp-selectbox" data-clearable=true data-value="1" data-options="url:' https://easy-mock.com/mock/58ff251d5e43ae5dbea5f48c/sineUI/list'">
+                </section>
+                <section class="code-box-meta">
+                    <div class="code-box-title">
+                        基础用法--单选
+                    </div>
+                    <div>
+                        <p>
+                            <code>value</code>只接受字符串类型，多选时，以逗号<code> , </code>隔开，组件会自动根据<code>data</code>的value来选中数据。
+                        </p>
+                    </div>
+                    <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+                </section>
+                <section class="code-box-wrapper">
+                    <pre><code class="language-markup">
+            &lt;!-- data-options定义属性 --&gt;
+            &lt;input class="btsp-selectbox" data-options="data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+            或者
+            &lt;!-- data-api单独定义属性 --&gt;
+            &lt;input class="btsp-selectbox" data-data="[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+                          </code></pre>
+                    <div class="code-box-wrapper-close">
+                        <i class="fa fa-angle-double-up"></i>
+                    </div>
+                </section>
             </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    基础用法
-                </div>
-                <div>
-                    <p>
-                        基本用法。
-                    </p>
-                    <p>
-                        <code>value</code>只接受字符串类型，多选时，以逗号<code> , </code>隔开，组件会自动根据<code>data</code>的value来返回选中的数据。
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            <section class="code-box">
+                <section class="code-box-demo">
+                    <input class="btsp-selectbox" data-options="readonly:true,data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'},{key:'选项3',value:'3'}]">
+                    <input class="btsp-selectbox" data-options="readonly:'2',data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'},{key:'选项3',value:'3'}]">
+                </section>
+                <section class="code-box-meta">
+                    <div class="code-box-title">
+                        只读
+                    </div>
+                    <div>
+                        <p>
+                            <code>readonly</code>接受布尔类型和字符串类型。
+                        </p>
+                        <p>
+                            布尔类型<code>true</code>或<code>false</code>表示整个selectbox的所有选项是否只读化。
+                        </p>
+                        <p>
+                            字符串是selectbox的<code>value</code>以<code> , </code>隔开，组件会自动根据<code>data</code>的value来判断数据中的只读项。
+                        </p>
+                    </div>
+                    <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+                </section>
+                <section class="code-box-wrapper">
+                    <pre><code class="language-markup">
+&lt;input class="btsp-selectbox" data-options="readonly:true,data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'},{key:'选项3',value:'3'}]"&gt;
+&lt;input class="btsp-selectbox" data-data="readonly:'2',[{key:'选项1',value:'1'},{key:'选项2',value:'2'},{key:'选项3',value:'3'}]"&gt;
+                              </code></pre>
+                    <div class="code-box-wrapper-close">
+                        <i class="fa fa-angle-double-up"></i>
+                    </div>
+                </section>
             </section>
-            <section class="code-box-wrapper">
-                <pre><code>
-                <!-- 组件代码 -->
-              </code></pre>
-                <div class="code-box-wrapper-close">
-                    <i class="fa fa-angle-double-up"></i>
-                </div>
+        </div>
+        <div class="col-sm-6">
+            <section class="code-box">
+                <section class="code-box-demo">
+                    <input class="btsp-selectbox" data-options="multiple:true,data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'},{key:'选项3',value:'3'},{key:'选项4',value:'4'},{key:'选项5',value:'5'}]">
+                </section>
+                <section class="code-box-meta">
+                    <div class="code-box-title">
+                        基础用法--多选
+                    </div>
+                    <div>
+                        <p>
+                            <code>value</code>只接受字符串类型，多选时，以逗号<code> , </code>隔开，组件会自动根据<code>data</code>的value来返回选中的数据。
+                        </p>
+                    </div>
+                    <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+                </section>
+                <section class="code-box-wrapper">
+                    <pre><code class="language-markup">
+            &lt;!-- data-options定义属性 --&gt;
+            &lt;input class="btsp-selectbox" data-options="data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+            或者
+            &lt;!-- data-api单独定义属性 --&gt;
+            &lt;input class="btsp-selectbox" data-data="[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+                          </code></pre>
+                    <div class="code-box-wrapper-close">
+                        <i class="fa fa-angle-double-up"></i>
+                    </div>
+                </section>
             </section>
-        </section>
+        </div>
     </article>
 </div>

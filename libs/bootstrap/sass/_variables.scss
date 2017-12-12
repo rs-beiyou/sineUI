@@ -23,7 +23,7 @@ $body-bg: #fff !default; //** Global text color on `<body>`.
 $text-color: $gray-dark !default; //** Global textual link color.
 $link-color: $brand-primary !default; //** Link hover color set via `darken()` function.
 $link-hover-color: darken($link-color, 15%) !default; //** Link hover decoration.
-$link-hover-decoration: underline !default; //== Typography
+$link-hover-decoration: none !default; //== Typography
 //
 //## Font, line-height, and color for body text, headings, and more.
 $font-family-sans-serif: "Helvetica Neue",
@@ -256,7 +256,7 @@ $navbar-inverse-toggle-border-color: #333 !default; //== Navs
 //##
 //=== Shared nav styles
 $nav-link-padding: 10px 15px !default;
-$nav-link-hover-bg: $gray-lighter !default;
+$nav-link-hover-bg: transparent !default;
 $nav-disabled-link-color: $gray-light !default;
 $nav-disabled-link-hover-color: $gray-light !default; //== Tabs
 $nav-tabs-border-color: #ddd !default;
@@ -505,3 +505,9 @@ $page-header-border-color: $gray-lighter !default; //** Width of horizontal desc
 $dl-horizontal-offset: $component-offset-horizontal !default; //** Point at which .dl-horizontal becomes horizontal
 $dl-horizontal-breakpoint: $grid-float-breakpoint !default; //** Horizontal line color.
 $hr-border: $gray-lighter !default;
+//tags
+$tag-bg: #fff !default;
+$tag-bg-checked: #f7f7f7 !default;
+$tag-color: $gray !default;
+$tag-border: #e9eaec !default;
+$tag-dot-bg: $tag-border !default

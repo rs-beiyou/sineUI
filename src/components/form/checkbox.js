@@ -8,6 +8,7 @@ import BaseForm from './form-base';
     }
     _init() {
       super._initForm();
+      this._setCheckbox();
       Object.assign(this.options, this.lastOptions);
       this.$element.after(this.$fragment[0]).remove();
     }
@@ -62,11 +63,14 @@ import BaseForm from './form-base';
         if (typeof rl === 'boolean') {
           newRla = rl ? Object.keys(cbd) : [];
         }
+        if (typeof rl === 'number') {
+          newRla = String(rl).split(',');
+        }
         if (typeof rl === 'string') {
           newRla = rl ? rl.split(',') : [];
         }
-        let arr1 = Array.compare(newRla, rla, true);
-        let arr2 = Array.compare(newRla, rla, false);
+        let arr1 = Array.compare(newRla, rla);
+        let arr2 = Array.compare(rla, newRla);
         arr1.forEach(key => {
           cbd[key] && cbd[key].$input.attr('disabled', true) && cbd[key].$checkbox.addClass('si-checkbox-disabled');
         });
@@ -100,11 +104,11 @@ import BaseForm from './form-base';
     _setValue() {
       if (this.checkboxDom) {
         let op = this.options,
-          va = op.value && op.value.split(',') || [],
+          va = op.value !== '' ? String(op.value).split(',') : [],
           vac = this.valueArrCache,
           cbd = this.checkboxDom;
-        let arr1 = Array.compare(va, vac, true);
-        let arr2 = Array.compare(va, vac, false);
+        let arr1 = Array.compare(va, vac);
+        let arr2 = Array.compare(vac, va);
         arr1.forEach(key => {
           cbd[key] && cbd[key].$checkbox.addClass('si-checkbox-checked');
         });
@@ -118,7 +122,7 @@ import BaseForm from './form-base';
     _setAttachList() {
       this.checkboxDom = {};
       let op = this.options;
-      this.valueArr = op.value ? op.value.split(',') : [];
+      this.valueArr = op.value !== '' ? String(op.value).split(',') : [];
       let valueArr = this.valueArr,
         checkboxDom = this.checkboxDom,
         data = op.data,

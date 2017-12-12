@@ -5,13 +5,16 @@
     }
 }
 
-.form-block {
-    display: inline-block;
-    position: relative;
-}
-
 .control-label {
     font-weight: normal;
+}
+
+.form-block {
+    margin-bottom: 18px;
+}
+
+.form-group .form-block {
+    margin-bottom: 0;
 }
 
 .form-attach {
@@ -22,6 +25,13 @@ input[type="radio"],
 input[type="checkbox"] {
     margin: 0;
     margin-top: 0;
+}
+
+[class^=btsp-] {
+    height: 34px;
+    width: 100%;
+    background-color: #eee;
+    border: none;
 }
 
 .form-control {
@@ -39,6 +49,24 @@ input[type="checkbox"] {
     &[readonly] {
         background-color: $input-bg;
         cursor: $cursor-disabled;
+    }
+}
+
+.has-success {
+    .form-control:hover {
+        border-color: $state-success-text;
+    }
+}
+
+.has-error {
+    .form-control:hover {
+        border-color: $state-danger-text;
+    }
+}
+
+.has-warning {
+    .form-control:hover {
+        border-color: $state-warning-text;
     }
 }
 
@@ -204,6 +232,7 @@ input[type="checkbox"] {
 
 .si-selectbox {
     position: relative;
+    width: 100%;
     &.si-selectbox-readonly {
         .si-selectbox-selection {
             cursor: $cursor-disabled;
@@ -250,6 +279,10 @@ input[type="checkbox"] {
     -webkit-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
+    &:last-of-type {
+        display: none;
+        cursor: pointer;
+    }
 }
 
 .si-selectbox-dropdown {
@@ -269,10 +302,23 @@ input[type="checkbox"] {
 }
 
 .si-selectbox-visible {
-    .si-selectbox-arrow {
+    .si-selectbox-arrow:first-of-type {
         -webkit-transform: rotate(180deg);
         -ms-transform: rotate(180deg);
         transform: rotate(180deg);
+    }
+}
+
+.si-selectbox-show-clear {
+    .si-selectbox-selection:hover {
+        .si-selectbox-arrow {
+            &:first-of-type {
+                display: none;
+            }
+            &:last-of-type {
+                display: inline-block;
+            }
+        }
     }
 }
 
@@ -281,7 +327,7 @@ input[type="checkbox"] {
     padding: 7px 16px;
     cursor: pointer;
     white-space: nowrap;
-    line-height: normal;
+    line-height: $headings-line-height;
     color: $dropdown-link-color;
     overflow: hidden;
     -webkit-transition: background .2s ease-in-out;
@@ -299,16 +345,39 @@ input[type="checkbox"] {
     }
 }
 
-.si-selectbox-item-selected {
-    background: $dropdown-link-active-bg;
-    color: $dropdown-link-active-color;
-    &:hover {
+.si-selectbox-single {
+    .si-selectbox-item-selected {
         background: $dropdown-link-active-bg;
-    }
-    &.si-selectbox-item-disabled {
-        background-color: $gray-blue;
+        color: $dropdown-link-active-color;
         &:hover {
+            background: $dropdown-link-active-bg;
+        }
+        &.si-selectbox-item-disabled {
             background-color: $gray-blue;
+            &:hover {
+                background-color: $gray-blue;
+            }
+        }
+    }
+}
+
+.si-selectbox-multiple {
+    .si-selectbox-selection {
+        height: auto;
+        min-height: $input-height-base;
+        .si-tag {
+            margin: 0 4px 2px 0;
+        }
+    }
+    .si-selectbox-item-selected {
+        color: $dropdown-link-active-bg;
+        &::after {
+            display: inline-block;
+            content: '\f00c';
+            font-family: FontAwesome;
+            float: right;
+            font-size: 13px;
+            line-height: $headings-line-height;
         }
     }
 }

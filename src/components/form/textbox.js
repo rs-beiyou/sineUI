@@ -9,10 +9,8 @@ import _ from '../../libs/util';
     }
     _init() {
       super._initForm();
-      if (this.lastOptions.name === '' && this.lastOptions.id === '') {
-        this.lastOptions.id = _.randomString(10);
-      }
       Object.assign(this.options, this.lastOptions);
+      this._setTextbox();
       this.$element.after(this.$fragment[0]).remove();
     }
     //无hidden情况

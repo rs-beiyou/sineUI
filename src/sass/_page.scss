@@ -313,14 +313,16 @@ a {
         cursor: pointer;
     }
     .si-nav-title {
+        width: 100%;
         padding-left: 20px;
         font-weight: bold;
+        margin: 0 auto;
     }
     .si-container {
         padding: 65px 0 10px;
         overflow: scroll;
         margin: 0 auto;
-        max-width: 1000px;
+        max-width: $si-container-max-width;
     }
     .si-back-top {
         position: fixed;

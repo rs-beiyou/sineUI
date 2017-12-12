@@ -1,0 +1,45 @@
+.fade-in-to-out {
+    -webkit-animation: fadeInToOut .2s;
+    animation: fadeInToOut .2s;
+}
+
+.fade-out-to-in {
+    -webkit-animation: fadeOutToIn .2s;
+    animation: fadeOutToIn .2s;
+}
+
+@-webkit-keyframes fadeInToOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+@keyframes fadeInToOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0
+    }
+}
+
+@-webkit-keyframes fadeOutToIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1
+    }
+}
+
+@keyframes fadeOutToIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1
+    }
+}

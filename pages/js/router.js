@@ -58,6 +58,10 @@ window.si.config({
       title: '图标',
       path: 'icons',
       page: 'pages/views/components/icons.html'
+    }, {
+      title: '标签',
+      path: 'tags',
+      page: 'pages/views/components/tags.html'
     }]
   }],
   redirect: 'home',

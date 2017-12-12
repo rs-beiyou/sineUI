@@ -25,8 +25,7 @@ export default class BaseForm {
         return cache[key];
       },
       set(val) {
-        if (!cache.hasOwnProperty(key)) return;
-        if (val === cache[key] || Array.isArray(val) && val.length === 0) return;
+        if (val === undefined || !cache.hasOwnProperty(key) || val === cache[key] || Array.isArray(val) && val.length === 0) return;
         cache[key] = val;
         switch (key) {
           case 'label':

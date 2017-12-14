@@ -4,15 +4,8 @@ import BaseForm from './form-base';
     constructor(el, options) {
       super(el, options, Passwordbox.DEFAULTS);
       this.className = 'Passwordbox';
-      this._init();
+      this._initForm();
     }
-    _init() {
-      super._initForm();
-      Object.assign(this.options, this.lastOptions);
-      this._setPasswordbox();
-      this.$element.after(this.$fragment[0]).remove();
-    }
-    //无hidden情况
     _setPasswordbox(item) {
       let op = this.options;
       let $input;
@@ -47,9 +40,18 @@ import BaseForm from './form-base';
   function Plugin(option, _relatedTarget) {
     return this.each(function() {
       let $this = $(this);
-      let data = $this.data('si.passwordbox');
-      let options = $.extend({}, Passwordbox.DEFAULTS, $this.data(), typeof option == 'object' && option);
-
+      let dataSet = $this.data();
+      let data = dataSet['si.passwordbox'];
+      //data-api覆盖data-options
+      let options = Object.assign({}, Passwordbox.DEFAULTS, typeof option == 'object' && option);
+      let datakeys = Object.keys(dataSet);
+      let defaultkeys = Object.keys(options);
+      defaultkeys.forEach((key) => {
+        let lowkey = key.toLocaleLowerCase();
+        if (datakeys.includes(lowkey)) {
+          options[key] = dataSet[lowkey];
+        }
+      });
       if (!data) {
         if (typeof option !== 'object') {
           console.error('请先初始化passwordbox，再执行其他操作！\n passwordbox初始化：$().passwordbox(Object);');

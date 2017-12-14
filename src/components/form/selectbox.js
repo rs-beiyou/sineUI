@@ -4,13 +4,7 @@ import BaseForm from './form-base';
     constructor(el, options) {
       super(el, options, Selectbox.DEFAULTS);
       this.className = 'Selectbox';
-      this._init();
-    }
-    _init() {
-      super._initForm();
-      this._setSelectbox();
-      Object.assign(this.options, this.lastOptions);
-      this.$element.after(this.$fragment[0]).remove();
+      this._initForm();
     }
     _setSelectbox(item) {
       let op = this.options;
@@ -40,8 +34,8 @@ import BaseForm from './form-base';
         $selectValue.addClass('si-selectbox-selected-value').hide();
         $dropdown.addClass('si-selectbox-dropdown').hide();
         $selection.addClass('form-control si-selectbox-selection').append(_selectValue).append(_placeholder).append(_cert).append(_clear);
-        $selectbox.addClass('si-selectbox si-selectbox-single').append(_selection).append(_dropdown);
-        this.$formBlock.append(_input).append(_selectbox);
+        $selectbox.addClass('si-selectbox si-selectbox-single').append(_input).append(_selection).append(_dropdown);
+        this.$formBlock.append(_selectbox);
         this.$input = $input;
         this.$selectbox = $selectbox;
         this.$dropdown = $dropdown;
@@ -324,8 +318,8 @@ import BaseForm from './form-base';
   function Plugin(option, _relatedTarget) {
     return this.each(function() {
       let $this = $(this);
-      let data = $this.data('si.selectbox');
       let dataSet = $this.data();
+      let data = dataSet['si.selectbox'];
       dataSet.data ? dataSet.data = (new Function('return ' + dataSet.data))() : false;
       //data-api覆盖data-options
       let options = Object.assign({}, Selectbox.DEFAULTS, typeof option == 'object' && option);

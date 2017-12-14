@@ -510,4 +510,16 @@ $tag-bg: #fff !default;
 $tag-bg-checked: #f7f7f7 !default;
 $tag-color: $gray !default;
 $tag-border: #e9eaec !default;
-$tag-dot-bg: $tag-border !default
+$tag-dot-bg: $tag-border !default;
+//switch
+$switch-bg: #ccc !default;
+$switch-checked-bg: $brand-primary !default;
+$switch-disabled-bg: #f3f3f3 !default;
+$switch-width: 48px !default;
+$switch-height: 24px !default;
+$switch-border-radius: 24px !default;
+$switch-after-bg: #fff !default;
+$switch-after-width:20px !default;
+$switch-after-height:20px !default;
+$switch-after-radius: 20px !default;
+$switch-after-active-width:26px !default;

@@ -1,4 +1,9 @@
-import './former';
+import './textbox';
+import './passwordbox';
+import './checkbox';
+import './radiobox';
+import './selectbox';
+import './switchbox';
 (function($) {
   class Parser {
     parse(el) {
@@ -8,7 +13,11 @@ import './former';
         let type = regex.exec(element.className)[1];
         let dataOptions = element.dataset.options || '';
         let options = (new Function('return {' + dataOptions + '}'))();
-        $(element)[type](options);
+        try {
+          $(element)[type](options);
+        } catch (error) {
+          console.error('former组件解析失败！\n' + error.msg);
+        }
       });
     }
   }

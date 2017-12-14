@@ -43,6 +43,10 @@ window.si.config({
       title: '表单',
       path: 'form',
       page: 'pages/views/form/form.html'
+    }, {
+      title: '开关',
+      path: 'switchbox',
+      page: 'pages/views/form/switchbox.html'
     }]
   }, {
     path: 'components',

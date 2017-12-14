@@ -12,7 +12,7 @@
         <div class="col-sm-6">
             <section class="code-box">
                 <section class="code-box-demo">
-                    <input class="btsp-selectbox" data-clearable=true data-value="1" data-options="url:' https://easy-mock.com/mock/58ff251d5e43ae5dbea5f48c/sineUI/list'">
+                    <input class="btsp-selectbox" data-width="200px" data-value="1" data-options="url:' https://easy-mock.com/mock/58ff251d5e43ae5dbea5f48c/sineUI/list'">
                 </section>
                 <section class="code-box-meta">
                     <div class="code-box-title">
@@ -27,11 +27,11 @@
                 </section>
                 <section class="code-box-wrapper">
                     <pre><code class="language-markup">
-            &lt;!-- data-options定义属性 --&gt;
-            &lt;input class="btsp-selectbox" data-options="data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
-            或者
-            &lt;!-- data-api单独定义属性 --&gt;
-            &lt;input class="btsp-selectbox" data-data="[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+&lt;!-- data-options定义属性 --&gt;
+&lt;input class="btsp-selectbox" data-width="200px" data-options="data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+或者
+&lt;!-- data-api单独定义属性 --&gt;
+&lt;input class="btsp-selectbox" data-width="200px" data-data="[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
                           </code></pre>
                     <div class="code-box-wrapper-close">
                         <i class="fa fa-angle-double-up"></i>
@@ -40,8 +40,12 @@
             </section>
             <section class="code-box">
                 <section class="code-box-demo">
-                    <input class="btsp-selectbox" data-options="readonly:true,data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'},{key:'选项3',value:'3'}]">
-                    <input class="btsp-selectbox" data-options="readonly:'2',data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'},{key:'选项3',value:'3'}]">
+                    <div>
+                        <input class="btsp-selectbox" data-width="200px" data-options="readonly:true,data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'},{key:'选项3',value:'3'}]">
+                    </div>
+                    <div>
+                        <input class="btsp-selectbox" data-width="200px" data-options="readonly:'2',data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'},{key:'选项3',value:'3'}]">
+                    </div>
                 </section>
                 <section class="code-box-meta">
                     <div class="code-box-title">
@@ -74,7 +78,7 @@
         <div class="col-sm-6">
             <section class="code-box">
                 <section class="code-box-demo">
-                    <input class="btsp-selectbox" data-options="multiple:true,data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'},{key:'选项3',value:'3'},{key:'选项4',value:'4'},{key:'选项5',value:'5'}]">
+                    <input class="btsp-selectbox" data-width="200px" data-options="multiple:true,data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'},{key:'选项3',value:'3'},{key:'选项4',value:'4'},{key:'选项5',value:'5'}]">
                 </section>
                 <section class="code-box-meta">
                     <div class="code-box-title">
@@ -89,11 +93,43 @@
                 </section>
                 <section class="code-box-wrapper">
                     <pre><code class="language-markup">
-            &lt;!-- data-options定义属性 --&gt;
-            &lt;input class="btsp-selectbox" data-options="data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
-            或者
-            &lt;!-- data-api单独定义属性 --&gt;
-            &lt;input class="btsp-selectbox" data-data="[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+&lt;!-- data-options定义属性 --&gt;
+&lt;input class="btsp-selectbox" data-options="multiple:true,data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+或者
+&lt;!-- data-api单独定义属性 --&gt;
+&lt;input class="btsp-selectbox" data-multiple=true data-data="[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+                          </code></pre>
+                    <div class="code-box-wrapper-close">
+                        <i class="fa fa-angle-double-up"></i>
+                    </div>
+                </section>
+            </section>
+            <section class="code-box">
+                <section class="code-box-demo">
+                    <div>
+                        <input class="btsp-selectbox" data-width="200px" data-options="clearable:true,data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'},{key:'选项3',value:'3'},{key:'选项4',value:'4'},{key:'选项5',value:'5'}]">
+                    </div>
+                    <div>
+                        <input class="btsp-selectbox" data-width="200px" data-options="clearable:true,multiple:true,data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'},{key:'选项3',value:'3'},{key:'选项4',value:'4'},{key:'选项5',value:'5'}]">
+                    </div>
+                </section>
+                <section class="code-box-meta">
+                    <div class="code-box-title">
+                        可清空
+                    </div>
+                    <div>
+                        <p>
+                            当<code>selectbox</code>的<code>value</code>不为空时，可直接将<code>value</code>置空。
+                        </p>
+                    </div>
+                    <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+                </section>
+                <section class="code-box-wrapper">
+                    <pre><code class="language-markup">
+&lt;!-- 单选置空 --&gt;
+&lt;input class="btsp-selectbox" data-options="clearable:true,data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
+&lt;!-- 多选置空 --&gt;
+&lt;input class="btsp-selectbox" data-multiple=true data-clearable=true data-data="[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
                           </code></pre>
                     <div class="code-box-wrapper-close">
                         <i class="fa fa-angle-double-up"></i>

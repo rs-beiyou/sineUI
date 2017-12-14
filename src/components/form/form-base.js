@@ -9,6 +9,9 @@ export default class BaseForm {
     this._setObserver();
     this._setFragment();
     this._setFormBlock();
+    this['_set' + this.className]();
+    Object.assign(this.options, this.lastOptions);
+    this.$element.after(this.$fragment[0]).remove();
   }
   _setObserver() {
     let op = this.options;
@@ -124,14 +127,6 @@ export default class BaseForm {
     if (item) {
       $helpText.text(op.helpText);
     }
-  }
-  _setFormAttach() {
-    if (this.$formAttach) return;
-    let _formAttach = document.createElement('div');
-    let $formAttach = $(_formAttach);
-    $formAttach.addClass('form-attach');
-    this.$formBlock.append(_formAttach);
-    this.$formAttach = $formAttach;
   }
   _getDataByUrl() {
     let op = this.options;

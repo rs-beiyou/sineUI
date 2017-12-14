@@ -32,12 +32,25 @@ code {
     color: #999;
 }
 
-.si-article .si-info {
+.si-info {
     margin: 10px 0;
     padding: 10px 20px;
     background-color: #eaf4fe;
     border: 1px solid #d5e8fc;
     border-radius: 4px;
+}
+
+.si-waring {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #fff5e6;
+    border: 1px solid #ffebcc;
+    border-radius: 4px;
+}
+
+.si-waring i {
+    color: #f90;
+    margin-right: 5px;
 }
 
 .si-callout {
@@ -114,6 +127,10 @@ code {
 
 .code-box-demo::after {
     clear: both;
+}
+
+.code-box-demo>.form-block:last-of-type {
+    margin-bottom: 0;
 }
 
 .code-box-meta {

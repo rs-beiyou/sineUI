@@ -4,13 +4,7 @@ import BaseForm from './form-base';
     constructor(el, options) {
       super(el, options, Checkbox.DEFAULTS);
       this.className = 'Checkbox';
-      this._init();
-    }
-    _init() {
-      super._initForm();
-      this._setCheckbox();
-      Object.assign(this.options, this.lastOptions);
-      this.$element.after(this.$fragment[0]).remove();
+      this._initForm();
     }
     _setCheckbox(item) {
       let op = this.options;
@@ -21,8 +15,8 @@ import BaseForm from './form-base';
         $checkbox = $(_checkbox);
         $input = $(_input);
         $input.attr('type', 'hidden');
-        $checkbox.addClass('si-checkbox');
-        this.$formBlock.append(_input).append(_checkbox);
+        $checkbox.addClass('si-checkbox').append(_input);
+        this.$formBlock.append(_checkbox);
         this.$input = $input;
         this.$checkbox = $checkbox;
         this.valueArr = [];
@@ -128,7 +122,17 @@ import BaseForm from './form-base';
         data = op.data,
         keyField = op.keyField,
         valueField = op.valueField,
-        $checkbox = this.$checkbox;
+        $checkbox = this.$checkbox,
+        $list;
+      if (this.$checkboxList) {
+        $list = this.$checkboxList;
+      } else {
+        let list = document.createElement('div');
+        $list = $(list);
+        $list.addClass('si-checkbox-list');
+        this.$checkboxList = $list;
+        $checkbox.append(list);
+      }
       let fragment = document.createDocumentFragment();
       for (let i = 0, len = data.length; i < len; i++) {
         let label = document.createElement('label');
@@ -162,16 +166,26 @@ import BaseForm from './form-base';
           op.value = valueArr.join(',');
         });
       }
-      $checkbox.html(fragment);
+      $list.html(fragment);
     }
   }
 
   function Plugin(option, _relatedTarget) {
     return this.each(function() {
       let $this = $(this);
-      let data = $this.data('si.checkbox');
-      let options = $.extend({}, Checkbox.DEFAULTS, $this.data(), typeof option == 'object' && option);
-
+      let dataSet = $this.data();
+      let data = dataSet['si.checkbox'];
+      dataSet.data ? dataSet.data = (new Function('return ' + dataSet.data))() : false;
+      //data-api覆盖data-options
+      let options = Object.assign({}, Checkbox.DEFAULTS, typeof option == 'object' && option);
+      let datakeys = Object.keys(dataSet);
+      let defaultkeys = Object.keys(options);
+      defaultkeys.forEach((key) => {
+        let lowkey = key.toLocaleLowerCase();
+        if (datakeys.includes(lowkey)) {
+          options[key] = dataSet[lowkey];
+        }
+      });
       if (!data) {
         if (typeof option !== 'object') {
           console.error('请先初始化checkbox，再执行其他操作！\n checkbox初始化：$().checkbox(Object);');

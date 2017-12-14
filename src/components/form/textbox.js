@@ -1,19 +1,11 @@
 import BaseForm from './form-base';
-import _ from '../../libs/util';
 (function($) {
   class Textbox extends BaseForm {
     constructor(el, options) {
       super(el, options, Textbox.DEFAULTS);
       this.className = 'Textbox';
-      this._init();
+      this._initForm();
     }
-    _init() {
-      super._initForm();
-      Object.assign(this.options, this.lastOptions);
-      this._setTextbox();
-      this.$element.after(this.$fragment[0]).remove();
-    }
-    //无hidden情况
     _setTextbox(item) {
       let op = this.options;
       let $input;
@@ -21,7 +13,6 @@ import _ from '../../libs/util';
         let _input = op.multiline ? document.createElement('textarea') : document.createElement('input');
         $input = $(_input);
         $input.addClass('form-control');
-        op.multiline ? null : op.password ? $input.attr('type', 'password') : $input.attr('type', 'text');
         this.$input = $input;
         this.$formBlock.append(_input);
       } else {
@@ -54,9 +45,18 @@ import _ from '../../libs/util';
   function Plugin(option, _relatedTarget) {
     return this.each(function() {
       let $this = $(this);
-      let data = $this.data('si.textbox');
-      let options = $.extend({}, Textbox.DEFAULTS, $this.data(), typeof option === 'object' && option);
-
+      let dataSet = $this.data();
+      let data = dataSet['si.textbox'];
+      //data-api覆盖data-options
+      let options = Object.assign({}, Textbox.DEFAULTS, typeof option == 'object' && option);
+      let datakeys = Object.keys(dataSet);
+      let defaultkeys = Object.keys(options);
+      defaultkeys.forEach((key) => {
+        let lowkey = key.toLocaleLowerCase();
+        if (datakeys.includes(lowkey)) {
+          options[key] = dataSet[lowkey];
+        }
+      });
       if (!data) {
         if (typeof option !== 'object') {
           console.error('请先初始化textbox，再执行其他操作！\n textbox初始化：$().textbox(Object);');

@@ -116,6 +116,13 @@
             "pid": "4",
             "url": "form/checkbox",
             "icon": "fa fa-check-square-o"
+        }, {
+            "id": "55",
+            "name": "开关",
+            "subName": "Switchbox",
+            "pid": "4",
+            "url": "form/switchbox",
+            "icon": "fa fa-toggle-on"
         }]
     },
     {

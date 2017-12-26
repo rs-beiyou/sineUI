@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
 module.exports = {
   // 入口：要进行处理的实例（js）
   entry: {
@@ -17,14 +18,14 @@ module.exports = {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
         use: [{
-          loader: 'css-loader',
-          options: {
-            minimize: true
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          },
+          {
+            loader: 'postcss-loader'
           }
-        },
-        {
-          loader: 'postcss-loader'
-        }
         ],
         fallback: 'style-loader'
       })
@@ -32,17 +33,17 @@ module.exports = {
       test: /\.less/,
       use: ExtractTextPlugin.extract({
         use: [{
-          loader: 'css-loader',
-          options: {
-            minimize: true
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          },
+          {
+            loader: 'postcss-loader'
+          },
+          {
+            loader: 'less-loader'
           }
-        },
-        {
-          loader: 'postcss-loader'
-        },
-        {
-          loader: 'less-loader'
-        }
         ],
         fallback: 'style-loader'
       })
@@ -50,17 +51,17 @@ module.exports = {
       test: /\.scss/,
       use: ExtractTextPlugin.extract({
         use: [{
-          loader: 'css-loader',
-          options: {
-            minimize: true
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          },
+          {
+            loader: 'postcss-loader'
+          },
+          {
+            loader: 'sass-loader'
           }
-        },
-        {
-          loader: 'postcss-loader'
-        },
-        {
-          loader: 'sass-loader'
-        }
         ],
         fallback: 'style-loader'
       })
@@ -76,7 +77,12 @@ module.exports = {
     }]
   },
   resolve: {
-    alias: {},
+    alias: {
+      libs: path.resolve(__dirname, './libs'),
+      bootstrap: 'libs/bootstrap',
+      fontAwesome: 'libs/fontAwesome',
+      src: path.resolve(__dirname, './src')
+    },
     extensions: ['.js', '.css', '.png', '.jpg', '.scss']
   },
   //添加了此项，则表明从外部引入，内部不会打包合并进去

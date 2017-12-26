@@ -1,144 +1,151 @@
 [{
-        "id": "1",
-        "name": "布局",
-        "subName": "Layout",
-        "pid": "-1",
-        "url": "",
-        "icon": "fa fa-th-large",
-        "children": [{
-            "id": "10",
-            "name": "布局",
-            "subName": "Layout",
-            "pid": "1",
-            "url": "layout/layout",
-            "icon": "fa fa-th-large"
-        }, {
-            "id": "11",
-            "name": "栅格",
-            "subName": "Grid",
-            "pid": "1",
-            "url": "layout/grid",
-            "icon": "fa fa-hashtag"
-        }]
-    },
-    {
-        "id": "2",
-        "name": "组件",
-        "subName": "Components",
-        "pid": "-1",
-        "url": "",
-        "icon": "fa fa-th",
-        "children": [{
-            "id": "20",
-            "name": "按钮",
-            "subName": "Button",
-            "pid": "2",
-            "url": "components/buttons",
-            "icon": "fa fa-hand-o-up"
-        }, {
-            "id": "21",
-            "name": "图标",
-            "subName": "Icons",
-            "pid": "2",
-            "url": "components/icons",
-            "icon": "fa fa-info-circle"
-        }, {
-            "id": "22",
-            "name": "颜色",
-            "subName": "Color",
-            "pid": "2",
-            "url": "components/color",
-            "icon": "fa fa-tachometer"
-        }, {
-            "id": "23",
-            "name": "标签",
-            "subName": "Tags",
-            "pid": "2",
-            "url": "components/tags",
-            "icon": "fa fa-tags"
-        }]
-    },
-    {
-        "id": "3",
-        "name": "表格",
-        "subName": "Table",
-        "pid": "-1",
-        "url": "",
-        "icon": "fa fa-table",
-        "children": [{
-            "id": "40",
-            "name": "普通表格",
-            "subName": "General",
-            "pid": "3",
-            "url": "",
-            "icon": ""
-        }]
-    },
-    {
-        "id": "4",
-        "name": "表单",
-        "subName": "Form",
-        "pid": "-1",
-        "url": "",
-        "icon": "fa fa-list-alt",
-        "children": [{
-            "id": "50",
-            "name": "表单",
-            "subName": "Form",
-            "pid": "4",
-            "url": "form/form",
-            "icon": "fa fa-list-alt"
-        }, {
-            "id": "51",
-            "name": "输入框",
-            "subName": "Textbox",
-            "pid": "4",
-            "url": "form/textbox",
-            "icon": "fa fa-edit"
-        }, {
-            "id": "52",
-            "name": "选择器",
-            "subName": "Selectbox",
-            "pid": "4",
-            "url": "form/selectbox",
-            "icon": "fa fa-chevron-down"
-        }, {
-            "id": "53",
-            "name": "单选框",
-            "subName": "Radiobox",
-            "pid": "4",
-            "url": "form/radiobox",
-            "icon": "fa fa-dot-circle-o"
-        }, {
-            "id": "54",
-            "name": "多选框",
-            "subName": "Checkbox",
-            "pid": "4",
-            "url": "form/checkbox",
-            "icon": "fa fa-check-square-o"
-        }, {
-            "id": "55",
-            "name": "开关",
-            "subName": "Switchbox",
-            "pid": "4",
-            "url": "form/switchbox",
-            "icon": "fa fa-toggle-on"
-        }]
-    },
-    {
-        "id": "5",
-        "name": "路由",
-        "subName": "Router",
-        "pid": "-1",
-        "url": "",
-        "icon": "fa fa-chrome",
-        "children": [{
-            "id": "60",
-            "name": "History模式",
-            "subName": "HTML5",
-            "pid": "5",
-            "url": "",
-            "icon": "fa fa-html5"
-        }]
-    }
+    "id": "1",
+    "name": "布局",
+    "subName": "Layout",
+    "pid": "-1",
+    "url": "",
+    "icon": "fa fa-th-large",
+    "children": [{
+      "id": "10",
+      "name": "布局",
+      "subName": "Layout",
+      "pid": "1",
+      "url": "layout/layout",
+      "icon": "fa fa-th-large"
+    }, {
+      "id": "11",
+      "name": "栅格",
+      "subName": "Grid",
+      "pid": "1",
+      "url": "layout/grid",
+      "icon": "fa fa-hashtag"
+    }]
+  },
+  {
+    "id": "2",
+    "name": "组件",
+    "subName": "Components",
+    "pid": "-1",
+    "url": "",
+    "icon": "fa fa-th",
+    "children": [{
+      "id": "20",
+      "name": "按钮",
+      "subName": "Button",
+      "pid": "2",
+      "url": "components/buttons",
+      "icon": "fa fa-hand-o-up"
+    }, {
+      "id": "21",
+      "name": "图标",
+      "subName": "Icons",
+      "pid": "2",
+      "url": "components/icons",
+      "icon": "fa fa-info-circle"
+    }, {
+      "id": "22",
+      "name": "颜色",
+      "subName": "Color",
+      "pid": "2",
+      "url": "components/color",
+      "icon": "fa fa-tachometer"
+    }, {
+      "id": "23",
+      "name": "标签",
+      "subName": "Tags",
+      "pid": "2",
+      "url": "components/tags",
+      "icon": "fa fa-tags"
+    }]
+  },
+  {
+    "id": "3",
+    "name": "表格",
+    "subName": "Table",
+    "pid": "-1",
+    "url": "",
+    "icon": "fa fa-table",
+    "children": [{
+      "id": "40",
+      "name": "普通表格",
+      "subName": "General",
+      "pid": "3",
+      "url": "",
+      "icon": ""
+    }]
+  },
+  {
+    "id": "4",
+    "name": "表单",
+    "subName": "Form",
+    "pid": "-1",
+    "url": "",
+    "icon": "fa fa-list-alt",
+    "children": [{
+      "id": "50",
+      "name": "表单",
+      "subName": "Form",
+      "pid": "4",
+      "url": "form/form",
+      "icon": "fa fa-list-alt"
+    }, {
+      "id": "51",
+      "name": "输入框",
+      "subName": "Textbox",
+      "pid": "4",
+      "url": "form/textbox",
+      "icon": "fa fa-edit"
+    }, {
+      "id": "52",
+      "name": "选择器",
+      "subName": "Selectbox",
+      "pid": "4",
+      "url": "form/selectbox",
+      "icon": "fa fa-chevron-down"
+    }, {
+      "id": "53",
+      "name": "单选框",
+      "subName": "Radiobox",
+      "pid": "4",
+      "url": "form/radiobox",
+      "icon": "fa fa-dot-circle-o"
+    }, {
+      "id": "54",
+      "name": "多选框",
+      "subName": "Checkbox",
+      "pid": "4",
+      "url": "form/checkbox",
+      "icon": "fa fa-check-square-o"
+    }, {
+      "id": "55",
+      "name": "开关",
+      "subName": "Switchbox",
+      "pid": "4",
+      "url": "form/switchbox",
+      "icon": "fa fa-toggle-on"
+    }, {
+      "id": "56",
+      "name": "文件上传",
+      "subName": "Filebox",
+      "pid": "4",
+      "url": "form/filebox",
+      "icon": "fa fa-upload"
+    }]
+  },
+  {
+    "id": "5",
+    "name": "路由",
+    "subName": "Router",
+    "pid": "-1",
+    "url": "",
+    "icon": "fa fa-chrome",
+    "children": [{
+      "id": "60",
+      "name": "History模式",
+      "subName": "HTML5",
+      "pid": "5",
+      "url": "",
+      "icon": "fa fa-html5"
+    }]
+  }
 ]

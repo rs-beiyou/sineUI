@@ -8,7 +8,8 @@ import BaseForm from './form-base';
     }
     _setCheckbox(item) {
       let op = this.options;
-      let $input, $checkbox;
+      let $input = this.$input,
+        $checkbox = this.$checkbox;
       if (!this.$input) {
         let _input = document.createElement('input');
         let _checkbox = document.createElement('div');
@@ -21,9 +22,6 @@ import BaseForm from './form-base';
         this.$checkbox = $checkbox;
         this.valueArr = [];
         this.valueArrCache = [];
-      } else {
-        $input = this.$input;
-        $checkbox = this.$checkbox;
       }
       switch (item) {
         case 'id':
@@ -147,10 +145,12 @@ import BaseForm from './form-base';
         $(checkbox).data('value', data[i][valueField]).addClass('si-checkbox-content').append(span).append(input);
         $(label).addClass('si-checkbox-item').append(checkbox).append(data[i][keyField]);
         fragment.appendChild(label);
-        checkboxDom[data[i][valueField]] = {
-          $checkbox: $(label),
-          $input: $(input)
-        };
+        Object.assign(checkboxDom, {
+          [data[i][valueField]]: {
+            $checkbox: $(label),
+            $input: $(input)
+          }
+        });
         $(input).on('change', function() {
           let val = this.value;
           if (valueArr.includes(val)) {
@@ -175,18 +175,19 @@ import BaseForm from './form-base';
       let $this = $(this);
       let dataSet = $this.data();
       let data = dataSet['si.checkbox'];
-      dataSet.data ? dataSet.data = (new Function('return ' + dataSet.data))() : false;
-      //data-api覆盖data-options
-      let options = Object.assign({}, Checkbox.DEFAULTS, typeof option == 'object' && option);
-      let datakeys = Object.keys(dataSet);
-      let defaultkeys = Object.keys(options);
-      defaultkeys.forEach((key) => {
-        let lowkey = key.toLocaleLowerCase();
-        if (datakeys.includes(lowkey)) {
-          options[key] = dataSet[lowkey];
-        }
-      });
+
       if (!data) {
+        dataSet.data ? dataSet.data = eval(dataSet.data) : false;
+        //data-api覆盖data-options
+        let options = Object.assign({}, Checkbox.DEFAULTS, typeof option === 'object' && option);
+        let datakeys = Object.keys(dataSet);
+        let defaultkeys = Object.keys(options);
+        defaultkeys.forEach((key) => {
+          let lowkey = key.toLocaleLowerCase();
+          if (datakeys.includes(lowkey)) {
+            options[key] = dataSet[lowkey];
+          }
+        });
         if (typeof option !== 'object') {
           console.error('请先初始化checkbox，再执行其他操作！\n checkbox初始化：$().checkbox(Object);');
           return;
@@ -194,9 +195,9 @@ import BaseForm from './form-base';
         data = new Checkbox(this, options);
         data.$input.data('si.checkbox', data);
       } else {
-        if (typeof option == 'object') data['set'](option);
+        if (typeof option === 'object') data['set'](option);
       }
-      if (typeof option == 'string') data[option](_relatedTarget);
+      if (typeof option === 'string') data[option](_relatedTarget);
     });
   }
 

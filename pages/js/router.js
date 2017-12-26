@@ -47,6 +47,10 @@ window.si.config({
       title: '开关',
       path: 'switchbox',
       page: 'pages/views/form/switchbox.html'
+    }, {
+      title: '文件上传',
+      path: 'filebox',
+      page: 'pages/views/form/filebox.html'
     }]
   }, {
     path: 'components',

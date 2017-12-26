@@ -1,0 +1,62 @@
+<div class="container-fluid" id="filebox-page">
+    <article class="si-article">
+        <p class="si-info">文件选择上传和拖拽上传控件。</p>
+        <p class="si-warning"><i class="fa fa-exclamation-circle"></i>暂不支持IE9浏览器！</p>
+        <h4>代码示例<i class="fa fa-code"></i></h4>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <input class="btsp-filebox" data-id="file" data-options="inputWidth:'col-md-5 col-sm-9'" data-fileloader="{uploader:'http://localhost:8080/zz/uploaddown/upload.action',formData:{aaa:123}}">
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    <!-- 组件名 -->
+                </div>
+                <div>
+                    <p>
+                        <!-- 组件描述 -->
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code>
+                <!-- 组件代码 -->
+              </code></pre>
+                <div class="code-box-wrapper-close">
+                    <i class="fa fa-angle-double-up"></i>
+                </div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <!-- 组件demo -->
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    <!-- 组件名 -->
+                </div>
+                <div>
+                    <p>
+                        <!-- 组件描述 -->
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code>
+                <!-- 组件代码 -->
+              </code></pre>
+                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
+            </section>
+        </section>
+    </article>
+</div>
+<script>
+    $("#file").filebox({
+        fileLoader: {
+            uploadSuccess: function(res) {
+                console.log(res);
+            }
+        }
+    })
+</script>

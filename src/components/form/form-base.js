@@ -10,7 +10,7 @@ export default class BaseForm {
     this._setFragment();
     this._setFormBlock();
     this['_set' + this.className]();
-    Object.assign(this.options, this.lastOptions);
+    this.set(this.lastOptions);
     this.$element.after(this.$fragment[0]).remove();
   }
   _setObserver() {
@@ -135,13 +135,10 @@ export default class BaseForm {
       method: 'get',
       success: (re) => {
         op.data = re.list;
-      },
-      error: () => {
-
       }
     });
   }
   set(option) {
-    Object.assign(this.options, option || {});
+    this.className === 'Filebox' ? $.extend(true, this.options, option) : Object.assign(this.options, option);
   }
 }

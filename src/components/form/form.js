@@ -4,6 +4,7 @@ import './checkbox';
 import './radiobox';
 import './selectbox';
 import './switchbox';
+import './filebox';
 // form操作器
 (function($) {
   class Form {

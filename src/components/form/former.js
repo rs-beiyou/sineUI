@@ -4,6 +4,7 @@ import './checkbox';
 import './radiobox';
 import './selectbox';
 import './switchbox';
+import './filebox';
 (function($) {
   function former(option, _relatedTarget) {
     return this.each(function() {

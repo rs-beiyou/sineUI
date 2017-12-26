@@ -5,7 +5,7 @@ $('#form1').form({
     id: 'aa',
     type: 'textbox',
     helpText: '必填项',
-    labelWidth: 'col-xs-3 col-sm-2 col-md-1',
+    labelWidth: 'col-sm-3 col-md-2',
     inputWidth: 'col-xs-9 col-sm-5'
   }, {
     label: 'checkbox：',
@@ -13,7 +13,7 @@ $('#form1').form({
     id: 'bb',
     type: 'checkbox',
     value: '2,3',
-    labelWidth: 'col-xs-3 col-sm-2 col-md-1',
+    labelWidth: 'col-sm-3 col-md-2',
     inputWidth: 'col-xs-9 col-sm-5',
     url: 'https://easy-mock.com/mock/58ff251d5e43ae5dbea5f48c/sineUI/list'
   }, {
@@ -22,7 +22,7 @@ $('#form1').form({
     id: 'cc',
     type: 'radiobox',
     value: '1',
-    labelWidth: 'col-xs-3 col-sm-2 col-md-1',
+    labelWidth: 'col-sm-3 col-md-2',
     inputWidth: 'col-xs-9 col-sm-5',
     url: 'https://easy-mock.com/mock/58ff251d5e43ae5dbea5f48c/sineUI/list'
   }, {
@@ -31,8 +31,22 @@ $('#form1').form({
     id: 'dd',
     type: 'selectbox',
     value: '1',
-    labelWidth: 'col-xs-3 col-sm-2 col-md-1',
+    labelWidth: 'col-sm-3 col-md-2',
     inputWidth: 'col-xs-9 col-sm-5',
     url: 'https://easy-mock.com/mock/58ff251d5e43ae5dbea5f48c/sineUI/list'
+  }, {
+    label: 'switchbox：',
+    name: 'ee',
+    id: 'ee',
+    labelWidth: 'col-sm-3 col-md-2',
+    inputWidth: 'col-xs-9 col-sm-5',
+    type: 'switchbox'
+  }, {
+    label: 'filebox：',
+    name: 'ff',
+    id: 'ff',
+    labelWidth: 'col-sm-3 col-md-2',
+    inputWidth: 'col-xs-9 col-sm-5',
+    type: 'filebox'
   }]
 });

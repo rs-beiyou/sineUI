@@ -8,7 +8,11 @@ import BaseForm from './form-base';
     }
     _setSelectbox(item) {
       let op = this.options;
-      let $input, $selectbox, $selection, $dropdown, $selectValue, $placeholder, $clear;
+      let $input = this.$input,
+        $selectbox = this.$selectbox,
+        $selection = this.$selection,
+        $placeholder = this.$placeholder,
+        $dropdown, $selectValue, $clear;
       if (!this.$input) {
         let _input = document.createElement('input');
         let _selectbox = document.createElement('div');
@@ -50,11 +54,6 @@ import BaseForm from './form-base';
           $dropdown.width($selection.outerWidth());
         });
         this._addEvent();
-      } else {
-        $input = this.$input;
-        $selectbox = this.$selectbox;
-        $placeholder = this.$placeholder;
-        $selection = this.$selection;
       }
       switch (item) {
         case 'id':
@@ -283,10 +282,12 @@ import BaseForm from './form-base';
         $li.data('value', data[i][valueField]).addClass('si-selectbox-item').html(data[i][keyField]);
         $ul.append(li);
         if (data[i][valueField] !== '') {
-          selectboxDom[data[i][valueField]] = {
-            $selectbox: $li,
-            text: data[i][keyField]
-          };
+          Object.assign(selectboxDom, {
+            [data[i][valueField]]: {
+              $selectbox: $li,
+              text: data[i][keyField]
+            }
+          });
         }
       }
       $ul.on('click', (e) => {
@@ -320,18 +321,19 @@ import BaseForm from './form-base';
       let $this = $(this);
       let dataSet = $this.data();
       let data = dataSet['si.selectbox'];
-      dataSet.data ? dataSet.data = (new Function('return ' + dataSet.data))() : false;
-      //data-api覆盖data-options
-      let options = Object.assign({}, Selectbox.DEFAULTS, typeof option == 'object' && option);
-      let datakeys = Object.keys(dataSet);
-      let defaultkeys = Object.keys(options);
-      defaultkeys.forEach((key) => {
-        let lowkey = key.toLocaleLowerCase();
-        if (datakeys.includes(lowkey)) {
-          options[key] = dataSet[lowkey];
-        }
-      });
+
       if (!data) {
+        dataSet.data ? dataSet.data = eval(dataSet.data) : false;
+        //data-api覆盖data-options
+        let options = Object.assign({}, Selectbox.DEFAULTS, typeof option === 'object' && option);
+        let datakeys = Object.keys(dataSet);
+        let defaultkeys = Object.keys(options);
+        defaultkeys.forEach((key) => {
+          let lowkey = key.toLocaleLowerCase();
+          if (datakeys.includes(lowkey)) {
+            options[key] = dataSet[lowkey];
+          }
+        });
         if (typeof option !== 'object') {
           console.error('请先初始化selectbox，再执行其他操作！\n selectbox初始化：$().selectbox(Object);');
           return;
@@ -339,9 +341,9 @@ import BaseForm from './form-base';
         data = new Selectbox(this, options);
         data.$input.data('si.selectbox', data);
       } else {
-        if (typeof option == 'object') data['set'](option);
+        if (typeof option === 'object') data['set'](option);
       }
-      if (typeof option == 'string') data[option](_relatedTarget);
+      if (typeof option === 'string') data[option](_relatedTarget);
     });
   }
 

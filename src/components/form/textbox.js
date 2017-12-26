@@ -8,15 +8,13 @@ import BaseForm from './form-base';
     }
     _setTextbox(item) {
       let op = this.options;
-      let $input;
+      let $input = this.$input;
       if (!this.$input) {
         let _input = op.multiline ? document.createElement('textarea') : document.createElement('input');
         $input = $(_input);
         $input.addClass('form-control');
         this.$input = $input;
         this.$formBlock.append(_input);
-      } else {
-        $input = this.$input;
       }
       switch (item) {
         case 'id':
@@ -47,17 +45,18 @@ import BaseForm from './form-base';
       let $this = $(this);
       let dataSet = $this.data();
       let data = dataSet['si.textbox'];
-      //data-api覆盖data-options
-      let options = Object.assign({}, Textbox.DEFAULTS, typeof option == 'object' && option);
-      let datakeys = Object.keys(dataSet);
-      let defaultkeys = Object.keys(options);
-      defaultkeys.forEach((key) => {
-        let lowkey = key.toLocaleLowerCase();
-        if (datakeys.includes(lowkey)) {
-          options[key] = dataSet[lowkey];
-        }
-      });
+
       if (!data) {
+        //data-api覆盖data-options
+        let options = Object.assign({}, Textbox.DEFAULTS, typeof option === 'object' && option);
+        let datakeys = Object.keys(dataSet);
+        let defaultkeys = Object.keys(options);
+        defaultkeys.forEach((key) => {
+          let lowkey = key.toLocaleLowerCase();
+          if (datakeys.includes(lowkey)) {
+            options[key] = dataSet[lowkey];
+          }
+        });
         if (typeof option !== 'object') {
           console.error('请先初始化textbox，再执行其他操作！\n textbox初始化：$().textbox(Object);');
           return;

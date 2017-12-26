@@ -1,7 +1,11 @@
 .form-horizontal {
     .si-checkbox,
-    .si-radiobox {
+    .si-radiobox,
+    {
         padding-top: 7px;
+    }
+    .si-switchbox {
+        margin-top: 5px;
     }
 }
 
@@ -521,6 +525,94 @@ input[type="checkbox"] {
         border-color: $switch-disabled-bg;
         &:after {
             cursor: not-allowed;
+        }
+    }
+}
+
+.si-filebox {
+    position: relative;
+    label,
+    .btn {
+        margin-bottom: 0;
+    }
+    .si-filebox-input {
+        display: none;
+    }
+    .si-filebox-upload-btn {
+        margin-left: 10px;
+    }
+}
+
+.si-filebox-list {
+    .si-filebox-list-item {
+        margin-top: 8px;
+        height: $filebox-item-height;
+        position: relative;
+        padding: 0 35px 0 15px;
+        overflow: hidden;
+        color: $filebox-item-color;
+        background-color: $filebox-item-bg;
+        cursor: pointer;
+        &:hover {
+            background-color: $filebox-item-hover-bg;
+        }
+        .si-filebox-item-inner {
+            display: inline-block;
+            line-height: $filebox-item-height;
+        }
+        i {
+            position: absolute;
+            line-height: $filebox-item-height;
+        }
+        .si-filebox-item-type {
+            left: 0;
+            cursor: default;
+        }
+        .si-filebox-item-info {
+            right: 20px;
+            &:hover {
+                color: $filebox-item-icon-hover-color;
+            }
+        }
+        .si-filebox-item-remove {
+            right: 5px;
+            cursor: pointer;
+            &:hover {
+                color: $filebox-item-icon-hover-color;
+            }
+        }
+        .si-filebox-item-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: $filebox-item-progress-bg;
+            opacity: .6;
+            z-index: 10;
+            -webkit-transition: margin-left .2s ease-out;
+            -o-transition: margin-left .2s ease-out;
+            transition: margin-left .2s ease-out;
+        }
+        &.si-filebox-item-ready {
+            background-color: $filebox-item-progress-bg;
+            .si-filebox-item-progress {
+                display: none;
+            }
+        }
+        &.si-filebox-item-error {
+            color: $filebox-item-error-color;
+            cursor: default;
+            .si-filebox-item-progress,
+            .si-filebox-item-info {
+                display: none;
+            }
+            .si-filebox-item-inner {
+                cursor: text;
+            }
+            i:hover {
+                color: $filebox-item-error-color;
+            }
         }
     }
 }

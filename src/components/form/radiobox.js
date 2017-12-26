@@ -8,7 +8,8 @@ import BaseForm from './form-base';
     }
     _setRadiobox(item) {
       let op = this.options;
-      let $input, $radiobox;
+      let $input = this.$input,
+        $radiobox = this.$radiobox;
       if (!this.$input) {
         let _input = document.createElement('input');
         let _radiobox = document.createElement('div');
@@ -20,9 +21,6 @@ import BaseForm from './form-base';
         this.$input = $input;
         this.$radiobox = $radiobox;
         this.valueCache = '';
-      } else {
-        $input = this.$input;
-        $radiobox = this.$radiobox;
       }
       switch (item) {
         case 'id':
@@ -138,10 +136,12 @@ import BaseForm from './form-base';
         $(radiobox).data('value', data[i][valueField]).addClass('si-radiobox-content').append(span).append(input);
         $(label).addClass('si-radiobox-item').append(radiobox).append(data[i][keyField]);
         fragment.appendChild(label);
-        radioboxDom[data[i][valueField]] = {
-          $radiobox: $(label),
-          $input: $(input)
-        };
+        Object.assign(radioboxDom, {
+          [data[i][valueField]]: {
+            $radiobox: $(label),
+            $input: $(input)
+          }
+        });
         $(input).on('change', function() {
           op.value = this.value;
         });
@@ -155,18 +155,18 @@ import BaseForm from './form-base';
       let $this = $(this);
       let dataSet = $this.data();
       let data = dataSet['si.textbox'];
-      dataSet.data ? dataSet.data = eval(dataSet.data) : false;
-      //data-api覆盖data-options
-      let options = Object.assign({}, Radiobox.DEFAULTS, typeof option == 'object' && option);
-      let datakeys = Object.keys(dataSet);
-      let defaultkeys = Object.keys(options);
-      defaultkeys.forEach((key) => {
-        let lowkey = key.toLocaleLowerCase();
-        if (datakeys.includes(lowkey)) {
-          options[key] = dataSet[lowkey];
-        }
-      });
       if (!data) {
+        dataSet.data ? dataSet.data = eval(dataSet.data) : false;
+        //data-api覆盖data-options
+        let options = Object.assign({}, Radiobox.DEFAULTS, typeof option === 'object' && option);
+        let datakeys = Object.keys(dataSet);
+        let defaultkeys = Object.keys(options);
+        defaultkeys.forEach((key) => {
+          let lowkey = key.toLocaleLowerCase();
+          if (datakeys.includes(lowkey)) {
+            options[key] = dataSet[lowkey];
+          }
+        });
         if (typeof option !== 'object') {
           console.error('请先初始化radiobox，再执行其他操作！\n radiobox初始化：$().radiobox(Object);');
           return;
@@ -174,9 +174,9 @@ import BaseForm from './form-base';
         data = new Radiobox(this, options);
         data.$input.data('si.radiobox', data);
       } else {
-        if (typeof option == 'object') data['set'](option);
+        if (typeof option === 'object') data['set'](option);
       }
-      if (typeof option == 'string') data[option](_relatedTarget);
+      if (typeof option === 'string') data[option](_relatedTarget);
     });
   }
 

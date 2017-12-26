@@ -8,7 +8,8 @@ import BaseForm from './form-base';
     }
     _setSwitchbox(item) {
       let op = this.options;
-      let $input, $switchbox;
+      let $input = this.$input,
+        $switchbox = this.$switchbox;
       if (!this.$input) {
         let _switchbox = document.createElement('div');
         let _input = document.createElement('input');
@@ -24,9 +25,6 @@ import BaseForm from './form-base';
         this.$switchbox = $switchbox;
         this.$switchboxInner = $inner;
         this._addEvent();
-      } else {
-        $input = this.$input;
-        $switchbox = this.$switchbox;
       }
       switch (item) {
         case 'id':
@@ -122,6 +120,8 @@ import BaseForm from './form-base';
     trueText: '',
     falseText: '',
     trueIcon: '',
-    falseIcon: ''
+    falseIcon: '',
+    labelWidth: '',
+    inputWidth: ''
   };
 })(jQuery);

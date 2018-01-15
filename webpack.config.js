@@ -18,14 +18,14 @@ module.exports = {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
         use: [{
-            loader: 'css-loader',
-            options: {
-              minimize: true
-            }
-          },
-          {
-            loader: 'postcss-loader'
+          loader: 'css-loader',
+          options: {
+            minimize: true
           }
+        },
+        {
+          loader: 'postcss-loader'
+        }
         ],
         fallback: 'style-loader'
       })
@@ -33,17 +33,17 @@ module.exports = {
       test: /\.less/,
       use: ExtractTextPlugin.extract({
         use: [{
-            loader: 'css-loader',
-            options: {
-              minimize: true
-            }
-          },
-          {
-            loader: 'postcss-loader'
-          },
-          {
-            loader: 'less-loader'
+          loader: 'css-loader',
+          options: {
+            minimize: true
           }
+        },
+        {
+          loader: 'postcss-loader'
+        },
+        {
+          loader: 'less-loader'
+        }
         ],
         fallback: 'style-loader'
       })
@@ -51,17 +51,17 @@ module.exports = {
       test: /\.scss/,
       use: ExtractTextPlugin.extract({
         use: [{
-            loader: 'css-loader',
-            options: {
-              minimize: true
-            }
-          },
-          {
-            loader: 'postcss-loader'
-          },
-          {
-            loader: 'sass-loader'
+          loader: 'css-loader',
+          options: {
+            minimize: true
           }
+        },
+        {
+          loader: 'postcss-loader'
+        },
+        {
+          loader: 'sass-loader'
+        }
         ],
         fallback: 'style-loader'
       })

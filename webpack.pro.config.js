@@ -7,8 +7,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = merge(webpackBaseConfig, {
   output: {
     path: path.join(__dirname, './dist'),
-    publicPath: './',
-    filename: '[name].min.js'
+    publicPath: '../',
+    filename: 'js/[name].min.js'
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
@@ -17,7 +17,7 @@ module.exports = merge(webpackBaseConfig, {
       }
     }),
     new ExtractTextPlugin({
-      filename: '[name].min.css',
+      filename: 'css/[name].min.css',
       allChunks: true
     })
   ],

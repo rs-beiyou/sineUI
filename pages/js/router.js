@@ -1,6 +1,6 @@
-let $container = $('.si-container');
-let $title = $('title');
-let $siTitle = $('.si-nav-title');
+var $container = $('.si-container');
+var $title = $('title');
+var $siTitle = $('.si-nav-title');
 window.si.config({
   router: [{
     title: '首页',
@@ -43,6 +43,14 @@ window.si.config({
       title: '表单',
       path: 'form',
       page: 'pages/views/form/form.html'
+    }, {
+      title: '开关',
+      path: 'switchbox',
+      page: 'pages/views/form/switchbox.html'
+    }, {
+      title: '文件上传',
+      path: 'filebox',
+      page: 'pages/views/form/filebox.html'
     }]
   }, {
     path: 'components',
@@ -58,6 +66,10 @@ window.si.config({
       title: '图标',
       path: 'icons',
       page: 'pages/views/components/icons.html'
+    }, {
+      title: '标签',
+      path: 'tags',
+      page: 'pages/views/components/tags.html'
     }]
   }],
   redirect: 'home',

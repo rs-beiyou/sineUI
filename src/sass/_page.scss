@@ -68,9 +68,9 @@ a {
     top: 0;
     bottom: 0;
     width: $sidebar-width;
-    -webkit-transition: margin-left 0.3s linear;
-    -o-transition: margin-left 0.3s linear;
-    transition: margin-left 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition: all 0.3s linear;
     z-index: 3;
     background-color: $sidebar-bg;
     color: $sidebar-font-color;
@@ -313,14 +313,16 @@ a {
         cursor: pointer;
     }
     .si-nav-title {
+        width: 100%;
         padding-left: 20px;
         font-weight: bold;
+        margin: 0 auto;
     }
     .si-container {
         padding: 65px 0 10px;
         overflow: scroll;
         margin: 0 auto;
-        max-width: 1000px;
+        max-width: $si-container-max-width;
     }
     .si-back-top {
         position: fixed;
@@ -382,10 +384,14 @@ a {
         }
     }
     .si-sidebar {
-        margin-left: -$sidebar-width;
+        -webkit-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
+        transform: translateX(-100%);
     }
     .si-sidebar-unfolded {
-        margin-left: 0;
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        transform: translateX(0);
         +.si-main-panel {
             margin-left: 0;
         }

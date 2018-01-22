@@ -4,69 +4,64 @@ import BaseForm from './form-base';
     constructor(el, options) {
       super(el, options, Checkbox.DEFAULTS);
       this.className = 'Checkbox';
-      this._init();
+      this._initForm();
     }
-    _init() {
-      super._initForm();
-      Object.assign(this.options, this.lastOptions);
-      this.$element.after(this.$fragment[0]).remove();
-    }
-    _setCheckbox(item) {
+    _setCheckbox(item, newVal) {
       let op = this.options;
-      let $input, $checkbox;
+      let $input = this.$input,
+        $checkbox = this.$checkbox;
       if (!this.$input) {
         let _input = document.createElement('input');
         let _checkbox = document.createElement('div');
         $checkbox = $(_checkbox);
         $input = $(_input);
         $input.attr('type', 'hidden');
-        $checkbox.addClass('si-checkbox');
-        this.$formBlock.append(_input).append(_checkbox);
+        $checkbox.addClass('si-checkbox').append(_input);
+        this.$formBlock.append(_checkbox);
         this.$input = $input;
         this.$checkbox = $checkbox;
         this.valueArr = [];
         this.valueArrCache = [];
-      } else {
-        $input = this.$input;
-        $checkbox = this.$checkbox;
       }
       switch (item) {
         case 'id':
         case 'name':
-          $input.attr(item, op[item]);
+          $input.attr(item, newVal);
           break;
         case 'readonly':
-          this._setReadonly();
+          this._setReadonly(newVal);
           break;
         case 'disabled':
-          this._setDisabled();
+          this._setDisabled(newVal);
           break;
         case 'value':
-          this._setValue();
+          this._setValue(newVal);
           break;
         case 'data':
-          this._setAttachList();
-          op.value !== '' && this._setValue();
-          op.readonly !== false && this._setReadonly();
-          op.disabled !== false && this._setDisabled();
+          this._setAttachList(newVal);
+          op.value !== '' && this._setValue(op.value);
+          op.readonly !== false && this._setReadonly(op.readonly);
+          op.disabled !== false && this._setDisabled(op.disabled);
           break;
       }
     }
-    _setReadonly() {
+    _setReadonly(newVal) {
       if (this.checkboxDom) {
-        let op = this.options,
-          rl = op.readonly,
+        let rl = newVal,
           cbd = this.checkboxDom,
           rla = this.readonlyArr || [],
           newRla;
         if (typeof rl === 'boolean') {
           newRla = rl ? Object.keys(cbd) : [];
         }
+        if (typeof rl === 'number') {
+          newRla = String(rl).split(',');
+        }
         if (typeof rl === 'string') {
           newRla = rl ? rl.split(',') : [];
         }
-        let arr1 = Array.compare(newRla, rla, true);
-        let arr2 = Array.compare(newRla, rla, false);
+        let arr1 = Array.compare(newRla, rla);
+        let arr2 = Array.compare(rla, newRla);
         arr1.forEach(key => {
           cbd[key] && cbd[key].$input.attr('disabled', true) && cbd[key].$checkbox.addClass('si-checkbox-disabled');
         });
@@ -76,9 +71,9 @@ import BaseForm from './form-base';
         this.readonlyArr = newRla;
       }
     }
-    _setDisabled() {
+    _setDisabled(newVal) {
       if (this.checkboxDom) {
-        let da = this.options.disabled,
+        let da = newVal,
           cbd = this.checkboxDom,
           $input = this.$input;
         if (typeof da === 'boolean') {
@@ -97,14 +92,13 @@ import BaseForm from './form-base';
         }
       }
     }
-    _setValue() {
+    _setValue(newVal) {
       if (this.checkboxDom) {
-        let op = this.options,
-          va = op.value && op.value.split(',') || [],
+        let va = newVal !== '' ? String(newVal).split(',') : [],
           vac = this.valueArrCache,
           cbd = this.checkboxDom;
-        let arr1 = Array.compare(va, vac, true);
-        let arr2 = Array.compare(va, vac, false);
+        let arr1 = Array.compare(va, vac);
+        let arr2 = Array.compare(vac, va);
         arr1.forEach(key => {
           cbd[key] && cbd[key].$checkbox.addClass('si-checkbox-checked');
         });
@@ -112,19 +106,29 @@ import BaseForm from './form-base';
           cbd[key] && cbd[key].$checkbox.removeClass('si-checkbox-checked');
         });
         this.valueArrCache = va;
-        this.$input.val(op.value).trigger('change');
+        this.$input.val(newVal).trigger('change');
       }
     }
-    _setAttachList() {
+    _setAttachList(newVal) {
       this.checkboxDom = {};
       let op = this.options;
-      this.valueArr = op.value ? op.value.split(',') : [];
+      this.valueArr = op.value !== '' ? String(op.value).split(',') : [];
       let valueArr = this.valueArr,
         checkboxDom = this.checkboxDom,
-        data = op.data,
+        data = newVal,
         keyField = op.keyField,
         valueField = op.valueField,
-        $checkbox = this.$checkbox;
+        $checkbox = this.$checkbox,
+        $list;
+      if (this.$checkboxList) {
+        $list = this.$checkboxList;
+      } else {
+        let list = document.createElement('div');
+        $list = $(list);
+        $list.addClass('si-checkbox-list');
+        this.$checkboxList = $list;
+        $checkbox.append(list);
+      }
       let fragment = document.createDocumentFragment();
       for (let i = 0, len = data.length; i < len; i++) {
         let label = document.createElement('label');
@@ -139,10 +143,12 @@ import BaseForm from './form-base';
         $(checkbox).data('value', data[i][valueField]).addClass('si-checkbox-content').append(span).append(input);
         $(label).addClass('si-checkbox-item').append(checkbox).append(data[i][keyField]);
         fragment.appendChild(label);
-        checkboxDom[data[i][valueField]] = {
-          $checkbox: $(label),
-          $input: $(input)
-        };
+        Object.assign(checkboxDom, {
+          [data[i][valueField]]: {
+            $checkbox: $(label),
+            $input: $(input)
+          }
+        });
         $(input).on('change', function() {
           let val = this.value;
           if (valueArr.includes(val)) {
@@ -158,17 +164,28 @@ import BaseForm from './form-base';
           op.value = valueArr.join(',');
         });
       }
-      $checkbox.html(fragment);
+      $list.html(fragment);
     }
   }
 
   function Plugin(option, _relatedTarget) {
     return this.each(function() {
       let $this = $(this);
-      let data = $this.data('si.checkbox');
-      let options = $.extend({}, Checkbox.DEFAULTS, $this.data(), typeof option == 'object' && option);
+      let dataSet = $this.data();
+      let data = dataSet['si.checkbox'];
 
       if (!data) {
+        dataSet.data ? dataSet.data = eval(dataSet.data) : false;
+        //data-api覆盖data-options
+        let options = Object.assign({}, Checkbox.DEFAULTS, typeof option === 'object' && option);
+        let datakeys = Object.keys(dataSet);
+        let defaultkeys = Object.keys(options);
+        defaultkeys.forEach((key) => {
+          let lowkey = key.toLocaleLowerCase();
+          if (datakeys.includes(lowkey)) {
+            options[key] = dataSet[lowkey];
+          }
+        });
         if (typeof option !== 'object') {
           console.error('请先初始化checkbox，再执行其他操作！\n checkbox初始化：$().checkbox(Object);');
           return;
@@ -176,9 +193,9 @@ import BaseForm from './form-base';
         data = new Checkbox(this, options);
         data.$input.data('si.checkbox', data);
       } else {
-        if (typeof option == 'object') data['set'](option);
+        if (typeof option === 'object') data['set'](option);
       }
-      if (typeof option == 'string') data[option](_relatedTarget);
+      if (typeof option === 'string') data[option](_relatedTarget);
     });
   }
 

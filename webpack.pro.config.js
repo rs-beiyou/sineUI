@@ -3,13 +3,12 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = merge(webpackBaseConfig, {
   output: {
     path: path.join(__dirname, './dist'),
-    publicPath: './',
-    filename: '[name].min.js'
+    publicPath: '../',
+    filename: 'js/[name].min.js'
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
@@ -18,8 +17,8 @@ module.exports = merge(webpackBaseConfig, {
       }
     }),
     new ExtractTextPlugin({
-        filename: '[name].min.css',
-        allChunks: true
+      filename: 'css/[name].min.css',
+      allChunks: true
     })
   ],
 });

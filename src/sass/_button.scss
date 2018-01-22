@@ -1,0 +1,26 @@
+.si-btn-load {
+    margin-right: 8px;
+    -webkit-animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite;
+}
+
+.btn {
+    &.si-btn-loading {
+        pointer-events: none;
+        cursor: default;
+    }
+}
+
+@-webkit-keyframes rotate {
+    100% {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn);
+    }
+}
+
+@keyframes rotate {
+    100% {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn);
+    }
+}

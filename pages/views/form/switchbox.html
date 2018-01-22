@@ -1,0 +1,92 @@
+<div class="container-fluid" id="radio-page">
+    <article class="si-article">
+        <p class="si-info">开关选择器，用于在两种状态间切换。</p>
+        <p class="si-warning"><i class="fa fa-exclamation-circle"></i>注：内联文本和图标待开发...</p>
+        <h4>代码示例<i class="fa fa-code"></i></h4>
+        <div class="col-sm-6">
+            <section class="code-box">
+                <section class="code-box-demo">
+                    <input class="btsp-switchbox">
+                    <input class="btsp-switchbox" data-value=true>
+                </section>
+                <section class="code-box-meta">
+                    <div class="code-box-title">
+                        基础用法
+                    </div>
+                    <div>
+                        <p>
+                            状态切换时会触发<code>change</code>事件。
+                        </p>
+                    </div>
+                    <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+                </section>
+                <section class="code-box-wrapper">
+                    <pre><code class="language-markup">
+&lt;input class="btsp-switchbox"&gt;
+&lt;input class="btsp-switchbox" data-value=true&gt;
+                                  </code></pre>
+                    <div class="code-box-wrapper-close">
+                        <i class="fa fa-angle-double-up"></i>
+                    </div>
+                </section>
+            </section>
+            <section class="code-box">
+                <section class="code-box-demo">
+                    <input class="btsp-switchbox" data-truevalue="1" data-falsevalue="0">
+                    <input class="btsp-switchbox" data-truevalue="1" data-falsevalue="0" data-value="1">
+                </section>
+                <section class="code-box-meta">
+                    <div class="code-box-title">
+                        自定义value
+                    </div>
+                    <div>
+                        <p>
+                            <code>value</code>默认为<code>true</code>和<code>false</code>。 通过
+                            <code>trueValue</code>和<code>falseValue</code>来分别定义选中与非选中的<code>value</code>。
+                        </p>
+                    </div>
+                    <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+                </section>
+                <section class="code-box-wrapper">
+                    <pre><code class="language-markup">
+&lt;input class="btsp-switchbox" data-truevalue="1" data-falsevalue="0"&gt;
+&lt;input class="btsp-switchbox" data-truevalue="1" data-falsevalue="0" data-value="1"&gt;
+                                      </code></pre>
+                    <div class="code-box-wrapper-close">
+                        <i class="fa fa-angle-double-up"></i>
+                    </div>
+                </section>
+            </section>
+        </div>
+        <div class="col-sm-6">
+            <section class="code-box">
+                <section class="code-box-demo">
+                    <input class="btsp-switchbox" data-readonly=true>
+                    <input class="btsp-switchbox" data-readonly=true data-value=true>
+                </section>
+                <section class="code-box-meta">
+                    <div class="code-box-title">
+                        禁用/只读
+                    </div>
+                    <div>
+                        <p>
+                            禁用开关。有只读和禁用两种模式，其中禁用会禁用表单元素。
+                        </p>
+                    </div>
+                    <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+                </section>
+                <section class="code-box-wrapper">
+                    <pre><code class="language-markup">
+&lt;!-- 禁用 --&gt;
+&lt;input class="btsp-switchbox" data-disabled=true&gt;
+&lt;!-- 只读 --&gt;
+&lt;input class="btsp-switchbox" data-readonly=true&gt;
+                                  </code></pre>
+                    <div class="code-box-wrapper-close">
+                        <i class="fa fa-angle-double-up"></i>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </article>
+</div>

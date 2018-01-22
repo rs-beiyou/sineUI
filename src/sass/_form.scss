@@ -1,17 +1,26 @@
 .form-horizontal {
     .si-checkbox,
-    .si-radiobox {
+    .si-radiobox,
+    {
         padding-top: 7px;
     }
-}
-
-.form-block {
-    display: inline-block;
-    position: relative;
+    .si-switchbox {
+        margin-top: 5px;
+    }
 }
 
 .control-label {
     font-weight: normal;
+}
+
+.form-block {
+    margin-bottom: 18px;
+    display: inline-block;
+}
+
+.form-group .form-block {
+    margin-bottom: 0;
+    display: block;
 }
 
 .form-attach {
@@ -22,6 +31,13 @@ input[type="radio"],
 input[type="checkbox"] {
     margin: 0;
     margin-top: 0;
+}
+
+[class^=btsp-] {
+    height: 34px;
+    width: 100%;
+    background-color: #eee;
+    border: none;
 }
 
 .form-control {
@@ -39,6 +55,24 @@ input[type="checkbox"] {
     &[readonly] {
         background-color: $input-bg;
         cursor: $cursor-disabled;
+    }
+}
+
+.has-success {
+    .form-control:hover {
+        border-color: $state-success-text;
+    }
+}
+
+.has-error {
+    .form-control:hover {
+        border-color: $state-danger-text;
+    }
+}
+
+.has-warning {
+    .form-control:hover {
+        border-color: $state-warning-text;
     }
 }
 
@@ -204,6 +238,7 @@ input[type="checkbox"] {
 
 .si-selectbox {
     position: relative;
+    width: 100%;
     &.si-selectbox-readonly {
         .si-selectbox-selection {
             cursor: $cursor-disabled;
@@ -222,7 +257,6 @@ input[type="checkbox"] {
 
 .si-selectbox-selected-value,
 .si-selectbox-placeholder {
-    height: 100%;
     overflow: hidden;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
@@ -250,6 +284,10 @@ input[type="checkbox"] {
     -webkit-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
+    &:last-of-type {
+        display: none;
+        cursor: pointer;
+    }
 }
 
 .si-selectbox-dropdown {
@@ -269,10 +307,23 @@ input[type="checkbox"] {
 }
 
 .si-selectbox-visible {
-    .si-selectbox-arrow {
+    .si-selectbox-arrow:first-of-type {
         -webkit-transform: rotate(180deg);
         -ms-transform: rotate(180deg);
         transform: rotate(180deg);
+    }
+}
+
+.si-selectbox-show-clear {
+    .si-selectbox-selection:hover {
+        .si-selectbox-arrow {
+            &:first-of-type {
+                display: none;
+            }
+            &:last-of-type {
+                display: inline-block;
+            }
+        }
     }
 }
 
@@ -281,7 +332,7 @@ input[type="checkbox"] {
     padding: 7px 16px;
     cursor: pointer;
     white-space: nowrap;
-    line-height: normal;
+    line-height: $headings-line-height;
     color: $dropdown-link-color;
     overflow: hidden;
     -webkit-transition: background .2s ease-in-out;
@@ -299,16 +350,41 @@ input[type="checkbox"] {
     }
 }
 
-.si-selectbox-item-selected {
-    background: $dropdown-link-active-bg;
-    color: $dropdown-link-active-color;
-    &:hover {
+.si-selectbox-single {
+    .si-selectbox-item-selected {
         background: $dropdown-link-active-bg;
-    }
-    &.si-selectbox-item-disabled {
-        background-color: $gray-blue;
+        color: $dropdown-link-active-color;
         &:hover {
+            background: $dropdown-link-active-bg;
+        }
+        &.si-selectbox-item-disabled {
             background-color: $gray-blue;
+            &:hover {
+                background-color: $gray-blue;
+            }
+        }
+    }
+}
+
+.si-selectbox-multiple {
+    .si-selectbox-selection {
+        height: auto;
+        min-height: $input-height-base;
+        .si-tag {
+            margin: 0 4px 0 0;
+            height: auto;
+            line-height: normal;
+        }
+    }
+    .si-selectbox-item-selected {
+        color: $dropdown-link-active-bg;
+        &::after {
+            display: inline-block;
+            content: '\f00c';
+            font-family: FontAwesome;
+            float: right;
+            font-size: 13px;
+            line-height: $headings-line-height;
         }
     }
 }
@@ -396,5 +472,147 @@ input[type="checkbox"] {
         transform-origin: 0 0;
         -webkit-transform: scaleY(.8);
         transform: scaleY(.8);
+    }
+}
+
+.si-switchbox {
+    position: relative;
+    width: $switch-width;
+    height: $switch-height;
+    line-height: 22px;
+    background-color: $switch-bg;
+    border: 1px solid $switch-bg;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    border-radius: $switch-border-radius;
+    display: inline-block;
+    &:after {
+        content: '';
+        width: $switch-after-width;
+        height: $switch-after-height;
+        border-radius: $switch-after-radius;
+        position: absolute;
+        margin-top: 1px;
+        margin-left: 1px;
+        cursor: pointer;
+        background-color: $switch-after-bg;
+        -webkit-transition: margin-left .2s ease-in-out, width .2s ease-in-out;
+        -o-transition: margin-left .2s ease-in-out, width .2s ease-in-out;
+        transition: margin-left .2s ease-in-out, width .2s ease-in-out;
+    }
+    &:active:after {
+        width: $switch-after-active-width;
+    }
+    &.si-switchbox-checked {
+        background-color: $switch-checked-bg;
+        border-color: $switch-checked-bg;
+        &:active:after {
+            margin-left: $switch-width - $switch-after-active-width -3;
+        }
+        &:after {
+            margin-left: $switch-width - $switch-after-width -3;
+        }
+    }
+    &.si-switchbox-disabled {
+        cursor: not-allowed;
+        background-color: $switch-disabled-bg;
+        border-color: $switch-disabled-bg;
+        &:after {
+            cursor: not-allowed;
+        }
+    }
+}
+
+.si-filebox {
+    position: relative;
+    label,
+    .btn {
+        margin-bottom: 0;
+    }
+    .si-filebox-input {
+        display: none;
+    }
+    .si-filebox-upload-btn {
+        margin-left: 10px;
+    }
+}
+
+.si-filebox-list {
+    .si-filebox-list-item {
+        margin-top: 8px;
+        height: $filebox-item-height;
+        position: relative;
+        padding: 0 35px 0 15px;
+        overflow: hidden;
+        color: $filebox-item-color;
+        background-color: $filebox-item-bg;
+        cursor: pointer;
+        &:hover {
+            background-color: $filebox-item-hover-bg;
+        }
+        .si-filebox-item-inner {
+            display: inline-block;
+            line-height: $filebox-item-height;
+        }
+        i {
+            position: absolute;
+            line-height: $filebox-item-height;
+        }
+        .si-filebox-item-type {
+            left: 0;
+            cursor: default;
+        }
+        .si-filebox-item-info {
+            right: 20px;
+            &:hover {
+                color: $filebox-item-icon-hover-color;
+            }
+        }
+        .si-filebox-item-remove {
+            right: 5px;
+            cursor: pointer;
+            &:hover {
+                color: $filebox-item-icon-hover-color;
+            }
+        }
+        .si-filebox-item-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: $filebox-item-progress-bg;
+            opacity: .6;
+            z-index: 10;
+            -webkit-transition: margin-left .2s ease-out;
+            -o-transition: margin-left .2s ease-out;
+            transition: margin-left .2s ease-out;
+        }
+        &.si-filebox-item-ready {
+            background-color: $filebox-item-progress-bg;
+            .si-filebox-item-progress {
+                display: none;
+            }
+        }
+        &.si-filebox-item-error {
+            color: $filebox-item-error-color;
+            cursor: default;
+            .si-filebox-item-progress,
+            .si-filebox-item-info {
+                display: none;
+            }
+            .si-filebox-item-inner {
+                cursor: text;
+            }
+            i:hover {
+                color: $filebox-item-error-color;
+            }
+        }
     }
 }

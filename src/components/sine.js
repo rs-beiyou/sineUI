@@ -87,7 +87,6 @@ class Sine {
         if (xhr.status === 404) {
           this.load(this.options.lost ? this.options.lost : this.options.redirect);
         }
-        $.parser.parse(to); //动态解析页面元素
         this.hasRouter ? this.options.afterEach && this.options.afterEach(from) : false;
         if (status == 'success') {
           loadSuccess && typeof loadSuccess === 'function' && loadSuccess();
@@ -105,6 +104,7 @@ class Sine {
         let container = '<div>' + content + '</div>';
         let scriptArr = $(container).find('script');
         to.html(content.replace(regEx_script, ''));
+        $.parser.parse(to); //动态解析页面元素
         for (let i = 0, len = scriptArr.length; i < len; i++) {
           if (scriptArr[i].src == '') {
             this.$body.append(scriptArr[i]);

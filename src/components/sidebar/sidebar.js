@@ -1,4 +1,4 @@
-import _ from '../../libs/util'; +
+import _ from 'src/utils/util';
 (function($) {
   class Sidebar {
     constructor(el, options) {

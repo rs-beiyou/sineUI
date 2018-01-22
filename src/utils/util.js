@@ -51,19 +51,27 @@ _.debounce = function(func, wait, immediate) {
       result = func.apply(context, args);
       context = args = null;
     }
-
     return result;
   };
 };
 
 _.randomString = (len) => {
   len = len || 32;
-  let $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/ 　　
+  /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+  let $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
   let maxPos = $chars.length;
   let pwd = '';
   for (let i = 0; i < len; i++) {
     pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
   }
   return pwd;
+};
+
+_.browserVersions = () => { //判断终端
+  let u = navigator.userAgent;
+  return { //移动终端浏览器版本信息
+    isIOS: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+    isAndroid: u.indexOf('Android') > -1 || u.indexOf('Adr') > -1 //android终端
+  };
 };
 export default _;

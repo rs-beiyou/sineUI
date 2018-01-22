@@ -4,68 +4,63 @@ import BaseForm from './form-base';
     constructor(el, options) {
       super(el, options, Radiobox.DEFAULTS);
       this.className = 'Radiobox';
-      this._init();
+      this._initForm();
     }
-    _init() {
-      super._initForm();
-      Object.assign(this.options, this.lastOptions);
-      this.$element.after(this.$fragment[0]).remove();
-    }
-    _setRadiobox(item) {
+    _setRadiobox(item, newVal) {
       let op = this.options;
-      let $input, $radiobox;
+      let $input = this.$input,
+        $radiobox = this.$radiobox;
       if (!this.$input) {
         let _input = document.createElement('input');
         let _radiobox = document.createElement('div');
         $radiobox = $(_radiobox);
         $input = $(_input);
         $input.attr('type', 'hidden');
-        $radiobox.addClass('si-radiobox');
-        this.$formBlock.append(_input).append(_radiobox);
+        $radiobox.addClass('si-radiobox').append(_input);
+        this.$formBlock.append(_radiobox);
         this.$input = $input;
         this.$radiobox = $radiobox;
         this.valueCache = '';
-      } else {
-        $input = this.$input;
-        $radiobox = this.$radiobox;
       }
       switch (item) {
         case 'id':
         case 'name':
-          $input.attr(item, op[item]);
+          $input.attr(item, newVal);
           break;
         case 'readonly':
-          this._setReadonly();
+          this._setReadonly(newVal);
           break;
         case 'disabled':
-          this._setDisabled();
+          this._setDisabled(newVal);
           break;
         case 'value':
-          this._setValue();
+          this._setValue(newVal);
           break;
         case 'data':
-          this._setAttachList();
-          op.value !== '' && this._setValue();
-          op.readonly !== false && this._setReadonly();
-          op.disabled !== false && this._setDisabled();
+          this._setAttachList(newVal);
+          op.value !== '' && this._setValue(op.value);
+          op.readonly !== false && this._setReadonly(op.readonly);
+          op.disabled !== false && this._setDisabled(op.disabled);
           break;
       }
     }
-    _setReadonly() {
+    _setReadonly(newVal) {
       if (this.radioboxDom) {
-        let op = this.options,
-          rl = op.readonly,
+        let rl = newVal,
           cbd = this.radioboxDom,
           rla = this.readonlyArr || [],
           newRla;
         if (typeof rl === 'boolean') {
           newRla = rl ? Object.keys(cbd) : [];
         }
+        if (typeof rl === 'number') {
+          newRla = String(rl).split(',');
+        }
         if (typeof rl === 'string') {
           newRla = rl ? rl.split(',') : [];
         }
-        let arr1 = Array.compare(newRla, rla, true);
-        let arr2 = Array.compare(newRla, rla, false);
+        let arr1 = Array.compare(newRla, rla);
+        let arr2 = Array.compare(rla, newRla);
         arr1.forEach(key => {
           cbd[key] && cbd[key].$input.attr('disabled', true) && cbd[key].$radiobox.addClass('si-radiobox-disabled');
         });
@@ -75,9 +70,9 @@ import BaseForm from './form-base';
         this.readonlyArr = newRla;
       }
     }
-    _setDisabled() {
+    _setDisabled(newVal) {
       if (this.radioboxDom) {
-        let da = this.options.disabled,
+        let da = newVal,
           cbd = this.radioboxDom,
           $input = this.$input;
         if (typeof da === 'boolean') {
@@ -96,10 +91,10 @@ import BaseForm from './form-base';
         }
       }
     }
-    _setValue() {
+    _setValue(newVal) {
       if (this.radioboxDom) {
         let op = this.options,
-          va = op.value,
+          va = newVal,
           vac = this.valueCache,
           cbd = this.radioboxDom;
         cbd[va] && cbd[va].$radiobox.addClass('si-radiobox-checked');
@@ -108,14 +103,24 @@ import BaseForm from './form-base';
         this.$input.val(op.value).trigger('change');
       }
     }
-    _setAttachList() {
+    _setAttachList(newVal) {
       this.radioboxDom = {};
       let op = this.options;
       let radioboxDom = this.radioboxDom,
-        data = op.data,
+        data = newVal,
         keyField = op.keyField,
         valueField = op.valueField,
-        $radiobox = this.$radiobox;
+        $radiobox = this.$radiobox,
+        $list;
+      if (this.$checkboxList) {
+        $list = this.$checkboxList;
+      } else {
+        let list = document.createElement('div');
+        $list = $(list);
+        $list.addClass('si-radiobox-list');
+        this.$radioboxList = $list;
+        $radiobox.append(list);
+      }
       let fragment = document.createDocumentFragment();
       for (let i = 0, len = data.length; i < len; i++) {
         let label = document.createElement('label');
@@ -130,25 +135,37 @@ import BaseForm from './form-base';
         $(radiobox).data('value', data[i][valueField]).addClass('si-radiobox-content').append(span).append(input);
         $(label).addClass('si-radiobox-item').append(radiobox).append(data[i][keyField]);
         fragment.appendChild(label);
-        radioboxDom[data[i][valueField]] = {
-          $radiobox: $(label),
-          $input: $(input)
-        };
+        Object.assign(radioboxDom, {
+          [data[i][valueField]]: {
+            $radiobox: $(label),
+            $input: $(input)
+          }
+        });
         $(input).on('change', function() {
           op.value = this.value;
         });
       }
-      $radiobox.html(fragment);
+      $list.html(fragment);
     }
   }
 
   function Plugin(option, _relatedTarget) {
     return this.each(function() {
       let $this = $(this);
-      let data = $this.data('si.radiobox');
-      let options = $.extend({}, Radiobox.DEFAULTS, $this.data(), typeof option == 'object' && option);
-
+      let dataSet = $this.data();
+      let data = dataSet['si.textbox'];
       if (!data) {
+        dataSet.data ? dataSet.data = eval(dataSet.data) : false;
+        //data-api覆盖data-options
+        let options = Object.assign({}, Radiobox.DEFAULTS, typeof option === 'object' && option);
+        let datakeys = Object.keys(dataSet);
+        let defaultkeys = Object.keys(options);
+        defaultkeys.forEach((key) => {
+          let lowkey = key.toLocaleLowerCase();
+          if (datakeys.includes(lowkey)) {
+            options[key] = dataSet[lowkey];
+          }
+        });
         if (typeof option !== 'object') {
           console.error('请先初始化radiobox，再执行其他操作！\n radiobox初始化：$().radiobox(Object);');
           return;
@@ -156,9 +173,9 @@ import BaseForm from './form-base';
         data = new Radiobox(this, options);
         data.$input.data('si.radiobox', data);
       } else {
-        if (typeof option == 'object') data['set'](option);
+        if (typeof option === 'object') data['set'](option);
       }
-      if (typeof option == 'string') data[option](_relatedTarget);
+      if (typeof option === 'string') data[option](_relatedTarget);
     });
   }
 

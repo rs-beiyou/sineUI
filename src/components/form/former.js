@@ -3,6 +3,8 @@ import './passwordbox';
 import './checkbox';
 import './radiobox';
 import './selectbox';
+import './switchbox';
+import './filebox';
 (function($) {
   function former(option, _relatedTarget) {
     return this.each(function() {
@@ -14,7 +16,11 @@ import './selectbox';
         console.error('The second argument of $.fn.former must be an Object');
         return;
       }
-      $(this)[option](_relatedTarget || {});
+      try {
+        $(this)[option](_relatedTarget || {});
+      } catch (error) {
+        console.error('$.fn.former没有' + option + '组件方法可调用！');
+      }
     });
   }
   let old = $.fn.former;

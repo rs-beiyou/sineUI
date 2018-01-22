@@ -3,6 +3,8 @@ import './passwordbox';
 import './checkbox';
 import './radiobox';
 import './selectbox';
+import './switchbox';
+import './filebox';
 // form操作器
 (function($) {
   class Form {
@@ -22,7 +24,6 @@ import './selectbox';
         this._getFormBtn(op.button[i]);
       }
     }
-    //私有方法
     _getPanel() {
       let op = this.options;
       let panel = document.createElement('div');
@@ -38,8 +39,12 @@ import './selectbox';
       let formGroup = document.createElement('div');
       let input = document.createElement('input');
       $(formGroup).addClass('form-group').append(input);
-      $(input)[el.type ? el.type : 'textbox'](el).css('opacity', '1');
       this.$element.append(formGroup);
+      try {
+        $(input)[el.type ? el.type : 'textbox'](el);
+      } catch (error) {
+        console.error('form组件解析失败！\n' + error.msg);
+      }
     }
     _getFormBtn() {
 

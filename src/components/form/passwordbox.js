@@ -4,17 +4,10 @@ import BaseForm from './form-base';
     constructor(el, options) {
       super(el, options, Passwordbox.DEFAULTS);
       this.className = 'Passwordbox';
-      this._init();
+      this._initForm();
     }
-    _init() {
-      super._initForm();
-      Object.assign(this.options, this.lastOptions);
-      this.$element.after(this.$fragment[0]).remove();
-    }
-    //无hidden情况
-    _setPasswordbox(item) {
-      let op = this.options;
-      let $input;
+    _setPasswordbox(item, newVal) {
+      let $input = this.$input;
       if (!this.$input) {
         let _input = document.createElement('input');
         $input = $(_input);
@@ -22,8 +15,6 @@ import BaseForm from './form-base';
         $input.attr('type', 'password');
         this.$input = $input;
         this.$formBlock.append(_input);
-      } else {
-        $input = this.$input;
       }
       switch (item) {
         case 'id':
@@ -31,13 +22,13 @@ import BaseForm from './form-base';
         case 'placeholder':
         case 'readonly':
         case 'disabled':
-          $input.attr(item, op[item]);
+          $input.attr(item, newVal);
           break;
         case 'value':
-          $input.val(op.value);
+          $input.val(newVal);
           break;
         case 'width':
-          $input.css('width', op.width);
+          $input.css('width', newVal);
           break;
       }
     }
@@ -46,10 +37,20 @@ import BaseForm from './form-base';
   function Plugin(option, _relatedTarget) {
     return this.each(function() {
       let $this = $(this);
-      let data = $this.data('si.passwordbox');
-      let options = $.extend({}, Passwordbox.DEFAULTS, $this.data(), typeof option == 'object' && option);
+      let dataSet = $this.data();
+      let data = dataSet['si.passwordbox'];
 
       if (!data) {
+        //data-api覆盖data-options
+        let options = Object.assign({}, Passwordbox.DEFAULTS, typeof option === 'object' && option);
+        let datakeys = Object.keys(dataSet);
+        let defaultkeys = Object.keys(options);
+        defaultkeys.forEach((key) => {
+          let lowkey = key.toLocaleLowerCase();
+          if (datakeys.includes(lowkey)) {
+            options[key] = dataSet[lowkey];
+          }
+        });
         if (typeof option !== 'object') {
           console.error('请先初始化passwordbox，再执行其他操作！\n passwordbox初始化：$().passwordbox(Object);');
           return;
@@ -57,9 +58,9 @@ import BaseForm from './form-base';
         data = new Passwordbox(this, options);
         $(data.inputDom).data('si.passwordbox', data);
       } else {
-        if (typeof option == 'object') data['set'](option);
+        if (typeof option === 'object') data['set'](option);
       }
-      if (typeof option == 'string') data[option](_relatedTarget);
+      if (typeof option === 'string') data[option](_relatedTarget);
     });
   }
   let old = $.fn.passwordbox;

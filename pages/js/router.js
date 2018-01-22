@@ -1,6 +1,6 @@
-let $container = $('.si-container');
-let $title = $('title');
-let $siTitle = $('.si-nav-title');
+var $container = $('.si-container');
+var $title = $('title');
+var $siTitle = $('.si-nav-title');
 window.si.config({
   router: [{
     title: '首页',

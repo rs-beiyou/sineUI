@@ -1,4 +1,4 @@
-let $document = $(document);
+var $document = $(document);
 $('.sidebar-background').css('background', 'url(./src/image/sidebar-4.jpg)');
 $('.si-sidebar').find('[data-toggle="tooltip"]').tooltip();
 $.ajax({
@@ -13,25 +13,25 @@ $.ajax({
 });
 //code-box
 $document.on('click', '.code-expand-icon', function() {
-  let $codeBox = $(this).parents('.code-box');
+  var $codeBox = $(this).parents('.code-box');
   $codeBox.toggleClass('expend');
 });
 //code-box
 $document.on('click', '.code-box-wrapper-close', function() {
-  let $codeBox = $(this).parents('.code-box');
+  var $codeBox = $(this).parents('.code-box');
   $codeBox.toggleClass('expend');
 }); +
 (function() {
-  let $backToTop = $('.si-back-top');
-  let $mainPanel = $('.si-main-panel');
-  let $navBar = $('.si-nav-bar');
-  let backToTopShow = false;
-  let scrollCurTop = 0;
+  var $backToTop = $('.si-back-top');
+  var $mainPanel = $('.si-main-panel');
+  var $navBar = $('.si-nav-bar');
+  var backToTopShow = false;
+  var scrollCurTop = 0;
   $backToTop.on('click', function() {
     $mainPanel.animate({ scrollTop: '0px' }, 200);
   });
   $mainPanel.on('scroll', window._si.throttle(function() {
-    let scrolltop = $(this).scrollTop();
+    var scrolltop = $(this).scrollTop();
     if (!backToTopShow && scrolltop > 300) {
       backToTopShow = true;
       $backToTop.css('display', 'block');

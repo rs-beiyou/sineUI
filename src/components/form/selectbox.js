@@ -180,10 +180,10 @@ import BaseForm from './form-base';
       this.opened = false;
       let $selectbox = this.$selectbox;
       let $dropdown = this.$dropdown;
-      $selectbox.removeClass('si-selectbox-visible');
       $dropdown.addClass('slide-up-out');
       setTimeout(() => {
         $dropdown.removeClass('slide-up-out');
+        $selectbox.removeClass('si-selectbox-visible');
       }, Number.parseFloat($dropdown.css('animation-duration')) * 1000);
     }
     _setValue(newVal) {

@@ -1,4 +1,4 @@
-(function() {
+(() => {
   'use strict'; // needed to support `apply`/`call` with `undefined`/`null`
   let defineProperty = (function() {
     // IE 8 only supports `Object.defineProperty` on DOM elements
@@ -12,12 +12,13 @@
     }
     return result;
   }());
-    /*
+
+  /*
     Array.compare
     arr1: Array数组
     arr2: Array数组
     表示arr1比arr2多的部分。
-    */
+  */
   if (typeof Array.compare != 'function') {
     (function() {
       let compare = function(arr1, arr2) {

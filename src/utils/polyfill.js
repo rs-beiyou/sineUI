@@ -1,4 +1,5 @@
 import 'core-js/es6/promise';
+import 'core-js/es6/symbol';
 import 'core-js/fn/object/assign';
 import 'core-js/fn/object/keys';
 import 'core-js/fn/array/is-array';
@@ -43,3 +44,5 @@ if (typeof Array.compare != 'function') {
     });
   }
 }
+//ie不支持 Number.parseFloat
+Number.parseFloat = parseFloat;

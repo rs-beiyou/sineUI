@@ -11,7 +11,7 @@ import _ from 'src/utils/util';
       this.className = 'Filebox';
       this._initForm();
     }
-    _setFilebox(item) {
+    _setFilebox(item, newVal) {
       let op = this.options;
       let $input = this.$input,
         $filebox = this.$filebox,
@@ -53,10 +53,10 @@ import _ from 'src/utils/util';
       switch (item) {
         case 'id':
         case 'name':
-          $input.attr(item, op[item]);
+          $input.attr(item, newVal);
           break;
         case 'multiple':
-          if (op[item]) {
+          if (newVal) {
             $fileInput.attr('multiple', 'multiple');
           } else {
             $fileInput.removeAttr('multiple');
@@ -64,13 +64,13 @@ import _ from 'src/utils/util';
           break;
         case 'readonly':
         case 'disabled':
-          this._setReadonly();
+          this._setReadonly(newVal);
           break;
         case 'value':
-          this._setValue();
+          this._setValue(newVal);
           break;
         case 'width':
-          $filebox.css('width', op[item]);
+          $filebox.css('width', newVal);
           break;
       }
     }
@@ -93,8 +93,8 @@ import _ from 'src/utils/util';
       }
       this._addEvent();
     }
-    _setValue() {
-      this.$input.val(this.options.value).trigger('change');
+    _setValue(newVal) {
+      this.$input.val(newVal).trigger('change');
     }
     _getFileList() {
 
@@ -120,16 +120,13 @@ import _ from 'src/utils/util';
     }
     _select(files) {
       let fileOptions = this.options.fileLoader,
-        fileList = this.fileList;
-      if (fileOptions.fileNumLimit && fileOptions.fileNumLimit < fileList.length + files.length) return;
+        valueCache = this.valueCache;
+      if (fileOptions.fileNumLimit && fileOptions.fileNumLimit < valueCache.length + files.length) return;
       for (let i = 0, len = files.length; i < len; i++) {
         let file = files[i];
-        let fileRandomName = _.randomString(10);
-        if (!fileOptions.multiple) {
-          fileList.splice(0, 1);
-        }
-        fileList.push(file);
-        this._addFileItem(fileRandomName);
+        console.log(`------已选择文件【${file.name}】------`);
+        // let fileRandomName = i + _.randomString(10);
+        this._addFileItem(file);
       }
     }
     _filter(file) {
@@ -151,8 +148,8 @@ import _ from 'src/utils/util';
       };
     }
     _getFileTypeClass(type) {
-      let defaultImgs = this.options.fileLoader.defaultImgs;
-      let fileClass = null;
+      let defaultImgs = this.options.fileLoader.defaultImgs,
+        fileClass;
       switch (type) {
         case 'zip':
           fileClass = defaultImgs.zip;
@@ -261,6 +258,8 @@ import _ from 'src/utils/util';
           });
           this.$filebox.append(uploadBtn);
           this.$uploadBtn = $uploadBtn;
+        } else {
+          this.$uploadBtn.fadeIn('slow');
         }
       }
     }
@@ -271,12 +270,13 @@ import _ from 'src/utils/util';
         arr.push(fn());
       });
       Promise.all(arr).then(() => {
+        this.uploadPromise.splice(0, this.uploadPromise.length);
         $uploadBtn.fadeOut('slow', () => {
-          $uploadBtn.remove();
-          this.$uploadBtn = null;
+          $uploadBtn.loading('close');
         });
+      }).catch(() => {
+        $uploadBtn.loading('close');
       });
-
     }
     _addUploadPromise(file, $progress) {
       const promise = new Promise((resolve, reject) => {
@@ -391,10 +391,12 @@ import _ from 'src/utils/util';
       multiple: true,
       autoUpload: false, //是否开启自动上传
       buttonText: '选择文件',
+      description: '', //组建描述
       showUploadedPercent: true, //是否实时显示上传的百分比，如20%
       showUploadedSize: true, //是否实时显示已上传的文件大小，如1M/2M
       fileObjName: 'file', //在后端接受文件的参数名称
       fileTypeExts: 'jpg;png;txt;doc',
+      fileTypeLimit: '',
       fileSizeLimit: 2048,
       fileNumLimit: null,
       uploader: '',
@@ -419,4 +421,4 @@ import _ from 'src/utils/util';
       }
     }
   };
-})(jQuery)
+})(jQuery);

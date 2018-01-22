@@ -6,7 +6,7 @@ import BaseForm from './form-base';
       this.className = 'Checkbox';
       this._initForm();
     }
-    _setCheckbox(item) {
+    _setCheckbox(item, newVal) {
       let op = this.options;
       let $input = this.$input,
         $checkbox = this.$checkbox;
@@ -26,29 +26,28 @@ import BaseForm from './form-base';
       switch (item) {
         case 'id':
         case 'name':
-          $input.attr(item, op[item]);
+          $input.attr(item, newVal);
           break;
         case 'readonly':
-          this._setReadonly();
+          this._setReadonly(newVal);
           break;
         case 'disabled':
-          this._setDisabled();
+          this._setDisabled(newVal);
           break;
         case 'value':
-          this._setValue();
+          this._setValue(newVal);
           break;
         case 'data':
-          this._setAttachList();
-          op.value !== '' && this._setValue();
-          op.readonly !== false && this._setReadonly();
-          op.disabled !== false && this._setDisabled();
+          this._setAttachList(newVal);
+          op.value !== '' && this._setValue(op.value);
+          op.readonly !== false && this._setReadonly(op.readonly);
+          op.disabled !== false && this._setDisabled(op.disabled);
           break;
       }
     }
-    _setReadonly() {
+    _setReadonly(newVal) {
       if (this.checkboxDom) {
-        let op = this.options,
-          rl = op.readonly,
+        let rl = newVal,
           cbd = this.checkboxDom,
           rla = this.readonlyArr || [],
           newRla;
@@ -72,9 +71,9 @@ import BaseForm from './form-base';
         this.readonlyArr = newRla;
       }
     }
-    _setDisabled() {
+    _setDisabled(newVal) {
       if (this.checkboxDom) {
-        let da = this.options.disabled,
+        let da = newVal,
           cbd = this.checkboxDom,
           $input = this.$input;
         if (typeof da === 'boolean') {
@@ -93,10 +92,9 @@ import BaseForm from './form-base';
         }
       }
     }
-    _setValue() {
+    _setValue(newVal) {
       if (this.checkboxDom) {
-        let op = this.options,
-          va = op.value !== '' ? String(op.value).split(',') : [],
+        let va = newVal !== '' ? String(newVal).split(',') : [],
           vac = this.valueArrCache,
           cbd = this.checkboxDom;
         let arr1 = Array.compare(va, vac);
@@ -108,16 +106,16 @@ import BaseForm from './form-base';
           cbd[key] && cbd[key].$checkbox.removeClass('si-checkbox-checked');
         });
         this.valueArrCache = va;
-        this.$input.val(op.value).trigger('change');
+        this.$input.val(newVal).trigger('change');
       }
     }
-    _setAttachList() {
+    _setAttachList(newVal) {
       this.checkboxDom = {};
       let op = this.options;
       this.valueArr = op.value !== '' ? String(op.value).split(',') : [];
       let valueArr = this.valueArr,
         checkboxDom = this.checkboxDom,
-        data = op.data,
+        data = newVal,
         keyField = op.keyField,
         valueField = op.valueField,
         $checkbox = this.$checkbox,

@@ -6,7 +6,7 @@ import BaseForm from './form-base';
       this.className = 'Radiobox';
       this._initForm();
     }
-    _setRadiobox(item) {
+    _setRadiobox(item, newVal) {
       let op = this.options;
       let $input = this.$input,
         $radiobox = this.$radiobox;
@@ -25,29 +25,28 @@ import BaseForm from './form-base';
       switch (item) {
         case 'id':
         case 'name':
-          $input.attr(item, op[item]);
+          $input.attr(item, newVal);
           break;
         case 'readonly':
-          this._setReadonly();
+          this._setReadonly(newVal);
           break;
         case 'disabled':
-          this._setDisabled();
+          this._setDisabled(newVal);
           break;
         case 'value':
-          this._setValue();
+          this._setValue(newVal);
           break;
         case 'data':
-          this._setAttachList();
-          op.value !== '' && this._setValue();
-          op.readonly !== false && this._setReadonly();
-          op.disabled !== false && this._setDisabled();
+          this._setAttachList(newVal);
+          op.value !== '' && this._setValue(op.value);
+          op.readonly !== false && this._setReadonly(op.readonly);
+          op.disabled !== false && this._setDisabled(op.disabled);
           break;
       }
     }
-    _setReadonly() {
+    _setReadonly(newVal) {
       if (this.radioboxDom) {
-        let op = this.options,
-          rl = op.readonly,
+        let rl = newVal,
           cbd = this.radioboxDom,
           rla = this.readonlyArr || [],
           newRla;
@@ -71,9 +70,9 @@ import BaseForm from './form-base';
         this.readonlyArr = newRla;
       }
     }
-    _setDisabled() {
+    _setDisabled(newVal) {
       if (this.radioboxDom) {
-        let da = this.options.disabled,
+        let da = newVal,
           cbd = this.radioboxDom,
           $input = this.$input;
         if (typeof da === 'boolean') {
@@ -92,10 +91,10 @@ import BaseForm from './form-base';
         }
       }
     }
-    _setValue() {
+    _setValue(newVal) {
       if (this.radioboxDom) {
         let op = this.options,
-          va = op.value,
+          va = newVal,
           vac = this.valueCache,
           cbd = this.radioboxDom;
         cbd[va] && cbd[va].$radiobox.addClass('si-radiobox-checked');
@@ -104,11 +103,11 @@ import BaseForm from './form-base';
         this.$input.val(op.value).trigger('change');
       }
     }
-    _setAttachList() {
+    _setAttachList(newVal) {
       this.radioboxDom = {};
       let op = this.options;
       let radioboxDom = this.radioboxDom,
-        data = op.data,
+        data = newVal,
         keyField = op.keyField,
         valueField = op.valueField,
         $radiobox = this.$radiobox,

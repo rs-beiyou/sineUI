@@ -6,7 +6,7 @@ import BaseForm from './form-base';
       this.className = 'Textbox';
       this._initForm();
     }
-    _setTextbox(item) {
+    _setTextbox(item, newVal) {
       let op = this.options;
       let $input = this.$input;
       if (!this.$input) {
@@ -22,19 +22,19 @@ import BaseForm from './form-base';
         case 'placeholder':
         case 'readonly':
         case 'disabled':
-          $input.attr(item, op[item]);
+          $input.attr(item, newVal);
           break;
         case 'rows':
         case 'cols':
           if (op.multiline) {
-            $input.attr(item, op[item]);
+            $input.attr(item, newVal);
           }
           break;
         case 'value':
-          $input.val(op.value);
+          $input.val(newVal);
           break;
         case 'width':
-          $input.css('width', op.width);
+          $input.css('width', newVal);
           break;
       }
     }

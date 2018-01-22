@@ -6,7 +6,7 @@ import BaseForm from './form-base';
       this.className = 'Selectbox';
       this._initForm();
     }
-    _setSelectbox(item) {
+    _setSelectbox(item, newVal) {
       let op = this.options;
       let $input = this.$input,
         $selectbox = this.$selectbox,
@@ -58,35 +58,35 @@ import BaseForm from './form-base';
       switch (item) {
         case 'id':
         case 'name':
-          $input.attr(item, op[item]);
+          $input.attr(item, newVal);
           break;
         case 'placeholder':
-          $placeholder.text(op[item]);
+          $placeholder.text(newVal);
           break;
         case 'width':
-          $selection.css('width', op[item]);
+          $selection.css('width', newVal);
           break;
         case 'readonly':
-          this._setReadonly();
+          this._setReadonly(newVal);
           break;
         case 'disabled':
-          this._setDisabled();
+          this._setDisabled(newVal);
           break;
         case 'value':
-          this._setValue();
+          this._setValue(newVal);
           break;
         case 'data':
-          if (!Array.isArray(op.data)) return;
-          this._setAttachList();
-          op.value !== '' && this._setValue();
-          op.readonly !== false && this._setReadonly();
-          op.disabled !== false && this._setDisabled();
+          if (!Array.isArray(newVal)) return;
+          this._setAttachList(newVal);
+          op.value !== '' && this._setValue(op.value);
+          op.readonly !== false && this._setReadonly(op.readonly);
+          op.disabled !== false && this._setDisabled(op.disabled);
           break;
         case 'search':
           this._setSearch();
           break;
         case 'multiple':
-          if (op.multiple) {
+          if (newVal) {
             $selectbox.removeClass('si-selectbox-single').addClass('si-selectbox-multiple');
           } else {
             $selectbox.removeClass('si-selectbox-multiple').addClass('si-selectbox-single');
@@ -94,10 +94,9 @@ import BaseForm from './form-base';
           break;
       }
     }
-    _setReadonly() {
+    _setReadonly(newVal) {
       if (this.selectboxDom) {
-        let op = this.options,
-          rl = op.readonly,
+        let rl = newVal,
           $selectbox = this.$selectbox;
         if (typeof rl === 'boolean') {
           if (rl) {
@@ -126,9 +125,9 @@ import BaseForm from './form-base';
         }
       }
     }
-    _setDisabled() {
+    _setDisabled(newVal) {
       if (this.selectboxDom) {
-        let da = this.options.disabled,
+        let da = newVal,
           $input = this.$input,
           $selectbox = this.$selectbox;
         if (typeof da === 'boolean') {
@@ -187,12 +186,12 @@ import BaseForm from './form-base';
         $dropdown.css('display', 'none').removeClass('slide-up-out');
       }, Number.parseFloat($dropdown.css('animation-duration')) * 1000);
     }
-    _setValue() {
+    _setValue(newVal) {
       if (this.selectboxDom) {
         let op = this.options;
         let $placeholder = this.$placeholder;
         if (op.multiple) {
-          let va = op.value !== '' ? String(op.value).split(',') : [],
+          let va = newVal !== '' ? String(newVal).split(',') : [],
             vac = this.valueArrCache,
             sbd = this.selectboxDom;
           let arr1 = Array.compare(va, vac);
@@ -215,9 +214,9 @@ import BaseForm from './form-base';
             op.clearable && this.$selectbox.removeClass('si-selectbox-show-clear');
           }
           this.valueArrCache = va;
-          this.$input.val(op.value).trigger('change');
+          this.$input.val(newVal).trigger('change');
         } else {
-          let va = String(op.value),
+          let va = String(newVal),
             vac = this.valueCache != null ? this.valueCache : '',
             sbd = this.selectboxDom,
             $selectValue = this.$selectValue;
@@ -264,11 +263,11 @@ import BaseForm from './form-base';
       this.$selection.append(_tag);
       this.tagsDom[val] = $tag;
     }
-    _setAttachList() {
+    _setAttachList(newVal) {
       this.selectboxDom = {};
       let op = this.options;
       let selectboxDom = this.selectboxDom,
-        data = op.data,
+        data = newVal,
         keyField = op.keyField,
         valueField = op.valueField,
         $dropdown = this.$dropdown,

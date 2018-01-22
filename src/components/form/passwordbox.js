@@ -6,8 +6,7 @@ import BaseForm from './form-base';
       this.className = 'Passwordbox';
       this._initForm();
     }
-    _setPasswordbox(item) {
-      let op = this.options;
+    _setPasswordbox(item, newVal) {
       let $input = this.$input;
       if (!this.$input) {
         let _input = document.createElement('input');
@@ -23,13 +22,13 @@ import BaseForm from './form-base';
         case 'placeholder':
         case 'readonly':
         case 'disabled':
-          $input.attr(item, op[item]);
+          $input.attr(item, newVal);
           break;
         case 'value':
-          $input.val(op.value);
+          $input.val(newVal);
           break;
         case 'width':
-          $input.css('width', op.width);
+          $input.css('width', newVal);
           break;
       }
     }

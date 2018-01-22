@@ -1,3 +1,4 @@
+import Watch from '../../libs/watch';
 export default class BaseForm {
   constructor(el, options, DEFAULTS) {
     this.$element = $(el);
@@ -6,7 +7,8 @@ export default class BaseForm {
     this.optionCache = Object.assign({}, DEFAULTS);
   }
   _initForm() {
-    this._setObserver();
+    this._defineReactive();
+    // this._setObserver();
     this._setFragment();
     this._setFormBlock();
     this['_set' + this.className]();
@@ -20,51 +22,91 @@ export default class BaseForm {
       this._defineReactive(this.options, keys[i]);
     }
   }
-  _defineReactive(obj, key) {
-    let _this = this;
-    let cache = this.optionCache;
-    Object.defineProperty(obj, key, {
-      get() {
-        return cache[key];
-      },
-      set(val) {
-        if (val === undefined || !cache.hasOwnProperty(key) || val === cache[key] || Array.isArray(val) && val.length === 0) return;
-        cache[key] = val;
-        switch (key) {
-          case 'label':
-          case 'labelWidth':
-            _this._setLabel(key);
-            break;
-          case 'id':
-          case 'name':
-          case 'value':
-          case 'placeholder':
-          case 'readonly':
-          case 'disabled':
-          case 'search':
-          case 'multiple':
-          case 'width':
-            _this['_set' + _this.className](key);
-            break;
-          case 'helpText':
-            _this._setHelpText(key);
-            break;
-          case 'data':
-            setTimeout(() => {
-              _this['_set' + _this.className](key);
-            });
-            break;
-          case 'inputWidth':
-            _this._setFormBlock(key);
-            break;
-          case 'url':
-            if (cache.data.length === 0) {
-              _this._getDataByUrl();
-            }
-            break;
-        }
+  _defineReactive() {
+    let _this = this,
+      op = this.options;
+    let callback = (path, newVal, val) => {
+      let key = path[0];
+      if (newVal === undefined || newVal === val || Array.isArray(newVal) && newVal.length === 0) return;
+      switch (key) {
+        case 'label':
+        case 'labelWidth':
+          _this._setLabel(key, newVal);
+          break;
+        case 'id':
+        case 'name':
+        case 'value':
+        case 'placeholder':
+        case 'readonly':
+        case 'disabled':
+        case 'search':
+        case 'multiple':
+        case 'width':
+          _this['_set' + _this.className](key, newVal);
+          break;
+        case 'helpText':
+          _this._setHelpText(key, newVal);
+          break;
+        case 'data':
+          setTimeout(() => {
+            _this['_set' + _this.className](key, newVal);
+          });
+          break;
+        case 'inputWidth':
+          _this._setFormBlock(key, newVal);
+          break;
+        case 'url':
+          if (op.data.length === 0) {
+            _this._getDataByUrl(newVal);
+          }
+          break;
       }
-    });
+    };
+    new Watch(op, callback);
+    // let _this = this;
+    // let cache = this.optionCache;
+    // Object.defineProperty(obj, key, {
+    //   get() {
+    //     return cache[key];
+    //   },
+    //   set(val) {
+    //     if (val === undefined || !cache.hasOwnProperty(key) || val === cache[key] || Array.isArray(val) && val.length === 0) return;
+    //     cache[key] = val;
+    //     switch (key) {
+    //       case 'label':
+    //       case 'labelWidth':
+    //         _this._setLabel(key);
+    //         break;
+    //       case 'id':
+    //       case 'name':
+    //       case 'value':
+    //       case 'placeholder':
+    //       case 'readonly':
+    //       case 'disabled':
+    //       case 'search':
+    //       case 'multiple':
+    //       case 'width':
+    //         _this['_set' + _this.className](key);
+    //         break;
+    //       case 'helpText':
+    //         _this._setHelpText(key);
+    //         break;
+    //       case 'data':
+    //         setTimeout(() => {
+    //           _this['_set' + _this.className](key);
+    //         });
+    //         break;
+    //       case 'inputWidth':
+    //         _this._setFormBlock(key);
+    //         break;
+    //       case 'url':
+    //         if (cache.data.length === 0) {
+    //           _this._getDataByUrl();
+    //         }
+    //         break;
+    //     }
+    //   }
+    // });
   }
   _setFragment() {
     if (!this.$fragment) {
@@ -128,10 +170,10 @@ export default class BaseForm {
       $helpText.text(op.helpText);
     }
   }
-  _getDataByUrl() {
+  _getDataByUrl(newVal) {
     let op = this.options;
     $.ajax({
-      url: op.url,
+      url: newVal,
       method: 'get',
       success: (re) => {
         op.data = re.list;

@@ -6,7 +6,7 @@ import BaseForm from './form-base';
       this.className = 'Switchbox';
       this._initForm();
     }
-    _setSwitchbox(item) {
+    _setSwitchbox(item, newVal) {
       let op = this.options;
       let $input = this.$input,
         $switchbox = this.$switchbox;
@@ -29,27 +29,27 @@ import BaseForm from './form-base';
       switch (item) {
         case 'id':
         case 'name':
-          $input.attr(item, op[item]);
+          $input.attr(item, newVal);
           break;
         case 'readonly':
         case 'disabled':
-          if (op[item]) {
+          if (newVal) {
             $switchbox.addClass('si-switchbox-disabled');
           } else {
             $switchbox.removeClass('si-switchbox-disabled');
           }
           if (item === 'disabled') {
-            $input.attr(item, op[item]);
+            $input.attr(item, newVal);
           }
           break;
         case 'value':
           setTimeout(() => {
-            if (op[item] === op.trueValue) {
+            if (newVal === op.trueValue) {
               $switchbox.addClass('si-switchbox-checked');
             } else {
               $switchbox.removeClass('si-switchbox-checked');
             }
-            $input.val(op[item]).trigger('change');
+            $input.val(newVal).trigger('change');
           });
           break;
       }

@@ -35,8 +35,8 @@ import BaseForm from './form-base';
         $placeholder.addClass('si-selectbox-placeholder');
         op.placeholder && $placeholder.text(op.placeholder);
         $input.attr('type', 'hidden');
-        $selectValue.addClass('si-selectbox-selected-value').hide();
-        $dropdown.addClass('si-selectbox-dropdown').hide();
+        $selectValue.addClass('si-selectbox-selected-value').attr('display', 'none');
+        $dropdown.addClass('si-selectbox-dropdown');
         $selection.addClass('form-control si-selectbox-selection').append(_selectValue).append(_placeholder).append(_cert).append(_clear);
         $selectbox.addClass('si-selectbox si-selectbox-single').append(_input).append(_selection).append(_dropdown);
         this.$formBlock.append(_selectbox);
@@ -170,7 +170,7 @@ import BaseForm from './form-base';
       let $selectbox = this.$selectbox;
       let $dropdown = this.$dropdown;
       $selectbox.addClass('si-selectbox-visible');
-      $dropdown.css('display', 'block').addClass('slide-up-in');
+      $dropdown.addClass('slide-up-in');
       setTimeout(() => {
         $dropdown.removeClass('slide-up-in');
       }, Number.parseFloat($dropdown.css('animation-duration')) * 1000);
@@ -183,7 +183,7 @@ import BaseForm from './form-base';
       $selectbox.removeClass('si-selectbox-visible');
       $dropdown.addClass('slide-up-out');
       setTimeout(() => {
-        $dropdown.css('display', 'none').removeClass('slide-up-out');
+        $dropdown.removeClass('slide-up-out');
       }, Number.parseFloat($dropdown.css('animation-duration')) * 1000);
     }
     _setValue(newVal) {

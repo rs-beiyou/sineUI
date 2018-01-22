@@ -11,7 +11,7 @@ export default class Watch {
   //path代表相应属性在原始对象的位置,以数组表示.
   //如[ 'a', 'b', 'c' ] 表示对象obj.a.b.c的属性改变
   observe(obj, path) {
-    if (typeof obj === 'object') {
+    if (obj && typeof obj === 'object') {
       this.observeObject(obj, path);
       Array.isArray(obj) && this.observeArray(obj, path);
     }

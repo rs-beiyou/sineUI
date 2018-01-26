@@ -253,11 +253,11 @@ input[type="checkbox"] {
             }
         }
     }
-    &.si-selectbox-visible {
-        .si-selectbox-dropdown {
-            display: block;
-        }
-    }
+    // &.si-selectbox-visible {
+    //     .si-selectbox-dropdown {
+    //         display: block;
+    //     }
+    // }
 }
 
 .si-selectbox-selected-value,
@@ -309,7 +309,7 @@ input[type="checkbox"] {
     -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
     box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
     background-color: $dropdown-bg;
-    display: none;
+    // display: none;
 }
 
 .si-selectbox-visible {

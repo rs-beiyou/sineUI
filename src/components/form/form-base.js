@@ -42,7 +42,7 @@ export default class BaseForm {
         case 'search':
         case 'multiple':
         case 'width':
-          _this['_set' + _this.className](key, newVal);
+          _this['_set' + _this.className](key, newVal, val);
           break;
         case 'helpText':
           _this._setHelpText(key, newVal);

@@ -6,7 +6,7 @@ import BaseForm from './form-base';
       this.className = 'Radiobox';
       this._initForm();
     }
-    _setRadiobox(item, newVal) {
+    _setRadiobox(item, newVal, val) {
       let op = this.options;
       let $input = this.$input,
         $radiobox = this.$radiobox;
@@ -20,7 +20,6 @@ import BaseForm from './form-base';
         this.$formBlock.append(_radiobox);
         this.$input = $input;
         this.$radiobox = $radiobox;
-        this.valueCache = '';
       }
       switch (item) {
         case 'id':
@@ -34,7 +33,7 @@ import BaseForm from './form-base';
           this._setDisabled(newVal);
           break;
         case 'value':
-          this._setValue(newVal);
+          this._setValue(newVal, val);
           break;
         case 'data':
           this._setAttachList(newVal);
@@ -91,16 +90,14 @@ import BaseForm from './form-base';
         }
       }
     }
-    _setValue(newVal) {
+    _setValue(newVal, val) {
       if (this.radioboxDom) {
-        let op = this.options,
-          va = newVal,
-          vac = this.valueCache,
+        let va = newVal,
+          vac = val,
           cbd = this.radioboxDom;
         cbd[va] && cbd[va].$radiobox.addClass('si-radiobox-checked');
         cbd[vac] && cbd[vac].$radiobox.removeClass('si-radiobox-checked') && cbd[vac].$input.attr('checked', false);
-        this.valueCache = va;
-        this.$input.val(op.value).trigger('change');
+        this.$input.val(newVal).trigger('change');
       }
     }
     _setAttachList(newVal) {

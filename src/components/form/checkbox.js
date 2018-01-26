@@ -6,7 +6,7 @@ import BaseForm from './form-base';
       this.className = 'Checkbox';
       this._initForm();
     }
-    _setCheckbox(item, newVal) {
+    _setCheckbox(item, newVal, val) {
       let op = this.options;
       let $input = this.$input,
         $checkbox = this.$checkbox;
@@ -20,8 +20,6 @@ import BaseForm from './form-base';
         this.$formBlock.append(_checkbox);
         this.$input = $input;
         this.$checkbox = $checkbox;
-        this.valueArr = [];
-        this.valueArrCache = [];
       }
       switch (item) {
         case 'id':
@@ -35,7 +33,7 @@ import BaseForm from './form-base';
           this._setDisabled(newVal);
           break;
         case 'value':
-          this._setValue(newVal);
+          this._setValue(newVal, val);
           break;
         case 'data':
           this._setAttachList(newVal);
@@ -92,10 +90,10 @@ import BaseForm from './form-base';
         }
       }
     }
-    _setValue(newVal) {
+    _setValue(newVal, val) {
       if (this.checkboxDom) {
         let va = newVal !== '' ? String(newVal).split(',') : [],
-          vac = this.valueArrCache,
+          vac = val !== '' ? String(val).split(',') : [],
           cbd = this.checkboxDom;
         let arr1 = Array.compare(va, vac);
         let arr2 = Array.compare(vac, va);
@@ -105,16 +103,13 @@ import BaseForm from './form-base';
         arr2.forEach(key => {
           cbd[key] && cbd[key].$checkbox.removeClass('si-checkbox-checked');
         });
-        this.valueArrCache = va;
         this.$input.val(newVal).trigger('change');
       }
     }
     _setAttachList(newVal) {
       this.checkboxDom = {};
       let op = this.options;
-      this.valueArr = op.value !== '' ? String(op.value).split(',') : [];
-      let valueArr = this.valueArr,
-        checkboxDom = this.checkboxDom,
+      let checkboxDom = this.checkboxDom,
         data = newVal,
         keyField = op.keyField,
         valueField = op.valueField,
@@ -151,6 +146,7 @@ import BaseForm from './form-base';
         });
         $(input).on('change', function() {
           let val = this.value;
+          let valueArr = op.value !== '' && String(op.value).split(',') || [];
           if (valueArr.includes(val)) {
             for (let i = 0, len = valueArr.length; i < len; i++) {
               if (valueArr[i] === val) {

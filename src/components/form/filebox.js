@@ -11,7 +11,7 @@ import _ from 'src/utils/util';
       this.className = 'Filebox';
       this._initForm();
     }
-    _setFilebox(item, newVal) {
+    _setFilebox(item, newVal, val) {
       let op = this.options;
       let $input = this.$input,
         $filebox = this.$filebox,
@@ -44,10 +44,8 @@ import _ from 'src/utils/util';
         this.$fileInput = $fileInput;
         this.$fileLabel = $fileLabel;
         this.$fileList = $fileList;
-        this.fileCacheObj = {}; //未上传file对象
         this.valueCache = []; //已上传返回value值
-        this.uploadPromise = []; //未上传promise对象
-        this.fileDomObj = {}; //列表文件dom对象
+        this.fileObj = {}; //文件对象
         this._setFileTrigger();
       }
       switch (item) {
@@ -67,7 +65,7 @@ import _ from 'src/utils/util';
           this._setReadonly(newVal);
           break;
         case 'value':
-          this._setValue(newVal);
+          this._setValue(newVal, val);
           break;
         case 'width':
           $filebox.css('width', newVal);
@@ -94,6 +92,8 @@ import _ from 'src/utils/util';
       this._addEvent();
     }
     _setValue(newVal) {
+      let newValArr = newVal !== '' && String(newVal).split(';');
+
       this.$input.val(newVal).trigger('change');
     }
     _getFileList() {
@@ -125,9 +125,129 @@ import _ from 'src/utils/util';
       for (let i = 0, len = files.length; i < len; i++) {
         let file = files[i];
         console.log(`------已选择文件【${file.name}】------`);
-        // let fileRandomName = i + _.randomString(10);
-        this._addFileItem(file);
+        let fid = this._addFile(file, i);
+        this._addFileItem(file, fid);
       }
+    }
+    _addFile(file, i) {
+      let fid = i + _.randomString(10);
+      Object.assign(this.fileObj, {
+        [fid]: {
+          state: false,
+          file: file,
+          data: null,
+          upload: null
+        }
+      });
+      return fid;
+    }
+    _removeFile(fid) {
+      let valueCache = this.valueCache,
+        fileObj = this.fileObj;
+      valueCache.splice(valueCache.indexOf(fileObj[fid].date.id), 1);
+    }
+    _addFileItem(file, fid) {
+      let fileOptions = this.options.fileLoader,
+        $fileList = this.$fileList,
+        valueCache = this.valueCache,
+        fileObj = this.fileObj,
+        thisFile = fileObj[fid];
+      let item = document.createElement('li');
+      let progress = document.createElement('div');
+      let doc = document.createElement('i');
+      let inner = document.createElement('div');
+      let name = document.createElement('span');
+      let info = document.createElement('i');
+      let remove = document.createElement('i');
+      let $item = $(item);
+      let $progress = $(progress);
+      $(doc).addClass('si-filebox-item-type ' + this._getFileTypeClass(file.name.split('.').pop().toLowerCase()));
+      $(info).addClass('si-filebox-item-info fa fa-info-circle');
+      $(remove).addClass('si-filebox-item-remove fa fa-remove');
+      $(name).addClass('si-filebox-list-item-name').text(file.name);
+      $(inner).addClass('si-filebox-item-inner').append(name);
+      $progress.addClass('si-filebox-item-progress');
+      $item.addClass('si-filebox-list-item').data('item', fid).append(doc).append(inner).append(info).append(remove).append(progress);
+      $item.on('click', (e) => {
+        let target = e.target;
+        if (target.className.includes('si-filebox-item-info')) {
+          console.log('tip');
+        }
+        if (target.className.includes('si-filebox-item-remove')) {
+          if (thisFile.status) {
+            this._removeFile(fid);
+          } else {
+            delete fileObj[fid];
+          }
+          $item.fadeOut(() => {
+            $item.remove();
+          });
+        }
+      });
+      this.options.fileLoader.multiple ? $fileList.append(item) : $fileList.html(item);
+      if (!this._filter(file).type) {
+        $item.addClass('si-filebox-item-error');
+        return;
+      }
+      const upload = () => {
+        if (!fileOptions.autoUpload) $item.removeClass('si-filebox-item-ready');
+        return this._addUploadPromise(file, $progress).then(res => {
+          if (fileOptions.uploadSuccess && fileOptions.uploadSuccess(res) !== false) {
+            if (res.id) {
+              Object.assign(thisFile, {
+                data: res,
+                state: true,
+                upload: null
+              });
+              valueCache.push(res.id);
+              this.options.value = valueCache.join(',');
+            }
+          }
+          return res;
+        }).catch(error => {
+          $item.addClass('si-filebox-item-error');
+          console.warn(error.message);
+          if (fileOptions.uploadFail && fileOptions.uploadFail(error)) {
+            console.log(error);
+          }
+        });
+      };
+      if (fileOptions.autoUpload) {
+        upload();
+      } else {
+        $item.addClass('si-filebox-item-ready');
+        Object.assign(thisFile, {
+          upload: upload
+        });
+        if (!this.$uploadBtn) {
+          let uploadBtn = document.createElement('div');
+          let $uploadBtn = $(uploadBtn);
+          $uploadBtn.addClass('si-filebox-upload-btn btn btn-success').html('上传').on('click', () => {
+            $uploadBtn.loading();
+            this._upload();
+          });
+          this.$filebox.append(uploadBtn);
+          this.$uploadBtn = $uploadBtn;
+        } else {
+          this.$uploadBtn.fadeIn('slow');
+        }
+      }
+    }
+    _upload() {
+      let fileObj = this.fileObj;
+      let $uploadBtn = this.$uploadBtn;
+      let arr = [];
+      Object.keys(fileObj).forEach(item => {
+        let fn = fileObj[item] && fileObj[item].upload;
+        fn && arr.push(fn());
+      });
+      Promise.all(arr).then(() => {
+        $uploadBtn.fadeOut('slow', () => {
+          $uploadBtn.loading('close');
+        });
+      }).catch(() => {
+        $uploadBtn.loading('close');
+      });
     }
     _filter(file) {
       let fileOptions = this.options.fileLoader;
@@ -188,95 +308,6 @@ import _ from 'src/utils/util';
           break;
       }
       return fileClass;
-    }
-    _addFileItem(file) {
-      let fileOptions = this.options.fileLoader,
-        $fileList = this.$fileList,
-        filedata = file.name + _.randomString(5),
-        valueCache = this.valueCache;
-      let item = document.createElement('li');
-      let progress = document.createElement('div');
-      let doc = document.createElement('i');
-      let inner = document.createElement('div');
-      let name = document.createElement('span');
-      let info = document.createElement('i');
-      let remove = document.createElement('i');
-      let $item = $(item);
-      let $progress = $(progress);
-      $(doc).addClass('si-filebox-item-type ' + this._getFileTypeClass(file.name.split('.').pop().toLowerCase()));
-      $(info).addClass('si-filebox-item-info fa fa-info-circle');
-      $(remove).addClass('si-filebox-item-remove fa fa-remove');
-      $(name).addClass('si-filebox-list-item-name').text(file.name);
-      $(inner).addClass('si-filebox-item-inner').append(name);
-      $progress.addClass('si-filebox-item-progress');
-      $item.addClass('si-filebox-list-item').data('item', filedata).append(doc).append(inner).append(info).append(remove).append(progress);
-      $item.on('click', (e) => {
-        let target = e.target;
-        if (target.className.includes('si-filebox-item-info')) {
-          console.log('tip');
-        }
-        if (target.className.includes('si-filebox-item-remove')) {
-          $item.fadeOut(() => {
-            $item.remove();
-          });
-        }
-      });
-      this.options.fileLoader.multiple ? $fileList.append(item) : $fileList.html(item);
-      if (!this._filter(file).type) {
-        $item.addClass('si-filebox-item-error');
-        return;
-      }
-      const upload = () => {
-        if (!fileOptions.autoUpload) $item.removeClass('si-filebox-item-ready');
-        return this._addUploadPromise(file, $progress).then(res => {
-          if (fileOptions.uploadSuccess && fileOptions.uploadSuccess(res) !== false) {
-            if (res.id) {
-              valueCache.push(res.id);
-              this.options.value = valueCache.join(',');
-            }
-          }
-          return res;
-        }).catch(error => {
-          $item.addClass('si-filebox-item-error');
-          console.warn(error.message);
-          if (fileOptions.uploadFail && fileOptions.uploadFail(error)) {
-            console.log(error);
-          }
-        });
-      };
-      if (fileOptions.autoUpload) {
-        upload();
-      } else {
-        $item.addClass('si-filebox-item-ready');
-        this.uploadPromise.push(upload);
-        if (!this.$uploadBtn) {
-          let uploadBtn = document.createElement('div');
-          let $uploadBtn = $(uploadBtn);
-          $uploadBtn.addClass('si-filebox-upload-btn btn btn-success').html('上传').on('click', () => {
-            $uploadBtn.loading();
-            this._upload();
-          });
-          this.$filebox.append(uploadBtn);
-          this.$uploadBtn = $uploadBtn;
-        } else {
-          this.$uploadBtn.fadeIn('slow');
-        }
-      }
-    }
-    _upload() {
-      let $uploadBtn = this.$uploadBtn;
-      let arr = [];
-      this.uploadPromise.forEach(fn => {
-        arr.push(fn());
-      });
-      Promise.all(arr).then(() => {
-        this.uploadPromise.splice(0, this.uploadPromise.length);
-        $uploadBtn.fadeOut('slow', () => {
-          $uploadBtn.loading('close');
-        });
-      }).catch(() => {
-        $uploadBtn.loading('close');
-      });
     }
     _addUploadPromise(file, $progress) {
       const promise = new Promise((resolve, reject) => {

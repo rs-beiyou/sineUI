@@ -42,7 +42,7 @@ export default class BaseForm {
         case 'search':
         case 'multiple':
         case 'width':
-          _this['_set' + _this.className](key, newVal);
+          _this['_set' + _this.className](key, newVal, val);
           break;
         case 'helpText':
           _this._setHelpText(key, newVal);
@@ -113,8 +113,7 @@ export default class BaseForm {
       this.$fragment = $(document.createDocumentFragment());
     }
   }
-  _setLabel(item) {
-    let op = this.options;
+  _setLabel(item, newVal) {
     let $label;
     if (!this.$label) {
       let _label = document.createElement('label');
@@ -131,15 +130,14 @@ export default class BaseForm {
     }
     switch (item) {
       case 'label':
-        $label.html(op.label);
+        $label.html(newVal);
         break;
       case 'labelWidth':
-        op.labelWidth.includes('col-') ? $label.addClass(op.labelWidth) : op.labelWidth.includes('px') ? $label.css('width', op.labelWidth) : $label.css('width', op.labelWidth + 'px');
+        newVal.includes('col-') ? $label.addClass(newVal) : newVal.includes('px') ? $label.css('width', newVal) : $label.css('width', newVal + 'px');
         break;
     }
   }
-  _setFormBlock(item) {
-    let op = this.options;
+  _setFormBlock(item, newVal) {
     let $formBlock;
     if (!this.$formBlock) {
       let _formBlock = document.createElement('div');
@@ -151,11 +149,10 @@ export default class BaseForm {
       $formBlock = this.$formBlock;
     }
     if (item === 'inputWidth') {
-      op.inputWidth.includes('col-') ? $formBlock.addClass(op.inputWidth) : op.inputWidth.includes('px') ? $formBlock.css('width', op.inputWidth) : $formBlock.css('width', op.inputWidth + 'px');
+      newVal.includes('col-') ? $formBlock.addClass(newVal) : newVal.includes('px') ? $formBlock.css('width', newVal) : $formBlock.css('width', newVal + 'px');
     }
   }
-  _setHelpText(item) {
-    let op = this.options;
+  _setHelpText(item, newVal) {
     let $helpText;
     if (!this.$helpText) {
       let _helpText = document.createElement('span');
@@ -167,7 +164,7 @@ export default class BaseForm {
       $helpText = this.$helpText;
     }
     if (item) {
-      $helpText.text(op.helpText);
+      $helpText.text(newVal);
     }
   }
   _getDataByUrl(newVal) {

@@ -11,7 +11,7 @@ import './switchbox';
       this.$element.find('input[class^="btsp-"]').each((index, element) => {
         let regex = new RegExp('btsp-(\\S*)');
         let type = regex.exec(element.className)[1];
-        let dataOptions = element.dataset.options || '';
+        let dataOptions = (element.dataset ? element.dataset.options : element.getAttribute('data-options')) || '';
         let options = (new Function('return {' + dataOptions + '}'))();
         try {
           $(element)[type](options);

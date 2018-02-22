@@ -6,7 +6,7 @@ import BaseForm from './form-base';
       this.className = 'Selectbox';
       this._initForm();
     }
-    _setSelectbox(item, newVal) {
+    _setSelectbox(item, newVal, val) {
       let op = this.options;
       let $input = this.$input,
         $selectbox = this.$selectbox,
@@ -47,8 +47,6 @@ import BaseForm from './form-base';
         this.$selectValue = $selectValue;
         this.$placeholder = $placeholder;
         this.$clear = $clear;
-        this.valueArr = []; //value的数组形式
-        this.valueArrCache = []; //前一个value的数组形式，用来跟现在value对比操作
         this.readonlyArr = []; //readonlyArr表示只读项数组
         setTimeout(() => {
           $dropdown.width($selection.outerWidth());
@@ -73,7 +71,7 @@ import BaseForm from './form-base';
           this._setDisabled(newVal);
           break;
         case 'value':
-          this._setValue(newVal);
+          this._setValue(newVal, val);
           break;
         case 'data':
           if (!Array.isArray(newVal)) return;
@@ -143,7 +141,7 @@ import BaseForm from './form-base';
     }
     _addEvent() {
       let op = this.options;
-      $('.si-page').on('click', () => {
+      $(document).on('click', () => {
         this._close();
       });
       this.$selection.on('click', () => {
@@ -170,7 +168,7 @@ import BaseForm from './form-base';
       let $selectbox = this.$selectbox;
       let $dropdown = this.$dropdown;
       $selectbox.addClass('si-selectbox-visible');
-      $dropdown.css('display', 'block').addClass('slide-up-in');
+      $dropdown.show().addClass('slide-up-in');
       setTimeout(() => {
         $dropdown.removeClass('slide-up-in');
       }, Number.parseFloat($dropdown.css('animation-duration')) * 1000);
@@ -183,16 +181,16 @@ import BaseForm from './form-base';
       $selectbox.removeClass('si-selectbox-visible');
       $dropdown.addClass('slide-up-out');
       setTimeout(() => {
-        $dropdown.css('display', 'none').removeClass('slide-up-out');
+        $dropdown.hide().removeClass('slide-up-out');
       }, Number.parseFloat($dropdown.css('animation-duration')) * 1000);
     }
-    _setValue(newVal) {
+    _setValue(newVal, val) {
       if (this.selectboxDom) {
         let op = this.options;
         let $placeholder = this.$placeholder;
         if (op.multiple) {
           let va = newVal !== '' ? String(newVal).split(',') : [],
-            vac = this.valueArrCache,
+            vac = val && val !== '' ? String(val).split(',') : [],
             sbd = this.selectboxDom;
           let arr1 = Array.compare(va, vac);
           let arr2 = Array.compare(vac, va);
@@ -207,17 +205,16 @@ import BaseForm from './form-base';
           arr2.forEach(key => {
             sbd[key] && sbd[key].$selectbox.removeClass('si-selectbox-item-selected');
             this.tagsDom[key].remove();
-            delete this.tagsDom[key];
+            this.tagsDom[key] = null;
           });
           if (va.length === 0) {
             $placeholder.show();
             op.clearable && this.$selectbox.removeClass('si-selectbox-show-clear');
           }
-          this.valueArrCache = va;
           this.$input.val(newVal).trigger('change');
         } else {
-          let va = String(newVal),
-            vac = this.valueCache != null ? this.valueCache : '',
+          let va = newVal && String(newVal) || '',
+            vac = val && String(val) || '',
             sbd = this.selectboxDom,
             $selectValue = this.$selectValue;
           if (va === '' && vac !== '') {
@@ -225,7 +222,6 @@ import BaseForm from './form-base';
             sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
             op.clearable && this.$selectbox.removeClass('si-selectbox-show-clear');
             this.$input.val(va).removeData('key').trigger('change');
-            this.valueCache = va;
             $placeholder.show();
             $selectValue.hide();
           }
@@ -236,25 +232,25 @@ import BaseForm from './form-base';
             vac !== '' && sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
             sbd[va].$selectbox.addClass('si-selectbox-item-selected');
             op.clearable && this.$selectbox.addClass('si-selectbox-show-clear');
-            this.valueCache = va;
           }
         }
       }
     }
     _addTag(val, text) {
-      let valueArr = this.valueArr;
+      let op = this.options;
       this.tagsDom = this.tagsDom || {};
       let _tag = document.createElement('div');
       let _tagText = document.createElement('span');
       let _tagClose = document.createElement('i');
       $(_tagClose).addClass('fa fa-close si-tag-close').on('click', (e) => {
+        let valueArr = op.value.split(',');
         for (let i = 0, len = valueArr.length; i < len; i++) {
           if (valueArr[i] === val) {
             valueArr.splice(i, 1);
             break;
           }
         }
-        this.options.value = valueArr.join(',');
+        op.value = valueArr.join(',');
         e.stopPropagation();
       });
       $(_tagText).addClass('si-tag-text').text(text);
@@ -270,8 +266,7 @@ import BaseForm from './form-base';
         data = newVal,
         keyField = op.keyField,
         valueField = op.valueField,
-        $dropdown = this.$dropdown,
-        valueArr = this.valueArr;
+        $dropdown = this.$dropdown;
       let ul = document.createElement('ul');
       let $ul = $(ul);
       $ul.addClass('si-select-dropdown-list');
@@ -294,6 +289,7 @@ import BaseForm from './form-base';
         let val = $(e.target).data('value');
         if (this.readonlyArr.includes(val)) return;
         if (op.multiple) {
+          let valueArr = op.value !== '' && op.value.split(',') || [];
           if (valueArr.includes(val)) {
             for (let i = 0, len = valueArr.length; i < len; i++) {
               if (valueArr[i] === val) {
@@ -309,7 +305,6 @@ import BaseForm from './form-base';
           op.value = val;
           this.opened && this._close();
         }
-
       });
       $dropdown.html(ul);
     }

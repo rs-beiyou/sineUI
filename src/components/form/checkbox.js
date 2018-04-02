@@ -41,6 +41,9 @@ import BaseForm from './form-base';
           op.readonly !== false && this._setReadonly(op.readonly);
           op.disabled !== false && this._setDisabled(op.disabled);
           break;
+        case 'valid':
+          $input.valid(newVal, this);
+          break;
       }
     }
     _setReadonly(newVal) {
@@ -103,7 +106,7 @@ import BaseForm from './form-base';
         arr2.forEach(key => {
           cbd[key] && cbd[key].$checkbox.removeClass('si-checkbox-checked');
         });
-        this.$input.val(newVal).trigger('change');
+        this.$input.val(newVal).trigger('change').trigger('valid.change');
       }
     }
     _setAttachList(newVal) {

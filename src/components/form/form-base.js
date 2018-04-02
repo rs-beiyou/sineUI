@@ -3,24 +3,17 @@ export default class BaseForm {
   constructor(el, options, DEFAULTS) {
     this.$element = $(el);
     this.lastOptions = options;
-    this.options = Object.assign({}, DEFAULTS);
+    this.options = $.extend(true, {}, DEFAULTS);
     this.optionCache = Object.assign({}, DEFAULTS);
   }
   _initForm() {
     this._defineReactive();
-    // this._setObserver();
     this._setFragment();
     this._setFormBlock();
     this['_set' + this.className]();
     this.set(this.lastOptions);
+    this._setCompile();
     this.$element.after(this.$fragment[0]).remove();
-  }
-  _setObserver() {
-    let op = this.options;
-    let keys = Object.keys(op);
-    for (let i = 0, len = keys.length; i < len; i++) {
-      this._defineReactive(this.options, keys[i]);
-    }
   }
   _defineReactive() {
     let _this = this,
@@ -60,53 +53,43 @@ export default class BaseForm {
             _this._getDataByUrl(newVal);
           }
           break;
+        case 'valid':
+          if(typeof newVal==='string'&& newVal.includes('{')){
+            _this['_set' + _this.className](key, (new Function(`return ${newVal}`))(), val);
+          }
+          break;
       }
     };
     new Watch(op, callback);
-    // let _this = this;
-    // let cache = this.optionCache;
-    // Object.defineProperty(obj, key, {
-    //   get() {
-    //     return cache[key];
-    //   },
-    //   set(val) {
-    //     if (val === undefined || !cache.hasOwnProperty(key) || val === cache[key] || Array.isArray(val) && val.length === 0) return;
-    //     cache[key] = val;
-    //     switch (key) {
-    //       case 'label':
-    //       case 'labelWidth':
-    //         _this._setLabel(key);
-    //         break;
-    //       case 'id':
-    //       case 'name':
-    //       case 'value':
-    //       case 'placeholder':
-    //       case 'readonly':
-    //       case 'disabled':
-    //       case 'search':
-    //       case 'multiple':
-    //       case 'width':
-    //         _this['_set' + _this.className](key);
-    //         break;
-    //       case 'helpText':
-    //         _this._setHelpText(key);
-    //         break;
-    //       case 'data':
-    //         setTimeout(() => {
-    //           _this['_set' + _this.className](key);
-    //         });
-    //         break;
-    //       case 'inputWidth':
-    //         _this._setFormBlock(key);
-    //         break;
-    //       case 'url':
-    //         if (cache.data.length === 0) {
-    //           _this._getDataByUrl();
-    //         }
-    //         break;
-    //     }
-    //   }
-    // });
+  }
+  _setCompile(){
+    let op = this.options, valid = (new Function(`return ${op.valid}`))();
+    if(!valid||$.isEmptyObject(valid)||this.hasValidControl)return;
+    this.cpLock = false;
+    this.hasValidControl = true;
+    if(this.className==='Textbox'||this.className==='Passwordbox'){
+      setTimeout(()=>{
+        this.$input.addClass('valid-control').on('compositionstart',()=>{
+          this.cpLock = true;
+        }).on('compositionend',()=>{
+          this.cpLock = false;
+          let val = this.$input.val();
+          if(val === op.value){
+            return;
+          }
+          op.value = val;
+          this.$input.trigger('valid.change');
+        }).on('input propertychange',()=>{
+          if(this.cpLock)return;
+          let val = this.$input.val();
+          if(val === op.value){
+            return;
+          }
+          op.value = val;
+          this.$input.trigger('valid.change');
+        });
+      });
+    }
   }
   _setFragment() {
     if (!this.$fragment) {

@@ -12,3 +12,4 @@ require('bootstrap/js/popover');
 require('bootstrap/js/scrollspy');
 require('bootstrap/js/tab');
 require('bootstrap/js/transition');
+require('./components/table');

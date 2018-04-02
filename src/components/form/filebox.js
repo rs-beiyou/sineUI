@@ -1,7 +1,7 @@
 import '../component/button';
 
 import BaseForm from './form-base';
-import XHR from 'src/utils/xhr';
+import XHR from 'src/libs/xhr';
 import _ from 'src/utils/util';
 
 (($) => {
@@ -92,7 +92,7 @@ import _ from 'src/utils/util';
       this._addEvent();
     }
     _setValue(newVal) {
-      let newValArr = newVal !== '' && String(newVal).split(';');
+      // let newValArr = newVal !== '' && String(newVal).split(';');
 
       this.$input.val(newVal).trigger('change');
     }
@@ -313,8 +313,9 @@ import _ from 'src/utils/util';
       const promise = new Promise((resolve, reject) => {
         let fileOptions = this.options.fileLoader;
         if (!fileOptions.uploader) {
-          console.warn(this.options.name + '未定义上传Url，请检查组件配置。');
-          return false;
+          // console.warn(this.options.name + '未定义上传Url，请检查组件配置。');
+          throw Error(`${this.options.name}未定义上传Url，请检查组件配置。`);
+          // return false;
         }
         let xhr = new XHR();
         if (xhr.upload) {
@@ -372,15 +373,16 @@ import _ from 'src/utils/util';
       if (!data) {
         dataSet.fileloader ? dataSet.fileloader = (new Function('return ' + dataSet.fileloader))() : false;
         //data-api覆盖data-options
-        let options = Object.assign({}, Filebox.DEFAULTS, typeof option == 'object' && option);
+        let options = $.extend(true, {}, typeof option === 'object' && option);
         let datakeys = Object.keys(dataSet);
-        let defaultkeys = Object.keys(options);
+        let defaultkeys = Object.keys(Filebox.DEFAULTS);
+        //dataset会将所有key转为小写
         defaultkeys.forEach((key) => {
           let lowkey = key.toLocaleLowerCase();
           if (datakeys.includes(lowkey)) {
-            let type = typeof options[key];
+            let type = typeof Filebox.DEFAULTS[key];
             type === 'string' ? options[key] = dataSet[lowkey] : null;
-            type === 'object' && Object.assign(options[key], dataSet[lowkey]);
+            type === 'object' ? options[key] = $.extend(true, {}, dataSet[lowkey]) : null;
           }
         });
         if (typeof option !== 'object') {

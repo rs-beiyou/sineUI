@@ -12,7 +12,7 @@ import BaseForm from './form-base';
         let _input = document.createElement('input');
         $input = $(_input);
         $input.addClass('form-control');
-        $input.attr('type', 'password');
+        $input.attr({'type':'password','autocomplete':'off'});
         this.$input = $input;
         this.$formBlock.append(_input);
       }
@@ -29,6 +29,9 @@ import BaseForm from './form-base';
           break;
         case 'width':
           $input.css('width', newVal);
+          break;
+        case 'valid':
+          $input.valid(newVal, this);
           break;
       }
     }
@@ -56,7 +59,7 @@ import BaseForm from './form-base';
           return;
         }
         data = new Passwordbox(this, options);
-        $(data.inputDom).data('si.passwordbox', data);
+        data.$input.data('si.passwordbox', data);
       } else {
         if (typeof option === 'object') data['set'](option);
       }

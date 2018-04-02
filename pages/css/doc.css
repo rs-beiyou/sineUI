@@ -137,6 +137,11 @@ label .btn {
     margin-bottom: 0;
 }
 
+.code-box-demo-title {
+    margin-bottom: 8px;
+    list-style: square;
+}
+
 .code-box-meta {
     position: relative;
     padding: 20px 16px;

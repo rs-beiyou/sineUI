@@ -71,6 +71,13 @@ window.si.config({
       path: 'tags',
       page: 'pages/views/components/tags.html'
     }]
+  }, {
+    path: 'table',
+    children: [{
+      title: '普通表格',
+      path: 'general',
+      page: 'pages/views/table/general.html'
+    }]
   }],
   redirect: 'home',
   lost: 'lost',

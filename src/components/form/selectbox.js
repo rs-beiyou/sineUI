@@ -90,6 +90,9 @@ import BaseForm from './form-base';
             $selectbox.removeClass('si-selectbox-multiple').addClass('si-selectbox-single');
           }
           break;
+        case 'valid':
+          $input.valid(newVal, this);
+          break;
       }
     }
     _setReadonly(newVal) {
@@ -211,7 +214,7 @@ import BaseForm from './form-base';
             $placeholder.show();
             op.clearable && this.$selectbox.removeClass('si-selectbox-show-clear');
           }
-          this.$input.val(newVal).trigger('change');
+          this.$input.val(newVal);
         } else {
           let va = newVal && String(newVal) || '',
             vac = val && String(val) || '',
@@ -221,12 +224,12 @@ import BaseForm from './form-base';
             $selectValue.text('');
             sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
             op.clearable && this.$selectbox.removeClass('si-selectbox-show-clear');
-            this.$input.val(va).removeData('key').trigger('change');
+            this.$input.val(va).removeData('key');
             $placeholder.show();
             $selectValue.hide();
           }
           if (sbd[va]) {
-            this.$input.val(va).data('key', sbd[va].text).trigger('change');
+            this.$input.val(va).data('key', sbd[va].text);
             $selectValue.text(sbd[va].text);
             vac === '' && $placeholder.hide() && $selectValue.show();
             vac !== '' && sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
@@ -234,6 +237,7 @@ import BaseForm from './form-base';
             op.clearable && this.$selectbox.addClass('si-selectbox-show-clear');
           }
         }
+        this.$input.trigger('change').trigger('valid.change');
       }
     }
     _addTag(val, text) {

@@ -1,1 +1,170 @@
-<table id="table" style="margin-top:200px;"></table>
+<div class="container-fluid" id="demo-page">
+    <article class="si-article">
+        <p class="si-info">主要用于展示大量结构化数据。</p>
+        <div class="si-callout info">
+            <div class="si-callout-title"何时使用></div>
+            <ul>
+                <li>当有大量结构化的数据需要展现时；</li>
+                <li>当需要对数据进行排序、搜索、分页、自定义操作等复杂行为时。</li>
+            </ul>
+        </div>
+        <h4>代码示例<i class="fa fa-code"></i></h4>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <table id="table1"></table>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    基础用法
+                </div>
+                <div>
+                    <p>表格的最简单用法。默认自带斑马纹，可通过表格参数<code>striped</code>控制。默认自带分页，可通过表格参数<code>pagination</code>控制。</p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;table id="table1"&gt;&lt;/table&gt;
+                </code><code class="language-javascript">
+$('#table1').table({
+    pagination: false,//取消分页
+    columns: [{
+        field: 'id',
+        title: 'Item ID'
+    }, {
+        field: 'name',
+        title: 'Item Name'
+    }, {
+        field: 'price',
+        title: 'Item Price'
+    }],
+    data: [{
+        id: 1,
+        name: 'Item 1',
+        price: '¥ 1'
+    }, {
+        id: 2,
+        name: 'Item 2',
+        price: '¥ 2'
+    }, {
+        id: 3,
+        name: 'Item 3',
+        price: '¥ 3'
+    }]
+});                    
+          </code></pre>
+                <div class="code-box-wrapper-close">
+                    <i class="fa fa-angle-double-up"></i>
+                </div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <table id="table2"></table>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    无边框表格
+                </div>
+                <div>
+                    <p>
+                        默认情况下，表格是有边框的，可以通过定义表格参数<code>classes</code>添加 <code>table-no-bordered</code>类 来删除表格的边框样式。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+                    &lt;table id="table2"&gt;&lt;/table&gt;
+                </code><code class="language-javascript">
+$('#table2').table({
+    classes: 'table table-hover table-no-bordered',
+    pagination: false,//取消分页
+    columns: [{
+        field: 'id',
+        title: 'Item ID'
+    }, {
+        field: 'name',
+        title: 'Item Name'
+    }, {
+        field: 'price',
+        title: 'Item Price'
+    }],
+    data: [{
+        id: 1,
+        name: 'Item 1',
+        price: '¥ 1'
+    }, {
+        id: 2,
+        name: 'Item 2',
+        price: '¥ 2'
+    }, {
+        id: 3,
+        name: 'Item 3',
+        price: '¥ 3'
+    }]
+});                    
+            </code></pre>
+                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <table id="table3"></table>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                可排序表格
+                </div>
+                <div>
+                    <p>
+                        表格的分页分为服务端和客户端两种形式，排序亦然。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+                    &lt;table id="table3"&gt;&lt;/table&gt;
+                </code><code class="language-javascript">
+$('#table3').table({
+    pagination: false,
+    sidePagination:'client',
+    columns: [{
+        field: 'id',
+        title: 'Item ID',
+        sortable: true
+    }, {
+        field: 'name',
+        title: 'Item Name',
+        sortable: true
+    }, {
+        field: 'price',
+        title: 'Item Price',
+        sortable: true
+    }],
+    data:[
+        {
+            "id": 0,
+            "name": "Item 0",
+            "price": "$0"
+        },
+        {
+            "id": 1,
+            "name": "Item 2",
+            "price": "$1"
+        },
+        {
+            "id": 2,
+            "name": "Item 1",
+            "price": "$2"
+        }
+    ]
+});                    
+            </code></pre>
+                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
+            </section>
+        </section>
+    </article>
+</div>
+<script src="pages/js/table/general.js"></script>

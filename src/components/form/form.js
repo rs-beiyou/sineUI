@@ -5,6 +5,10 @@ import './radiobox';
 import './selectbox';
 import './switchbox';
 import './filebox';
+import './valid';
+
+import {Log} from '../../libs/log';
+
 // form操作器
 (function($) {
   class Form {
@@ -43,7 +47,7 @@ import './filebox';
       try {
         $(input)[el.type ? el.type : 'textbox'](el);
       } catch (error) {
-        console.error('form组件解析失败！\n' + error.msg);
+        Log.error(`form：${el.type}组件解析失败！\n${error}`);
       }
     }
     _getFormBtn() {

@@ -161,4 +161,7 @@ Sine.DEFAULTS = {
   afterEach: null,
   redirect: null
 };
-export default Sine;
+
+let si = new Sine();
+
+export default si;

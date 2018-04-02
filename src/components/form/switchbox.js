@@ -49,7 +49,7 @@ import BaseForm from './form-base';
             } else {
               $switchbox.removeClass('si-switchbox-checked');
             }
-            $input.val(newVal).trigger('change');
+            $input.val(newVal).trigger('change').trigger('valid.change');
           });
           break;
       }

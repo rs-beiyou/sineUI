@@ -1,34 +1,27 @@
-import './textbox';
-import './passwordbox';
-import './checkbox';
-import './radiobox';
-import './selectbox';
-import './switchbox';
-import './filebox';
-(function($) {
-  function former(option, _relatedTarget) {
-    return this.each(function() {
+import './form';
+
+import {Log} from '../../libs/log';
+
+function former(option, _relatedTarget) {
+  return this.each(function() {
+    try {
       if (typeof option !== 'string') {
-        console.error('The first argument of $.fn.former must be a String');
-        return;
+        throw new Error('The first argument of $.fn.former plugin must be a String！\nformer插件第一个参数必须是String类型！');
       }
       if (typeof _relatedTarget !== 'object') {
-        console.error('The second argument of $.fn.former must be an Object');
-        return;
+        throw new Error('The second argument of $.fn.former plugin must be an Object！\nformer插件第二个参数必须是Object类型！');
       }
-      try {
-        $(this)[option](_relatedTarget || {});
-      } catch (error) {
-        console.error('$.fn.former没有' + option + '组件方法可调用！');
-      }
-    });
-  }
-  let old = $.fn.former;
+      $(this)[option](_relatedTarget || {});
+    } catch (error) {
+      Log.error(`${option}：${error}`);
+    }
+  });
+}
+let old = $.fn.former;
 
-  $.fn.former = former;
+$.fn.former = former;
 
-  $.fn.former.noConflict = function() {
-    $.fn.former = old;
-    return this;
-  };
-})(jQuery);
+$.fn.former.noConflict = function() {
+  $.fn.former = old;
+  return this;
+};

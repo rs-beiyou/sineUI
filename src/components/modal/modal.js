@@ -1,5 +1,3 @@
-"use strict";
-
 import './dialog';
 import './confirm';
 import './loading';

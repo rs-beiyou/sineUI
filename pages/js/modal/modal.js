@@ -9,7 +9,7 @@ $("#btnJsModal").click(function() {
     success: function(obj, index) {
       console.log(index)
     },
-    cancel:function(){
+    cancel: function() {
       console.log('关闭窗口');
     }
   });
@@ -28,7 +28,7 @@ $('#btnJsInfo').click(function() {
   $.info({
     //title:'信息提示',
     content: '内容内容',
-    yes:function(){
+    yes: function() {
       console.log('点击了确定')
     }
   });
@@ -65,7 +65,7 @@ $('#btnJsDelete').click(function() {
     btn: [{
       class: 'btn-danger',
       title: '确定'
-    },{
+    }, {
       title: '取消'
     }]
   });

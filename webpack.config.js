@@ -80,6 +80,13 @@ module.exports = {
         name: 'fonts/[name].[ext]'
       }
     }, {
+      test: /\.(swf)\??.*$/,
+      loader: 'url-loader',
+      options: {
+        limit: 60*1024,
+        name: 'flash/[name].[ext]'
+      }
+    }, {
       test: /\.(html|tpl)$/,
       loader: 'html-loader'
     }]

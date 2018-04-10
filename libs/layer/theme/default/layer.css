@@ -61,10 +61,8 @@ html #layuicss-layer{display: none; position: absolute; width: 1989px;}
 
 /* 按钮栏 */
 .layui-layer-btn{text-align: right; padding: 0 15px 12px; pointer-events: auto; user-select: none; -webkit-user-select: none;}
-.layui-layer-btn a{height: 28px; line-height: 28px; margin: 5px 5px 0; padding: 0 15px; border: 1px solid #dedede; background-color:#fff; color: #333; border-radius: 2px; font-weight:400; cursor:pointer; text-decoration: none;}
-.layui-layer-btn a:hover{opacity: 0.9; text-decoration: none;}
-.layui-layer-btn a:active{opacity: 0.8;}
-.layui-layer-btn .layui-layer-btn0{border-color: #1E9FFF; background-color: #1E9FFF; color:#fff;}
+.layui-layer-btn button + button{margin-left: 5px;}
+.layui-layer-btn button:first-child{color: #fff;background-color: #2d8cf0;}
 .layui-layer-btn-l{text-align: left;}
 .layui-layer-btn-c{text-align: center;}
 

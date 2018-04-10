@@ -1,30 +1,29 @@
-"use strict";
-
+import layer from 'libs/layer/layer.js';
 $.extend({
-    
-    //loading
-    loading : function(msg){
-      msg = (msg==null || msg=="" || typeof(msg)=="undefined")?'正在努力加载中...':msg;
-      layer.load(2,{
-        shade: [0.5, '#ffffff'],
-        content:msg,
-        success: function(layero){
-          layero.css({
-            'padding':'0 10px',
-            'background':'rgba(0,0,0,.7)',
-            'color':'#fff',
-            'border-radius':'5px'
-          });
-          layero.find('.layui-layer-content').css({
-            'width':'auto',
-            'line-height':'32px',
-            'font-size':'14px',
-            'background':'none'
-          });
-        }
-      })
-    },
-    loadingClose:function(){
-      layer.closeAll('loading');
-    },
-  });
+
+  //loading
+  loading: function(msg) {
+    msg = (msg == null || msg == '' || typeof(msg) == 'undefined') ? '正在努力加载中...' : msg;
+    layer.load(2, {
+      shade: [0.5, '#ffffff'],
+      content: msg,
+      success: function(layero) {
+        layero.css({
+          'padding': '0 10px',
+          'background': 'rgba(0,0,0,.7)',
+          'color': '#fff',
+          'border-radius': '5px'
+        });
+        layero.find('.layui-layer-content').css({
+          'width': 'auto',
+          'line-height': '32px',
+          'font-size': '14px',
+          'background': 'none'
+        });
+      }
+    });
+  },
+  loadingClose: function() {
+    layer.closeAll('loading');
+  },
+});

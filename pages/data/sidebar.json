@@ -147,5 +147,28 @@
       "url": "",
       "icon": "fa fa-html5"
     }]
+  },
+  {
+    "id": "6",
+    "name": "对话框",
+    "subName": "Modal",
+    "pid": "-1",
+    "url": "",
+    "icon": "fa fa-window-maximize",
+    "children": [{
+      "id": "70",
+      "name": "示例",
+      "subName": "",
+      "pid": "6",
+      "url": "modal/modal",
+      "icon": ""
+    },{      
+      "id": "71",
+      "name": "API",
+      "subName": "",
+      "pid": "6",
+      "url": "modal/api",
+      "icon": ""
+    }]
   }
 ]

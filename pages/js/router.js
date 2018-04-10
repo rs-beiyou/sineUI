@@ -78,6 +78,17 @@ window.si.config({
       path: 'general',
       page: 'pages/views/table/general.html'
     }]
+  }, {
+    path: 'modal',
+    children: [{
+      title: '对话框',
+      path: 'modal',
+      page: 'pages/views/modal/modal.html'
+    },{
+      title: 'API',
+      path: 'api',
+      page: 'pages/views/modal/api.html'
+    }]
   }],
   redirect: 'home',
   lost: 'lost',

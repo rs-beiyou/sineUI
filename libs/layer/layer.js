@@ -196,7 +196,71 @@
       document.body ? that.creat() : setTimeout(function() {
         that.creat();
       }, 30);
-      console.log(this)
+    }
+    //标题
+    _setModalHeader() {
+      let config = this.config,
+        titype = typeof config.title === 'object';
+      if (config.title) {
+        this.$modaltitle = $(document.createElement('div')).addClass('layui-layer-title')
+          .attr('style', titype ? config.title[1] : '')
+          .html(titype ? config.title[0] : config.title);
+      }
+    }
+
+    ////遮罩
+    _setModalShade() {
+      let config = this.config,
+        times = this.index;
+      let zIndex = config.zIndex + times;
+      if (config.shade) {
+        this.$modalshade = $(document.createElement('div')).addClass('layui-layer-shade')
+          .attr('id', 'layui-layer-shade' + times + '')
+          .attr('times', times)
+          .attr('style', 'z-index:' + (zIndex - 1) + ';');
+      }
+    }
+
+    //内容
+    _setModalContent() {
+      let config = this.config;
+      this.$modalcontent = $(document.createElement('div'))
+        .addClass('layui-layer-content ' + ((config.type == 0 && config.icon !== -1) ? 'layui-layer-padding' : ' ') + (config.type == 3 ? 'layui-layer-loading' + config.icon : ''))
+        .attr('id', config.id || '');
+
+      if (config.type == 0 && config.icon !== -1) {
+        this.$modalcontent.append('<i class="layui-layer-ico layui-layer-ico' + config.icon + '"></i>');
+      }
+    }
+
+    _setModalSetwin() {
+      let config = this.config;
+      let ismax = config.maxmin && (config.type === 1 || config.type === 2);
+      let closebtn = ismax ? '<a class="layui-layer-min" href="javascript:;"><cite></cite></a><a class="layui-layer-ico layui-layer-max" href="javascript:;"></a>' : '';
+      config.closeBtn && (closebtn += '<a class="layui-layer-ico ' + doms[7] + ' ' + doms[7] + (config.title ? config.closeBtn : (config.type == 4 ? '1' : '2')) + '" href="javascript:;"></a>');
+
+      this.$modalsetwin = $(document.createElement('span'))
+        .addClass('layui-layer-setwin')
+        .append(closebtn);
+    }
+    //按钮
+    _setModalBtns() {
+      let config = this.config;
+      this.$modalbtn = config.btn ? function() {
+        let button = '';
+        typeof config.btn === 'string' && (config.btn = [config.btn]);
+        for (var i = 0, len = config.btn.length; i < len; i++) {
+          button += '<button class="btn btn-default btn-sm">' + config.btn[i] + '</button>'
+        }
+        return $(document.createElement('div')).addClass(doms[6] + ' layui-layer-btn-' + (config.btnAlign || '')).append(button);
+      }() : ''
+    }
+
+    _setModalResize() {
+      let config = this.config;
+      if (config.resize) {
+        this.$modalresize = $(document.createElement('span')).addClass('layui-layer-resize');
+      }
     }
 
     //容器
@@ -204,52 +268,43 @@
       let that = this,
         times = that.index,
         config = that.config;
-      let zIndex = config.zIndex + times,
-        titype = typeof config.title === 'object';
-      let ismax = config.maxmin && (config.type === 1 || config.type === 2);
-      let titleHTML = (config.title ? '<div class="layui-layer-title" style="' + (titype ? config.title[1] : '') + '">' +
-        (titype ? config.title[0] : config.title) +
-        '</div>' : '');
-      //标题
-      that.$modaltitle = config.title ? $(document.createElement('div')).addClass('layui-layer-title')
-        .attr('style', titype ? config.title[1] : '')
-        .html(titype ? config.title[0] : config.title) : '';
+      let zIndex = config.zIndex + times;
 
+      that._setModalHeader();
       //遮罩
-      that.$modalshade = config.shade ? $(document.createElement('div')).addClass('layui-layer-shade')
-        .attr('id', 'layui-layer-shade' + times + '')
-        .attr('times', times)
-        .attr('style', 'z-index:' + (zIndex - 1) + ';') : '';
+      that._setModalShade();
+
 
       that.$modalmove = $(document.createElement('div')).addClass('layui-layer-move');
       config.zIndex = zIndex;
-      callback([
-        //遮罩
-        ,
 
-        //主体
-        '<div class="' + doms[0] + (' layui-layer-' + ready.type[config.type]) + (((config.type == 0 || config.type == 2) && !config.shade) ? ' layui-layer-border' : '') + ' ' + (config.skin || '') + '" id="' + doms[0] + times + '" type="' + ready.type[config.type] + '" times="' + times + '" showtime="' + config.time + '" conType="' + (conType ? 'object' : 'string') + '" style="z-index: ' + zIndex + '; width:' + config.area[0] + ';height:' + config.area[1] + (config.fixed ? '' : ';position:absolute;') + '">' +
-        (conType && config.type != 2 ? '' : titleHTML) +
-        '<div id="' + (config.id || '') + '" class="layui-layer-content' + ((config.type == 0 && config.icon !== -1) ? ' layui-layer-padding' : '') + (config.type == 3 ? ' layui-layer-loading' + config.icon : '') + '">' +
-        (config.type == 0 && config.icon !== -1 ? '<i class="layui-layer-ico layui-layer-ico' + config.icon + '"></i>' : '') +
-        (config.type == 1 && conType ? '' : (config.content || '')) +
-        '</div>' +
-        '<span class="layui-layer-setwin">' + function() {
-          let closebtn = ismax ? '<a class="layui-layer-min" href="javascript:;"><cite></cite></a><a class="layui-layer-ico layui-layer-max" href="javascript:;"></a>' : '';
-          config.closeBtn && (closebtn += '<a class="layui-layer-ico ' + doms[7] + ' ' + doms[7] + (config.title ? config.closeBtn : (config.type == 4 ? '1' : '2')) + '" href="javascript:;"></a>');
-          return closebtn;
-        }() + '</span>' +
-        (config.btn ? function() {
-          let button = '';
-          typeof config.btn === 'string' && (config.btn = [config.btn]);
-          for (var i = 0, len = config.btn.length; i < len; i++) {
-            button += '<button class="btn btn-default btn-sm">' + config.btn[i] + '</button>'
-          }
-          return '<div class="' + doms[6] + ' layui-layer-btn-' + (config.btnAlign || '') + '">' + button + '</div>'
-        }() : '') +
-        (config.resize ? '<span class="layui-layer-resize"></span>' : '') +
-        '</div>'
-      ]);
+      that.$modal = $(document.createElement('div'))
+        .addClass(doms[0] + (' layui-layer-' + ready.type[config.type]) + (((config.type == 0 || config.type == 2) && !config.shade) ? ' layui-layer-border' : '') + ' ' + (config.skin || ''))
+        .attr('id', doms[0] + times)
+        .attr('type', ready.type[config.type])
+        .attr('times', times)
+        .attr('showtime', config.time)
+        .attr('conType', conType ? 'object' : 'string')
+        .attr('style', 'z-index: ' + zIndex + '; width:' + config.area[0] + '; height:' + config.area[1] + (config.fixed ? '' : ';position:absolute;'));
+
+
+      that._setModalContent();
+      if (!(config.type == 1 && conType)) {
+        this.$modalcontent.append(config.content || '')
+      }
+
+
+      that._setModalSetwin();
+      that._setModalBtns();
+      that._setModalResize();
+
+
+      if (!conType || config.type == 2) {
+        that.$modal.append(that.$modaltitle);
+      }
+      that.$modal.append(that.$modalcontent).append(that.$modalsetwin).append(that.$modalbtn).append(that.$modalresize);
+
+      callback();
       return that;
     }
 
@@ -302,28 +357,31 @@
       }
 
       //建立容器
-      that.vessel(conType, function(html) {
+      that.vessel(conType, function() {
         that.$body.append(that.$modalshade);
         conType ? function() {
           (config.type == 2 || config.type == 4) ? function() {
-            that.$body.append(html[1]);
+            that.$body.append(that.$modal);
           }() : function() {
             if (!content.parents('.' + doms[0])[0]) {
-              content.data('display', content.css('display')).show().addClass('layui-layer-wrap').wrap(html[1]);
+              content.data('display', content.css('display')).show().addClass('layui-layer-wrap').wrap(that.$modal);
               $('#' + doms[0] + times).find('.' + doms[5]).before(that.$modaltitle);
             }
           }();
-        }() : that.$body.append(html[1]);
+        }() : that.$body.append(that.$modal);
         $('.layui-layer-move')[0] || that.$body.append(that.$modalmove);
         that.layero = $('#' + doms[0] + times);
         config.scrollbar || doms.html.css('overflow', 'hidden').attr('layer-full', times);
       }).auto(times);
 
       //遮罩
-      $('#layui-layer-shade' + that.index).css({
-        'background-color': config.shade[1] || '#000',
-        'opacity': config.shade[0] || config.shade
-      });
+      if (that.$modalshade) {
+        that.$modalshade.css({
+          'background-color': config.shade[1] || '#000',
+          'opacity': config.shade[0] || config.shade
+        });
+      }
+
 
       config.type == 2 && layer.ie == 6 && that.layero.find('iframe').attr('src', content[0]);
 
@@ -362,12 +420,16 @@
         config = that.config,
         layero = $('#' + doms[0] + index);
 
-      if (config.area[0] === '' && config.maxWidth > 0) {
+      if (config.area[0] === '' || config.maxWidth > 0) {
         //为了修复IE7下一个让人难以理解的bug
         if (layer.ie && layer.ie < 8 && config.btn) {
           layero.width(layero.innerWidth());
         }
         layero.outerWidth() > config.maxWidth && layero.width(config.maxWidth);
+      }
+      //弹窗高度
+      if(layero.outerHeight()>win.height()){
+      	layero.height(win.height());
       }
 
       let area = [layero.innerWidth(), layero.innerHeight()],

@@ -131,13 +131,6 @@
       "url": "form/datebox",
       "icon": "fa fa-calendar"
     }, {
-      "id": "57",
-      "name": "双日历",
-      "subName": "Daterangebox",
-      "pid": "4",
-      "url": "form/daterangebox",
-      "icon": "fa fa-calendar"
-    }, {
       "id": "58",
       "name": "文件上传",
       "subName": "Filebox",

@@ -53,10 +53,6 @@ window.si.config({
       path: 'datebox',
       page: 'pages/views/form/datebox.html'
     }, {
-      title: '双日期',
-      path: 'daterangebox',
-      page: 'pages/views/form/daterangebox.html'
-    }, {
       title: '文件上传',
       path: 'filebox',
       page: 'pages/views/form/filebox.html'

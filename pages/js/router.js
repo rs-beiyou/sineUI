@@ -1,6 +1,5 @@
 var $container = $('.si-container');
-var $title = $('title');
-var $siTitle = $('.si-nav-title');
+var $siTitle = $('#si-breadcrumb-home');
 window.si.config({
   router: [{
     title: '首页',
@@ -12,6 +11,7 @@ window.si.config({
     page: 'pages/views/404.html'
   }, {
     path: 'layout',
+    title: '结构',
     children: [{
       title: '布局',
       path: 'layout',
@@ -23,6 +23,7 @@ window.si.config({
     }]
   }, {
     path: 'form',
+    title: '表单',
     children: [{
       title: '输入框',
       path: 'textbox',
@@ -48,12 +49,21 @@ window.si.config({
       path: 'switchbox',
       page: 'pages/views/form/switchbox.html'
     }, {
+      title: '日期',
+      path: 'datebox',
+      page: 'pages/views/form/datebox.html'
+    }, {
+      title: '双日期',
+      path: 'daterangebox',
+      page: 'pages/views/form/daterangebox.html'
+    }, {
       title: '文件上传',
       path: 'filebox',
       page: 'pages/views/form/filebox.html'
     }]
   }, {
     path: 'components',
+    title: '小组件',
     children: [{
       title: '按钮',
       path: 'buttons',
@@ -73,6 +83,7 @@ window.si.config({
     }]
   }, {
     path: 'table',
+    title: '表格',
     children: [{
       title: '普通表格',
       path: 'general',
@@ -80,6 +91,7 @@ window.si.config({
     }]
   }, {
     path: 'modal',
+    title: '弹层',
     children: [{
       title: '对话框',
       path: 'modal',
@@ -92,9 +104,15 @@ window.si.config({
   }],
   redirect: 'home',
   lost: 'lost',
-  afterEach: function(route) {
-    $title.text('SineUI - ' + route.title);
-    $siTitle.text(route.title);
+  afterEach: function(route, pathArr) {
+    var html = [];
+    pathArr.forEach(function(ele,i){
+      if(ele.path==='home')return;
+      i===pathArr.length-1?html.push('<li class="active">'+ele.title+'</li>'):html.push('<li>'+ele.title+'</li>');
+    });
+    $siTitle.nextAll().remove();
+    $siTitle.after(html.join(''));
+    // $siTitle.text(route.title);
     $container.find('[data-toggle="tooltip"]').tooltip();
     $container.find('code').map(function() {
       window.Prism.highlightElement(this);

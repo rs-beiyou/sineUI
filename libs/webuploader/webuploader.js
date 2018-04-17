@@ -4918,8 +4918,8 @@
                     owner.trigger( e.type );
                 };
     
-                input.on( 'change', function( e ) {
-                    var fn = arguments.callee,
+                input.on( 'change', function inputChange( e ) {
+                    var fn = inputChange,
                         clone;
     
                     me.files = e.target.files;

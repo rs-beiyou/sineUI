@@ -1,3 +1,4 @@
+@import 'libs/bootstrap/sass/_buttons';
 .form-horizontal {
     .si-checkbox,
     .si-radiobox,
@@ -11,6 +12,14 @@
 
 .control-label {
     font-weight: normal;
+    &.si-form-required::before{
+        content: '*';
+        display: inline-block;
+        margin-right: 4px;
+        font-size: 12px;
+        color: $state-danger-text;
+        font-family: SimSun;
+    }
 }
 
 .form-block {
@@ -20,13 +29,22 @@
 
 .form-group .form-block {
     margin-bottom: 0;
-    display: block;
 }
 
 .form-attach {
     position: absolute;
 }
-
+.form-columns{
+    .control-label{
+        float: left;
+        text-align: right;
+        line-height: 30px;
+        font-weight: normal;
+    }
+    .form-group{
+        margin-bottom: 5px;
+    }
+}
 input[type="radio"],
 input[type="checkbox"] {
     margin: 0;
@@ -239,12 +257,12 @@ input[type="checkbox"] {
 .si-selectbox {
     position: relative;
     width: 100%;
-    &.si-selectbox-readonly {
+    &.si-form-readonly {
         .si-selectbox-selection {
             cursor: $cursor-disabled;
         }
     }
-    &.si-selectbox-disabled {
+    &.si-form-disabled {
         .si-selectbox-selection {
             cursor: $cursor-disabled;
             background-color: $input-bg-disabled;
@@ -253,11 +271,6 @@ input[type="checkbox"] {
             }
         }
     }
-    // &.si-selectbox-visible {
-    //     .si-selectbox-dropdown {
-    //         display: block;
-    //     }
-    // }
 }
 
 .si-selectbox-selected-value,
@@ -266,6 +279,7 @@ input[type="checkbox"] {
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     white-space: nowrap;
+    user-select: none;
 }
 
 .si-selectbox-placeholder {
@@ -274,11 +288,19 @@ input[type="checkbox"] {
 
 .form-control.si-selectbox-selection {
     cursor: pointer;
-    padding-right: 24px;
-    position: relative;
+}
+.form-control{
+    &.has-icon-right{
+        position: relative;
+        padding-right: 24px;
+    }
+    &.has-icon-left{
+        position: relative;
+        padding-left: 24px;
+    }
 }
 
-.si-selectbox-arrow {
+.form-control-icon {
     position: absolute;
     top: 50%;
     right: 8px;
@@ -309,27 +331,13 @@ input[type="checkbox"] {
     -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
     box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
     background-color: $dropdown-bg;
-    // display: none;
 }
 
 .si-selectbox-visible {
-    .si-selectbox-arrow:first-of-type {
+    .form-control-icon:first-of-type {
         -webkit-transform: rotate(180deg);
         -ms-transform: rotate(180deg);
         transform: rotate(180deg);
-    }
-}
-
-.si-selectbox-show-clear {
-    .si-selectbox-selection:hover {
-        .si-selectbox-arrow {
-            &:first-of-type {
-                display: none;
-            }
-            &:last-of-type {
-                display: inline-block;
-            }
-        }
     }
 }
 
@@ -380,12 +388,12 @@ input[type="checkbox"] {
             margin: 0 4px 0 0;
             height: auto;
             line-height: normal;
+            user-select: none;
         }
     }
     .si-selectbox-item-selected {
         color: $dropdown-link-active-bg;
         &::after {
-            display: inline-block;
             content: '\f00c';
             font-family: FontAwesome;
             float: right;
@@ -396,19 +404,30 @@ input[type="checkbox"] {
 }
 
 .slide-up-in {
-    -webkit-animation-name: siSlideUpIn;
-    animation-name: siSlideUpIn;
+    -webkit-animation-name: siSlideIn;
+    animation-name: siSlideIn;
     -webkit-animation-duration: .3s;
     animation-duration: .3s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-    -webkit-transform-origin: 0 0;
-    transform-origin: 0 0;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
 }
 
 .slide-up-out {
-    -webkit-animation-name: siSlideUpOut;
-    animation-name: siSlideUpOut;
+    -webkit-animation-name: siSlideOut;
+    animation-name: siSlideOut;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+}
+
+.slide-down-in {
+    -webkit-animation-name: siSlideIn;
+    animation-name: siSlideIn;
     -webkit-animation-duration: .3s;
     animation-duration: .3s;
     -webkit-animation-fill-mode: both;
@@ -417,7 +436,18 @@ input[type="checkbox"] {
     transform-origin: 0 0;
 }
 
-@keyframes siSlideUpIn {
+.slide-down-out {
+    -webkit-animation-name: siSlideOut;
+    animation-name: siSlideOut;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+@keyframes siSlideIn {
     0% {
         opacity: 0;
         -webkit-transform: scaleY(.8);
@@ -430,7 +460,7 @@ input[type="checkbox"] {
     }
 }
 
-@-webkit-keyframes siSlideUpIn {
+@-webkit-keyframes siSlideIn {
     0% {
         opacity: 0;
         -webkit-transform: scaleY(.8);
@@ -443,7 +473,7 @@ input[type="checkbox"] {
     }
 }
 
-@keyframes siSlideUpOut {
+@keyframes siSlideOut {
     0% {
         opacity: 1;
         -webkit-transform: scaleY(1);
@@ -456,7 +486,7 @@ input[type="checkbox"] {
     }
 }
 
-@-webkit-keyframes siSlideUpOut {
+@-webkit-keyframes siSlideOut {
     0% {
         opacity: 1;
         -webkit-transform: scaleY(1);
@@ -468,6 +498,7 @@ input[type="checkbox"] {
         transform: scaleY(.8);
     }
 }
+
 
 .si-switchbox {
     position: relative;
@@ -536,77 +567,140 @@ input[type="checkbox"] {
         margin-left: 10px;
     }
 }
-
-.si-filebox-list {
-    .si-filebox-list-item {
-        margin-top: 8px;
-        height: $filebox-item-height;
-        position: relative;
-        padding: 0 35px 0 15px;
-        overflow: hidden;
-        color: $filebox-item-color;
-        background-color: $filebox-item-bg;
+.webuploader-container {
+    position: relative;
+    display: inline-block;
+}
+.webuploader-element-invisible {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+.webuploader-pick{
+    @extend .btn;
+    @extend .btn-sm;
+    @extend .btn-info;
+}
+.si-uploader-body{
+    font-size: $font-size-small;
+    overflow: auto;
+	padding-bottom: 50px;
+    height: 100%;
+    .si-uploader-queue{
+        margin: 0 40px;
+        .uploader-queue-item{
+            .form-group{
+                margin: 5px 0;
+            }
+            .uploader-filename,.uploader-progress-num{
+                margin-right: 10px;
+            }
+            .uploader-progress{
+                display:inline-block; 
+                width:100%; 
+                height:5px; 
+                background-color:#ddd;
+                border:none;
+                vertical-align:middle;
+                padding:0;
+           }
+           .uploader-progress-desc{
+               margin-left: 10px;
+               color: $state-info-text;
+           }
+           .uploader-progress-bar{
+               width:0;
+               height:100%;
+               background-color: $filebox-item-progress-bg;
+           }
+        }
+    }
+    .uploader-item-left{
+        width: 70px;
+        height: 70px;
+        float: left;
+        margin-top: 10px; 
+    }
+    .uploader-item-right{
+        width: 470px;
+        float: right;
+        margin-top: 10px; 
+    }
+}
+.file-list .file-list-item{
+    height: 30px;
+    line-height: 30px;
+    width: 300px;
+    list-style: none;
+    overflow: hidden;
+}
+.file-remove,.file-download{
+    cursor:pointer;
+    line-height:24px;
+    padding:0 10px;
+    float: right;
+}
+.delfileBtn{
+    line-height:24px;
+    padding:0 18px;
+    font-size:12px;
+    color:#666;
+    cursor:pointer;
+    text-decoration:none;
+    float: right;
+}
+.file-download:hover{
+    color: #0099FF;
+}
+.file-remove:hover,.delfileBtn:hover{
+    color: #FF3300;
+}
+.si-uploader-fix{
+    width: 100%;
+	text-align: center;
+	position: absolute;
+	bottom: 0px;
+	left: 0;
+	right: 0;
+	padding-bottom:10px;
+    background-color: #fff;
+    button{
+        margin-left: 5px;
+        margin-bottom: 0;
+    }
+}
+.si-datebox{
+    position: relative;
+    width: 100%;
+    .si-datebox-datetion{
         cursor: pointer;
-        &:hover {
-            background-color: $filebox-item-hover-bg;
+    }
+    .si-datebox-value,
+    .si-datebox-placeholder {
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        user-select: none;
+    }
+}
+.si-show-clear:hover {
+    .form-control-icon {
+        &:first-of-type {
+            display: none;
         }
-        .si-filebox-item-inner {
+        &:last-of-type {
             display: inline-block;
-            line-height: $filebox-item-height;
         }
-        i {
-            position: absolute;
-            line-height: $filebox-item-height;
+    }
+}
+.si-form-readonly:hover,.si-form-disabled:hover {
+    .form-control-icon {
+        &:first-of-type {
+            display: inline-block;
         }
-        .si-filebox-item-type {
-            left: 0;
-            cursor: default;
-        }
-        .si-filebox-item-info {
-            right: 20px;
-            &:hover {
-                color: $filebox-item-icon-hover-color;
-            }
-        }
-        .si-filebox-item-remove {
-            right: 5px;
-            cursor: pointer;
-            &:hover {
-                color: $filebox-item-icon-hover-color;
-            }
-        }
-        .si-filebox-item-progress {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: $filebox-item-progress-bg;
-            opacity: .6;
-            z-index: 10;
-            -webkit-transition: margin-left .2s ease-out;
-            -o-transition: margin-left .2s ease-out;
-            transition: margin-left .2s ease-out;
-        }
-        &.si-filebox-item-ready {
-            background-color: $filebox-item-progress-bg;
-            .si-filebox-item-progress {
-                display: none;
-            }
-        }
-        &.si-filebox-item-error {
-            color: $filebox-item-error-color;
-            cursor: default;
-            .si-filebox-item-progress,
-            .si-filebox-item-info {
-                display: none;
-            }
-            .si-filebox-item-inner {
-                cursor: text;
-            }
-            i:hover {
-                color: $filebox-item-error-color;
-            }
+        &:last-of-type {
+            display: none;
         }
     }
 }

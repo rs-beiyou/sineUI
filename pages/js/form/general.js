@@ -1,58 +1,57 @@
 $('#form1').form({
   list: [{
-    label: 'Name：',
+    label: '姓名：',
     type: 'textbox',
     labelWidth: 'col-sm-3 col-md-2',
     inputWidth: 'col-xs-9 col-sm-5'
   }, {
-    label: 'checkbox：',
+    label: '爱好：',
     type: 'checkbox',
     labelWidth: 'col-sm-3 col-md-2',
     inputWidth: 'col-xs-9 col-sm-5',
     data: [{
-      key:'1111',
-      value: '1111'
+      key:'打篮球',
+      value: '1'
     },{
-      key:'2222',
-      value: '2222'
+      key:'踢足球',
+      value: '2'
     },{
-      key:'3333',
-      value: '3333'
+      key:'电脑游戏',
+      value: '3'
     },{
-      key:'4444',
-      value: '4444'
+      key:'读书',
+      value: '4'
     }]
   }, {
-    label: 'radiobox：',
+    label: '性别：',
     type: 'radiobox',
     labelWidth: 'col-sm-3 col-md-2',
     inputWidth: 'col-xs-9 col-sm-5',
     data: [{
-      key:'1111',
-      value: '1111'
+      key:'男',
+      value: '1'
     },{
-      key:'2222',
-      value: '2222'
-    },{
-      key:'3333',
-      value: '3333'
-    },{
-      key:'4444',
-      value: '4444'
+      key:'女',
+      value: '0'
     }]
   }, {
-    label: 'selectbox：',
+    label: '生日：',
+    type: 'datebox',
+    labelWidth: 'col-sm-3 col-md-2',
+    inputWidth: 'col-xs-9 col-sm-5'
+  }, {
+    label: '某选项：',
     type: 'selectbox',
     labelWidth: 'col-sm-3 col-md-2',
     inputWidth: 'col-xs-9 col-sm-5',
     url: 'https://easy-mock.com/mock/58ff251d5e43ae5dbea5f48c/sineUI/list'
   }, {
-    label: 'switchbox：',
+    label: '是否婚配：',
     labelWidth: 'col-sm-3 col-md-2',
     inputWidth: 'col-xs-9 col-sm-5',
     type: 'switchbox'
   }, {
-    label: 'filebox：',
+    label: '附件：',
     labelWidth: 'col-sm-3 col-md-2',
     inputWidth: 'col-xs-9 col-sm-5',
     type: 'filebox'

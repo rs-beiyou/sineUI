@@ -52,7 +52,6 @@
         "webpack-merge": "^4.1.0"
     },
     "dependencies": {
-        "bootstrap-table": "^1.12.1",
         "core-js": "^2.5.1",
         "moment": "^2.22.0",
         "wangeditor": "^3.1.1"

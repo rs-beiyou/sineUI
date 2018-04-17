@@ -1,6 +1,6 @@
-require('bootstrap-table/src/bootstrap-table.css');
-require('bootstrap-table');
-require('bootstrap-table/src/locale/bootstrap-table-zh-CN');
+require('libs/bsTable/css/bootstrap-table.min.css');
+require('libs/bsTable/js/bootstrap-table');
+require('libs/bsTable/js/bootstrap-table-zh-CN.min.js');
 
 let BootstrapTable = $.fn.bootstrapTable.Constructor;
 let compareObjects = $.fn.bootstrapTable.utils.compareObjects;

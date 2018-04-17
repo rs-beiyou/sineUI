@@ -9,7 +9,7 @@ class Parser {
       let regex = new RegExp('btsp-(\\S*)');
       let type = regex.exec(element.className)[1];
       let dataOptions = (element.dataset ? element.dataset.options : element.getAttribute('data-options')) || '';
-      let options = (new Function(`return {${dataOptions}}`))();
+      let options = (new Function(`return ${dataOptions && dataOptions.startsWith('{') ? dataOptions : '{'+dataOptions+'}'}`))();
       try {
         $(element)[type](options);
       } catch (error) {

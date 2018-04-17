@@ -9,7 +9,7 @@ class Textbox extends BaseForm {
     let op = this.options;
     let $input = this.$input;
     if (!$input) {
-      let _input = op.multiline ? document.createElement('textarea') : document.createElement('input');
+      let _input = this.lastOptions.multiline ? document.createElement('textarea') : document.createElement('input');
       $input = $(_input);
       $input.addClass('form-control');
       this.$input = $input;
@@ -90,9 +90,9 @@ $.fn.textbox.noConflict = function() {
 };
 
 Textbox.DEFAULTS = {
+  multiline: false,
   hasSurface: false,
   label: '',
-  multiline: false,
   id: '',
   name: '',
   labelWidth: '',

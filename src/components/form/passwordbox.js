@@ -89,6 +89,7 @@ import BaseForm from './form-base';
     size: '',
     value: '',
     placeholder: '',
-    width: ''
+    width: '',
+    valid: false
   };
 })(jQuery);

@@ -7,7 +7,6 @@ import _ from 'src/utils/util';
       this.$wrapper = this.$el.children('.sidebar-wrapper');
       let nav = this.getNodes(this.options.data);
       let $nav = $(nav);
-      this.$wrapper.append();
       this.activedNode = null;
       this.hasActive = false;
       $nav.css('opacity', '0');

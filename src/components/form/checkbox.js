@@ -224,6 +224,7 @@ import BaseForm from './form-base';
     valueField: 'value',
     data: [],
     url: '',
-    value: ''
+    value: '',
+    valid: false
   };
 })(jQuery);

@@ -8,6 +8,7 @@ class Valid{
     this.pass = true;
     this.hasError = false;
     this.msg = '';
+    this.isShow = false;
     this.init();
   }
   init(){
@@ -17,6 +18,19 @@ class Valid{
     this.$el.on('valid.change',()=>{
       this.valid();
     });
+  }
+  reset(option){
+    this.hasError&&this.hide();
+    Object.assign(this.options,option||{});
+    if(this.options.required){
+      this.former.$label&&this.former.$label.addClass('si-form-required');
+    }else{
+      this.former.$label&&this.former.$label.removeClass('si-form-required');
+    }
+  }
+  destroy(){
+    this.reset();
+    this.$el.off('valid.change');
   }
   check(){
     if(this.hasError) return false;
@@ -251,6 +265,9 @@ function Plugin(option, former){
           if (option === 'destroy') {
             $this.removeData('si.valid');
           }
+        }
+        if(typeof option === 'object'&&data){
+          data.reset(option);
         }
         if (!data) {
           $this.data('si.valid', (data = new Valid(options, former)));

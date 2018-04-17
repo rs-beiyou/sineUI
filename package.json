@@ -53,6 +53,7 @@
     },
     "dependencies": {
         "bootstrap-table": "^1.12.1",
-        "core-js": "^2.5.1"
+        "core-js": "^2.5.1",
+        "moment": "^2.22.0"
     }
 }

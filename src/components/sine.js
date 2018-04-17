@@ -10,6 +10,7 @@ class Sine {
     this.loadTimer = null;
     this.hasRouter = false;
     this.options = Sine.DEFAULTS;
+    this.pathArr = [];
   }
   init() {
     this._initLoadingBar();
@@ -38,6 +39,7 @@ class Sine {
       this.load(this.options.redirect);
       return;
     }
+    this.pathArr = [];
     let hashArr = hash[1] === '/' ? hash.replace(/#\/(^#\/)*/, '$1').split('/') : hash.replace(/#([^#]*)(#.*)?/, '$1').split('/');
     this._localHash(hashArr, router);
   }
@@ -45,6 +47,7 @@ class Sine {
     for (let i = 0, len = router.length; i < len; i++) {
       if (router[i].path == hashArr.join('/')) {
         if (router[i].page) {
+          this.pathArr.push(router[i]);
           this.load(router[i]);
           this.currPageUrl = window.location.hash;
           break;
@@ -55,6 +58,7 @@ class Sine {
       if (router[i].path.split('/')[0] == hashArr[0]) {
         hashArr.shift();
         if (Array.isArray(router[i].children)) {
+          this.pathArr.push(router[i]);
           this._localHash(hashArr, router[i].children);
         } else {
           throw new Error('Router children for ' + hashArr[0] + ' must be an array.');
@@ -66,7 +70,7 @@ class Sine {
     let url = typeof from === 'string' ? from : typeof from == 'object' ? from.page : null;
     if (url === null) return;
     if (url.indexOf('.') == -1) {
-      this.options.beforeEach && this.options.beforeEach(from);
+      this.options.beforeEach && this.options.beforeEach(from, this.pathArr);
       window.location.hash = '#' + from;
       return;
     }
@@ -87,7 +91,7 @@ class Sine {
         if (xhr.status === 404) {
           this.load(this.options.lost ? this.options.lost : this.options.redirect);
         }
-        this.hasRouter ? this.options.afterEach && this.options.afterEach(from) : false;
+        this.hasRouter ? this.options.afterEach && this.options.afterEach(from, this.pathArr) : false;
         if (status == 'success') {
           loadSuccess && typeof loadSuccess === 'function' && loadSuccess();
         }

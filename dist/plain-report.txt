@@ -1,0 +1,5 @@
+wangeditor: 145.28 KB (15.8%)
+moment: 143.38 KB (15.6%)
+core-js: 61.87 KB (6.71%)
+webpack: 517 B (0.0548%)
+<self>: 570.96 KB (61.9%)

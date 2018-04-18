@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer').WebpackBundleSizeAnalyzerPlugin;
 
 module.exports = merge(webpackBaseConfig, {
   output: {
@@ -12,6 +13,9 @@ module.exports = merge(webpackBaseConfig, {
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
+      output: {
+        comments: false,  
+      },
       compress: {
         warnings: false
       }
@@ -19,6 +23,8 @@ module.exports = merge(webpackBaseConfig, {
     new ExtractTextPlugin({
       filename: 'css/[name].min.css',
       allChunks: true
-    })
+    }),
+    new WebpackBundleSizeAnalyzerPlugin('./plain-report.txt'),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
 });

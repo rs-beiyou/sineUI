@@ -6,10 +6,10 @@
 * @website: http://www.daterangepicker.com/
 */
 // Follow the UMD template https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js
-
 import moment from 'moment';
-
-var DateRangePicker = function(element, options, cb) {
+// const moment = require('./moment.min.js');
+! function(window, undefined) {
+    var DateRangePicker = function(element, options, cb) {
 
         //default settings for options
         this.docEl = $(document);
@@ -1631,3 +1631,4 @@ var DateRangePicker = function(element, options, cb) {
         });
         return this;
     };
+}(window)

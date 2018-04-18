@@ -3,7 +3,7 @@ import '../modal/dialog';
 import '../modal/confirm';
 
 import BaseForm from './form-base';
-import WebUploader from 'libs/webuploader/webuploader.js';
+import WebUploader from 'libs/webuploader/webuploader.noimage.min.js';
 import uploaderFlash from 'libs/webuploader/Uploader.swf';
 
 class Filebox extends BaseForm {
@@ -56,8 +56,8 @@ class Filebox extends BaseForm {
         break;
     }
   }
-  _setValue(){
-    
+  _setValue(newVal){
+    this.loadData(newVal);
   }
   _initDialog(){
     this.$dialogBtn.on('click',(e)=>{
@@ -620,6 +620,9 @@ function Plugin(option) {
         if (option === 'destroy') {
           $this.removeData('si.filebox');
         }
+      }
+      if(typeof option === 'object'&& data){
+        data.set(option);
       }
       if (!data) {
         dataSet.fileloader ? dataSet.fileloader = (new Function('return ' + dataSet.fileloader))() : false;

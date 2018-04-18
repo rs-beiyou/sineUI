@@ -1,5 +1,10 @@
+import 'libs/daterangepicker/daterangepicker.css';
+import 'libs/daterangepicker/daterangepicker';
+
 import BaseForm from './form-base';
+// import moment from 'libs/daterangepicker/moment.min.js';
 import moment from 'moment';
+
 class Daterangebox extends BaseForm{
   constructor(el, options){
     super(el, options, Daterangebox.DEFAULTS);
@@ -159,6 +164,9 @@ function Plugin(option) {
         if (option === 'destroy') {
           $this.removeData('si.daterangebox');
         }
+      }
+      if(typeof option === 'object'&& data){
+        data.set(option);
       }
       if (!data) {
         let options = $.extend( {} , Daterangebox.DEFAULTS, typeof option === 'object' && option);

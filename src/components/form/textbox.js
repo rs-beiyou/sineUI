@@ -60,6 +60,9 @@ function Plugin(option) {
           $this.removeData('si.textbox');
         }
       }
+      if(typeof option === 'object'&& data){
+        data.set(option);
+      }
       if (!data) {
         let options = $.extend( {} , Textbox.DEFAULTS, typeof option === 'object' && option);
         let datakeys = Object.keys(dataSet);

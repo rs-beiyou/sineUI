@@ -9,7 +9,7 @@ import './datebox';
 import './daterangebox';
 import './treebox';
 import './combobox';
-import './valid';
+import '../valid';
 
 import {Log} from '../../libs/log';
 

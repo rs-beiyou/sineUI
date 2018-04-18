@@ -35,9 +35,7 @@ class Datebox extends BaseForm{
       this.$datebox = $datebox;
       this.$datetion = $datetion;
       this.$clear = $clear;
-      setTimeout(()=>{
-        !this.options.readonly&&!this.options.disabled&&this.initDate();
-      });
+      this.initDate();
     }
     switch (item) {
       case 'id':
@@ -63,17 +61,17 @@ class Datebox extends BaseForm{
     }
   }
   initDate(){
-    let op = this.options, $input = this.$input;
+    let op = this.options,lop = this.lastOptions, $input = this.$input;
     $input.daterangepicker({
       showDropdowns: true,
       autoUpdateInput: false,
       singleDatePicker: true,
       autoApply: true,
       locale: {
-        format :op.format
+        format :lop.format
       },
-      minDate: op.minDate,
-      maxDate: op.maxDate
+      minDate: lop.minDate,
+      maxDate: lop.maxDate
     }).on('apply.daterangepicker', (ev, picker)=> {
       op.value = picker.startDate.format(op.format);
     }).on('cancel.daterangepicker', ()=> {
@@ -85,12 +83,12 @@ class Datebox extends BaseForm{
     this.inited = true;
   }
   _setReadonly(newVal){
-    newVal = newVal===undefined||this.options.readonly;
+    newVal===undefined?newVal = this.options.readonly:undefined;
     let $input = this.$input, $datebox = this.$datebox;
     if(newVal){
       $datebox.addClass('si-form-readonly');
       $input.attr('readonly',true);
-      this.inited&&this.destroy();
+      this.destroy();
     }else{
       $datebox.removeClass('si-form-readonly');
       $input.removeAttr('readonly');
@@ -98,7 +96,7 @@ class Datebox extends BaseForm{
     }
   }
   _setDisabled(newVal){
-    newVal = newVal===undefined||this.options.disabled;
+    newVal===undefined?newVal = this.options.readonly:undefined;
     let $input = this.$input, $datebox = this.$datebox;
     if(newVal){
       $datebox.addClass('si-form-disabled');
@@ -144,6 +142,9 @@ function Plugin(option) {
         if (option === 'destroy') {
           $this.removeData('si.datebox');
         }
+      }
+      if(typeof option === 'object'&& data){
+        data.set(option);
       }
       if (!data) {
         let options = $.extend( {} , Datebox.DEFAULTS, typeof option === 'object' && option);

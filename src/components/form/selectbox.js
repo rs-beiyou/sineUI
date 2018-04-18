@@ -363,6 +363,9 @@ import BaseForm from './form-base';
           $this.removeData('si.selectbox');
         }
       }
+      if(typeof option === 'object'&& data){
+        data.set(option);
+      }
       if (!data) {
         let options = $.extend( {} , Selectbox.DEFAULTS, typeof option === 'object' && option);
         let datakeys = Object.keys(dataSet);

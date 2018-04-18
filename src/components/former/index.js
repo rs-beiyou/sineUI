@@ -1,4 +1,4 @@
-import './form';
+import '../form/index';
 
 import {Log} from '../../libs/log';
 

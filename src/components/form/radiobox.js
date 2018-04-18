@@ -149,34 +149,46 @@ import BaseForm from './form-base';
     }
   }
 
-  function Plugin(option, _relatedTarget) {
-    return this.each(function() {
-      let $this = $(this);
-      let dataSet = $this.data();
-      let data = dataSet['si.textbox'];
-      if (!data) {
-        dataSet.data ? dataSet.data = eval(dataSet.data) : false;
-        //data-api覆盖data-options
-        let options = Object.assign({}, Radiobox.DEFAULTS, typeof option === 'object' && option);
-        let datakeys = Object.keys(dataSet);
-        let defaultkeys = Object.keys(options);
-        defaultkeys.forEach((key) => {
-          let lowkey = key.toLocaleLowerCase();
-          if (datakeys.includes(lowkey)) {
-            options[key] = dataSet[lowkey];
+  function Plugin(option) {
+    try {
+      let value, args = Array.prototype.slice.call(arguments, 1);
+      
+      this.each(function(){
+        let $this = $(this),
+          dataSet = $this.data(),
+          data = dataSet['si.radiobox'];
+          
+        if (typeof option === 'string') {
+          if (!data) {
+            return;
           }
-        });
-        if (typeof option !== 'object') {
-          console.error('请先初始化radiobox，再执行其他操作！\n radiobox初始化：$().radiobox(Object);');
-          return;
+          value = data[option].apply(data, args);
+          if (option === 'destroy') {
+            $this.removeData('si.radiobox');
+          }
         }
-        data = new Radiobox(this, options);
-        data.$input.data('si.radiobox', data);
-      } else {
-        if (typeof option === 'object') data['set'](option);
-      }
-      if (typeof option === 'string') data[option](_relatedTarget);
-    });
+        if(typeof option === 'object'&& data){
+          data.set(option);
+        }
+        if (!data) {
+          dataSet.data ? dataSet.data = (new Function('return ' + dataSet.data))() : false;
+          let options = $.extend( {} , Radiobox.DEFAULTS, typeof option === 'object' && option);
+          let datakeys = Object.keys(dataSet);
+          let defaultkeys = Object.keys(options);
+          defaultkeys.forEach((key) => {
+            let lowkey = key.toLocaleLowerCase();
+            if (datakeys.includes(lowkey)) {
+              options[key] = dataSet[lowkey];
+            }
+          });
+          data = new Radiobox(this, options);
+          data.$input.data('si.radiobox', data);
+        }
+      });
+      return typeof value === 'undefined' ? this : value;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 
   let old = $.fn.radiobox;

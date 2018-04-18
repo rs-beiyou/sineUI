@@ -4,7 +4,6 @@ export default class BaseForm {
     this.$element = $(el);
     this.lastOptions = options;
     this.options = $.extend(true, {}, DEFAULTS);
-    this.optionCache = Object.assign({}, DEFAULTS);
   }
   _initForm() {
     this._defineReactive();

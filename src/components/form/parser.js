@@ -1,4 +1,4 @@
-import './form';
+import './index';
 
 import {Log} from '../../libs/log';
 
@@ -16,7 +16,7 @@ class Parser {
         Log.error(`former组件解析失败！\n${error}`);
       }
     });
-    this.$element.find('[data-toggle="table"]').bootstrapTable();
+    $.fn.bootstrapTable&&this.$element.find('[data-toggle="table"]').bootstrapTable();
   }
 }
 const siParser = new Parser();

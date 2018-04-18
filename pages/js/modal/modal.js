@@ -4,6 +4,8 @@ let content = '<table><tr><td>表格</td><td><p>测试下弹窗的内容<br>加�
 $("#btnJsModal").click(function() {
   $.dialog({
     title: '自定义标题',
+    shade:false,
+    url:'http://www.baidu.com',
     content: content,
     area: ['600px', '300px'],
     success: function(obj, index) {
@@ -60,7 +62,7 @@ $('#btnJsConfirm').click(function() {
 });
 $('#btnJsDelete').click(function() {
   $.confirm({
-    title: '确定要删除吗？',
+    title: '',
     content: '一些描述内容',
     btn: [{
       class: 'btn-danger',

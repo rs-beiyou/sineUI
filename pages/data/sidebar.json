@@ -56,6 +56,13 @@
       "pid": "2",
       "url": "components/tags",
       "icon": "fa fa-tags"
+    }, {
+      "id": "24",
+      "name": "富文本编辑器",
+      "subName": "Editor",
+      "pid": "2",
+      "url": "components/editor",
+      "icon": "fa fa-tags"
     }]
   },
   {
@@ -125,6 +132,13 @@
       "icon": "fa fa-toggle-on"
     }, {
       "id": "56",
+      "name": "日历",
+      "subName": "Datebox",
+      "pid": "4",
+      "url": "form/datebox",
+      "icon": "fa fa-calendar"
+    }, {
+      "id": "58",
       "name": "文件上传",
       "subName": "Filebox",
       "pid": "4",

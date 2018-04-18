@@ -9,7 +9,7 @@ class Textbox extends BaseForm {
     let op = this.options;
     let $input = this.$input;
     if (!$input) {
-      let _input = op.multiline ? document.createElement('textarea') : document.createElement('input');
+      let _input = this.lastOptions.multiline ? document.createElement('textarea') : document.createElement('input');
       $input = $(_input);
       $input.addClass('form-control');
       this.$input = $input;
@@ -60,6 +60,9 @@ function Plugin(option) {
           $this.removeData('si.textbox');
         }
       }
+      if(typeof option === 'object'&& data){
+        data.set(option);
+      }
       if (!data) {
         let options = $.extend( {} , Textbox.DEFAULTS, typeof option === 'object' && option);
         let datakeys = Object.keys(dataSet);
@@ -90,9 +93,9 @@ $.fn.textbox.noConflict = function() {
 };
 
 Textbox.DEFAULTS = {
+  multiline: false,
   hasSurface: false,
   label: '',
-  multiline: false,
   id: '',
   name: '',
   labelWidth: '',

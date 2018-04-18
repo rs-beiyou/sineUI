@@ -4,7 +4,6 @@ export default class BaseForm {
     this.$element = $(el);
     this.lastOptions = options;
     this.options = $.extend(true, {}, DEFAULTS);
-    this.optionCache = Object.assign({}, DEFAULTS);
   }
   _initForm() {
     this._defineReactive();
@@ -56,6 +55,8 @@ export default class BaseForm {
         case 'valid':
           if(typeof newVal==='string'&& newVal.includes('{')){
             _this['_set' + _this.className](key, (new Function(`return ${newVal}`))(), val);
+          }else{
+            _this['_set' + _this.className](key, newVal, val);
           }
           break;
       }
@@ -63,7 +64,7 @@ export default class BaseForm {
     new Watch(op, callback);
   }
   _setCompile(){
-    let op = this.options, valid = (new Function(`return ${op.valid}`))();
+    let op = this.options, valid = typeof op.valid==='string'? (new Function(`return ${op.valid}`))():op.valid;
     if(!valid||$.isEmptyObject(valid)||this.hasValidControl)return;
     this.cpLock = false;
     this.hasValidControl = true;

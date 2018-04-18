@@ -3,7 +3,7 @@ import layer from 'libs/layer/layer.js';
 $.extend({
   //对话框
   dialog: function(options) {
-    if (options.content && options.content.indexOf('action') > -1) {
+    if (options.content && typeof options.content==='string' && options.content.indexOf('action') > -1) {
       $.ajax({
         url: options.content,
         type: 'get',
@@ -34,7 +34,7 @@ $.extend({
       area: ['600px', '400px'], //宽高
       title: '对话框',
       maxmin: true, //最大化
-      fixed: true, //固定
+      fixed: false, //固定
       shade: [0.5, '#ffffff'],
       scrollbar: false
     }, options || {});

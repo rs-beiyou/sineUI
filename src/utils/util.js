@@ -25,7 +25,7 @@ _.throttle = function(fn, interval) {
   };
 };
 //函数消抖
-_.debounce = function(func, wait, immediate) {
+_.debounce = function(func, wait=500, immediate) {
   let timeout, args, context, timestamp, result;
 
   let later = function() {

@@ -5,7 +5,11 @@ import './radiobox';
 import './selectbox';
 import './switchbox';
 import './filebox';
-import './valid';
+import './datebox';
+import './daterangebox';
+import './treebox';
+import './combobox';
+import '../valid';
 
 import {Log} from '../../libs/log';
 
@@ -42,10 +46,12 @@ import {Log} from '../../libs/log';
     _getFormGroup(el) {
       let formGroup = document.createElement('div');
       let input = document.createElement('input');
+      let $input = $(input);
+      $input.addClass('btsp-');
       $(formGroup).addClass('form-group').append(input);
       this.$element.append(formGroup);
       try {
-        $(input)[el.type ? el.type : 'textbox'](el);
+        $input[el.type ? el.type : 'textbox'](el);
       } catch (error) {
         Log.error(`form：${el.type}组件解析失败！\n${error}`);
       }

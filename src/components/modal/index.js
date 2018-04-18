@@ -1,3 +1,4 @@
+import 'libs/layer/theme/default/layer.css';
 import './dialog';
 import './confirm';
 import './loading';

@@ -1,4 +1,7 @@
-require('./bootstrap-table-extend');
+import './bootstrap-table-extend';
+
+import {Log} from '../../libs/log';
+
 class Table {
   constructor(el, options){
     this.options = options;
@@ -184,7 +187,7 @@ function Plugin(option){
     });
     return typeof value === 'undefined' ? this : value;
   } catch (error) {
-    console.warn(error);
+    Log.warn(error);
   }
 }
 

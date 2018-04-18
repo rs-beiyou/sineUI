@@ -37,34 +37,45 @@ import BaseForm from './form-base';
     }
   }
 
-  function Plugin(option, _relatedTarget) {
-    return this.each(function() {
-      let $this = $(this);
-      let dataSet = $this.data();
-      let data = dataSet['si.passwordbox'];
-
-      if (!data) {
-        //data-api覆盖data-options
-        let options = Object.assign({}, Passwordbox.DEFAULTS, typeof option === 'object' && option);
-        let datakeys = Object.keys(dataSet);
-        let defaultkeys = Object.keys(options);
-        defaultkeys.forEach((key) => {
-          let lowkey = key.toLocaleLowerCase();
-          if (datakeys.includes(lowkey)) {
-            options[key] = dataSet[lowkey];
+  function Plugin(option) {
+    try {
+      let value, args = Array.prototype.slice.call(arguments, 1);
+      
+      this.each(function(){
+        let $this = $(this),
+          dataSet = $this.data(),
+          data = dataSet['si.passwordbox'];
+          
+        if (typeof option === 'string') {
+          if (!data) {
+            return;
           }
-        });
-        if (typeof option !== 'object') {
-          console.error('请先初始化passwordbox，再执行其他操作！\n passwordbox初始化：$().passwordbox(Object);');
-          return;
+          value = data[option].apply(data, args);
+          if (option === 'destroy') {
+            $this.removeData('si.passwordbox');
+          }
         }
-        data = new Passwordbox(this, options);
-        data.$input.data('si.passwordbox', data);
-      } else {
-        if (typeof option === 'object') data['set'](option);
-      }
-      if (typeof option === 'string') data[option](_relatedTarget);
-    });
+        if(typeof option === 'object'&& data){
+          data.set(option);
+        }
+        if (!data) {
+          let options = $.extend( {} , Passwordbox.DEFAULTS, typeof option === 'object' && option);
+          let datakeys = Object.keys(dataSet);
+          let defaultkeys = Object.keys(options);
+          defaultkeys.forEach((key) => {
+            let lowkey = key.toLocaleLowerCase();
+            if (datakeys.includes(lowkey)) {
+              options[key] = dataSet[lowkey];
+            }
+          });
+          data = new Passwordbox(this, options);
+          data.$input.data('si.passwordbox', data);
+        }
+      });
+      return typeof value === 'undefined' ? this : value;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
   let old = $.fn.passwordbox;
 
@@ -89,6 +100,7 @@ import BaseForm from './form-base';
     size: '',
     value: '',
     placeholder: '',
-    width: ''
+    width: '',
+    valid: false
   };
 })(jQuery);

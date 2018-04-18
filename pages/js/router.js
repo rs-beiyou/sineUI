@@ -59,7 +59,7 @@ window.si.config({
     }]
   }, {
     path: 'components',
-    title: '小组件',
+    title: '组件',
     children: [{
       title: '按钮',
       path: 'buttons',
@@ -76,6 +76,10 @@ window.si.config({
       title: '标签',
       path: 'tags',
       page: 'pages/views/components/tags.html'
+    }, {
+      title: '富文本编辑器',
+      path: 'editor',
+      page: 'pages/views/components/editor.html'
     }]
   }, {
     path: 'table',

@@ -1,0 +1,34 @@
+<div class="container-fluid" id="demo-page">
+    <article class="si-article">
+        <p class="si-info">富文本编辑器，用于文档编辑发布。</p>
+        <h4>代码示例<i class="fa fa-code"></i></h4>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <div id="editor"></div>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    富文本编辑器
+                </div>
+                <div>
+                    <p>
+                        感谢 <a href="http://www.wangeditor.com/" target="_blank">wangEditor</a>。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;div id="editor"&gt;&lt;/div&gt;
+$('#editor').editor();
+            </code></pre>
+                <div class="code-box-wrapper-close">
+                    <i class="fa fa-angle-double-up"></i>
+                </div>
+            </section>
+        </section>
+    </article>
+</div>
+<script>
+    $("#editor").editor();
+</script>

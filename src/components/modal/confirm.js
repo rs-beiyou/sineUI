@@ -1,8 +1,8 @@
 import layer from 'libs/layer/layer.js';
 $.extend({
   //警告框
-  alert: function(options) {
-    let option = null;
+  alert(options) {
+    let option = {};
     let defaults = {
       title: '提示', //标题
       content: '', //内容
@@ -38,21 +38,30 @@ $.extend({
     layer.open(option);
   },
   //确认框
-  confirm: function(message, callback1, callback2) {
-    layer.open({
-      content: message,
-      title: '确认',
-      icon: 3,
-      shade: [0.5, '#ffffff'],
-      btn: ['确认', '取消'],
-      btn1: function(index) {
-        if (callback1) callback1();
-        layer.close(index);
-      },
-      btn2: function(index) {
-        if (callback2) callback2();
-        layer.close(index);
-      }
-    });
+  confirm(options) {
+    if (typeof options === 'object') {
+      layer.open(options);
+    } else {
+      let callback1 = arguments[1];
+      let callback2 = arguments[2];
+      layer.open({
+        content: options,
+        title: '确认',
+        icon: 3,
+        shade: [0.5, '#ffffff'],
+        btn: ['确认', '取消'],
+        btn1: function(index) {
+          if (callback1) callback1();
+          layer.close(index);
+        },
+        btn2: function(index) {
+          if (callback2) callback2();
+          layer.close(index);
+        }
+      });
+    }
+  },
+  info() {
+
   }
 });

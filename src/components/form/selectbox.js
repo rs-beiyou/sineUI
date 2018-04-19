@@ -36,13 +36,13 @@ import BaseForm from './form-base';
         $selection = $(_selection);
         $selectValue = $(_selectValue);
         $clear = $(_clear);
-        $(_cert).addClass('fa fa-caret-down  form-control-icon');
-        $clear.addClass('fa fa-times-circle form-control-icon');
-        $placeholder.addClass('si-selectbox-placeholder');
+        $(_cert).addClass(`${this.lastOptions.icon} form-control-icon`);
+        $clear.addClass(`${this.lastOptions.clearIcon} form-control-icon`);
+        $placeholder.addClass('si-placeholder');
         op.placeholder && $placeholder.text(op.placeholder);
         $input.attr('type', 'hidden');
         $selectValue.addClass('si-selectbox-selected-value').hide();
-        $dropdown.addClass('si-selectbox-dropdown').hide();
+        $dropdown.addClass('si-dropdown si-selectbox-dropdown').hide();
         $selection.derection().addClass('form-control si-selectbox-selection has-icon-right').append(_selectValue).append(_placeholder).append(_cert).append(_clear);
         $selectbox.addClass('si-selectbox si-selectbox-single').append(_input).append(_selection);
         if(this.lastOptions.transfer){
@@ -235,7 +235,7 @@ import BaseForm from './form-base';
             op.clearable && this.$selectbox.addClass('si-show-clear');
           }
           arr1.forEach(key => {
-            sbd[key] && sbd[key].$selectbox.addClass('si-item-selected');
+            sbd[key] && sbd[key].$selectbox.addClass('si-selectbox-item-selected');
             this._addTag(key, sbd[key].text);
           });
           arr2.forEach(key => {
@@ -245,7 +245,7 @@ import BaseForm from './form-base';
           });
           if (va.length === 0) {
             $placeholder.show();
-            op.clearable && this.$selectbox.removeClass('si-selectbox-show-clear');
+            op.clearable && this.$selectbox.removeClass('si-show-clear');
           }
           this.$input.val(newVal);
         } else {
@@ -256,7 +256,7 @@ import BaseForm from './form-base';
           if (va === '' && vac !== '') {
             $selectValue.text('');
             sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
-            op.clearable && this.$selectbox.removeClass('si-selectbox-show-clear');
+            op.clearable && this.$selectbox.removeClass('si-show-clear');
             this.$input.val(va).removeData('key');
             $placeholder.show();
             $selectValue.hide();
@@ -267,7 +267,7 @@ import BaseForm from './form-base';
             vac === '' && $placeholder.hide() && $selectValue.show();
             vac !== '' && sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
             sbd[va].$selectbox.addClass('si-selectbox-item-selected');
-            op.clearable && this.$selectbox.addClass('si-selectbox-show-clear');
+            op.clearable && this.$selectbox.addClass('si-show-clear');
           }
         }
         this.$input.trigger('change');
@@ -416,6 +416,8 @@ import BaseForm from './form-base';
     search: false,
     clearable: false,
     multiple: false,
-    valid: false
+    valid: false,
+    icon:'fa fa-caret-down',
+    clearIcon:'fa fa-times-circle'
   };
 })(jQuery);

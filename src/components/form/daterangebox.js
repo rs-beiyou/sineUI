@@ -130,7 +130,7 @@ class Daterangebox extends BaseForm{
     let op = this.options;
     !op.readonly&&!op.disabled&&!this.inited&&this.initDate();
     this.$input.val(newVal);
-    this.inited&&this.$input.trigger('change').daterangepicker('elementChanged');
+    this.inited&&this.$input.daterangepicker('elementChanged').trigger('valid.change').trigger('change');
     if(newVal!==''&&val===''){
       let valArr = newVal.split(this.options.separator);
       this.$inputBegin.val(valArr[0]);

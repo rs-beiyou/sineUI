@@ -164,4 +164,7 @@ export default class BaseForm {
   set(option) {
     this.className === 'Filebox' ? $.extend(true, this.options, option) : Object.assign(this.options, option);
   }
+  create(el){
+    return el?document.createElement(el):document.createDocumentFragment();
+  }
 }

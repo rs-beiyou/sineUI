@@ -1,10 +1,13 @@
 <div class="container-fluid" id="demo-page">
     <article class="si-article">
-        <p class="si-info"></p>
+        <p class="si-info">树形控件。多用于组织架构、文件结构、国家地区等，可完整展现其层级关系。</p>
+        <div class="si-callout info">
+           感谢<a href="https://github.com/zTree/zTree_v3" target="_blank"><i class="fa fa-github"></i>zTree</a>
+        </div>
         <h4>代码示例<i class="fa fa-code"></i></h4>
         <section class="code-box">
             <section class="code-box-demo">
-                <input class="btsp-treebox" data-options="width:'200px'">
+                <ul id="treeDemo" class="ztree"></ul>
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
@@ -20,7 +23,7 @@
             <section class="code-box-wrapper">
                 <pre><code>
             <!-- 组件代码 -->
-            </code></pre>
+          </code></pre>
                 <div class="code-box-wrapper-close">
                     <i class="fa fa-angle-double-up"></i>
                 </div>
@@ -44,9 +47,18 @@
             <section class="code-box-wrapper">
                 <pre><code>
             <!-- 组件代码 -->
-            </code></pre>
+          </code></pre>
                 <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
             </section>
         </section>
     </article>
 </div>
+<script>
+    $('#treeDemo').tree({
+        type:'get',
+        url: 'pages/data/data2.json',
+        chkStyle: 'checkbox',
+        chkboxType: 'link'
+    });
+    
+</script>

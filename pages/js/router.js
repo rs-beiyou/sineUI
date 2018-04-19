@@ -85,6 +85,10 @@ window.si.config({
       path: 'tags',
       page: 'pages/views/components/tags.html'
     }, {
+      title: '树形控件',
+      path: 'tree',
+      page: 'pages/views/components/tree.html'
+    }, {
       title: '富文本编辑器',
       path: 'editor',
       page: 'pages/views/components/editor.html'

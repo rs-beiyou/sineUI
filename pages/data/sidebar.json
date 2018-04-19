@@ -58,6 +58,13 @@
       "icon": "fa fa-tags"
     }, {
       "id": "24",
+      "name": "树",
+      "subName": "Tree",
+      "pid": "2",
+      "url": "components/tree",
+      "icon": "fa fa-code-fork"
+    },{
+      "id": "25",
       "name": "富文本编辑器",
       "subName": "Editor",
       "pid": "2",

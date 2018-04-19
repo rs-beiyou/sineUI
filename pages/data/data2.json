@@ -1,0 +1,19 @@
+[{
+        "listname": "test1",
+        "open": true,
+        "children": [{
+            "listname": "test1_1"
+        }, {
+            "listname": "test1_2"
+        }]
+    },
+    {
+        "listname": "test2",
+        "open": true,
+        "children": [{
+            "listname": "test2_1"
+        }, {
+            "listname": "test2_2"
+        }]
+    }
+]

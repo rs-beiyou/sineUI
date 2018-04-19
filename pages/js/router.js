@@ -49,6 +49,14 @@ window.si.config({
       path: 'switchbox',
       page: 'pages/views/form/switchbox.html'
     }, {
+      title: '级联选择器',
+      path: 'combobox',
+      page: 'pages/views/form/combobox.html'
+    }, {
+      title: '下拉树',
+      path: 'treebox',
+      page: 'pages/views/form/treebox.html'
+    }, {
       title: '日期',
       path: 'datebox',
       page: 'pages/views/form/datebox.html'

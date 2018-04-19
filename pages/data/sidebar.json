@@ -132,13 +132,27 @@
       "icon": "fa fa-toggle-on"
     }, {
       "id": "56",
+      "name": "级联选择器",
+      "subName": "Combobox",
+      "pid": "4",
+      "url": "form/combobox",
+      "icon": "fa fa-map-o"
+    }, {
+      "id": "57",
+      "name": "下拉树",
+      "subName": "Treebox",
+      "pid": "4",
+      "url": "form/treebox",
+      "icon": "fa fa-code-fork"
+    }, {
+      "id": "58",
       "name": "日历",
       "subName": "Datebox",
       "pid": "4",
       "url": "form/datebox",
-      "icon": "fa fa-calendar"
+      "icon": "fa fa-calendar-o"
     }, {
-      "id": "58",
+      "id": "59",
       "name": "文件上传",
       "subName": "Filebox",
       "pid": "4",

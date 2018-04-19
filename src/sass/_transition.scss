@@ -43,3 +43,98 @@
         opacity: 1
     }
 }
+.slide-up-in {
+    -webkit-animation-name: siSlideIn;
+    animation-name: siSlideIn;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+}
+
+.slide-up-out {
+    -webkit-animation-name: siSlideOut;
+    animation-name: siSlideOut;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+}
+
+.slide-down-in {
+    -webkit-animation-name: siSlideIn;
+    animation-name: siSlideIn;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+.slide-down-out {
+    -webkit-animation-name: siSlideOut;
+    animation-name: siSlideOut;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
+
+@keyframes siSlideIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scaleY(.8);
+        transform: scaleY(.8);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+}
+
+@-webkit-keyframes siSlideIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scaleY(.8);
+        transform: scaleY(.8);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+}
+
+@keyframes siSlideOut {
+    0% {
+        opacity: 1;
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scaleY(.8);
+        transform: scaleY(.8);
+    }
+}
+
+@-webkit-keyframes siSlideOut {
+    0% {
+        opacity: 1;
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scaleY(.8);
+        transform: scaleY(.8);
+    }
+}

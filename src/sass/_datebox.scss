@@ -1,0 +1,11 @@
+.si-datebox{
+    position: relative;
+    width: 100%;
+    .si-datebox-datetion{
+        cursor: pointer;
+    }
+    .si-datebox-value,
+    .si-datebox-placeholder {
+        @extend .si-overflow-el;
+    }
+}

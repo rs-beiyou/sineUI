@@ -1,0 +1,53 @@
+.si-switchbox {
+    position: relative;
+    width: $switch-width;
+    height: $switch-height;
+    line-height: 22px;
+    background-color: $switch-bg;
+    border: 1px solid $switch-bg;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    border-radius: $switch-border-radius;
+    display: inline-block;
+    &:after {
+        content: '';
+        width: $switch-after-width;
+        height: $switch-after-height;
+        border-radius: $switch-after-radius;
+        position: absolute;
+        margin-top: 1px;
+        margin-left: 1px;
+        cursor: pointer;
+        background-color: $switch-after-bg;
+        -webkit-transition: margin-left .2s ease-in-out, width .2s ease-in-out;
+        -o-transition: margin-left .2s ease-in-out, width .2s ease-in-out;
+        transition: margin-left .2s ease-in-out, width .2s ease-in-out;
+    }
+    &:active:after {
+        width: $switch-after-active-width;
+    }
+    &.si-switchbox-checked {
+        background-color: $switch-checked-bg;
+        border-color: $switch-checked-bg;
+        &:active:after {
+            margin-left: $switch-width - $switch-after-active-width -3;
+        }
+        &:after {
+            margin-left: $switch-width - $switch-after-width -3;
+        }
+    }
+    &.si-switchbox-disabled {
+        cursor: not-allowed;
+        background-color: $switch-disabled-bg;
+        border-color: $switch-disabled-bg;
+        &:after {
+            cursor: not-allowed;
+        }
+    }
+}

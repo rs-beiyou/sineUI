@@ -1,11 +1,11 @@
 import layer from 'libs/layer/layer.js';
+import 'libs/layer/theme/default/layer.css';
 $.extend({
 
   //loading
   loading: function(msg) {
     msg = (msg == null || msg == '' || typeof(msg) == 'undefined') ? '正在努力加载中...' : msg;
     layer.load(2, {
-      shade: [0.5, '#ffffff'],
       content: msg,
       success: function(layero) {
         layero.css({

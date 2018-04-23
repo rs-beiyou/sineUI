@@ -10,6 +10,9 @@
         cursor: default;
     }
 }
+.btn + .btn{
+    margin-left:5px;
+}
 
 @-webkit-keyframes rotate {
     100% {

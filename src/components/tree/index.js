@@ -14,23 +14,23 @@ class Tree {
     this.tree = $.fn.zTree.init(this.$el,{
       check: {
         enable: !!op.chkStyle,
-        chkStyle: op.chkStyle||'radio',
+        chkStyle: op.chkStyle,
         chkboxType: {'Y':op.chkboxType==='link'&&'ps'||'', 'N':op.chkboxType==='link'&&'ps'||''},
       },
       async: {
         enable: !!op.url,
-        url: op.url||'',
-        type: op.type
+        url: op.url,
+        type: op.method
       },
       data: {
         key: {
-          name: op.valueField||'listname'
+          name: op.valueField
         },
         simpleData: {
           enable: true,
-          idKey: op.idField||'id',
-          pIdKey: op.pIdField||'parentid',
-          rootPId: op.pIdValue||'-1'
+          idKey: op.idField,
+          pIdKey: op.pIdField,
+          rootPId: op.pIdValue
         }
       },
       callback:op.callback||{}
@@ -40,7 +40,7 @@ class Tree {
     this.tree.reAsyncChildNodes(null,'refresh');
   }
   load(data){
-    let op = this.options, key = op.idKey, tree = this.tree;
+    let op = this.options, key = op.idField, tree = this.tree;
     if(op.chkStyle){
       tree.checkAllNodes(false);
       if(data&&typeof data==='string'){
@@ -51,24 +51,33 @@ class Tree {
       }
       return;
     }
-    if(data&&typeof data==='string'){
+    if(typeof data==='string'){
       let node = tree.getNodeByParam(key, data);
       node?tree.selectNode(node):tree.cancelSelectedNode(node);
     }
   }
   data(){
-    let op = this.options, key = op.idKey, 
+    let op = this.options,
       tree = this.tree, chkStyle = op.chkStyle,
       chkboxType = op.chkboxType;
-    let arr = [];
+    let arr = [],titleArr = [];
     if(chkStyle){
       tree.getCheckedNodes(true).forEach(n=>{
-        chkboxType==='link'?!n.getCheckStatus().half&&arr.push(n[key]):arr.push(n[key]);
+        if(chkboxType==='link'){
+          !(n.getCheckStatus().half)&&arr.push(n[op.idField])&&titleArr.push(n[op.valueField]);
+        }else{
+          arr.push(n[op.idField]);
+          titleArr.push(n[op.valueField]);
+        }
       });
     }else{
-      arr.push(tree.getSelectedNodes()[0][key]);
+      let node = tree.getSelectedNodes()[0];
+      node&&arr.push(node[op.idField])&&titleArr.push(node[op.valueField]);
     }
-    return arr.join(',');
+    return {
+      key: titleArr.join(','),
+      value: arr.join(',')
+    };
   }
   getChecked(checked){
     let op = this.options, chkboxType = op.chkboxType;
@@ -81,7 +90,23 @@ class Tree {
     return this.tree.getSelectedNodes();
   }
   expandAll(flag){
-    this.tree.expandAll(!flag);
+    this.tree.expandAll(flag);
+  }
+  checkNode(treeNode, checked, checkTypeFlag, callbackFlag){
+    this.tree.checkNode(treeNode, checked, checkTypeFlag, callbackFlag);
+  }
+  getNodeByParam(key,value,parentNode){
+    return this.tree.getNodeByParam(key,value,parentNode);
+  }
+  updateNode(treeNode){
+    this.tree.updateNode(treeNode, this.options.chkboxType==='link'?true:false);
+  }
+  other(option){
+    let args = Array.prototype.slice.call(arguments, 1);
+    return this.tree[option].apply(this.tree, args);
+  }
+  destroy(){
+    this.tree.destroy();
   }
 }
 function Plugin(option){
@@ -96,7 +121,12 @@ function Plugin(option){
         if (!data) {
           return;
         }
-        value = data[option].apply(data, args);
+        if(data[option]){
+          value = data[option].apply(data, args);
+        }else{
+          args.unshift(option);
+          value = data.other.apply(data, args);
+        }
         if (option === 'destroy') {
           $this.removeData('si.tree');
         }
@@ -121,13 +151,13 @@ $.fn.tree.noConflict = function() {
   return this;
 };
 Tree.DEFAULTS = {
-  type:'post',
-  chkStyle:'',
+  method:'get',
+  chkStyle:'radio',
   chkboxType:'',
-  valueField:'',
-  idField: '',
-  pIdField: '',
-  pIdValue: '',
+  valueField:'listname',
+  idField: 'id',
+  pIdField: 'parentid',
+  pIdValue: '-1',
   url:'',
   data:null,
   callback:{}

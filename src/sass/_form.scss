@@ -108,6 +108,7 @@ input[type="checkbox"] {
 }
 .si-placeholder {
     color: $input-color-placeholder;
+    user-select: none;
 }
 
 .form-control{

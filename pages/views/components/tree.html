@@ -55,10 +55,13 @@
 </div>
 <script>
     $('#treeDemo').tree({
-        type:'get',
+        method:'get',
         url: 'pages/data/data2.json',
         chkStyle: 'checkbox',
-        chkboxType: 'link'
+        chkboxType: 'link',
+        callback:{
+            
+        }
     });
     
 </script>

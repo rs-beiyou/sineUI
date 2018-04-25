@@ -15,15 +15,14 @@ export default class BaseForm {
     this.$element.after(this.$fragment[0]).remove();
   }
   _defineReactive() {
-    let _this = this,
-      op = this.options;
+    let op = this.options;
     let callback = (path, newVal, val) => {
       let key = path[0];
       if (newVal === undefined || newVal === val || Array.isArray(newVal) && newVal.length === 0) return;
       switch (key) {
         case 'label':
         case 'labelWidth':
-          _this._setLabel(key, newVal);
+          this._setLabel(key, newVal);
           break;
         case 'id':
         case 'name':
@@ -34,34 +33,37 @@ export default class BaseForm {
         case 'search':
         case 'multiple':
         case 'width':
-          _this['_set' + _this.className](key, newVal, val);
+        case 'expandAll':
+          this['_set' + this.className](key, newVal, val);
           break;
         case 'helpText':
-          _this._setHelpText(key, newVal);
+          this._setHelpText(key, newVal);
           break;
         case 'data':
           setTimeout(() => {
-            _this['_set' + _this.className](key, newVal);
+            this['_set' + this.className](key, newVal);
           });
           break;
         case 'inputWidth':
-          _this._setFormBlock(key, newVal);
+          this._setFormBlock(key, newVal);
           break;
         case 'url':
-          if (op.data.length === 0) {
-            _this._getDataByUrl(newVal);
-          }
+          this._startLoading&&this._startLoading();
+          this._getDataByUrl(newVal).then((re)=>{
+            op.data = op.dataField?re[op.dataField]:re;
+            this._endLoading&&this._endLoading();
+          });
           break;
         case 'valid':
           if(typeof newVal==='string'&& newVal.includes('{')){
-            _this['_set' + _this.className](key, (new Function(`return ${newVal}`))(), val);
+            this['_set' + this.className](key, (new Function(`return ${newVal}`))(), val);
           }else{
-            _this['_set' + _this.className](key, newVal, val);
+            this['_set' + this.className](key, newVal, val);
           }
           break;
       }
     };
-    new Watch(op, callback);
+    new Watch(op, callback.bind(this));
   }
   _setCompile(){
     let op = this.options, valid = typeof op.valid==='string'? (new Function(`return ${op.valid}`))():op.valid;
@@ -152,13 +154,14 @@ export default class BaseForm {
     }
   }
   _getDataByUrl(newVal) {
-    let op = this.options;
-    $.ajax({
-      url: newVal,
-      method: 'get',
-      success: (re) => {
-        op.data = re.list;
-      }
+    return new Promise((resolve)=>{
+      $.ajax({
+        url: newVal,
+        method: 'get',
+        success: (re) => {
+          resolve(re);
+        }
+      });
     });
   }
   set(option) {

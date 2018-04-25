@@ -4,22 +4,22 @@
         <h4>代码示例<i class="fa fa-code"></i></h4>
         <section class="code-box">
             <section class="code-box-demo">
-                <input class="btsp-treebox" data-options="width:'200px'">
+                <input class="btsp-treebox" data-options="placeholder:'请选择',width:'200px',method:'get',url:'pages/data/data2.json'">
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
-                    <!-- 组件名 -->
+                    常规单选树
                 </div>
                 <div>
                     <p>
-                        <!-- 组件描述 -->
+                        最简单的用法。数据可以是静态也可远程获取。
                     </p>
                 </div>
                 <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
             </section>
             <section class="code-box-wrapper">
-                <pre><code>
-            <!-- 组件代码 -->
+                <pre><code class="language-markup">
+&lt;input class="btsp-treebox" data-options="placeholder:'请选择',width:'200px',method:'get',url:'pages/data/data2.json'"&gt;
             </code></pre>
                 <div class="code-box-wrapper-close">
                     <i class="fa fa-angle-double-up"></i>
@@ -28,24 +28,98 @@
         </section>
         <section class="code-box">
             <section class="code-box-demo">
-                <!-- 组件demo -->
+                <input class="btsp-treebox" data-options="placeholder:'请选择',chkStyle:'checkbox',width:'200px',method:'get',url:'pages/data/data2.json'">
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
-                    <!-- 组件名 -->
+                    常规多选树
                 </div>
                 <div>
                     <p>
-                        <!-- 组件描述 -->
+                        多选。可勾选多个，<code>,</code>隔开。
                     </p>
                 </div>
                 <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
             </section>
             <section class="code-box-wrapper">
-                <pre><code>
-            <!-- 组件代码 -->
+                <pre><code class="language-markup">
+&lt;input class="btsp-treebox" data-options="placeholder:'请选择',chkStyle:'checkbox',width:'200px',method:'get',url:'pages/data/data2.json'"&gt;
             </code></pre>
                 <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <input class="btsp-treebox" data-options="placeholder:'请选择',chkStyle:'checkbox',chkboxType:'link',width:'200px',method:'get',url:'pages/data/data2.json'">
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    父子联动多选树
+                </div>
+                <div>
+                    <p>
+                        在常规多选基础上设置<code>chkboxType</code>为<code>link</code>实现。<br>
+                        勾选父节点，将会全选子节点，取消亦然。
+                        将子节点全部勾选，会自动勾选父节点。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;input class="btsp-treebox" data-options="placeholder:'请选择',chkStyle:'checkbox',chkboxType:'link',width:'200px',method:'get',url:'pages/data/data2.json'"&gt;
+            </code></pre>
+                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <input class="btsp-treebox" data-options="placeholder:'请选择',clearable:true,width:'200px',method:'get',url:'pages/data/data2.json',transfer:true">
+                <input class="btsp-treebox" data-options="placeholder:'请选择',chkStyle:'checkbox',clearable:true,width:'200px',method:'get',url:'pages/data/data2.json',transfer:true">
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    可清空
+                </div>
+                <div>
+                    <p>
+                        设置<code>clearable</code>为<code>true</code>实现。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;input class="btsp-treebox" data-options="clearable:true,placeholder:'请选择',width:'200px',method:'get',url:'pages/data/data2.json'"&gt;
+&lt;input class="btsp-treebox" data-options="clearable:true,placeholder:'请选择',chkStyle:'checkbox',width:'200px',method:'get',url:'pages/data/data2.json'"&gt;
+            </code></pre>
+                <div class="code-box-wrapper-close">
+                    <i class="fa fa-angle-double-up"></i>
+                </div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <input class="btsp-treebox" data-options="expandAll:true,placeholder:'请选择',clearable:true,width:'200px',method:'get',url:'pages/data/data2.json',transfer:true">
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    全部展开
+                </div>
+                <div>
+                    <p>
+                        设置<code>expandAll</code>为<code>true</code>实现。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;input class="btsp-treebox" data-options="expandAll:true,placeholder:'请选择',width:'200px',method:'get',url:'pages/data/data2.json'"&gt;
+            </code></pre>
+                <div class="code-box-wrapper-close">
+                    <i class="fa fa-angle-double-up"></i>
+                </div>
             </section>
         </section>
     </article>

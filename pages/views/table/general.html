@@ -165,6 +165,61 @@ $('#table3').table({
                 <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
             </section>
         </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <table id="table4"></table>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                可选择表格
+                </div>
+                <div>
+                    <p>
+                        表格的分页分为服务端和客户端两种形式，排序亦然。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;table id="table4"&gt;&lt;/table&gt;
+                </code><code class="language-javascript">
+$('#table4').table({
+    pagination: false,
+    columns: [{
+        checkbox: true
+    }, {
+        field: 'id',
+        title: 'Item ID'
+    }, {
+        field: 'name',
+        title: 'Item Name'
+    }, {
+        field: 'price',
+        title: 'Item Price'
+    }],
+    data:[
+        {
+            "id": 0,
+            "name": "Item 0",
+            "price": "$0"
+        },
+        {
+            "id": 1,
+            "name": "Item 2",
+            "price": "$1"
+        },
+        {
+            "id": 2,
+            "name": "Item 1",
+            "price": "$2"
+        }
+    ]
+});                    
+            </code></pre>
+                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
+            </section>
+        </section>
     </article>
 </div>
 <script src="pages/js/table/general.js"></script>

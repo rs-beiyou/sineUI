@@ -1,5 +1,4 @@
 import 'core-js/es6/promise';
-import 'core-js/es6/symbol';
 import 'core-js/fn/object/assign';
 import 'core-js/fn/object/keys';
 import 'core-js/fn/array/is-array';
@@ -7,6 +6,8 @@ import 'core-js/fn/array/includes';
 import 'core-js/fn/array/find-index';
 import 'core-js/fn/string/includes';
 import 'core-js/fn/string/starts-with';
+
+import {Log} from '../libs/log';
 
 let defineProperty = (function() {
   // IE 8 only supports `Object.defineProperty` on DOM elements
@@ -16,7 +17,7 @@ let defineProperty = (function() {
     let $defineProperty = Object.defineProperty;
     result = $defineProperty(object, object, object) && $defineProperty;
   } catch (error) {
-    console.warn('defineProperty 方法出现问题！');
+    Log.warn('defineProperty 方法出现问题！');
   }
   return result;
 }());

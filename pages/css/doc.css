@@ -220,3 +220,31 @@ label .btn {
 pre[class*="language-"] {
     overflow: scroll;
 }
+
+.code-box-demo table.code-box-table {
+    font-family: Consolas,Menlo,Courier,monospace;
+    font-size: 12px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid #e9e9e9;
+    width: 100%;
+    margin-bottom: 24px
+}
+
+.code-box-demo table.code-box-table th {
+    background: #f7f7f7;
+    white-space: nowrap;
+    color: #5c6b77;
+    font-weight: 600
+}
+
+.code-box-demo table.code-box-table td,.code-box-demo table.code-box-table th {
+    border: 1px solid #e9e9e9;
+    padding: 8px 16px;
+    text-align: left
+}
+
+.code-box-demo table.code-box-table td ul li {
+    font-size: 12px!important
+}

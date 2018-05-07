@@ -5,6 +5,7 @@ const webpackBaseConfig = require('./webpack.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer').WebpackBundleSizeAnalyzerPlugin;
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(webpackBaseConfig, {
   output: {
@@ -13,6 +14,12 @@ module.exports = merge(webpackBaseConfig, {
     filename: 'js/[name].min.js'
   },
   plugins: [
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.html',
+    //   title: 'sineUI',
+    //   template: 'src/template/index.html',
+    //   inject:true
+    // }),
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false,  

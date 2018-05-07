@@ -53,6 +53,7 @@ class Valid{
         if(!this.checkPass())return false;
       }
     }
+    return true;
   }
   checkPass(){
     if(!this.pass){
@@ -245,7 +246,7 @@ function Plugin(option, former){
         options = Object.assign( {} , $this.data(),
           typeof option === 'object' && option);
       if($this.is('form')){
-        let $list = $this.find('.valid-control');
+        let $list = $this.find('.si-valid-control');
         for (let index = 0; index < $list.length; index++) {
           const element = $list[index];
           const pass = $(element).valid('check');
@@ -270,6 +271,7 @@ function Plugin(option, former){
           data.reset(option);
         }
         if (!data) {
+          $this.addClass('si-valid-control');
           $this.data('si.valid', (data = new Valid(options, former)));
         }
       }

@@ -52,9 +52,6 @@ class Datebox extends BaseForm{
       case 'value':
         this._setValue(newVal, val);
         break;
-      case 'valid':
-        $input.valid(newVal, this);
-        break;
       case 'width':
         $input.css('width', newVal);
         break;
@@ -111,7 +108,7 @@ class Datebox extends BaseForm{
   _setValue(newVal, val){
     let op = this.options;
     !op.readonly&&!op.disabled&&!this.inited&&this.initDate();
-    this.$input.val(newVal);
+    this.$input.val(newVal?new Date(newVal).format(op.format):'');
     this.inited&&this.$input.daterangepicker('elementChanged').trigger('valid.change').trigger('change');
     if(newVal!==''&&val===''){
       this.$datebox.addClass('si-show-clear');
@@ -184,6 +181,7 @@ Datebox.DEFAULTS = {
   name: '',
   labelWidth: '',
   inputWidth: '',
+  labelAlign: 'right',
   readonly: false,
   disabled: false,
   value: '',
@@ -195,6 +193,6 @@ Datebox.DEFAULTS = {
   format:'YYYY-MM-DD',
   minDate:'',
   maxDate:'',
-  icon:'fa fa-calendar-o',
-  clearIcon:'fa fa-times-circle'
+  icon:'fa fa-calendar-o fa-fw',
+  clearIcon:'fa fa-times-circle fa-fw'
 };

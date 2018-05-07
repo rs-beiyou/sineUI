@@ -1,4 +1,4 @@
-import './form/parser';
+import './parser';
 
 class Sine {
   constructor() {

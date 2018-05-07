@@ -133,6 +133,7 @@ import BaseForm from './form-base';
     trueIcon: '',
     falseIcon: '',
     labelWidth: '',
-    inputWidth: ''
+    inputWidth: '',
+    labelAlign: 'right'
   };
 })(jQuery);

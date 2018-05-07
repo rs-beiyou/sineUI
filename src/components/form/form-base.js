@@ -10,6 +10,7 @@ export default class BaseForm {
     this._setFragment();
     this._setFormBlock();
     this['_set' + this.className]();
+    this.$input.addClass('si-form-input').data('si-form-type',this.className).attr({'spellcheck':false,'autocomplete':'off'});
     this.set(this.lastOptions);
     this._setCompile();
     this.$element.after(this.$fragment[0]).remove();
@@ -48,31 +49,23 @@ export default class BaseForm {
           this._setFormBlock(key, newVal);
           break;
         case 'url':
-          this._startLoading&&this._startLoading();
-          this._getDataByUrl(newVal).then((re)=>{
+          this._getDataByUrl(newVal,{},re=>{
             op.data = op.dataField?re[op.dataField]:re;
-            this._endLoading&&this._endLoading();
           });
           break;
         case 'valid':
-          if(typeof newVal==='string'&& newVal.includes('{')){
-            this['_set' + this.className](key, (new Function(`return ${newVal}`))(), val);
-          }else{
-            this['_set' + this.className](key, newVal, val);
-          }
+          this.$input.valid(typeof newVal==='string'&& newVal.includes('{')?(new Function(`return ${newVal}`))():newVal, this);
           break;
       }
     };
     new Watch(op, callback.bind(this));
   }
   _setCompile(){
-    let op = this.options, valid = typeof op.valid==='string'? (new Function(`return ${op.valid}`))():op.valid;
-    if(!valid||$.isEmptyObject(valid)||this.hasValidControl)return;
+    let op = this.options;
     this.cpLock = false;
-    this.hasValidControl = true;
     if(this.className==='Textbox'||this.className==='Passwordbox'){
       setTimeout(()=>{
-        this.$input.addClass('valid-control').on('compositionstart',()=>{
+        this.$input.on('compositionstart',()=>{
           this.cpLock = true;
         }).on('compositionend',()=>{
           this.cpLock = false;
@@ -81,7 +74,6 @@ export default class BaseForm {
             return;
           }
           op.value = val;
-          this.$input.trigger('valid.change');
         }).on('input propertychange',()=>{
           if(this.cpLock)return;
           let val = this.$input.val();
@@ -89,7 +81,6 @@ export default class BaseForm {
             return;
           }
           op.value = val;
-          this.$input.trigger('valid.change');
         });
       });
     }
@@ -153,15 +144,14 @@ export default class BaseForm {
       $helpText.text(newVal);
     }
   }
-  _getDataByUrl(newVal) {
-    return new Promise((resolve)=>{
-      $.ajax({
-        url: newVal,
-        method: 'get',
-        success: (re) => {
-          resolve(re);
-        }
-      });
+  _getDataByUrl(newVal,data, cb) {
+    $.ajax({
+      url: newVal,
+      data:data,
+      method: 'get',
+      success: (re) => {
+        cb && cb(re);
+      }
     });
   }
   set(option) {

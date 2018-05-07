@@ -1,0 +1,118 @@
+.si-combobox {
+    width: 100%;
+    .si-combobox-combo{
+        cursor: pointer;
+        height: auto;
+        min-height: $input-height-base;
+        position: relative;
+        &.has-icon-right{
+            .form-control{
+                padding-right: 24px;
+                &[readonly]{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    &.si-form-readonly {
+        .si-combobox-combo {
+            cursor: $cursor-disabled;
+        }
+        .has-icon-right{
+            .form-control[readonly]{
+                cursor: $cursor-disabled;
+            }
+        }
+    }
+    &.si-form-disabled {
+        .si-combobox-combo {
+            cursor: $cursor-disabled;
+            background-color: $input-bg-disabled;
+            &:hover {
+                border-color: $input-bg-disabled;
+            }
+        }
+    }
+    .si-combobox-loading{
+        position: relative;
+        width: 100%;
+        text-align: center;
+        color: $brand-primary;
+        font-size: $font-size-small;
+        padding: 8px 0;
+    }
+}
+.si-combobox-visible{
+    .form-control-icon:first-of-type{
+        transform: rotate(180deg);
+    }
+}
+.si-combobox-dropdown{
+    position: absolute;
+    user-select: none;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+}
+.si-combobox-menu{
+    padding: 5px 0;
+    display: inline-block;
+    min-width: 100px;
+    height: 200px;
+    border-right: 1px solid $gray-lighter;
+    vertical-align: top;
+    overflow: auto;
+    &:last-child{
+        border-right-color: transparent;
+        margin-right: -1px;
+    }
+}
+.si-combobox-item{
+    position: relative;
+    margin: 0;
+    padding: 7px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: $headings-line-height;
+    color: $dropdown-link-color;
+    overflow: hidden;
+    -webkit-transition: background .2s ease-in-out;
+    -o-transition: background .2s ease-in-out;
+    transition: background .2s ease-in-out;
+    font-size: $font-size-small;
+    &:hover {
+        background: $dropdown-link-hover-bg;
+    }
+    &.si-combobox-item-disabled {
+        color: $input-color-placeholder;
+        cursor: $cursor-disabled;
+        &:hover {
+            background-color: $dropdown-bg;
+        }
+    }
+    i{
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        font-size: $font-size-small;
+        margin-top: -$font-size-small/2;
+        &:last-of-type{
+            display: none;
+        }
+    }
+    &.si-combobox-item-loading{
+        i{
+            &:first-of-type{
+                display: none;
+            }
+            &:last-of-type{
+                display: inline-block;
+            }
+        }
+        
+    }
+}
+.si-combobox-item-active{
+    background: $dropdown-link-hover-bg;
+    color: $dropdown-link-active-bg;
+}

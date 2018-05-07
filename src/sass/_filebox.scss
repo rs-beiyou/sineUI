@@ -12,6 +12,11 @@
         margin-left: 10px;
     }
 }
+.has-error{
+    .si-filebox{
+        background-color: $state-danger-bg;
+    }
+}
 .webuploader-container {
     position: relative;
     display: inline-block;

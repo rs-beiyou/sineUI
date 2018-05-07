@@ -16,6 +16,11 @@
         margin-right: 8px;
     }
 }
+.has-error{
+    .si-checkbox{
+        background-color: $state-danger-bg;
+    }
+}
 .si-checkbox-inner {
     display: inline-block;
     position: relative;

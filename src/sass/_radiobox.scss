@@ -19,6 +19,11 @@
         margin-right: 8px;
     }
 }
+.has-error{
+    .si-radiobox{
+        background-color: $state-danger-bg;
+    }
+}
 .si-radiobox-checked {
     .si-radiobox-inner {
         border-color: $input-border-focus;

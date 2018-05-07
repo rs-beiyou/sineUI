@@ -1,6 +1,7 @@
 import './derection';
 
 import BaseForm from './form-base';
+import _ from '../../utils/util';
 
 (function($) {
   class Selectbox extends BaseForm {
@@ -8,6 +9,7 @@ import BaseForm from './form-base';
       super(el, options, Selectbox.DEFAULTS);
       this.className = 'Selectbox';
       this.derection = '';
+      this.randomString = _.randomString();
       this._initForm();
     }
     _setSelectbox(item, newVal, val) {
@@ -104,9 +106,6 @@ import BaseForm from './form-base';
             op.transfer&&$dropdown.removeClass('si-selectbox-multiple').addClass('si-selectbox-single');
           }
           break;
-        case 'valid':
-          $input.valid(newVal, this);
-          break;
       }
     }
     _setReadonly(newVal) {
@@ -155,11 +154,11 @@ import BaseForm from './form-base';
       });
     }
     _addEvent() {
-      $(document).on('click.si.selectbox', this._close.bind(this));
+      $(document).on(`click.si.selectbox.${this.randomString}`, this._close.bind(this));
       this.$selection.on('click.si.selectbox', this._toogle.bind(this));
     }
     _removeEvent(){
-      $(document).off('click.si.selectbox');
+      $(document).off(`click.si.selectbox.${this.randomString}`);
       this.$selection.off('click.si.selectbox');
     }
     _toogle(){
@@ -398,6 +397,7 @@ import BaseForm from './form-base';
     name: '',
     labelWidth: '',
     inputWidth: '',
+    labelAlign: 'right',
     width: '',
     readonly: false,
     disabled: false,
@@ -415,7 +415,7 @@ import BaseForm from './form-base';
     clearable: false,
     multiple: false,
     valid: false,
-    icon:'fa fa-caret-down',
-    clearIcon:'fa fa-times-circle'
+    icon:'fa fa-caret-down fa-fw',
+    clearIcon:'fa fa-times-circle fa-fw'
   };
 })(jQuery);

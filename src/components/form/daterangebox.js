@@ -70,9 +70,6 @@ class Daterangebox extends BaseForm{
       case 'value':
         this._setValue(newVal, val);
         break;
-      case 'valid':
-        $input.valid(newVal, this);
-        break;
       case 'width':
         $input.css('width', newVal);
         break;
@@ -226,6 +223,7 @@ Daterangebox.DEFAULTS = {
   name: '',
   labelWidth: '',
   inputWidth: '',
+  labelAlign: 'right',
   readonly: false,
   disabled: false,
   value: '',
@@ -239,6 +237,6 @@ Daterangebox.DEFAULTS = {
   ranges: false,
   minDate: '',
   maxDate: '',
-  icon:'fa fa-calendar-o',
-  clearIcon:'fa fa-times-circle'
+  icon:'fa fa-calendar-o fa-fw',
+  clearIcon:'fa fa-times-circle fa-fw'
 };

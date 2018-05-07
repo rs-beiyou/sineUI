@@ -59,18 +59,84 @@ import {Log} from '../../libs/log';
     _getFormBtn() {
 
     }
+    load(obj){
+      if(!obj||typeof obj!=='object'){
+        throw new Error('表单（Form）插件load方法参数必须为Object对象！');
+      }
+      this.$element.find('.si-form-input').each((i,el)=>{
+        let $el = $(el), name = $el.attr('name');
+        let type = $el.data('si-form-type').toLowerCase();
+        obj[name]!==undefined && $el[type]({value:obj[name]});
+      });
+    }
+    clear(){
+      this.$element.find('.si-form-input').each((i,el)=>{
+        let $el = $(el);
+        let type = $el.data('si-form-type').toLowerCase();
+        $el[type]({value:''});
+      });
+    }
+    data(noValid){
+      let $el = this.$element;
+      if(noValid!==true){
+        if(!$el.valid('check')){
+          return false;
+        }
+      }
+      let obj = {};
+      $el.serializeArray().forEach(da => {
+        Object.assign(obj,{
+          [da.name]:da.value.replace(/\n|\r\n/g, '<br>')
+        });
+      });
+      return obj;
+    }
   }
 
 
-  function Plugin(option, _relatedTarget) {
-    return this.each(function() {
-      let $this = $(this);
-      let data = $this.data('si.form');
-      let options = $.extend({}, Form.DEFAULTS, $this.data(), typeof option == 'object' && option);
+  function Plugin(option) {
+    try {
+      let value, args = Array.prototype.slice.call(arguments, 1);
+      
+      this.each(function(){
+        let $this = $(this),
+          dataSet = $this.data(),
+          data = dataSet['si.form'];
+          
+        if (typeof option === 'string') {
+          if (!data) {
+            return;
+          }
+          value = data[option].apply(data, args);
+          if (option === 'destroy') {
+            $this.removeData('si.form');
+          }
+        }
+        if (!data) {
+          let options = $.extend( {} , Form.DEFAULTS, typeof option === 'object' && option);
+          let datakeys = Object.keys(dataSet);
+          let defaultkeys = Object.keys(options);
+          defaultkeys.forEach((key) => {
+            let lowkey = key.toLocaleLowerCase();
+            if (datakeys.includes(lowkey)) {
+              options[key] = dataSet[lowkey];
+            }
+          });
+          $this.data('si.form', new Form(this, options));
+        }
+      });
+      return typeof value === 'undefined' ? this : value;
+    } catch (error) {
+      throw new Error(error);
+    }
+    // return this.each(function() {
+    //   let $this = $(this);
+    //   let data = $this.data('si.form');
+    //   let options = $.extend({}, Form.DEFAULTS, $this.data(), typeof option == 'object' && option);
 
-      if (!data) $this.data('si.form', (data = new Form(this, options)));
-      if (typeof option == 'string') data[option](_relatedTarget);
-    });
+    //   if (!data) $this.data('si.form', (data = new Form(this, options)));
+    //   if (typeof option == 'string') data[option](_relatedTarget);
+    // });
   }
 
   let old = $.fn.form;

@@ -3,7 +3,7 @@ import '../modal/dialog';
 import '../modal/confirm';
 
 import BaseForm from './form-base';
-import WebUploader from 'libs/webuploader/webuploader.noimage.min.js';
+import WebUploader from 'libs/webuploader/webuploader.js';
 import uploaderFlash from 'libs/webuploader/Uploader.swf';
 
 class Filebox extends BaseForm {
@@ -33,7 +33,7 @@ class Filebox extends BaseForm {
       $dialogBtn = $(_dialogBtn);
       $input.attr('type', 'hidden');
       $fileList.addClass('si-filebox-list');
-      $dialogBtn.addClass('btn btn-sm btn-info').html('文件上传');
+      $dialogBtn.attr('type','button').addClass('btn btn-sm btn-info').html('文件上传');
       op.fileLoader.listType === 'card' ? $fileList.addClass('si-filebox-list-card') : $fileList.addClass('si-filebox-list-list');
       $filebox.addClass('si-filebox').append(_input).append(_dialogBtn);
       this.$formBlock.append(_filebox).append(_fileList);
@@ -551,6 +551,7 @@ Filebox.DEFAULTS = {
   value: '',
   labelWidth: '',
   inputWidth: '',
+  labelAlign: 'right',
   width: '',
   readonly: false,
   disabled: false,

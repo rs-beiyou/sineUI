@@ -23,7 +23,7 @@
 
 .form-block {
     margin-bottom: 18px;
-    display: inline-block;
+    display: block;
 }
 
 .form-group .form-block {
@@ -33,17 +33,7 @@
 .form-attach {
     position: absolute;
 }
-.form-columns{
-    .control-label{
-        float: left;
-        text-align: right;
-        line-height: 30px;
-        font-weight: normal;
-    }
-    .form-group{
-        margin-bottom: 5px;
-    }
-}
+
 input[type="radio"],
 input[type="checkbox"] {
     margin: 0;
@@ -166,6 +156,49 @@ input[type="checkbox"] {
         }
         &:last-of-type {
             display: none;
+        }
+    }
+}
+.form-inline{
+    .form-block{
+        display: inline-block;
+    }
+}
+.form-vertical{
+    .form-group{
+        padding: 0 8px;
+    }
+    .control-label{
+        float: none !important;
+    }
+    .form-block{
+        display: block;
+        float: none !important;
+        .si-checkbox,.si-radiobox{
+            margin: 5px 0;
+        }
+        .si-switchbox{
+            margin-top: 5px;
+        }
+    }
+}
+.form-columns{
+    .control-label{
+        float: left;
+        text-align: right;
+        line-height: 30px;
+        font-weight: normal;
+    }
+    .form-group{
+        margin-bottom: 12px;
+    }
+    .form-block{
+        display: inline-block;
+        .si-checkbox,.si-radiobox{
+            margin: 5px 0;
+        }
+        .si-switchbox{
+            margin-top: 5px;
         }
     }
 }

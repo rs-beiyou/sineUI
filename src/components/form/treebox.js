@@ -1,12 +1,13 @@
 import '../tree';
 
 import BaseForm from './form-base';
-import Util from '../../utils/util';
+import _ from '../../utils/util';
 
 class Treebox extends BaseForm {
   constructor(el, options) {
     super(el, options, Treebox.DEFAULTS);
     this.className = 'Treebox';
+    this.randomString = _.randomString();
     this.derection = '';
     this.inited = false;
     this._initForm();
@@ -47,8 +48,8 @@ class Treebox extends BaseForm {
       $treeIcon.addClass(`${this.lastOptions.icon} form-control-icon`);
       $clear.addClass(`${this.lastOptions.clearIcon} form-control-icon`);
       $tree.derection().addClass('form-control si-treebox-tree has-icon-right').append(_treeValue).append(_placeholder).append(_treeIcon).append(_clear);
-      $treeUl.addClass('ztree').attr('id',Util.randomString());
-      $(_loadingIcon).addClass(`si-spin ${this.lastOptions.loadingIcon}`);
+      $treeUl.addClass('ztree').attr('id',this.randomString);
+      $(_loadingIcon).addClass(`${this.lastOptions.loadingIcon}`);
       $loading.addClass('si-treebox-loading').append(_loadingIcon).append('<br>').append('加载中...');
       $dropdown.addClass('si-dropdown si-treebox-dropdown').hide().append(_ul).append(_loading);
       $treebox.addClass('si-treebox').append(_input).append(_tree);
@@ -96,9 +97,6 @@ class Treebox extends BaseForm {
       case 'width':
         $tree.css('width', newVal);
         break;
-      case 'valid':
-        $input.valid(newVal, this);
-        break;
       case 'expandAll':
         this._toogleExpand(newVal);
         break;
@@ -116,11 +114,11 @@ class Treebox extends BaseForm {
     });
   }
   _addEvent(){
-    $(document).on('click.si.treebox', this._close.bind(this));
+    $(document).on(`click.si.treebox.${this.randomString}`, this._close.bind(this));
     this.$tree.on('click.si.treebox', this._toogle.bind(this));
   }
   _removeEvent(){
-    $(document).off('click.si.treebox');
+    $(document).off(`click.si.treebox.${this.randomString}`);
     this.$tree.off('click.si.treebox');
   }
   _toogle(){
@@ -135,12 +133,6 @@ class Treebox extends BaseForm {
     }
   }
   _initTree(){
-    if(this.inited){
-      this.$treeUl.tree('destroy');
-      this.inited = false;
-      op.value = '';
-    }
-    this.$loading.hide();
     let op = this.options, setting = {
       method: 'post',
       chkStyle:'',
@@ -153,6 +145,12 @@ class Treebox extends BaseForm {
       data: null,
       callback: {}
     };
+    if(this.inited){
+      this.$treeUl.tree('destroy');
+      this.inited = false;
+      op.value = '';
+    }
+    this.$loading.hide();
     Object.keys(setting).forEach((currentValue)=>{
       if(op.hasOwnProperty(currentValue)){
         setting[currentValue] = op[currentValue];
@@ -376,6 +374,7 @@ Treebox.DEFAULTS = {
   name: '',
   labelWidth: '',
   inputWidth: '',
+  labelAlign: 'right',
   readonly: false,
   disabled: false,
   value: '',
@@ -385,9 +384,9 @@ Treebox.DEFAULTS = {
   helpText: '',
   width: '',
   valid: false,
-  icon:'fa fa-code-fork',
-  clearIcon:'fa fa-times-circle',
-  loadingIcon: 'fa fa-circle-o-notch',
+  icon:'fa fa-code-fork fa-fw',
+  clearIcon:'fa fa-times-circle fa-fw',
+  loadingIcon: 'fa fa-spinner fa-fw fa-pulse',
   method:'get',
   chkStyle:'',
   chkboxType:'',

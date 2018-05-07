@@ -377,7 +377,7 @@
       //遮罩
       if (that.$modalshade) {
         that.$modalshade.css({
-          'background-color': config.shade[1] || '#000',
+          'background-color': config.shade[1] || '#fff',
           'opacity': config.shade[0] || config.shade
         });
       }
@@ -420,7 +420,7 @@
         config = that.config,
         layero = $('#' + doms[0] + index);
 
-      if (config.area[0] === '' || config.maxWidth > 0) {
+      if (config.area[0] === '' && config.maxWidth > 0) {
         //为了修复IE7下一个让人难以理解的bug
         if (layer.ie && layer.ie < 8 && config.btn) {
           layero.width(layero.innerWidth());

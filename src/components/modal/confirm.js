@@ -1,4 +1,5 @@
 import layer from 'libs/layer/layer.js';
+import 'libs/layer/theme/default/layer.css';
 $.extend({
   //警告框
   alert(options) {
@@ -48,7 +49,6 @@ $.extend({
         content: options,
         title: '确认',
         icon: 3,
-        shade: [0.5, '#ffffff'],
         btn: ['确认', '取消'],
         btn1: function(index) {
           if (callback1) callback1();

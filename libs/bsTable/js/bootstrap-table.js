@@ -887,7 +887,7 @@
                 if (column.checkbox) {
                     text = '';
                     if (!that.options.singleSelect && that.options.checkboxHeader) {
-                        text = '<input name="btSelectAll" type="checkbox" />';
+                        text = '<label class="si-checkbox-item"><span class="si-checkbox-content"><span class="si-checkbox-inner"></span><input name="btSelectAll" type="checkbox" class="si-checkbox-input"/></span></label>';
                     }
                     that.header.stateField = column.field;
                 }
@@ -1846,7 +1846,7 @@
 
                 text = [sprintf(that.options.cardView ?
                         '<div class="card-view %s">' : '<td class="bs-checkbox %s">', column['class'] || ''),
-                    '<input' +
+                    '<label class="si-checkbox-item"><span class="si-checkbox-content"><span class="si-checkbox-inner"></span><input class="si-checkbox-input"' +
                     sprintf(' data-index="%s"', i) +
                     sprintf(' name="%s"', that.options.selectItemName) +
                     sprintf(' type="%s"', type) +
@@ -1855,7 +1855,7 @@
                         (value_ || value && value.checked) ? 'checked' : undefined) +
                     sprintf(' disabled="%s"', !column.checkboxEnabled ||
                         (value && value.disabled) ? 'disabled' : undefined) +
-                    ' />',
+                    ' /></span></label>',
                     that.header.formatters[j] && typeof value === 'string' ? value : '',
                     that.options.cardView ? '</div>' : '</td>'
                 ].join('');
@@ -2189,9 +2189,13 @@
             this.$selectItem.filter(':enabled').filter(':checked').length;
 
         this.$selectAll.add(this.$selectAll_).prop('checked', checkAll);
+        this.$selectAll.closest('label')[checkAll ? 'addClass' : 'removeClass']('si-checkbox-checked');
 
         this.$selectItem.each(function () {
-            $(this).closest('tr')[$(this).prop('checked') ? 'addClass' : 'removeClass']('selected');
+            var $this = $(this);
+            var checked = $this.prop('checked');
+            $this.closest('label')[checked ? 'addClass' : 'removeClass']('si-checkbox-checked');
+            $this.closest('tr')[checked ? 'addClass' : 'removeClass']('selected');
         });
     };
 

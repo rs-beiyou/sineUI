@@ -56,7 +56,7 @@ _.debounce = function(func, wait=500, immediate) {
 };
 
 _.randomString = (len) => {
-  len = len || 32;
+  len = len || 10;
   /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
   let $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
   let maxPos = $chars.length;

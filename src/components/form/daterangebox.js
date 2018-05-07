@@ -35,8 +35,8 @@ class Daterangebox extends BaseForm{
       $inputEnd = $(_inputEnd);
       $inputBegin.attr('type','hidden');
       $inputEnd.attr('type','hidden');
-      $(_calendar).addClass('fa fa-calendar form-control-icon');
-      $clear.addClass('fa fa-times-circle form-control-icon');
+      $(_calendar).addClass(`${this.lastOptions.icon} form-control-icon`);
+      $clear.addClass(`${this.lastOptions.clearIcon} form-control-icon`);
       $input.addClass('form-control has-icon-right');
       $datetion.addClass('si-datebox-datetion').append(_inputBegin).append(_inputEnd).append(_calendar).append(_clear);
       $datebox.addClass('si-datebox').append(_input).append(_datetion);
@@ -69,9 +69,6 @@ class Daterangebox extends BaseForm{
         break;
       case 'value':
         this._setValue(newVal, val);
-        break;
-      case 'valid':
-        $input.valid(newVal, this);
         break;
       case 'width':
         $input.css('width', newVal);
@@ -127,8 +124,10 @@ class Daterangebox extends BaseForm{
     }
   }
   _setValue(newVal, val){
-    !this.inited&&this.initDate();
-    this.$input.val(newVal).trigger('change').daterangepicker('elementChanged');
+    let op = this.options;
+    !op.readonly&&!op.disabled&&!this.inited&&this.initDate();
+    this.$input.val(newVal);
+    this.inited&&this.$input.daterangepicker('elementChanged').trigger('valid.change').trigger('change');
     if(newVal!==''&&val===''){
       let valArr = newVal.split(this.options.separator);
       this.$inputBegin.val(valArr[0]);
@@ -224,6 +223,7 @@ Daterangebox.DEFAULTS = {
   name: '',
   labelWidth: '',
   inputWidth: '',
+  labelAlign: 'right',
   readonly: false,
   disabled: false,
   value: '',
@@ -236,5 +236,7 @@ Daterangebox.DEFAULTS = {
   separator: ' - ',
   ranges: false,
   minDate: '',
-  maxDate: ''
+  maxDate: '',
+  icon:'fa fa-calendar-o fa-fw',
+  clearIcon:'fa fa-times-circle fa-fw'
 };

@@ -92,23 +92,34 @@ $('#table3').table({
     ]
 });
 $('#table4').table({
-    method:'get',
-    queryParams: function(params){
-        return params;
-    },
     pagination: false,
     columns: [{
+        checkbox: true
+    }, {
         field: 'id',
-        title: 'Item ID',
-        sortable: true
+        title: 'Item ID'
     }, {
         field: 'name',
-        title: 'Item Name',
-        sortable: true
+        title: 'Item Name'
     }, {
         field: 'price',
-        title: 'Item Price',
-        sortable: true
+        title: 'Item Price'
     }],
-    url:''
+    data:[
+        {
+            "id": 0,
+            "name": "Item 0",
+            "price": "$0"
+        },
+        {
+            "id": 1,
+            "name": "Item 2",
+            "price": "$1"
+        },
+        {
+            "id": 2,
+            "name": "Item 1",
+            "price": "$2"
+        }
+    ]
 });

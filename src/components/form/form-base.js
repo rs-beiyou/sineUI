@@ -10,20 +10,20 @@ export default class BaseForm {
     this._setFragment();
     this._setFormBlock();
     this['_set' + this.className]();
+    this.$input.addClass('si-form-input').data('si-form-type',this.className).attr({'spellcheck':false,'autocomplete':'off'});
     this.set(this.lastOptions);
     this._setCompile();
     this.$element.after(this.$fragment[0]).remove();
   }
   _defineReactive() {
-    let _this = this,
-      op = this.options;
+    let op = this.options;
     let callback = (path, newVal, val) => {
       let key = path[0];
       if (newVal === undefined || newVal === val || Array.isArray(newVal) && newVal.length === 0) return;
       switch (key) {
         case 'label':
         case 'labelWidth':
-          _this._setLabel(key, newVal);
+          this._setLabel(key, newVal);
           break;
         case 'id':
         case 'name':
@@ -34,43 +34,38 @@ export default class BaseForm {
         case 'search':
         case 'multiple':
         case 'width':
-          _this['_set' + _this.className](key, newVal, val);
+        case 'expandAll':
+          this['_set' + this.className](key, newVal, val);
           break;
         case 'helpText':
-          _this._setHelpText(key, newVal);
+          this._setHelpText(key, newVal);
           break;
         case 'data':
           setTimeout(() => {
-            _this['_set' + _this.className](key, newVal);
+            this['_set' + this.className](key, newVal);
           });
           break;
         case 'inputWidth':
-          _this._setFormBlock(key, newVal);
+          this._setFormBlock(key, newVal);
           break;
         case 'url':
-          if (op.data.length === 0) {
-            _this._getDataByUrl(newVal);
-          }
+          this._getDataByUrl(newVal,{},re=>{
+            op.data = op.dataField?re[op.dataField]:re;
+          });
           break;
         case 'valid':
-          if(typeof newVal==='string'&& newVal.includes('{')){
-            _this['_set' + _this.className](key, (new Function(`return ${newVal}`))(), val);
-          }else{
-            _this['_set' + _this.className](key, newVal, val);
-          }
+          this.$input.valid(typeof newVal==='string'&& newVal.includes('{')?(new Function(`return ${newVal}`))():newVal, this);
           break;
       }
     };
-    new Watch(op, callback);
+    new Watch(op, callback.bind(this));
   }
   _setCompile(){
-    let op = this.options, valid = typeof op.valid==='string'? (new Function(`return ${op.valid}`))():op.valid;
-    if(!valid||$.isEmptyObject(valid)||this.hasValidControl)return;
+    let op = this.options;
     this.cpLock = false;
-    this.hasValidControl = true;
     if(this.className==='Textbox'||this.className==='Passwordbox'){
       setTimeout(()=>{
-        this.$input.addClass('valid-control').on('compositionstart',()=>{
+        this.$input.on('compositionstart',()=>{
           this.cpLock = true;
         }).on('compositionend',()=>{
           this.cpLock = false;
@@ -79,7 +74,6 @@ export default class BaseForm {
             return;
           }
           op.value = val;
-          this.$input.trigger('valid.change');
         }).on('input propertychange',()=>{
           if(this.cpLock)return;
           let val = this.$input.val();
@@ -87,7 +81,6 @@ export default class BaseForm {
             return;
           }
           op.value = val;
-          this.$input.trigger('valid.change');
         });
       });
     }
@@ -151,17 +144,20 @@ export default class BaseForm {
       $helpText.text(newVal);
     }
   }
-  _getDataByUrl(newVal) {
-    let op = this.options;
+  _getDataByUrl(newVal,data, cb) {
     $.ajax({
       url: newVal,
+      data:data,
       method: 'get',
       success: (re) => {
-        op.data = re.list;
+        cb && cb(re);
       }
     });
   }
   set(option) {
     this.className === 'Filebox' ? $.extend(true, this.options, option) : Object.assign(this.options, option);
+  }
+  create(el){
+    return el?document.createElement(el):document.createDocumentFragment();
   }
 }

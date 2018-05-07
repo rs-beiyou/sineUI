@@ -1,0 +1,61 @@
+[{
+    "value": "名称1",
+    "key":"1",
+    "hasChild": true,
+    "children": [{
+        "value": "名称1-1",
+        "key":"11",
+        "hasChild": true,
+        "children": [{
+            "value": "名称1-1-1",
+            "key":"111"
+        }, {
+            "value": "名称1-1-2",
+            "key":"112"
+        }]
+    }, {
+        "value": "名称1-2",
+        "key":"12"
+    }]
+},
+{
+    "value": "名称2",
+    "key":"2",
+    "hasChild": true,
+    "children": [{
+        "value": "名称2-1",
+        "key":"21"
+    }, {
+        "value": "名称2-2",
+        "key":"22"
+    }]
+},
+{
+    "value": "名称3",
+    "key":"3"
+},
+{
+    "value": "名称4",
+    "key":"4"
+},
+{
+    "value": "名称5",
+    "key":"5"
+},
+{
+    "value": "名称6",
+    "key":"6"
+},
+{
+    "value": "名称7",
+    "key":"7"
+},
+{
+    "value": "名称8",
+    "key":"8"
+},
+{
+    "value": "名称9",
+    "key":"9"
+}
+]

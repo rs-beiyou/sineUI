@@ -54,9 +54,7 @@ class Table {
         align:'center',
         title:'序号',
         formatter:(value, row, index)=>{
-          let page = this.$el.bootstrapTable('getPage');  
-          let num = page.pageSize * (page.pageNumber - 1) + index + 1;
-          return num;
+          return this.options.pageSize * (this.options.pageNumber - 1) + index + 1;
         }
       };
       if(Object.prototype.toString.call(op.columns[0])=== '[object Array]'){

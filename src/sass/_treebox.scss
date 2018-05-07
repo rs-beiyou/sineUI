@@ -1,0 +1,45 @@
+.si-treebox {
+    position: relative;
+    width: 100%;
+    .si-treebox-tree{
+        cursor: pointer;
+        height: auto;
+        min-height: $input-height-base;
+        .si-tag {
+            margin: 0 4px 0 0;
+            height: auto;
+            line-height: normal;
+            user-select: none;
+        }
+    }
+    &.si-form-readonly {
+        .si-treebox-tree {
+            cursor: $cursor-disabled;
+        }
+    }
+    &.si-form-disabled {
+        .si-treebox-tree {
+            cursor: $cursor-disabled;
+            background-color: $input-bg-disabled;
+            &:hover {
+                border-color: $input-bg-disabled;
+            }
+        }
+    }
+    .si-treebox-loading{
+        position: relative;
+        width: 100%;
+        text-align: center;
+        color: $brand-primary;
+        font-size: $font-size-small;
+        padding: 8px 0;
+    }
+}
+.si-treebox-dropdown{
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    max-height: 200px;
+    overflow: auto;
+    user-select: none;
+}

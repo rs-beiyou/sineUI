@@ -49,6 +49,14 @@ window.si.config({
       path: 'switchbox',
       page: 'pages/views/form/switchbox.html'
     }, {
+      title: '级联选择器',
+      path: 'combobox',
+      page: 'pages/views/form/combobox.html'
+    }, {
+      title: '下拉树',
+      path: 'treebox',
+      page: 'pages/views/form/treebox.html'
+    }, {
       title: '日期',
       path: 'datebox',
       page: 'pages/views/form/datebox.html'
@@ -76,6 +84,10 @@ window.si.config({
       title: '标签',
       path: 'tags',
       page: 'pages/views/components/tags.html'
+    }, {
+      title: '树形控件',
+      path: 'tree',
+      page: 'pages/views/components/tree.html'
     }, {
       title: '富文本编辑器',
       path: 'editor',

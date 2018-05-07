@@ -1,6 +1,7 @@
 import './derection';
 
 import BaseForm from './form-base';
+import _ from '../../utils/util';
 
 (function($) {
   class Selectbox extends BaseForm {
@@ -8,6 +9,7 @@ import BaseForm from './form-base';
       super(el, options, Selectbox.DEFAULTS);
       this.className = 'Selectbox';
       this.derection = '';
+      this.randomString = _.randomString();
       this._initForm();
     }
     _setSelectbox(item, newVal, val) {
@@ -36,13 +38,13 @@ import BaseForm from './form-base';
         $selection = $(_selection);
         $selectValue = $(_selectValue);
         $clear = $(_clear);
-        $(_cert).addClass('fa fa-caret-down  form-control-icon');
-        $clear.addClass('fa fa-times-circle form-control-icon');
-        $placeholder.addClass('si-selectbox-placeholder');
+        $(_cert).addClass(`${this.lastOptions.icon} form-control-icon`);
+        $clear.addClass(`${this.lastOptions.clearIcon} form-control-icon`);
+        $placeholder.addClass('si-placeholder');
         op.placeholder && $placeholder.text(op.placeholder);
         $input.attr('type', 'hidden');
         $selectValue.addClass('si-selectbox-selected-value').hide();
-        $dropdown.addClass('si-selectbox-dropdown').hide();
+        $dropdown.addClass('si-dropdown si-selectbox-dropdown').hide();
         $selection.derection().addClass('form-control si-selectbox-selection has-icon-right').append(_selectValue).append(_placeholder).append(_cert).append(_clear);
         $selectbox.addClass('si-selectbox si-selectbox-single').append(_input).append(_selection);
         if(this.lastOptions.transfer){
@@ -63,7 +65,7 @@ import BaseForm from './form-base';
         setTimeout(() => {
           $dropdown.width($selection.outerWidth());
         });
-        this._addEvent();
+        this._initEvent();
       }
       switch (item) {
         case 'id':
@@ -104,9 +106,6 @@ import BaseForm from './form-base';
             op.transfer&&$dropdown.removeClass('si-selectbox-multiple').addClass('si-selectbox-single');
           }
           break;
-        case 'valid':
-          $input.valid(newVal, this);
-          break;
       }
     }
     _setReadonly(newVal) {
@@ -114,11 +113,8 @@ import BaseForm from './form-base';
         let rl = newVal,
           $selectbox = this.$selectbox;
         if (typeof rl === 'boolean') {
-          if (rl) {
-            $selectbox.addClass('si-form-readonly');
-          } else {
-            $selectbox.removeClass('si-form-readonly');
-          }
+          rl && $selectbox.addClass('si-form-readonly')&&this._removeEvent();
+          !rl && $selectbox.removeClass('si-form-readonly')&&this._addEvent();
           return;
         }
         if (typeof rl === 'number') {
@@ -143,41 +139,38 @@ import BaseForm from './form-base';
     _setDisabled(newVal) {
       if (this.selectboxDom) {
         let da = newVal,
-          $input = this.$input,
           $selectbox = this.$selectbox;
-        if (typeof da === 'boolean') {
-          if (da) {
-            $selectbox.addClass('si-form-disabled');
-            $input.attr('disabled', true);
-          } else {
-            $selectbox.removeClass('si-form-disabled');
-            $input.removeAttr('disabled');
-          }
-        }
+        da && $selectbox.addClass('si-form-disabled')&&this._removeEvent();
+        !da && $selectbox.removeClass('si-form-disabled')&&this._addEvent();
       }
     }
-    _addEvent() {
+    _initEvent(){
+      this._addEvent();
       let op = this.options;
-      $(document).on('click', () => {
-        this._close();
-      });
-      this.$selection.on('click', () => {
-        if (op.readonly === true || op.disabled === true) return;
-        if (this.opened) {
-          setTimeout(() => {
-            this._close();
-          });
-        } else {
-          setTimeout(() => {
-            this._open();
-          });
-        }
-      });
       this.$clear.on('click', (e) => {
         op.value = '';
         this.opened && this._close();
-        e.stopPropagation();
+        document.all ? e.cancelBubble=true : e.stopPropagation();
       });
+    }
+    _addEvent() {
+      $(document).on(`click.si.selectbox.${this.randomString}`, this._close.bind(this));
+      this.$selection.on('click.si.selectbox', this._toogle.bind(this));
+    }
+    _removeEvent(){
+      $(document).off(`click.si.selectbox.${this.randomString}`);
+      this.$selection.off('click.si.selectbox');
+    }
+    _toogle(){
+      if (this.opened) {
+        setTimeout(() => {
+          this._close();
+        });
+      } else {
+        setTimeout(() => {
+          this._open();
+        });
+      }
     }
     _open() {
       if (this.opened) return;
@@ -198,9 +191,9 @@ import BaseForm from './form-base';
           'left': transfer ? offset.left : 0
         });
       }else{
-        $dropdown.css({
-          'top': transfer ? offset.top + $selectbox.outerHeight() : $selectbox.outerHeight(),
-          'left': transfer ? offset.left : 0
+        transfer&&$dropdown.css({
+          'top': offset.top + $selectbox.outerHeight(),
+          'left': offset.left
         });
       }
       $dropdown.show().addClass(className);
@@ -232,20 +225,20 @@ import BaseForm from './form-base';
           let arr2 = Array.compare(vac, va);
           if (va.length > 0) {
             $placeholder.hide();
-            op.clearable && this.$selectbox.addClass('si-show-clear');
+            op.clearable && this.$selection.addClass('si-show-clear');
           }
           arr1.forEach(key => {
-            sbd[key] && sbd[key].$selectbox.addClass('si-item-selected');
+            sbd[key] && sbd[key].$selectbox.addClass('si-selectbox-item-selected');
             this._addTag(key, sbd[key].text);
           });
           arr2.forEach(key => {
             sbd[key] && sbd[key].$selectbox.removeClass('si-selectbox-item-selected');
             this.tagsDom[key].remove();
-            this.tagsDom[key] = null;
+            delete this.tagsDom[key];
           });
           if (va.length === 0) {
             $placeholder.show();
-            op.clearable && this.$selectbox.removeClass('si-selectbox-show-clear');
+            op.clearable && this.$selection.removeClass('si-show-clear');
           }
           this.$input.val(newVal);
         } else {
@@ -256,7 +249,7 @@ import BaseForm from './form-base';
           if (va === '' && vac !== '') {
             $selectValue.text('');
             sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
-            op.clearable && this.$selectbox.removeClass('si-selectbox-show-clear');
+            op.clearable && this.$selection.removeClass('si-show-clear');
             this.$input.val(va).removeData('key');
             $placeholder.show();
             $selectValue.hide();
@@ -267,11 +260,10 @@ import BaseForm from './form-base';
             vac === '' && $placeholder.hide() && $selectValue.show();
             vac !== '' && sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
             sbd[va].$selectbox.addClass('si-selectbox-item-selected');
-            op.clearable && this.$selectbox.addClass('si-selectbox-show-clear');
+            op.clearable && this.$selection.addClass('si-show-clear');
           }
         }
-        this.$input.trigger('change');
-        this.$input.trigger('valid.change');
+        this.$input.trigger('valid.change').trigger('change');
       }
     }
     _addTag(val, text) {
@@ -346,6 +338,10 @@ import BaseForm from './form-base';
       });
       $dropdown.html(ul);
     }
+    destroy(){
+      this._removeEvent();
+      this.options.transfer&&this.$dropdown.remove();
+    }
   }
 
   function Plugin(option) {
@@ -401,6 +397,7 @@ import BaseForm from './form-base';
     name: '',
     labelWidth: '',
     inputWidth: '',
+    labelAlign: 'right',
     width: '',
     readonly: false,
     disabled: false,
@@ -409,13 +406,16 @@ import BaseForm from './form-base';
     size: '',
     keyField: 'key',
     valueField: 'value',
-    data: [],
+    dataField:'list',
+    data: null,
     url: '',
     value: '',
     transfer: false,
     search: false,
     clearable: false,
     multiple: false,
-    valid: false
+    valid: false,
+    icon:'fa fa-caret-down fa-fw',
+    clearIcon:'fa fa-times-circle fa-fw'
   };
 })(jQuery);

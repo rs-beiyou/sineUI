@@ -30,15 +30,20 @@ class Textbox extends BaseForm {
         }
         break;
       case 'value':
-        $input.val(newVal);
+        this._setValue(newVal);
         break;
       case 'width':
         $input.css('width', newVal);
         break;
-      case 'valid':
-        $input.valid(newVal, this);
-        break;
     }
+  }
+  _setValue(newVal){
+    let op = this.options;
+    if(this.$input.val()!==newVal){
+      this.$input.val(newVal);
+      op.value = newVal;
+    }
+    op.valid && this.$input.trigger('valid.change');
   }
 }
 
@@ -100,6 +105,7 @@ Textbox.DEFAULTS = {
   name: '',
   labelWidth: '',
   inputWidth: '',
+  labelAlign: 'right',
   readonly: false,
   disabled: false,
   value: '',

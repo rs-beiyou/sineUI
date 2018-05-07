@@ -1,5 +1,4 @@
-import 'core-js/es6/promise';
-import 'core-js/es6/symbol';
+// import 'core-js/es6/promise';
 import 'core-js/fn/object/assign';
 import 'core-js/fn/object/keys';
 import 'core-js/fn/array/is-array';
@@ -7,6 +6,8 @@ import 'core-js/fn/array/includes';
 import 'core-js/fn/array/find-index';
 import 'core-js/fn/string/includes';
 import 'core-js/fn/string/starts-with';
+
+import {Log} from '../libs/log';
 
 let defineProperty = (function() {
   // IE 8 only supports `Object.defineProperty` on DOM elements
@@ -16,7 +17,7 @@ let defineProperty = (function() {
     let $defineProperty = Object.defineProperty;
     result = $defineProperty(object, object, object) && $defineProperty;
   } catch (error) {
-    console.warn('defineProperty 方法出现问题！');
+    Log.warn('defineProperty 方法出现问题！');
   }
   return result;
 }());
@@ -102,3 +103,28 @@ if (typeof Array.findObjIndex !== 'function') {
 
 //ie不支持 Number.parseFloat
 Number.parseFloat = parseFloat;
+
+// 对Date的扩展，将 Date 转化为指定格式的String
+// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
+// 例子：
+// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+Date.prototype.format = function (fmt) { //author: meizz
+  let o = {
+    // 'Y+': this.getFullYear(),//年份
+    // 'y+': this.getFullYear(),//年份
+    'M+': this.getMonth() + 1, //月份
+    'D+': this.getDate(), //日
+    'd+': this.getDate(), //日
+    'h+': this.getHours(), //小时
+    'm+': this.getMinutes(), //分
+    's+': this.getSeconds(), //秒
+    'q+': Math.floor((this.getMonth() + 3) / 3), //季度
+    'S': this.getMilliseconds() //毫秒
+  };
+  if (/(y|Y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+  for (let k in o)
+    if (new RegExp('(' + k + ')').test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+  return fmt;
+};

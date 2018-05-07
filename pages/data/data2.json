@@ -1,0 +1,29 @@
+[{
+        "listname": "名称1",
+        "id":"1",
+        "parentid":"-1",
+        "children": [{
+            "listname": "名称1-1",
+            "id":"11",
+            "parentid":"1"
+        }, {
+            "listname": "名称1-2",
+            "id":"12",
+            "parentid":"1"
+        }]
+    },
+    {
+        "listname": "名称2",
+        "id":"2",
+        "parentid":"-1",
+        "children": [{
+            "listname": "名称2-1",
+            "id":"21",
+            "parentid":"2"
+        }, {
+            "listname": "名称2-2",
+            "id":"22",
+            "parentid":"2"
+        }]
+    }
+]

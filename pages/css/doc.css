@@ -73,6 +73,9 @@ label .btn {
     font-weight: bold;
     margin: 0 0 10px;
 }
+.si-callout i{
+    margin: 0 5px;
+}
 
 .si-callout.warning {
     border-left-color: #ff9800;

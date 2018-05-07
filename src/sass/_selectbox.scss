@@ -1,0 +1,98 @@
+.si-selectbox {
+    position: relative;
+    width: 100%;
+    &.si-form-readonly {
+        .si-selectbox-selection {
+            cursor: $cursor-disabled;
+        }
+    }
+    &.si-form-disabled {
+        .si-selectbox-selection {
+            cursor: $cursor-disabled;
+            background-color: $input-bg-disabled;
+            &:hover {
+                border-color: $input-bg-disabled;
+            }
+        }
+    }
+}
+.si-selectbox-dropdown {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow: auto;
+}
+.si-selectbox-selection {
+    cursor: pointer;
+}
+.si-selectbox-selected-value{
+    @extend .si-overflow-el;
+}
+.si-selectbox-visible {
+    .form-control-icon:first-of-type {
+        -webkit-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+}
+
+.si-selectbox-item {
+    margin: 0;
+    padding: 7px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: $headings-line-height;
+    color: $dropdown-link-color;
+    overflow: hidden;
+    -webkit-transition: background .2s ease-in-out;
+    -o-transition: background .2s ease-in-out;
+    transition: background .2s ease-in-out;
+    &:hover {
+        background: $dropdown-link-hover-bg;
+    }
+    &.si-selectbox-item-disabled {
+        color: $input-color-placeholder;
+        cursor: $cursor-disabled;
+        &:hover {
+            background-color: $dropdown-bg;
+        }
+    }
+}
+
+.si-selectbox-single {
+    .si-selectbox-item-selected {
+        background: $dropdown-link-active-bg;
+        color: $dropdown-link-active-color;
+        &:hover {
+            background: $dropdown-link-active-bg;
+        }
+        &.si-selectbox-item-disabled {
+            background-color: $gray-blue;
+            &:hover {
+                background-color: $gray-blue;
+            }
+        }
+    }
+}
+.si-selectbox-multiple {
+    .si-selectbox-selection {
+        height: auto;
+        min-height: $input-height-base;
+        .si-tag {
+            margin: 0 4px 0 0;
+            height: auto;
+            line-height: normal;
+            user-select: none;
+        }
+    }
+    .si-selectbox-item-selected {
+        color: $dropdown-link-active-bg;
+        &::after {
+            content: '\f00c';
+            font-family: FontAwesome;
+            float: right;
+            font-size: 13px;
+            line-height: $headings-line-height;
+        }
+    }
+}

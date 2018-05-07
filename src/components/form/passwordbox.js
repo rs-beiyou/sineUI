@@ -11,8 +11,7 @@ import BaseForm from './form-base';
       if (!this.$input) {
         let _input = document.createElement('input');
         $input = $(_input);
-        $input.addClass('form-control');
-        $input.attr({'type':'password','autocomplete':'off'});
+        $input.addClass('form-control').attr({'type':'password'});
         this.$input = $input;
         this.$formBlock.append(_input);
       }
@@ -25,15 +24,20 @@ import BaseForm from './form-base';
           $input.attr(item, newVal);
           break;
         case 'value':
-          $input.val(newVal);
+          this._setValue(newVal);
           break;
         case 'width':
           $input.css('width', newVal);
           break;
-        case 'valid':
-          $input.valid(newVal, this);
-          break;
       }
+    }
+    _setValue(newVal){
+      let op = this.options;
+      if(this.$input.val()!==newVal){
+        this.$input.val(newVal);
+        op.value = newVal;
+      }
+      op.valid && this.$input.trigger('valid.change');
     }
   }
 
@@ -94,6 +98,7 @@ import BaseForm from './form-base';
     name: '',
     labelWidth: '',
     inputWidth: '',
+    labelAlign: 'right',
     readonly: false,
     disabled: false,
     helpText: '',

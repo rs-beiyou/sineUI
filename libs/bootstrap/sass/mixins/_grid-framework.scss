@@ -4,9 +4,10 @@
 // any value of `$grid-columns`.
 
 // [converter] This is defined recursively in LESS, but Sass supports real loops
-@mixin make-grid-columns($i: 1, $list: ".col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}") {
+@mixin make-grid-columns($i: 1, $list: ".col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}", $list2: ".col-xs-#{$i}") {
   @for $i from (1 + 1) through $grid-columns {
-    $list: "#{$list}, .col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}";
+    $list: "#{$list}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}";
+    $list2: "#{$list2}, .col-xs-#{$i}";
   }
   #{$list} {
     position: relative;
@@ -15,6 +16,14 @@
     // Inner gutter via padding
     padding-left:  ceil(($grid-gutter-width / 2));
     padding-right: floor(($grid-gutter-width / 2));
+  }
+  #{$list2} {
+    position: relative;
+    // Prevent columns from collapsing when empty
+    min-height: 1px;
+    // Inner gutter via padding
+    padding-left:  0;
+    padding-right: 0;
   }
 }
 

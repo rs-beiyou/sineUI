@@ -232,8 +232,7 @@ pre[class*="language-"] {
     border-spacing: 0;
     empty-cells: show;
     border: 1px solid #e9e9e9;
-    width: 100%;
-    margin-bottom: 24px
+    /* width: 100%; */
 }
 
 .code-box-demo table.code-box-table th {

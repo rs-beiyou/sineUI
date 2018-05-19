@@ -11,5 +11,9 @@
         ]
       }
     }]
+  ],
+  "ignore": [
+    "./libs/webuploader/webuploader.js",
+    "./libs/webuploader/webuploader.noimage.js"
   ]
 }

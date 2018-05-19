@@ -205,16 +205,6 @@ Daterangebox.ranges = {
     moment().endOf(0,'day')
   ]
 };
-
-let old = $.fn.daterangebox;
-
-$.fn.daterangebox = Plugin;
-$.fn.daterangebox.Constructor = Daterangebox;
-$.fn.daterangebox.ranges = Daterangebox.ranges;
-$.fn.daterangebox.noConflict = function() {
-  $.fn.daterangebox = old;
-  return this;
-};
   
 Daterangebox.DEFAULTS = {
   hasSurface: false,
@@ -239,4 +229,14 @@ Daterangebox.DEFAULTS = {
   maxDate: '',
   icon:'fa fa-calendar-o fa-fw',
   clearIcon:'fa fa-times-circle fa-fw'
+};
+let old = $.fn.daterangebox;
+
+$.fn.daterangebox = Plugin;
+$.fn.daterangebox.defaults = Daterangebox.DEFAULTS;
+$.fn.daterangebox.Constructor = Daterangebox;
+$.fn.daterangebox.ranges = Daterangebox.ranges;
+$.fn.daterangebox.noConflict = function() {
+  $.fn.daterangebox = old;
+  return this;
 };

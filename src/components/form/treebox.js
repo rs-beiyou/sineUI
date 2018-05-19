@@ -69,9 +69,6 @@ class Treebox extends BaseForm {
       this.$clear = $clear;
       this.$treeUl = $treeUl;
       this.$loading = $loading;
-      setTimeout(() => {
-        $dropdown.width($tree.outerWidth());
-      });
       this._initEvent();
     }
     switch (item) {
@@ -168,7 +165,7 @@ class Treebox extends BaseForm {
     }
     this.$treeUl.tree(setting);
     this.inited = true;
-    this._setValue(op.value);
+    op.value&&this._setValue(op.value);
     this._toogleExpand(op.expandAll);
   }
   _setValue(newVal,val){
@@ -182,8 +179,8 @@ class Treebox extends BaseForm {
       let nva = newVal !== '' ? String(newVal).split(',') : [],
         va = val && val !== '' ? String(val).split(',') : [];
       let titleArr = this.titleVal ? this.titleVal.split(',') : [];
-      let arr1 = Array.compare(nva, va);
-      let arr2 = Array.compare(va, nva);
+      let arr1 = _.compare(nva, va);
+      let arr2 = _.compare(va, nva);
       newVal&&$placeholder.hide();
       arr1.forEach((key) => {
         this._addTag(key, titleArr[nva.findIndex(k=>k===key)]);
@@ -279,6 +276,7 @@ class Treebox extends BaseForm {
     let realHright = $dropdown.outerHeight() + Number($dropdown.css('margin-top').replace('px', '')) + Number($dropdown.css('margin-bottom').replace('px', ''));
     let derection = realHright <= $tree.derection('check').bottomDistance ? 'bottom' : 'top';
     $treebox.addClass('si-treebox-visible');
+    $dropdown.width($tree.outerWidth());
     this.derection = derection;
     let className = derection === 'top'? 'slide-up-in' : 'slide-down-in';
     if(derection==='top'){
@@ -287,9 +285,12 @@ class Treebox extends BaseForm {
         'left': transfer ? offset.left : 0
       });
     }else{
-      transfer&&$dropdown.css({
+      transfer?$dropdown.css({
         'top': offset.top + $treebox.outerHeight(),
         'left': offset.left
+      }):$dropdown.css({
+        'top': $treebox.outerHeight(),
+        'left': 0
       });
     }
     $dropdown.show().addClass(className);
@@ -356,15 +357,6 @@ function Plugin(option) {
     throw new Error(error);
   }
 }
-let old = $.fn.treebox;
-
-$.fn.treebox = Plugin;
-$.fn.treebox.Constructor = Treebox;
-
-$.fn.treebox.noConflict = function() {
-  $.fn.treebox = old;
-  return this;
-};
 
 Treebox.DEFAULTS = {
   multiline: false,
@@ -398,4 +390,15 @@ Treebox.DEFAULTS = {
   data: null,
   dataField: null,
   url :''
+};
+
+let old = $.fn.treebox;
+
+$.fn.treebox = Plugin;
+$.fn.treebox.defaults = Treebox.DEFAULTS;
+$.fn.treebox.Constructor = Treebox;
+
+$.fn.treebox.noConflict = function() {
+  $.fn.treebox = old;
+  return this;
 };

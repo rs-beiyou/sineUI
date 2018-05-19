@@ -1,10 +1,11 @@
-import layer from 'libs/layer/layer.js';
 import 'libs/layer/theme/default/layer.css';
+
+import layer from 'libs/layer/layer.js';
 
 $.extend({
   //对话框
   dialog: function(options) {
-    if (options.content && options.content.indexOf('action') > -1) {
+    if (options.content &&typeof options.content==='string' && options.content.indexOf('action') > -1) {
       $.ajax({
         url: options.content,
         type: 'get',
@@ -41,7 +42,7 @@ $.extend({
     layer.open(options);
   },
   dialogClose: function(index) {
-    layer.close(index);
+    index!==undefined?layer.close(index):layer.closeAll('dialog');
   },
   dialogGetChildFrame: function(DOM, index) {
     return layer.getChildFrame(DOM, index);

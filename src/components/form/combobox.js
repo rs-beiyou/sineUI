@@ -101,7 +101,7 @@ class Combobox extends BaseForm {
   }
   _delayInit(){
     let op = this.options;
-    this._setValue(op.value);
+    op.value&&this._setValue(op.value);
   }
   _initEvent(){
     let op = this.options;
@@ -358,15 +358,6 @@ function Plugin(option) {
     throw new Error(error);
   }
 }
-let old = $.fn.combobox;
-
-$.fn.combobox = Plugin;
-$.fn.combobox.Constructor = Combobox;
-
-$.fn.combobox.noConflict = function() {
-  $.fn.combobox = old;
-  return this;
-};
 
 Combobox.DEFAULTS = {
   hasSurface: false,
@@ -392,8 +383,19 @@ Combobox.DEFAULTS = {
   nextLevelIcon: 'fa fa-angle-right fa-fw',
   keyField: 'key',
   valueField: 'value',
+  dataField: '',
   searchField: '',
   parameter: null,
   url:'',
   data: null
+};
+let old = $.fn.combobox;
+
+$.fn.combobox = Plugin;
+$.fn.combobox.defaults = Combobox.DEFAULTS;
+$.fn.combobox.Constructor = Combobox;
+
+$.fn.combobox.noConflict = function() {
+  $.fn.combobox = old;
+  return this;
 };

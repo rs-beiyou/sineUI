@@ -70,6 +70,13 @@
       "pid": "2",
       "url": "components/editor",
       "icon": "fa fa-tags"
+    },{
+      "id": "26",
+      "name": "面板",
+      "subName": "Panel",
+      "pid": "2",
+      "url": "components/panel",
+      "icon": "fa fa-window-restore"
     }]
   },
   {

@@ -1,0 +1,123 @@
+@import '../variables';
+@import '../base';
+body{
+    background: $page-bg;
+}
+.si-page{
+    .si-page-header{
+        position: fixed;
+        height: $page-header-height;
+        width: 100%;
+        z-index: $page-header-zIndex;
+        padding: 0 5%;
+        background: $page-nav-bg;
+        box-shadow: $page-nav-shadow;
+        transition: all .3s;
+        .si-nav-brand{
+            height: $page-header-height;
+            line-height: $page-header-height;
+            font-size: $font-size-large;
+        }
+    }
+    .si-page-sider{
+        position: absolute;
+        top: $page-header-height;
+        left: 0;
+        bottom: 0;
+        width: $page-sider-width;
+        z-index: $page-sider-zIndex;
+        .si-sider-content{
+            position: fixed;
+            width: $page-sider-width;
+            margin-top: $page-header-height;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background: $page-sider-bg;
+            box-shadow: $page-sider-shadow;
+            z-index: $page-sider-zIndex;
+            transition: margin .5s;
+        }
+        .si-sider-topbar{
+            width: 100%;
+            text-align: center;
+            height: $page-sider-topbar-height;
+            line-height: $page-sider-topbar-height;
+            font-family: FontAwesome;
+            background: $page-sider-topbar-bg;
+            cursor: pointer;
+            color: #666;
+            transition: all .5s;
+            &::before{
+                display: inline-block;
+                content: "\f0c9";
+            }
+        }
+    }
+    .si-page-mark{
+        position: absolute;
+        top: $page-header-height;
+        right: 0;
+        left: 0;
+        height: $page-mark-height;
+        line-height: $page-mark-height;
+        z-index: $page-mark-zIndex;
+        .si-mark-content{
+            position: fixed;
+            top: $page-header-height;
+            background: #fff;
+            width: 100%;
+            box-shadow: $page-mark-shadow;
+            margin-left: $page-sider-width;
+            transition: margin-left .5s, top .5s;
+        }
+    }
+    .si-page-content{
+        position: absolute;
+        top: $page-header-height + $page-mark-height;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        margin-left: $page-sider-width;
+        padding: 10px;
+        transition: margin-left .5s, top .5s;
+    }
+}
+.si-page.si-page-top-hide{
+    .si-page-header{
+        transform: translateY(-90%);
+        &:hover{
+            transform: translateY(0);
+        }
+    }
+    .si-page-content{
+        top: $page-header-height*0.1 + $page-mark-height;
+    }
+    .si-sider-content{
+        margin-top: $page-header-height*0.1;
+    }
+    .si-mark-content{
+        position: fixed;
+        top: $page-header-height*0.1;
+    }
+}
+.si-page.si-page-left-hide{
+    .si-page-sider{
+        margin-left: - $page-sider-width*0.8;
+        .si-sider-content{
+            margin-left: - $page-sider-width*0.8;
+        }
+        .si-sider-topbar{
+            width: 20%;
+            margin-left: 80%;
+            &::before{
+                display: inline-block;
+                content: "\f0c9";
+                transform: rotate(-90deg);
+            }
+        }
+    }
+    .si-page-content,.si-mark-content{
+        margin-left: $page-sider-width*0.2;
+    }
+}

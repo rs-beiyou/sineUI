@@ -39,7 +39,7 @@ class Textbox extends BaseForm {
   }
   _setValue(newVal){
     let op = this.options;
-    if(this.$input.val()!==newVal){
+    if(this.$input.val()!=newVal){
       this.$input.val(newVal);
       op.value = newVal;
     }
@@ -87,15 +87,6 @@ function Plugin(option) {
     throw new Error(error);
   }
 }
-let old = $.fn.textbox;
-
-$.fn.textbox = Plugin;
-$.fn.textbox.Constructor = Textbox;
-
-$.fn.textbox.noConflict = function() {
-  $.fn.textbox = old;
-  return this;
-};
 
 Textbox.DEFAULTS = {
   multiline: false,
@@ -116,4 +107,14 @@ Textbox.DEFAULTS = {
   cols: '',
   width: '',
   valid: false
+};
+let old = $.fn.textbox;
+
+$.fn.textbox = Plugin;
+$.fn.textbox.defaults = Textbox.DEFAULTS;
+$.fn.textbox.Constructor = Textbox;
+
+$.fn.textbox.noConflict = function() {
+  $.fn.textbox = old;
+  return this;
 };

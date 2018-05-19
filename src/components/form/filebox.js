@@ -4,6 +4,7 @@ import '../modal/confirm';
 
 import BaseForm from './form-base';
 import WebUploader from 'libs/webuploader/webuploader.js';
+import _ from '../../utils/util';
 import uploaderFlash from 'libs/webuploader/Uploader.swf';
 
 class Filebox extends BaseForm {
@@ -78,8 +79,14 @@ class Filebox extends BaseForm {
           this.dialogIndex = di;
           this._initUploader();
         },
-        cancel:()=>{
-          
+        cancel:(index)=>{
+          if(this.hasInited()){
+            $.confirm('现在关闭将终止未上传文件的上传，确定关闭吗？',()=>{
+              this.uploader.destroy();
+              $.dialogClose(index);
+            });
+            return false;
+          }
         },
         end:()=>{
           this.$dialogContent.remove();
@@ -100,7 +107,7 @@ class Filebox extends BaseForm {
       $closeBtn = $(_closeBtn),
       $chooseBtn = $(_chooseBtn),
       $fileQueue = $(_fileQueue);
-    $uploadBtn.addClass('btn btn-sm btn-info').hide().on('click',()=>{
+    $uploadBtn.attr('type','button').addClass('btn btn-sm btn-info').text('开始上传').hide().on('click',()=>{
       let curIndex = this.curIndex,
         fileArr = this.fileArr;
       if (this.state === 'uploading'){
@@ -111,8 +118,15 @@ class Filebox extends BaseForm {
         }
       }
     });
-    $closeBtn.addClass('btn btn-sm btn-default').text('关闭').on('click',()=>{
-      $.dialogClose(this.dialogIndex);
+    $closeBtn.attr('type','button').addClass('btn btn-sm btn-default').text('关闭').on('click',()=>{
+      if(this.hasInited()){
+        $.confirm('现在关闭将终止未上传文件的上传，确定关闭吗？',()=>{
+          this.uploader.destroy();
+          $.dialogClose(this.dialogIndex);
+        });
+      }else{
+        $.dialogClose(this.dialogIndex);
+      }
     });
     $chooseBtn.text('选择文件');
     $fileQueue.addClass('si-uploader-queue');
@@ -238,7 +252,7 @@ class Filebox extends BaseForm {
         //分块存在，跳过
         deferred.reject();
       }else{
-        let fd =  this.uploader.owner.options.formData;
+        let fd =  this.uploader.options.formData;
         fd.fileMd5 = file.fileMd5;
         file.filedesc = file.$fileDesc.val();
         if(upop.formData){
@@ -282,6 +296,7 @@ class Filebox extends BaseForm {
       valueArr = this.valueArr,
       fileArr = this.fileArr;
     this.uploader.on('uploadSuccess', (file, response)=> {
+      file.$progressBar.css('width','100%');
       if(upop.chunked){
         file.$progressDesc.html('文件合并中...');
         //如果分块上传成功，则通知后台合并分块
@@ -350,7 +365,7 @@ class Filebox extends BaseForm {
   }
   _formatFileType(){
     let type = this.options.fileLoader.fileTypeExts;
-    if(type.includes('[')){
+    if(type&&type.includes('[')){
       let typeObj = Filebox.fileTypes;
       let arr = type.split(';');
       arr.forEach((te,i)=>{
@@ -367,7 +382,7 @@ class Filebox extends BaseForm {
       uploader = this.uploader;
     //处理模板中使用的变量
     let item = document.createElement('div');
-    let itemLeft = document.createElement('img');
+    let itemLeft = document.createElement('div');
     let itemRight = document.createElement('div');
     let itemTitle = document.createElement('span');
     let itemSize = document.createElement('span');
@@ -408,13 +423,15 @@ class Filebox extends BaseForm {
     $(itemRight).addClass('uploader-item-right').append(itemTitle).append(itemButton).append(itemDesc).append(itemProgress);
     $item.append(itemLeft).append(itemRight);
     uploader.makeThumb( file, ( error, ret )=> {
-      let imgUrl;
+      let pic = null;
       if ( error ) {
-        imgUrl = this.getObjectURL(file);
+        pic = this.create('i');
+        $(pic).addClass(this.getObjectURL(file));
       } else {
-        imgUrl = ret;
+        pic = this.create('img');
+        $(pic).attr('src',ret);
       }
-      $(itemLeft).attr('src', imgUrl);
+      $(itemLeft).html(pic);
     });
     //为删除文件按钮绑定删除文件事件
     $(itemButton).on('click', function() {
@@ -440,6 +457,46 @@ class Filebox extends BaseForm {
       $uploadPercent: $itemPercent
     });
   }
+  getObjectURL(file){
+    let url = null, option = this.options.fileLoader;
+    let fileType = file.name.split('.').pop().toLowerCase();
+    switch (fileType) {
+      case 'zip':
+        url = option.defaultImgs.zip;
+        break;
+      case 'doc':
+      case 'docx':
+        url = option.defaultImgs.doc;
+        break;
+      case 'pdf':
+        url = option.defaultImgs.pdf;
+        break;
+      case 'xls':
+      case 'xlsx':
+        url = option.defaultImgs.xls;
+        break;
+      case 'ppt':
+      case 'pptx':
+        url = option.defaultImgs.ppt;
+        break;
+      case 'png':
+      case 'jpg':
+      case 'jpeg':
+      case 'gif':
+        if (window.createObjectURL != undefined) {
+          url = window.createObjectURL(file);
+        } else if (window.URL != undefined) {
+          url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) {
+          url = window.webkitURL.createObjectURL(file);
+        }
+        break;
+      default:
+        url = option.defaultImgs.other;
+        break;
+    }
+    return url;
+  }
   _addFileList(file, id){
     let option = this.options, li;
     if (option.readonly || option.disabled) {
@@ -463,12 +520,12 @@ class Filebox extends BaseForm {
         if (removeFromServer) {
           this.deleteFile(id, ()=> {
             $(li).remove();
-            valueArr.delete(id);
+            _.delete(valueArr, id);
             this.$input.val(valueArr.join(';')).trigger('change');
           });
         } else {
           $(li).remove();
-          valueArr.delete(id);
+          _.delete(valueArr, id);
           this.$input.val(valueArr.join(';')).trigger('change');
         }
       });
@@ -543,7 +600,6 @@ Filebox.fileTypes = {
   document:'doc;docx;ppt;pptx;xls;xlsx;txt;pdf',
   picture:'jpg;jpeg;png;gif;svg'
 };
-const webRoot = 'localhost:8080/zzsoft';
 Filebox.DEFAULTS = {
   label: '',
   name: '',
@@ -579,12 +635,12 @@ Filebox.DEFAULTS = {
     fileSizeLimit: 6*1024*1024*1024,//6G 验证文件总大小是否超出限制, 超出则不允许加入队列
     fileSingleSizeLimit: 3*1024*1024*1024,  //3G 验证单个文件大小是否超出限制, 超出则不允许加入队列
     fileNumLimit: null,
-    uploader: webRoot + '/uploaddown/chunkUpload.action', //文件提交的地址
-    delFileUrl: webRoot + '/uploaddown/delete.action', //文件删除的地址
-    getFileUrl: webRoot + '/uploaddown/getFileList.action', //获取文件列表
-    downloader: webRoot + '/uploaddown/downFile.action', //文件下载地址
-    checkChunkUrl: webRoot + '/uploaddown/checkChunks.action', // 切片校验地址
-    mergeUrl: webRoot + '/uploaddown/merge.action',//切片合并地址
+    uploader: '', //文件提交的地址
+    delFileUrl: '', //文件删除的地址
+    getFileUrl: '', //获取文件列表
+    downloader: '', //文件下载地址
+    checkChunkUrl: '', // 切片校验地址
+    mergeUrl: '',//切片合并地址
     formData: null,
     domData: null, //动态参数，格式：{key:id}
     uploadSuccess: null,
@@ -648,6 +704,7 @@ function Plugin(option) {
 let old = $.fn.filebox;
 
 $.fn.filebox = Plugin;
+$.fn.filebox.defaults = Filebox.DEFAULTS;
 $.fn.filebox.Constructor = Filebox;
 
 $.fn.filebox.noConflict = function() {

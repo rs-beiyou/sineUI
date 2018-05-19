@@ -33,7 +33,9 @@ class Tree {
           rootPId: op.pIdValue
         }
       },
-      callback:op.callback||{}
+      callback:Object.assign({
+        beforeAsync:this.beforeAsync
+      },op.callback||{})
     },op.data||[]);
   }
   refresh(){
@@ -140,25 +142,25 @@ function Plugin(option){
     Log.warn(error);
   }
 }
-
-let old = $.fn.tree;
-
-$.fn.tree = Plugin;
-$.fn.tree.Constructor = Tree;
-
-$.fn.tree.noConflict = function() {
-  $.fn.tree = old;
-  return this;
-};
 Tree.DEFAULTS = {
-  method:'get',
+  method:'post',
   chkStyle:'radio',
   chkboxType:'',
   valueField:'listname',
   idField: 'id',
   pIdField: 'parentid',
   pIdValue: '-1',
-  url:'',
+  url:null,
   data:null,
   callback:{}
+};
+let old = $.fn.tree;
+
+$.fn.tree = Plugin;
+$.fn.tree.defaults = Tree.DEFAULTS;
+$.fn.tree.Constructor = Tree;
+
+$.fn.tree.noConflict = function() {
+  $.fn.tree = old;
+  return this;
 };

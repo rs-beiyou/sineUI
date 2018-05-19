@@ -56,15 +56,6 @@ function Plugin(option) {
     throw new Error(error);
   }
 }
-let old = $.fn.editor;
-
-$.fn.editor = Plugin;
-$.fn.editor.Constructor = Editor;
-
-$.fn.editor.noConflict = function() {
-  $.fn.editor = old;
-  return this;
-};
 
 Editor.DEFAULTS = {
   uploadFileName: '',
@@ -96,4 +87,14 @@ Editor.DEFAULTS = {
     'undo',  // 撤销
     'redo'  // 重复
   ]
+};
+let old = $.fn.editor;
+
+$.fn.editor = Plugin;
+$.fn.editor.defaults = Editor.DEFAULTS;
+$.fn.editor.Constructor = Editor;
+
+$.fn.editor.noConflict = function() {
+  $.fn.editor = old;
+  return this;
 };

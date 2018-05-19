@@ -108,16 +108,6 @@ import BaseForm from './form-base';
       throw new Error(error);
     }
   }
-
-  let old = $.fn.switchbox;
-
-  $.fn.switchbox = Plugin;
-  $.fn.switchbox.Constructor = Switchbox;
-
-  $.fn.switchbox.noConflict = function() {
-    $.fn.switchbox = old;
-    return this;
-  };
   Switchbox.DEFAULTS = {
     label: '',
     id: '',
@@ -135,5 +125,16 @@ import BaseForm from './form-base';
     labelWidth: '',
     inputWidth: '',
     labelAlign: 'right'
+  };
+
+  let old = $.fn.switchbox;
+
+  $.fn.switchbox = Plugin;
+  $.fn.switchbox.defaults = Switchbox.DEFAULTS;
+  $.fn.switchbox.Constructor = Switchbox;
+
+  $.fn.switchbox.noConflict = function() {
+    $.fn.switchbox = old;
+    return this;
   };
 })(jQuery);

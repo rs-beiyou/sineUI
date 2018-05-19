@@ -4,9 +4,8 @@
     .si-treebox-tree{
         cursor: pointer;
         height: auto;
-        min-height: $input-height-base;
         .si-tag {
-            margin: 0 4px 0 0;
+            margin: 1px 4px 1px 0;
             height: auto;
             line-height: normal;
             user-select: none;
@@ -35,6 +34,20 @@
         padding: 8px 0;
     }
 }
+.si-treebox-tree{
+    min-height: $input-height-base;
+}
+.form-group-sm{
+    .si-treebox-tree{
+        min-height: $input-height-small;
+    }
+}
+.form-group-lg{
+    .si-treebox-tree{
+        min-height: $input-height-large;
+    }
+}
+
 .si-treebox-dropdown{
     position: absolute;
     width: 100%;

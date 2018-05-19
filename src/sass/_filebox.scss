@@ -70,6 +70,16 @@
         height: 70px;
         float: left;
         margin-top: 10px; 
+        text-align: center;
+        img{
+            width: 100%;
+            height: 100%;
+        }
+        i{
+            font-size: $font-size-h2;
+            line-height: 70px;
+            color: $brand-primary;
+        }
     }
     .uploader-item-right{
         width: 470px;
@@ -118,4 +128,10 @@
         margin-left: 5px;
         margin-bottom: 0;
     }
+}
+.file-list-item{
+    margin: 3px 0;
+    padding: 0 5px;
+    color: #666;
+    line-height: 24px;
 }

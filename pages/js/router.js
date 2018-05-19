@@ -69,6 +69,10 @@ window.si.config({
     path: 'components',
     title: '组件',
     children: [{
+      title: '面板',
+      path: 'panel',
+      page: 'pages/views/components/panel.html'
+    }, {
       title: '按钮',
       path: 'buttons',
       page: 'pages/views/components/buttons.html'

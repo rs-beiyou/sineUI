@@ -1,6 +1,7 @@
 import './bootstrap-table-extend';
 
 import {Log} from '../../libs/log';
+import _ from '../../utils/util';
 
 class Table {
   constructor(el, options){
@@ -108,7 +109,7 @@ class Table {
     let tableData = this.$el.bootstrapTable('getData');
     let selected = this.$el.bootstrapTable('getSelections');
     $.each(selected, (i, row)=> {
-      let inde = tableData.findObjIndex(row);
+      let inde = _.findObjIndex(tableData, row);
       this.$el.bootstrapTable('updateRow', {
         index: inde,
         row: data
@@ -123,7 +124,7 @@ class Table {
     let data = this.$el.bootstrapTable('getData');
     if(id!==null&&id!==undefined){
       let row = this.$el.bootstrapTable('getRowByUniqueId', id);
-      let inde = data.findObjIndex(row);
+      let inde = _.findObjIndex(data, row);
       if (inde > -1) {
         data.splice(inde, 1);
       }
@@ -134,7 +135,7 @@ class Table {
     let data = this.$el.bootstrapTable('getData');
     let selected = this.$el.bootstrapTable('getSelections');
     $.each(selected, (i, row)=> {
-      let inde = data.findObjIndex(row);
+      let inde = _.findObjIndex(data, row);
       if (inde > -1) {
         data.splice(inde, 1);
       }
@@ -189,17 +190,6 @@ function Plugin(option){
   }
 }
 
-let old = $.fn.table;
-
-$.fn.table = Plugin;
-$.fn.table.Constructor = Table;
-$.fn.table.methods = allowedMethods;
-
-$.fn.table.noConflict = function() {
-  $.fn.table = old;
-  return this;
-};
-
 Table.DEFAULTS = {
   method: 'post',
   clickToSelect: true,
@@ -216,4 +206,14 @@ Table.DEFAULTS = {
   pageList: [10, 20, 30, 50],
   showSerialNumber: false
 };
+let old = $.fn.table;
+
+$.fn.table = Plugin;
+$.fn.table.Constructor = Table;
 $.fn.table.defaults = Table.DEFAULTS;
+$.fn.table.methods = allowedMethods;
+
+$.fn.table.noConflict = function() {
+  $.fn.table = old;
+  return this;
+};

@@ -2,6 +2,7 @@ import 'libs/daterangepicker/daterangepicker.css';
 import 'libs/daterangepicker/daterangepicker.js';
 
 import BaseForm from './form-base';
+import _ from '../../utils/util';
 
 class Datebox extends BaseForm{
   constructor(el, options){
@@ -108,7 +109,7 @@ class Datebox extends BaseForm{
   _setValue(newVal, val){
     let op = this.options;
     !op.readonly&&!op.disabled&&!this.inited&&this.initDate();
-    this.$input.val(newVal?new Date(newVal).format(op.format):'');
+    this.$input.val(newVal?_.formatDate(new Date(newVal),op.format):'');
     this.inited&&this.$input.daterangepicker('elementChanged').trigger('valid.change').trigger('change');
     if(newVal!==''&&val===''){
       this.$datebox.addClass('si-show-clear');
@@ -164,15 +165,6 @@ function Plugin(option) {
     throw new Error(error);
   }
 }
-let old = $.fn.datebox;
-
-$.fn.datebox = Plugin;
-$.fn.datebox.Constructor = Datebox;
-
-$.fn.datebox.noConflict = function() {
-  $.fn.datebox = old;
-  return this;
-};
 
 Datebox.DEFAULTS = {
   hasSurface: false,
@@ -195,4 +187,14 @@ Datebox.DEFAULTS = {
   maxDate:'',
   icon:'fa fa-calendar-o fa-fw',
   clearIcon:'fa fa-times-circle fa-fw'
+};
+let old = $.fn.datebox;
+
+$.fn.datebox = Plugin;
+$.fn.datebox.defaults = Datebox.DEFAULTS;
+$.fn.datebox.Constructor = Datebox;
+
+$.fn.datebox.noConflict = function() {
+  $.fn.datebox = old;
+  return this;
 };

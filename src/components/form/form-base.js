@@ -19,7 +19,7 @@ export default class BaseForm {
     let op = this.options;
     let callback = (path, newVal, val) => {
       let key = path[0];
-      if (newVal === undefined || newVal === val || Array.isArray(newVal) && newVal.length === 0) return;
+      if (newVal === undefined || newVal === val) return;
       switch (key) {
         case 'label':
         case 'labelWidth':
@@ -150,7 +150,7 @@ export default class BaseForm {
       data:data,
       method: 'get',
       success: (re) => {
-        cb && cb(re);
+        cb && cb(typeof re==='string' ? JSON.parse(re) : re);
       }
     });
   }

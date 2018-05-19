@@ -62,9 +62,6 @@ import _ from '../../utils/util';
         this.$placeholder = $placeholder;
         this.$clear = $clear;
         this.readonlyArr = []; //readonlyArr表示只读项数组
-        setTimeout(() => {
-          $dropdown.width($selection.outerWidth());
-        });
         this._initEvent();
       }
       switch (item) {
@@ -90,7 +87,7 @@ import _ from '../../utils/util';
         case 'data':
           if (!Array.isArray(newVal)) return;
           this._setAttachList(newVal);
-          op.value !== '' && this._setValue(op.value);
+          op.value && this._setValue(op.value);
           op.readonly !== false && this._setReadonly(op.readonly);
           op.disabled !== false && this._setDisabled(op.disabled);
           break;
@@ -124,8 +121,8 @@ import _ from '../../utils/util';
           let sbd = this.selectboxDom,
             rla = this.readonlyArr;
           let newRla = rl ? rl.split(',') : [];
-          let arr1 = Array.compare(newRla, rla);
-          let arr2 = Array.compare(rla, newRla);
+          let arr1 = _.compare(newRla, rla);
+          let arr2 = _.compare(rla, newRla);
           arr1.forEach(key => {
             sbd[key] && sbd[key].$selectbox.addClass('si-selectbox-item-disabled');
           });
@@ -144,6 +141,7 @@ import _ from '../../utils/util';
         !da && $selectbox.removeClass('si-form-disabled')&&this._addEvent();
       }
     }
+    _setSearch(){}
     _initEvent(){
       this._addEvent();
       let op = this.options;
@@ -183,6 +181,7 @@ import _ from '../../utils/util';
       let realHright = $dropdown.outerHeight() + Number($dropdown.css('margin-top').replace('px', '')) + Number($dropdown.css('margin-bottom').replace('px', ''));
       let derection = realHright <= $selection.derection('check').bottomDistance ? 'bottom' : 'top';
       $selectbox.addClass('si-selectbox-visible');
+      $dropdown.width($selection.outerWidth());
       this.derection = derection;
       let className = derection === 'top'? 'slide-up-in' : 'slide-down-in';
       if(derection==='top'){
@@ -191,9 +190,12 @@ import _ from '../../utils/util';
           'left': transfer ? offset.left : 0
         });
       }else{
-        transfer&&$dropdown.css({
+        transfer?$dropdown.css({
           'top': offset.top + $selectbox.outerHeight(),
           'left': offset.left
+        }):$dropdown.css({
+          'top': $selectbox.outerHeight(),
+          'left': 0
         });
       }
       $dropdown.show().addClass(className);
@@ -221,8 +223,8 @@ import _ from '../../utils/util';
           let va = newVal !== '' ? String(newVal).split(',') : [],
             vac = val && val !== '' ? String(val).split(',') : [],
             sbd = this.selectboxDom;
-          let arr1 = Array.compare(va, vac);
-          let arr2 = Array.compare(vac, va);
+          let arr1 = _.compare(va, vac);
+          let arr2 = _.compare(vac, va);
           if (va.length > 0) {
             $placeholder.hide();
             op.clearable && this.$selection.addClass('si-show-clear');
@@ -381,16 +383,6 @@ import _ from '../../utils/util';
     }
   }
 
-  let old = $.fn.selectbox;
-
-  $.fn.selectbox = Plugin;
-  $.fn.selectbox.Constructor = Selectbox;
-
-  $.fn.selectbox.noConflict = function() {
-    $.fn.selectbox = old;
-    return this;
-  };
-
   Selectbox.DEFAULTS = {
     label: '',
     id: '',
@@ -406,7 +398,7 @@ import _ from '../../utils/util';
     size: '',
     keyField: 'key',
     valueField: 'value',
-    dataField:'list',
+    dataField:'',
     data: null,
     url: '',
     value: '',
@@ -417,5 +409,16 @@ import _ from '../../utils/util';
     valid: false,
     icon:'fa fa-caret-down fa-fw',
     clearIcon:'fa fa-times-circle fa-fw'
+  };
+
+  let old = $.fn.selectbox;
+
+  $.fn.selectbox = Plugin;
+  $.fn.selectbox.defaults = Selectbox.DEFAULTS;
+  $.fn.selectbox.Constructor = Selectbox;
+
+  $.fn.selectbox.noConflict = function() {
+    $.fn.selectbox = old;
+    return this;
   };
 })(jQuery);

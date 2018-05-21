@@ -10,7 +10,7 @@ export default class BaseForm {
     this._setFragment();
     this._setFormBlock();
     this['_set' + this.className]();
-    this.$input.addClass('si-form-input').data('si-form-type',this.className).attr({'spellcheck':false,'autocomplete':'off'});
+    this.$input.addClass('si-form-input').data('si-form-type',this.className.toLowerCase()).attr({'spellcheck':false,'autocomplete':'off'});
     this.set(this.lastOptions);
     this._setCompile();
     this.$element.after(this.$fragment[0]).remove();
@@ -35,6 +35,8 @@ export default class BaseForm {
         case 'multiple':
         case 'width':
         case 'expandAll':
+        case 'cols':
+        case 'rows':
           this['_set' + this.className](key, newVal, val);
           break;
         case 'helpText':

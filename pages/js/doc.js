@@ -1,5 +1,5 @@
 var $document = $(document);
-$('.sidebar-background').css('background', 'url(./src/image/sidebar-4.jpg)');
+$('.sidebar-background').css('background', 'url(./static/image/sidebar-4.jpg)');
 $('.si-sidebar').find('[data-toggle="tooltip"]').tooltip();
 $.ajax({
   url: './pages/data/sidebar.json',

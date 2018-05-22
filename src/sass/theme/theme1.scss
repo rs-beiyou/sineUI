@@ -37,6 +37,15 @@ body{
             box-shadow: $page-sider-shadow;
             z-index: $page-sider-zIndex;
             transition: margin .5s;
+            .nav-list{
+                position: absolute;
+                top: $page-sider-topbar-height;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                overflow: auto;
+                padding-bottom: 10px;
+            }
         }
         .si-sider-topbar{
             width: 100%;

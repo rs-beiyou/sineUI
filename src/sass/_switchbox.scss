@@ -15,6 +15,7 @@
     cursor: pointer;
     border-radius: $switch-border-radius;
     display: inline-block;
+    vertical-align: top;
     &:after {
         content: '';
         width: $switch-after-width;
@@ -48,6 +49,30 @@
         border-color: $switch-disabled-bg;
         &:after {
             cursor: not-allowed;
+        }
+    }
+}
+.form-group-sm{
+    .si-switchbox{
+        width: $switch-width-small;
+        height: $switch-height-small;
+        line-height: 20px;
+        border-radius: $switch-border-radius-small;
+        &:after {
+            width: $switch-after-width-small;
+            height: $switch-after-height-small;
+            border-radius: $switch-after-radius-small;
+        }
+        &:active:after {
+            width: $switch-after-active-width-small;
+        }
+        &.si-switchbox-checked {
+            &:active:after {
+                margin-left: $switch-width-small - $switch-after-active-width-small -3;
+            }
+            &:after {
+                margin-left: $switch-width-small - $switch-after-width-small -3;
+            }
         }
     }
 }

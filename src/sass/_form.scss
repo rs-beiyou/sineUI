@@ -174,12 +174,6 @@ input[type="checkbox"] {
     .form-block{
         display: block;
         float: none !important;
-        .si-checkbox,.si-radiobox{
-            margin: 5px 0;
-        }
-        .si-switchbox{
-            margin-top: 5px;
-        }
     }
 }
 .form-columns{
@@ -194,11 +188,16 @@ input[type="checkbox"] {
     }
     .form-block{
         display: inline-block;
-        .si-checkbox,.si-radiobox{
-            margin: 5px 0;
-        }
-        .si-switchbox{
-            margin-top: 5px;
-        }
+    }
+}
+.si-checkbox,.si-radiobox,.si-switchbox{
+    margin: 5px 0 1px;
+    label{
+        margin-bottom: 0;
+    }
+}
+.form-group-sm{
+    .si-checkbox,.si-radiobox,.si-switchbox{
+        margin: 5px 0;
     }
 }

@@ -3,7 +3,7 @@
     .si-combobox-combo{
         cursor: pointer;
         height: auto;
-        min-height: $input-height-base;
+        min-height: $input-height-small;
         position: relative;
         &.has-icon-right{
             .form-control{

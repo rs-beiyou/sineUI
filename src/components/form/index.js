@@ -62,6 +62,16 @@ class Form {
     if(!obj||typeof obj!=='object'){
       throw new Error('表单（Form）插件load方法参数必须为Object对象！');
     }
+    this.$element.find('input').each((i,el) => {
+      let $el = $(el), name = $el.attr('name');
+      if(name===undefined || obj[name]===undefined)return true;
+      if($el.hasClass('si-form-input')){
+        let type = $el.data('si-form-type').toLowerCase();
+        $el[type]({value:obj[name]});
+        return true;
+      }
+      $el.val(obj[name]);
+    });
     this.$element.find('.si-form-input').each((i,el)=>{
       let $el = $(el), name = $el.attr('name');
       let type = $el.data('si-form-type').toLowerCase();

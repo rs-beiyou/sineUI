@@ -23,12 +23,8 @@ $.extend({
     let success = options.success;
     if (success) {
       options.success = function(o, index) {
-        $.parser.parse(o);
+        //$.parser.parse(o);
         success(o, index);
-      };
-    } else {
-      options.success = function(o) {
-        $.parser.parse(o);
       };
     }
     options = $.extend({
@@ -42,7 +38,7 @@ $.extend({
     layer.open(options);
   },
   dialogClose: function(index) {
-    index!==undefined?layer.close(index):layer.closeAll('dialog');
+    index!==undefined?layer.close(index):layer.closeAll();
   },
   dialogGetChildFrame: function(DOM, index) {
     return layer.getChildFrame(DOM, index);

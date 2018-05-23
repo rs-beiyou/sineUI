@@ -199,21 +199,21 @@
     }
     //标题
     _setModalHeader() {
-      let config = this.config,
-        titype = typeof config.title === 'object';
-      if (config.title) {
+      let op = this.config,
+        titype = typeof op.title === 'object';
+      if (op.title) {
         this.$modaltitle = $(document.createElement('div')).addClass('layui-layer-title')
-          .attr('style', titype ? config.title[1] : '')
-          .html(titype ? config.title[0] : config.title);
+          .attr('style', titype ? op.title[1] : '')
+          .html(titype ? op.title[0] : op.title);
       }
     }
 
     ////遮罩
     _setModalShade() {
-      let config = this.config,
+      let op = this.config,
         times = this.index;
-      let zIndex = config.zIndex + times;
-      if (config.shade) {
+      let zIndex = op.zIndex + times;
+      if (op.shade) {
         this.$modalshade = $(document.createElement('div')).addClass('layui-layer-shade')
           .attr('id', 'layui-layer-shade' + times + '')
           .attr('times', times)
@@ -223,21 +223,20 @@
 
     //内容
     _setModalContent() {
-      let config = this.config;
+      let op = this.config;
       this.$modalcontent = $(document.createElement('div'))
-        .addClass('layui-layer-content ' + ((config.type == 0 && config.icon !== -1) ? 'layui-layer-padding' : ' ') + (config.type == 3 ? 'layui-layer-loading' + config.icon : ''))
-        .attr('id', config.id || '');
-
-      if (config.type == 0 && config.icon !== -1) {
-        this.$modalcontent.append('<i class="layui-layer-ico layui-layer-ico' + config.icon + '"></i>');
+        .addClass('layui-layer-content ' + ((op.type == 0 && op.icon !== -1) ? 'layui-layer-padding' : ' ') + (op.type == 3 ? 'layui-layer-loading' + op.icon : ''))
+        .attr('id', op.id || '');
+      if (op.type == 0 && op.icon !== -1) {
+        this.$modalcontent.append('<i class="layui-layer-ico layui-layer-ico' + op.icon + '"></i>');
       }
     }
 
     _setModalSetwin() {
-      let config = this.config;
-      let ismax = config.maxmin && (config.type === 1 || config.type === 2);
+      let op = this.config;
+      let ismax = op.maxmin && (op.type === 1 || op.type === 2);
       let closebtn = ismax ? '<a class="layui-layer-min" href="javascript:;"><cite></cite></a><a class="layui-layer-ico layui-layer-max" href="javascript:;"></a>' : '';
-      config.closeBtn && (closebtn += '<a class="layui-layer-ico ' + doms[7] + ' ' + doms[7] + (config.title ? config.closeBtn : (config.type == 4 ? '1' : '2')) + '" href="javascript:;"></a>');
+      op.closeBtn && (closebtn += '<a class="layui-layer-ico ' + doms[7] + ' ' + doms[7] + (op.title ? op.closeBtn : (op.type == 4 ? '1' : '2')) + '" href="javascript:;"></a>');
 
       this.$modalsetwin = $(document.createElement('span'))
         .addClass('layui-layer-setwin')
@@ -245,20 +244,22 @@
     }
     //按钮
     _setModalBtns() {
-      let config = this.config;
-      this.$modalbtn = config.btn ? function() {
-        let button = '';
-        typeof config.btn === 'string' && (config.btn = [config.btn]);
-        for (var i = 0, len = config.btn.length; i < len; i++) {
-          button += '<button class="btn btn-default btn-sm">' + config.btn[i] + '</button>'
-        }
-        return $(document.createElement('div')).addClass(doms[6] + ' layui-layer-btn-' + (config.btnAlign || '')).append(button);
-      }() : ''
+      let op = this.config;
+      if (op.btn) {
+        this.$modalbtn = function() {
+          let button = '';
+          typeof op.btn === 'string' && (op.btn = [op.btn]);
+          for (var i = 0, len = op.btn.length; i < len; i++) {
+            button += '<button class="btn btn-default btn-sm">' + op.btn[i] + '</button>'
+          }
+          return $(document.createElement('div')).addClass(doms[6] + ' layui-layer-btn-' + (op.btnAlign || '')).append(button);
+        }()
+      }
     }
 
     _setModalResize() {
-      let config = this.config;
-      if (config.resize) {
+      let op = this.config;
+      if (op.resize) {
         this.$modalresize = $(document.createElement('span')).addClass('layui-layer-resize');
       }
     }
@@ -290,7 +291,9 @@
 
       that._setModalContent();
       if (!(config.type == 1 && conType)) {
-        this.$modalcontent.append(config.content || '')
+        var o = $('<div></div').append(config.content || ''); 
+        $.parser.parse(o);
+        this.$modalcontent.append(o);
       }
 
 
@@ -428,12 +431,12 @@
         layero.outerWidth() > config.maxWidth && layero.width(config.maxWidth);
       }
       //弹窗高度
-      if(layero.outerHeight()>win.height()){
-      	layero.height(win.height());
+      if (layero.outerHeight() > win.height()) {
+        layero.height(win.height());
       }
 
       let area = [layero.innerWidth(), layero.innerHeight()],
-        titHeight = layero.find(doms[1]).outerHeight() || 0,
+        titHeight = that.$modaltitle ? that.$modaltitle.outerHeight() : 0,
         btnHeight = layero.find('.' + doms[6]).outerHeight() || 0,
         setHeight = function(elem) {
           elem = layero.find(elem);
@@ -515,7 +518,7 @@
       }
 
       if (layero.attr('minLeft')) {
-        that.offsetTop = win.height() - (layero.find(doms[1]).outerHeight() || 0);
+        that.offsetTop = win.height() - (that.$modaltitle.outerHeight() || 0);
         that.offsetLeft = layero.css('left');
       }
 
@@ -595,10 +598,8 @@
     move() {
       let that = this,
         config = that.config,
-        _DOC = $(document),
         layero = that.layero,
         moveElem = layero.find(config.move),
-        resizeElem = layero.find('.layui-layer-resize'),
         dict = {};
 
       if (config.move) {
@@ -616,7 +617,7 @@
         }
       });
 
-      resizeElem.on('mousedown', function(e) {
+      this.$modalresize.on('mousedown', function(e) {
         e.preventDefault();
         dict.resizeStart = true;
         dict.offset = [e.clientX, e.clientY];
@@ -626,8 +627,7 @@
         that.$modalmove.css('cursor', 'se-resize').show();
       });
 
-      _DOC.on('mousemove', function(e) {
-
+      $(document).on('mousemove', function(e) {
         //拖拽移动
         if (dict.moveStart) {
           let X = e.clientX - dict.offset[0],
@@ -728,7 +728,7 @@
 
       //点遮罩关闭
       if (config.shadeClose) {
-        $('#layui-layer-shade' + that.index).on('click', function() {
+        this.$modalshade.on('click', function() {
           layer.close(that.index);
         });
       }

@@ -23,12 +23,8 @@ $.extend({
     let success = options.success;
     if (success) {
       options.success = function(o, index) {
-        $.parser.parse(o);
+        //$.parser.parse(o);
         success(o, index);
-      };
-    } else {
-      options.success = function(o) {
-        $.parser.parse(o);
       };
     }
     options = $.extend({

@@ -6,7 +6,8 @@
     "scripts": {
         "dev": "webpack-dev-server --open --config webpack.dev.config.js",
         "build": "webpack --progress --hide-modules --config webpack.pro.config.js",
-        "lint": "eslint --fix --ext .js,.sass src"
+        "lint": "eslint --fix --ext .js,.sass src",
+        "release": "webpack --progress --hide-modules --config webpack.release.config.js"
     },
     "repository": {
         "type": "git",
@@ -52,7 +53,8 @@
         "webpack-bundle-analyzer": "^2.11.1",
         "webpack-bundle-size-analyzer": "^2.7.0",
         "webpack-dev-server": "^2.6.1",
-        "webpack-merge": "^4.1.0"
+        "webpack-merge": "^4.1.0",
+        "webpack-zip-plugin": "^0.1.6"
     },
     "dependencies": {
         "core-js": "^2.5.5",

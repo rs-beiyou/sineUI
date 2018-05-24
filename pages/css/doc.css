@@ -250,6 +250,12 @@ pre[class*="language-"] {
 .code-box-demo table.code-box-table td ul li {
     font-size: 12px!important
 }
+.title{
+    font-size: 16px;
+    font-weight: 600;
+    margin: 5px 0 10px;
+    color: #555;
+}
 
 .demo-content{
     margin-top: 20px;
@@ -270,7 +276,7 @@ pre[class*="language-"] {
     padding-left: 15px;
 }
 .ul-circle li{
-    list-style: circle;
+    list-style: disc;
     padding: 5px 0;
     font-size: 20px;
 }

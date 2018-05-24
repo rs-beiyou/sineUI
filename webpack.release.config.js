@@ -44,7 +44,7 @@ module.exports = merge(webpackBaseConfig, {
     new WebpackZipPlugin({
       initialFile: './release',//需要打包的文件夹(一般为dist)
       endPath: './static/release',  //打包到对应目录（一般为当前目录'./'）
-      zipName: packageInfo.name + packageInfo.version +'.zip' //打包生成的文件名
+      zipName: `${packageInfo.name}-${packageInfo.version}.zip` //打包生成的文件名
     })
   ]
 });

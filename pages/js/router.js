@@ -10,9 +10,9 @@ window.si.config({
     path: 'lost',
     page: 'pages/views/404.html'
   },{
-    title: '下载',
-    path: 'download',
-    page: 'pages/views/download.html'
+    title: '更新日志',
+    path: 'update',
+    page: 'pages/views/update.html'
   }, {
     path: 'layout',
     title: '结构',

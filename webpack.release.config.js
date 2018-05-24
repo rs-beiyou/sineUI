@@ -5,6 +5,7 @@ const webpackBaseConfig = require('./webpack.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const WebpackZipPlugin =require('webpack-zip-plugin');
+const packageInfo = require('./package.json');
 
 module.exports = merge(webpackBaseConfig, {
   // 入口：要进行处理的实例（js）
@@ -14,6 +15,7 @@ module.exports = merge(webpackBaseConfig, {
   },
   output: {
     path: path.join(__dirname, './release'),
+    // path: '/Users/zhangming/eclipse-workspace/zzsoft5.0/webapp/script/static/libs/sineui',
     publicPath: '../',
     filename: 'js/[name].min.js'
   },
@@ -40,9 +42,9 @@ module.exports = merge(webpackBaseConfig, {
       minRatio: 1
     }),
     new WebpackZipPlugin({
-      initialFile: './release',  //需要打包的文件夹(一般为dist)
+      initialFile: './release',//需要打包的文件夹(一般为dist)
       endPath: './static/release',  //打包到对应目录（一般为当前目录'./'）
-      zipName: 'sineui.zip' //打包生成的文件名
+      zipName: packageInfo.name + packageInfo.version +'.zip' //打包生成的文件名
     })
   ]
 });

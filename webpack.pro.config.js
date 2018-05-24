@@ -11,7 +11,6 @@ const CompressionPlugin = require('compression-webpack-plugin');
 module.exports = merge(webpackBaseConfig, {
   output: {
     path: path.join(__dirname, './dist'),
-    // path: '/Users/zhangming/eclipse-workspace/zzsoft5.0/webapp/script/static/libs/sineui',
     publicPath: '../',
     filename: 'js/[name].min.js'
   },

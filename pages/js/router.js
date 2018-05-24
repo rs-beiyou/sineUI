@@ -9,6 +9,10 @@ window.si.config({
     title: '404',
     path: 'lost',
     page: 'pages/views/404.html'
+  },{
+    title: '下载',
+    path: 'download',
+    page: 'pages/views/download.html'
   }, {
     path: 'layout',
     title: '结构',

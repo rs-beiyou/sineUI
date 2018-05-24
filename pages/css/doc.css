@@ -250,3 +250,40 @@ pre[class*="language-"] {
 .code-box-demo table.code-box-table td ul li {
     font-size: 12px!important
 }
+
+.demo-content{
+    margin-top: 20px;
+    padding: 0 20px;
+}
+.demo-date{
+    background: #f7f7f7;
+    border: 1px solid #eee;
+    padding: 2px 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+    border-radius: 3px;
+}
+.demo-date i{
+    margin-right: 5px;
+}
+.ul-circle{
+    padding-left: 15px;
+}
+.ul-circle li{
+    list-style: circle;
+    padding: 5px 0;
+    font-size: 20px;
+}
+.ul-circle li.add{
+    color: #19be6b;
+}
+.ul-circle li.cancel{
+    color: #ed3f14;
+}
+.ul-circle li.fix{
+    color: #2d8cf0;
+}
+.ul-circle li span{
+    color: #333;
+    font-size: 14px;
+}

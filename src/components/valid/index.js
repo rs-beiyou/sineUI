@@ -15,9 +15,11 @@ class Valid{
     if(this.options.required){
       this.former.$label&&this.former.$label.addClass('si-form-required');
     }
-    this.$el.on('valid.change',()=>{
-      this.valid();
-    });
+    if(this.$el.data('si-form-type')==='textbox'){
+      this.$el.on('valid.change',_.debounce(this.valid.bind(this),500));
+    }else{
+      this.$el.on('valid.change',this.valid.bind(this));
+    }
   }
   reset(option){
     this.hasError&&this.hide();
@@ -123,30 +125,35 @@ class Valid{
   //判断是否是合法的身份证号
   id(){
     let val = this.$el.val();
+    if(val==='')return;
     this.pass = /^\d{15}$|^\d{14}x$|^\d{14}X$|^\d{18}$|^\d{17}x$|^\d{17}X$/.test(val);
     this.msg = this.options.msg||'身份证号格式错误';
   }
   //是否是合法的E_mail地址(以字母开头，字母、数字、下划线的组合，中间必须有一个“@”)
   email(){
     let val = this.$el.val();
+    if(val==='')return;
     this.pass = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/.test(val);
     this.msg = this.options.msg||'邮箱格式错误';
   }
   //邮编
   postcode(){
     let val = this.$el.val();
+    if(val==='')return;
     this.pass = /^\d{6}$/.test(val);
     this.msg = this.options.msg||'邮编格式错误';
   }
   //正整数
   int(){
     let val = this.$el.val();
+    if(val==='')return;
     this.pass = /^\d+$/.test(val);
     this.msg = this.options.msg||'数值(整数)格式错误';
   }
   //浮点数
   float(){
     let val = this.$el.val();
+    if(val==='')return;
     this.pass = /^\d+\.{0,1}\d*$/.test(val);
     this.msg = this.options.msg||'数值(正实数)格式错误';
   }
@@ -160,6 +167,7 @@ class Valid{
       throw new Error('The type of interval in the number size check must be an array!\n数字大小校验区间必须为数组！');
     }
     let val = this.$el.val();
+    if(val==='')return;
     let num = Number(val);
     if(isNaN(num)){
       this.pass = false;
@@ -174,29 +182,36 @@ class Valid{
   //固定电话号码
   tel(){
     let val = this.$el.val();
+    if(val==='')return;
     this.pass = /^(0\\d{2}-\\d{8}(-\\d{1,4})?)|(0\\d{3}-\\d{7,8}(-\\d{1,4})?)$/.test(val);
     this.msg = this.options.msg||'固定电话号码格式错误';
   }
   //手机号码
   mobile(){
     let val = this.$el.val();
+    if(val==='')return;
     this.pass = /^1[345789]\d{9}$/.test(val);
     this.msg = this.options.msg||'手机号码格式错误';
   }
   //电话号码：包括固定和移动两种
   phone(){
-    this.pass = this.tel().pass||this.mobile().pass;
+    this.tel();
+    this.msg = this.options.msg||'电话号码格式错误';
+    if(this.pass)return;
+    this.mobile();
     this.msg = this.options.msg||'电话号码格式错误';
   }
   //路径
   url(){
     let val = this.$el.val();
+    if(val==='')return;
     this.pass = /^((ht|f)tps?):\/\/[\w\\-]+(\.[\w\\-]+)+([\w\-\\.,@?^=%&:\\/~\\+#]*[\w\-\\@?^=%&\\/~\\+#])?$/.test(val);
     this.msg = this.options.msg||'身份证号格式错误';
   }
   //数字类型
   number(){
     let val = this.$el.val();
+    if(val==='')return;
     this.pass = !isNaN(val);
     this.msg = this.options.msg||'身份证号格式错误';
   }
@@ -206,6 +221,7 @@ class Valid{
       regex = this.options.regex,
       url = this.options.url,
       name = this.former.options.name||_.randomString();
+    if(val==='')return;
     if(regex){
       this.pass = new RegExp(regex).test(val);
       this.msg = '输入不符合规则！';
@@ -249,6 +265,7 @@ function Plugin(option, former){
         let $list = $this.find('.si-valid-control');
         for (let index = 0; index < $list.length; index++) {
           const element = $list[index];
+          if($(element).is(':hidden'))continue;
           const pass = $(element).valid('check');
           if(!pass){
             value = false;

@@ -1,0 +1,42 @@
+.si-timeline{
+    .si-timeline-item{
+        position: relative;
+        padding-bottom: 20px;
+        .si-timeline-item-tail{
+            position: absolute;
+            top: 0;
+            left: 6px;
+            height: 100%;
+            border-left: 1px solid #e9eaec;
+        }
+        .si-timeline-item-head{
+            position: absolute;
+            width: 13px;
+            height: 13px;
+            background: #fff;
+            border-radius: 50%;
+            border: 1px solid transparent;
+        }
+        .si-timeline-item-head-primary{
+            border-color: $brand-primary;
+            color: $brand-primary;
+        }
+        .si-timeline-item-head-warning{
+            border-color: $brand-warning;
+            color: $brand-warning;
+        }
+        .si-timeline-item-head-danger{
+            border-color: $brand-danger;
+            color: $brand-danger;
+        }
+        .si-timeline-item-content{
+            padding: 2px 2px 10px 24px;
+            position: relative;
+        }
+        &:last-child{
+            .si-timeline-item-tail{
+                display: none;
+            }
+        }
+    }
+}

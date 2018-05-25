@@ -359,7 +359,13 @@ a {
         margin-left: 0;
     }
 }
-
+@media (min-width: $screen-xl) {
+    .si-main-panel{
+        .si-container{
+            min-width: $si-container-max-width-xl;
+        }
+    }
+}
 @media (min-width: $screen-sm-min+1) {
     .si-main-panel {
         margin-left: $sidebar-width;

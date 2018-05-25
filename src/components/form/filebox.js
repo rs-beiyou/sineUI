@@ -73,7 +73,6 @@ class Filebox extends BaseForm {
         title:'文件上传',
         maxmin: false,
         area:['650px','400px'],
-        resize: false,
         content: this.$dialogContent,
         success:(d, di)=>{
           this.dialogIndex = di;

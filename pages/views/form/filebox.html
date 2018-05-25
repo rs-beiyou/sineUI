@@ -1,14 +1,14 @@
 <div class="container-fluid" id="filebox-page">
     <article class="si-article">
         <p class="si-info">文件选择上传和拖拽上传控件。</p>
-        <p class="si-warning"><i class="fa fa-exclamation-circle"></i>暂不支持上传测试</p>
+        <p class="si-warning"><i class="fa fa-exclamation-circle"></i>支持上传测试，最多上传3个，单文件大小限制3M，文件切片上传后合并很慢，个人服务器还请理解。</p>
         <div class="si-callout info">
             感谢<a href="https://github.com/fex-team/webuploader" target="_blank"><i class="fa fa-github"></i>WebUploader</a>
         </div>
         <h4>代码示例<i class="fa fa-code"></i></h4>
         <section class="code-box">
             <section class="code-box-demo">
-                <input class="btsp-filebox" data-id="file">
+                <input class="btsp-filebox" data-options="id:'file'">
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
@@ -57,6 +57,8 @@
 <script>
     $("#file").filebox({
         fileLoader: {
+            fileNumLimit: 3,
+            fileSizeLimit: 3*1024*1024,
             uploader: '/zzsoft/uploaddown/chunkUpload.action', //文件提交的地址
             delFileUrl: '/zzsoft/uploaddown/delete.action', //文件删除的地址
             getFileUrl: '/zzsoft/uploaddown/getFileList.action', //获取文件列表

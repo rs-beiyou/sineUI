@@ -616,16 +616,17 @@
           that.$modalmove.css('cursor', 'move').show();
         }
       });
-
-      this.$modalresize.on('mousedown', function(e) {
-        e.preventDefault();
-        dict.resizeStart = true;
-        dict.offset = [e.clientX, e.clientY];
-        dict.area = [
-          layero.outerWidth(), layero.outerHeight()
-        ];
-        that.$modalmove.css('cursor', 'se-resize').show();
-      });
+      if (config.resize) {
+        that.$modalresize.on('mousedown', function(e) {
+          e.preventDefault();
+          dict.resizeStart = true;
+          dict.offset = [e.clientX, e.clientY];
+          dict.area = [
+            layero.outerWidth(), layero.outerHeight()
+          ];
+          that.$modalmove.css('cursor', 'se-resize').show();
+        });
+      }
 
       $(document).on('mousemove', function(e) {
         //拖拽移动

@@ -264,8 +264,10 @@ function Plugin(option, former){
       if($this.is('form')){
         let $list = $this.find('.si-valid-control');
         for (let index = 0; index < $list.length; index++) {
-          const element = $list[index];
-          if($(element).is(':hidden'))continue;
+          const element = $list[index],$el = $(element);
+          const type = $el.data('si-form-type');
+          const former = $el.data('si.'+type);
+          if(former.$formBlock.is(':hidden'))continue;
           const pass = $(element).valid('check');
           if(!pass){
             value = false;

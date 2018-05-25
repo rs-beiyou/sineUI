@@ -6,8 +6,12 @@ class Former{
   constructor(el){
     this.$el = $(el);
     this.former = this.$el.data('si.'+ this.$el.data('si-form-type'));
+    this.valid = this.$el.data('si.valid');
   }
   hide(){
+    if(this.valid&&!this.valid.pass){
+      this.valid.hide();
+    }
     this.former.$label.hide();
     this.former.$formBlock.hide();
   }

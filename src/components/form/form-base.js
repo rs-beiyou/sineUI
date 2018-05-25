@@ -37,6 +37,7 @@ export default class BaseForm {
         case 'expandAll':
         case 'cols':
         case 'rows':
+        case 'wrap':
           this['_set' + this.className](key, newVal, val);
           break;
         case 'helpText':

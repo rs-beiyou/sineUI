@@ -26,6 +26,9 @@ class Radiobox extends BaseForm {
       case 'name':
         $input.attr(item, newVal);
         break;
+      case 'wrap':
+        $radiobox[newVal===true?'addClass':'removeClass']('si-radiobox-wrap');
+        break;
       case 'readonly':
         this._setReadonly(newVal);
         break;
@@ -192,6 +195,7 @@ Radiobox.DEFAULTS = {
   label: '',
   id: '',
   name: '',
+  wrap: false,
   labelWidth: '',
   inputWidth: '',
   labelAlign: 'right',

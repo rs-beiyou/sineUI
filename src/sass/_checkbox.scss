@@ -78,3 +78,9 @@
 .si-checkbox-content{
     @extend .si-radiobox-content;
 }
+.si-checkbox-wrap{
+    .si-checkbox-item{
+        display: block;
+        margin-bottom: 5px;
+    }
+}

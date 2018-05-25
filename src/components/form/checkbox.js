@@ -26,6 +26,9 @@ class Checkbox extends BaseForm {
       case 'name':
         $input.attr(item, newVal);
         break;
+      case 'wrap':
+        $checkbox[newVal===true?'addClass':'removeClass']('si-checkbox-wrap');
+        break;
       case 'readonly':
         this._setReadonly(newVal);
         break;
@@ -210,6 +213,7 @@ Checkbox.DEFAULTS = {
   label: '',
   id: '',
   name: '',
+  wrap: false,
   labelWidth: '',
   inputWidth: '',
   labelAlign: 'right',

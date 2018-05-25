@@ -7,6 +7,7 @@ $brand-info: #37c4fb;
 $brand-warning: #ff9900;
 $brand-danger: #ed3f14;
 
+$screen-xl: 1450px !default;
 
 $state-danger-text: $brand-danger;
 $state-info-text: $brand-info;
@@ -29,7 +30,8 @@ $sidebar-active-bg: #ff9800;
 $sidebar-active-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14),
 0 7px 10px -5px rgba(255, 152, 0, 0.4);
 $si-main-panel-bg: #f8f8f8;
-$si-container-max-width:1000px !default;
+$si-container-max-width:1100px !default;
+$si-container-max-width-xl:1200px !default;
 
 //theme
 $page-bg: #f4f5f5;

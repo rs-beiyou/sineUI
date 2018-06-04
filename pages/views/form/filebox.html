@@ -12,18 +12,18 @@
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
-                    <!-- 组件名 -->
+                    简单用法
                 </div>
                 <div>
                     <p>
-                        <!-- 组件描述 -->
+                        文件上传，可切片，可断点续传。需先定义几个文件处理<code>url</code>地址。
                     </p>
                 </div>
                 <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
             </section>
             <section class="code-box-wrapper">
-                <pre><code>
-                <!-- 组件代码 -->
+                <pre><code class="language-markup">
+&lt;input class="btsp-filebox" data-options="id:'file'"&gt;
               </code></pre>
                 <div class="code-box-wrapper-close">
                     <i class="fa fa-angle-double-up"></i>
@@ -32,22 +32,22 @@
         </section>
         <section class="code-box">
             <section class="code-box-demo">
-                <!-- 组件demo -->
+                <input class="btsp-filebox" data-options="id:'file2'">
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
-                    <!-- 组件名 -->
+                    自动上传
                 </div>
                 <div>
                     <p>
-                        <!-- 组件描述 -->
+                       <code>fileLoader</code>中<code>auto</code>参数
                     </p>
                 </div>
                 <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
             </section>
             <section class="code-box-wrapper">
-                <pre><code>
-                <!-- 组件代码 -->
+                <pre><code class="language-markup">
+&lt;input class="btsp-filebox" data-options="id:'file'"&gt;
               </code></pre>
                 <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
             </section>
@@ -65,9 +65,19 @@
             downloader: '/zzsoft/uploaddown/downFile.action', //文件下载地址
             checkChunkUrl: '/zzsoft/uploaddown/checkChunks.action', // 切片校验地址
             mergeUrl: '/zzsoft/uploaddown/merge.action',//切片合并地址
-            uploadSuccess: function(res) {
-                console.log(res);
-            }
+        }
+    })
+    $("#file2").filebox({
+        fileLoader: {
+            auto: true,
+            fileNumLimit: 3,
+            fileSizeLimit: 3*1024*1024,
+            uploader: '/zzsoft/uploaddown/chunkUpload.action', //文件提交的地址
+            delFileUrl: '/zzsoft/uploaddown/delete.action', //文件删除的地址
+            getFileUrl: '/zzsoft/uploaddown/getFileList.action', //获取文件列表
+            downloader: '/zzsoft/uploaddown/downFile.action', //文件下载地址
+            checkChunkUrl: '/zzsoft/uploaddown/checkChunks.action', // 切片校验地址
+            mergeUrl: '/zzsoft/uploaddown/merge.action',//切片合并地址
         }
     })
 </script>

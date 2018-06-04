@@ -340,6 +340,17 @@ import _ from '../../utils/util';
       });
       $dropdown.html(ul);
     }
+    getKey(){
+      let op = this.options,
+        valueArr = op.value !== '' && op.value.split(',') || [],
+        arr = [];
+      op.data.filter(item=>{
+        return valueArr.includes(item[op.valueField]);
+      }).forEach(item=>{
+        arr.push(item[op.keyField]);
+      });
+      return arr.join(',');
+    }
     destroy(){
       this._removeEvent();
       this.options.transfer&&this.$dropdown.remove();

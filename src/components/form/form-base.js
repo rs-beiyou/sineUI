@@ -163,4 +163,7 @@ export default class BaseForm {
   create(el){
     return el?document.createElement(el):document.createDocumentFragment();
   }
+  getValue(){
+    return this.options.value;
+  }
 }

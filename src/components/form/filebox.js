@@ -78,6 +78,9 @@ class Filebox extends BaseForm {
         success:(d, di)=>{
           this.dialogIndex = di;
           this._initUploader();
+          setTimeout(()=>{
+            this.options.fileLoader.auto&&this.$chooseBtn.find('label').trigger('click');
+          },300);
         },
         cancel:(index)=>{
           if(this.hasInited()){
@@ -143,14 +146,16 @@ class Filebox extends BaseForm {
   _initUploader() {
     let op = this.options,
       upop = op.fileLoader;
+    WebUploader.Uploader.unRegister('custom');
     WebUploader.Uploader.register({
-      'before-send':'beforeSend'  //每个分片上传前
-    },{
-      beforeSend:this.beforeSend.bind(this)
+      name: 'custom',
+      'before-send-file':'beforeSendFile',//整个文件上传前
+      'before-send':this.beforeSend.bind(this),  //每个分片上传前
+      'after-send-file':'afterSendFile'  //分片上传完毕
     });
     const mimeTypes = this._formatFileType();
     let uploader = WebUploader.create({
-      auto:upop.auto,//选择文件后是否自动上传
+      auto:false,//选择文件后是否自动上传
       method: upop.method,
       chunked: upop.chunked,//开启分片上传
       chunkSize: upop.chunkSize,// 如果要分片，分多大一片？默认大小为5M
@@ -161,6 +166,7 @@ class Filebox extends BaseForm {
       swf: uploaderFlash,// swf文件路径
       fileVal: upop.fileObjName,
       server: upop.uploader,// 文件接收服务端
+      fileNumLimit: upop.fileNumLimit,
       fileSizeLimit: upop.fileSizeLimit,//6G 验证文件总大小是否超出限制, 超出则不允许加入队列
       fileSingleSizeLimit: upop.fileSingleSizeLimit,  //3G 验证单个文件大小是否超出限制, 超出则不允许加入队列
       pick: op.readonly||op.disabled ? null:{
@@ -178,10 +184,11 @@ class Filebox extends BaseForm {
     this.uploader = uploader;
     this.queue();
     this.dequeue();
+    this.uploadBeforeSend();
     this.uploadProgress();
     this.uploadSuccess();
     this.uploadError();
-    this.uploadFinished();
+    // this.uploadFinished();
     this.error();
     uploader.on('all', type=> {
       if (type === 'startUpload'){
@@ -205,9 +212,10 @@ class Filebox extends BaseForm {
       this._createFileItem(file);
       file.$progressDesc.html('文件解析中...');
       this.options.fileLoader.chunked && this.uploader.md5File(file, 0, this.options.fileLoader.chunkSize)
-        .then(function(val) {
+        .then((val)=> {
           file.fileMd5 = val;
           file.$progressDesc.html('等待上传');
+          this.options.fileLoader.auto&&this.uploader.upload(file);
         });
       file.on('statuschange',function(cur){
         switch(cur){
@@ -240,43 +248,58 @@ class Filebox extends BaseForm {
   beforeSend(block){
     let upop = this.options.fileLoader;
     if(!upop.chunked)return;
-    let deferred = WebUploader.Deferred(),
-      file = block.file;
-    $.post(upop.checkChunkUrl,{
-      'fileName' : file.name,
-      'fileMd5': file.fileMd5,  //文件唯一标记
-      'chunk': block.chunk,  //当前分块下标
-      'chunkSize':  block.end-block.start//当前分块大小
-    },response=>{
-      if(response){
-        //分块存在，跳过
-        deferred.reject();
-      }else{
-        let fd =  this.uploader.options.formData;
-        fd.fileMd5 = file.fileMd5;
-        file.filedesc = file.$fileDesc.val();
-        if(upop.formData){
-          for (let key in upop.formData) {
-            fd[key] = upop.formData[key];
-          }
+    let deferred = WebUploader.Deferred();
+    let file = block.file;
+    $.ajax({
+      type:'post',
+      url: upop.checkChunkUrl,  //ajax验证每一个分片
+      data:{
+        'fileName' : file.name,
+        'fileMd5': file.fileMd5,  //文件唯一标记
+        'chunk': block.chunk,  //当前分块下标
+        'chunkSize':  block.end-block.start//当前分块大小
+      },
+      cache: false,
+      async: false,  // 同步
+      timeout: 2000, //todo 超时的话，只能认为该分片未上传过
+      dataType:'json',
+      success:function(response){
+        if(response){
+          //分块存在，跳过
+          deferred.reject();
+        }else{
+          deferred.resolve();
         }
-        if(upop.domData){
-          for (let d_key in upop.domData) {
-            let dom_id = upop.domData[d_key];
-            if (dom_id !== '') {
-              dom_id = dom_id.indexOf('#') > -1
-                ? dom_id
-                :'#' + dom_id;
-              let dom_val = $(dom_id).val();
-              fd[d_key] = dom_val;
-            }
-          }
-        }
-        //分块不存在或不完整，重新发送该分块内容
-        deferred.resolve();
       }
     });
     return deferred.promise();
+  }
+  uploadBeforeSend(){
+    let upop = this.options.fileLoader;
+    this.uploader.on('uploadBeforeSend', (block, data)=> {
+      if(!upop.chunked)return;
+      let file = block.file;
+      let fd = {};
+      fd.chunk = block.chunk;
+      fd.fileMd5 = file.fileMd5;
+      fd.filedesc = file.$fileDesc.val();
+      if(upop.formData){
+        for (let key in upop.formData) {
+          fd[key] = upop.formData[key];
+        }
+      }
+      if(upop.domData){
+        for (let d_key in upop.domData) {
+          let dom_id = upop.domData[d_key];
+          if (dom_id !== '') {
+            dom_id = dom_id.indexOf('#') > -1 ? dom_id : '#' + dom_id;
+            let dom_val = $(dom_id).val();
+            fd[d_key] = dom_val;
+          }
+        }
+      }
+      Object.assign(data, fd);
+    });
   }
   uploadProgress(){
     let upop = this.options.fileLoader;
@@ -311,6 +334,9 @@ class Filebox extends BaseForm {
             return;
           }
           file.$progressDesc.html('上传成功！').css('color','#0099FF');
+          if(!this.hasInited()){
+            this.$uploadBtn.hide();
+          }
           valueArr.push(res);
           this.$input.val(valueArr.join(';')).trigger('change');
           let re;
@@ -509,14 +535,19 @@ class Filebox extends BaseForm {
   _addFileItem(file, id, hasDownload, hasRemove, removeFromServer){
     let li = document.createElement('li'),
       name_span = document.createElement('span'),
-      remove_span, download_span,
+      remove_span, download_span, load_span,
       valueArr = this.valueArr;
-    $(name_span).html(file.name);
+    $(name_span).addClass('file-name').html(file.name).attr('title', file.name).data({'toggle':'tooltip','placement':'bottom'}).tooltip();
     if (hasRemove) {
+      load_span = document.createElement('span');
       remove_span = document.createElement('span');
       let remove_i = document.createElement('i');
-      $(remove_i).addClass('fa fa-remove');
-      $(remove_span).attr('title', '删除').addClass('file-remove').append(remove_i).on('click',()=> {
+      $(remove_i).addClass('fa fa-remove fa-fw');
+      let $load_span = $(load_span), $remove_span = $(remove_span);
+      $load_span.addClass('file-loading').html('<i class="fa fa-spinner fa-fw fa-spin"></i>');
+      $remove_span.attr('title', '删除').data({'toggle':'tooltip','placement':'bottom'}).tooltip().addClass('file-remove').append(remove_i).on('click',()=> {
+        $remove_span.hide();
+        $load_span.show();
         if (removeFromServer) {
           this.deleteFile(id, ()=> {
             $(li).remove();
@@ -533,12 +564,12 @@ class Filebox extends BaseForm {
     if (hasDownload) {
       download_span = document.createElement('span');
       let download_i = document.createElement('i');
-      $(download_i).addClass('fa fa-download');
-      $(download_span).attr('title', '下载').addClass('file-download').append(download_i).on('click', ()=> {
+      $(download_i).addClass('fa fa-download fa-fw');
+      $(download_span).attr('title', '下载').data({'toggle':'tooltip','placement':'bottom'}).tooltip().addClass('file-download').append(download_i).on('click', ()=> {
         this.downloadFile(id);
       });
     }
-    $(li).addClass('file-list-item').append(name_span).append(remove_span).append(download_span);
+    $(li).addClass('file-list-item clearfix').append(name_span).append(load_span).append(remove_span).append(download_span);
     return li;
   }
   getFileList(id, fn){
@@ -618,7 +649,7 @@ Filebox.DEFAULTS = {
     type: 'select', //[select,photo,drag]
     listType: 'text', //[text,card]
     multiple: true,
-    autoUpload: false, //是否开启自动上传
+    auto: false, //是否开启自动上传
     buttonText: '选择文件',
     description: '', //组建描述
     showUploadedPercent: true, //是否实时显示上传的百分比，如20%

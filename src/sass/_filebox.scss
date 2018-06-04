@@ -32,10 +32,12 @@
     @extend .btn-info;
 }
 .si-uploader-body{
+    position: absolute;
     font-size: $font-size-small;
     overflow: auto;
 	padding-bottom: 50px;
     height: 100%;
+    width: 100%;
     .si-uploader-queue{
         margin: 0 40px;
         .uploader-queue-item{
@@ -87,19 +89,6 @@
         margin-top: 10px; 
     }
 }
-.file-list .file-list-item{
-    height: 30px;
-    line-height: 30px;
-    width: 300px;
-    list-style: none;
-    overflow: hidden;
-}
-.file-remove,.file-download{
-    cursor:pointer;
-    line-height:24px;
-    padding:0 10px;
-    float: right;
-}
 .delfileBtn{
     line-height:24px;
     padding:0 18px;
@@ -108,12 +97,6 @@
     cursor:pointer;
     text-decoration:none;
     float: right;
-}
-.file-download:hover{
-    color: #0099FF;
-}
-.file-remove:hover,.delfileBtn:hover{
-    color: #FF3300;
 }
 .si-uploader-fix{
     width: 100%;
@@ -129,9 +112,35 @@
         margin-bottom: 0;
     }
 }
+.file-download:hover{
+    color: #0099FF;
+}
+.file-remove:hover,.delfileBtn:hover{
+    color: #FF3300;
+}
 .file-list-item{
+    position: relative;
     margin: 3px 0;
     padding: 0 5px;
     color: #666;
     line-height: 24px;
+    .file-name{
+        position: absolute;
+        left: 0;
+        right: 60px;
+        display: inline-block;
+        @extend .si-overflow-el;
+    }
+    .file-loading{
+        display: none;
+        line-height:70px;
+        padding:0 8px;
+        float: right;
+    }
+    .file-remove,.file-download{
+        cursor:pointer;
+        line-height:24px;
+        padding:0 5px;
+        float: right;
+    }
 }

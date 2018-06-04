@@ -12,35 +12,37 @@ class Former{
     if(this.valid&&!this.valid.pass){
       this.valid.hide();
     }
-    this.former.$label.hide();
-    this.former.$formBlock.hide();
+    this.former.$label&&this.former.$label.hide();
+    this.former.$formBlock&&this.former.$formBlock.hide();
   }
   show(){
-    this.former.$label.show();
-    this.former.$formBlock.show();
+    this.former.$label&&this.former.$label.show();
+    this.former.$formBlock&&this.former.$formBlock.show();
   }
 }
 
 let allowedMethods = ['hide','show'];
 
-function plugin(option, _relatedTarget) {
-  return this.each(function() {
-    try {
+function plugin(option) {
+  try {
+    let value, args = Array.prototype.slice.call(arguments, 1);
+    this.each(function() {
+      let $this = $(this);
       if (typeof option === 'string') {
         if(allowedMethods.includes(option)){
           new Former(this)[option]();
         }else{
-          $(this)[option](_relatedTarget || {});
+          value = $this[$this.data('si-form-type')](option, args);
         }
       }
       if (typeof option === 'object') {
-        let $this = $(this);
-        $this[$this.data('si-form-type')](option);
+        value = $this[$this.data('si-form-type')](option);
       }
-    } catch (error) {
-      Log.error(`${option}：${error}`);
-    }
-  });
+    });
+    return typeof value === 'undefined' ? this : value;
+  } catch (error) {
+    Log.error(`${option}：${error}`);
+  }
 }
 
 let old = $.fn.former;

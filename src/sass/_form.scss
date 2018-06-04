@@ -162,6 +162,9 @@ input[type="checkbox"] {
 .form-inline{
     .form-block{
         display: inline-block;
+        &>.form-control{
+            width: 100%;
+        }
     }
 }
 .form-vertical{
@@ -190,14 +193,24 @@ input[type="checkbox"] {
         display: inline-block;
     }
 }
-.si-checkbox,.si-radiobox,.si-switchbox{
-    margin: 5px 0 1px;
+.si-switchbox{
+    margin: 5px 0;
+    label{
+        margin-bottom: 0;
+    }
+}
+.si-checkbox,.si-radiobox{
+    margin: 8px 0 7px;
     label{
         margin-bottom: 0;
     }
 }
 .form-group-sm{
-    .si-checkbox,.si-radiobox,.si-switchbox{
-        margin: 5px 0;
+    font-size: $font-size-small;
+    .si-checkbox,.si-radiobox{
+        margin: 6px 0 5px;
+    }
+    .form-block{
+        margin-bottom: 10px;
     }
 }

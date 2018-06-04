@@ -165,6 +165,17 @@ class Checkbox extends BaseForm {
     }
     $list.html(fragment);
   }
+  getKey(){
+    let op = this.options,
+      valueArr = op.value !== '' && op.value.split(',') || [],
+      arr = [];
+    op.data.filter(item=>{
+      return valueArr.includes(item[op.valueField]);
+    }).forEach(item=>{
+      arr.push(item[op.keyField]);
+    });
+    return arr.join(',');
+  }
 }
 
 function Plugin(option) {

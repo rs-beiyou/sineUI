@@ -10,6 +10,7 @@ class Treebox extends BaseForm {
     this.randomString = _.randomString();
     this.derection = '';
     this.inited = false;
+    this.titleVal = '';
     this._initForm();
   }
   _setTreebox(item, newVal, val) {
@@ -309,6 +310,9 @@ class Treebox extends BaseForm {
     setTimeout(() => {
       $dropdown.hide().removeClass(className);
     }, Number.parseFloat($dropdown.css('animation-duration')) * 1000);
+  }
+  getKey(){
+    return this.titleVal;
   }
   destroy(){
     this._removeEvent();

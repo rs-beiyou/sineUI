@@ -311,6 +311,9 @@ class Combobox extends BaseForm {
       $dropdown.hide().removeClass(className);
     }, Number.parseFloat($dropdown.css('animation-duration')) * 1000);
   }
+  getKey(){
+    return this.keyArr.join(',');
+  }
   destroy(){
     this._removeEvent();
     this.$comboUl.combo('destroy');

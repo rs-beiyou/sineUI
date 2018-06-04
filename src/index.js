@@ -7,4 +7,5 @@ import 'src/components/former';
 import 'src/components/modal';
 import 'src/components/table';
 import 'src/components/editor';
+import 'src/components/fullscreen';
 import './theme';

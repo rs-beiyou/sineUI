@@ -6,7 +6,7 @@ class Parser {
   parse(el) {
     this.$element = el ? el : $('body');
     this.parseForm();//表单解析
-    $.fn.bootstrapTable&&this.$element.find('[data-toggle="table"]').bootstrapTable();//表格解析
+    this.parsePlugins();
   }
   parseForm(){
     this.$element.find('input[class^="btsp-"]').each((index, element) => {
@@ -20,6 +20,11 @@ class Parser {
         Log.error(`former组件解析失败！\n${error}`);
       }
     });
+  }
+  parsePlugins(){
+    let $el = this.$element;
+    $.fn.bootstrapTable && $el.find('[data-toggle="table"]').bootstrapTable();//表格解析
+    $.fn.tooltip && $el.find('[data-toggle="tooltip"]').tooltip();
   }
 }
 const siParser = new Parser();

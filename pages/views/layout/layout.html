@@ -1,1 +1,70 @@
-<div></div>
+<div class="container-fluid" id="theme-page">
+    <article class="si-article">
+        <p class="si-info">页面布局</p>
+        <h4>代码示例<i class="fa fa-code"></i></h4>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <iframe src="theme1.html" frameborder="0" width="100%" height="500px"></iframe>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    基础页面布局
+                </div>
+                <div>
+                    <p>
+                        上、下结构，下面再分左右结构，无底部。左右可收缩，头部导航随着内容滑动可收展。
+                        <p class="si-warning"><i class="fa fa-exclamation-circle"></i>注意：请将首页结构调整至最新代码。首页的<code>js</code>中当前用户名的<code>dom</code><code>id</code>修改为<code>userLoginName</code></p>
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;div class="si-page"&gt;
+    &lt;header class="si-page-header"&gt;
+        &lt;nav class="si-page-nav"&gt;
+            &lt;a href="#" class="si-nav-brand"&gt;sineUI后台管理系统&lt;/a&gt;
+            &lt;ul class="nav nav-bar"&gt;
+                &lt;li class="browerFullscreen" title="全屏" data-toggle="tooltip" data-placement="bottom"&gt;&lt;i class="fa fa-arrows-alt"&gt;&lt;/i&gt;&lt;/li&gt;
+                &lt;li id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"&gt;
+                    &lt;!-- 用户名 --&gt;
+                    &lt;span id="userLoginName"&gt;&lt;/span&gt;
+                    &lt;img class="photograph" src="./script/static/libs/sineui/img/photograph.jpeg" alt="头像"&gt;
+                &lt;/li&gt;
+                &lt;ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1"&gt;
+                    &lt;li id="editUser"&gt;&lt;a href="javascript:;"&gt;&lt;i class="fa fa-pencil-square-o"&gt;&lt;/i&gt;修改个人信息&lt;/a&gt;&lt;/li&gt;
+                    &lt;li id="editPwd"&gt;&lt;a href="javascript:;"&gt;&lt;i class="fa fa-pencil-square-o"&gt;&lt;/i&gt;修改密码&lt;/a&gt;&lt;/li&gt;
+                    &lt;li role="separator" class="divider"&gt;&lt;/li&gt;
+                    &lt;li id="logout"&gt;&lt;a href="javascript:;"&gt;&lt;i class="fa fa-sign-out"&gt;&lt;/i&gt;退出登录&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+    &lt;aside class="si-page-sider"&gt;
+        &lt;div class="si-sider-content"&gt;
+            &lt;div class="si-sider-topbar si-sider-unfold"&gt;&lt;/div&gt;
+            &lt;ul class="nav-list" id="menu"&gt;&lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/aside&gt;
+    &lt;div class="si-page-mark"&gt;
+        &lt;div class="si-mark-content"&gt;
+            &lt;ul class="nav btsp-nav-tabs" role="tablist"&gt;
+                &lt;li class="active"&gt;&lt;a href="#Index" role="tab"
+                    data-toggle="tab"&gt;首页&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;main class="si-page-content"&gt;
+        &lt;div role="tabpanel" class="tab-pane active" id="Index"&gt;
+            首页内容
+        &lt;/div&gt;
+    &lt;/main&gt;
+&lt;/div&gt;
+            </code></pre>
+                <div class="code-box-wrapper-close">
+                    <i class="fa fa-angle-double-up"></i>
+                </div>
+            </section>
+        </section>
+    </article>
+</div>

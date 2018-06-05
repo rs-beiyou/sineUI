@@ -18,10 +18,12 @@
                 <a href="#" class="si-nav-brand">sineUI后台管理系统</a>
                 <ul class="nav nav-bar">
                     <li class="browerFullscreen" title="全屏" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-arrows-alt"></i></li>
-                    <li id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">管理员
+                    <li id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
+                        <span id="editUser">管理员</span>
                         <img class="photograph" src="./dist/img/photograph.jpeg" alt="头像">
                     </li>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                        <li><a href="javascript:;"><i class="fa fa-pencil-square-o"></i>修改个人信息</a></li>
                         <li><a href="javascript:;"><i class="fa fa-pencil-square-o"></i>修改密码</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="javascript:;"><i class="fa fa-sign-out"></i>退出登录</a></li>
@@ -32,18 +34,18 @@
         <aside class="si-page-sider">
             <div class="si-sider-content">
                 <div class="si-sider-topbar si-sider-unfold"></div>
+                目录区
             </div>
         </aside>
         <div class="si-page-mark">
-            <div class="si-mark-content">123123</div>
+            <div class="si-mark-content">标签区</div>
         </div>
-        <main class="si-page-content">
-        </main>
-        <footer class="si-page-footer"></footer>
+        <main class="si-page-content">内容区</main>
     </div>
     <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js" charset="utf-8"></script>
     <script src="./dist/js/bootstrap.min.js" charset="utf-8"></script>
     <script src="./dist/js/theme.min.js" charset="utf-8"></script>
+    <script src="./pages/js/theme/theme1.js"></script>
 </body>
 
 </html>

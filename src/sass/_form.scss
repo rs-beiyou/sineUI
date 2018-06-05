@@ -180,6 +180,8 @@ input[type="checkbox"] {
     }
 }
 .form-columns{
+    padding-top: 10px;
+    zoom: 1;
     .control-label{
         float: left;
         text-align: right;
@@ -191,6 +193,11 @@ input[type="checkbox"] {
     }
     .form-block{
         display: inline-block;
+    }
+    &:after{
+        content: '';
+        display: block;
+        clear: both;
     }
 }
 .si-switchbox{

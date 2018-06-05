@@ -10,14 +10,47 @@ body{
         height: $page-header-height;
         width: 100%;
         z-index: $page-header-zIndex;
-        padding: 0 5%;
+        padding: 0 3%;
         background: $page-nav-bg;
         box-shadow: $page-nav-shadow;
         transition: all .3s;
+        .si-page-nav{
+            .nav{
+                position: relative;
+                float: right;
+                &>li{
+                    position: relative;
+                    display: inline-block;
+                    height: $page-header-height;
+                    line-height: $page-header-height;
+                    color: #ddd;
+                    padding: 0 5px;
+                    cursor: pointer;
+                    min-width: 40px;
+                    text-align: center;
+                    &:hover{
+                        color: #fff;
+                        background: #1c7ee4;
+                    }
+                    .photograph{
+                        width: $page-header-height*.6;
+                        height: $page-header-height*.6;
+                        border-radius: 50%;
+                        margin: 0 3px;
+                    }
+                }
+                .dropdown-menu{
+                    i{
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
         .si-nav-brand{
             height: $page-header-height;
             line-height: $page-header-height;
             font-size: $font-size-large;
+            color: #fff;
         }
     }
     .si-page-sider{

@@ -516,5 +516,8 @@
     $.fn.tooltip = old
     return this
   }
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 
 }(jQuery);

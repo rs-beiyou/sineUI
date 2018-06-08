@@ -123,3 +123,53 @@ $('#table4').table({
         }
     ]
 });
+$('#table5').table({
+    pagination: false,
+    columns: [{
+        checkbox: true
+    }, {
+        field: 'id',
+        title: 'Item ID'
+    }, {
+        field: 'name',
+        title: 'Item Name'
+    }, {
+        field: 'price',
+        title: 'Item Price',
+        events: {
+            'click .myclass': function(e, value, row, index){
+                e.stopPropagation();//防勾选
+                $.alert(value);
+            }
+        },
+        formatter: function(value, row, index, field){
+            var color;
+            switch(value){
+                case '2': color = 'green';
+                break;
+                case '0': color = 'red';
+                break;
+                default: color = 'blue';
+                break;
+            }
+            return '<span class="myclass" style="color:'+color+'">¥ '+value+'</span>';
+        }
+    }],
+    data:[
+        {
+            "id": 0,
+            "name": "Item 0",
+            "price": '0'
+        },
+        {
+            "id": 1,
+            "name": "Item 2",
+            "price": '1'
+        },
+        {
+            "id": 2,
+            "name": "Item 1",
+            "price": '2'
+        }
+    ]
+});

@@ -175,7 +175,7 @@ $('#table3').table({
                 </div>
                 <div>
                     <p>
-                        表格的分页分为服务端和客户端两种形式，排序亦然。
+                       <code>columns</code>参数<code>checkbox</code>为<code>true</code>。
                     </p>
                 </div>
                 <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
@@ -216,6 +216,79 @@ $('#table4').table({
         }
     ]
 });                    
+            </code></pre>
+                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <table id="table5"></table>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                表格formatter及事件绑定
+                </div>
+                <div>
+                    <p>
+                        <code>columns</code>参数<code>formatter</code>配合<code>events</code>使用实现单个或多个事件绑定。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;table id="table5"&gt;&lt;/table&gt;
+                </code><code class="language-javascript">  
+$('#table5').table({
+    pagination: false,
+    columns: [{
+        checkbox: true
+    }, {
+        field: 'id',
+        title: 'Item ID'
+    }, {
+        field: 'name',
+        title: 'Item Name'
+    }, {
+        field: 'price',
+        title: 'Item Price',
+        events: {
+            'click .myclass': function(e, value, row, index){
+                e.stopPropagation();//防勾选
+                $.alert(value);
+            }
+        },
+        formatter: function(value, row, index, field){
+            var color;
+            switch(value){
+                case '2': color = 'green';
+                break;
+                case '0': color = 'red';
+                break;
+                default: color = 'blue';
+                break;
+            }
+            return '&lt;span class="myclass" style="color:'+color+'"&gt;¥ '+value+'&lt;/span&gt;';
+        }
+    }],
+    data:[
+        {
+            "id": 0,
+            "name": "Item 0",
+            "price": '0'
+        },
+        {
+            "id": 1,
+            "name": "Item 2",
+            "price": '1'
+        },
+        {
+            "id": 2,
+            "name": "Item 1",
+            "price": '2'
+        }
+    ]
+});
             </code></pre>
                 <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
             </section>

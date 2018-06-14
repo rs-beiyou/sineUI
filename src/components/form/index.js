@@ -64,7 +64,7 @@ class Form {
     }
     this.$element.find('input').each((i,el) => {
       let $el = $(el), name = $el.attr('name');
-      if(name===undefined || obj[name]===undefined)return true;
+      if(name===undefined || obj[name]===undefined || obj[name] === null)return true;
       if($el.hasClass('si-form-input')){
         let type = $el.data('si-form-type').toLowerCase();
         $el[type]({value:obj[name]});

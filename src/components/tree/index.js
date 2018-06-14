@@ -53,7 +53,7 @@ class Tree {
       }
       return;
     }
-    if(typeof data==='string'){
+    if(typeof data==='string' || typeof data==='number'){
       let node = tree.getNodeByParam(key, data);
       node?tree.selectNode(node):tree.cancelSelectedNode(node);
     }

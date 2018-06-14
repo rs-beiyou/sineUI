@@ -146,7 +146,6 @@ class Treebox extends BaseForm {
     if(this.inited){
       this.$treeUl.tree('destroy');
       this.inited = false;
-      op.value = '';
     }
     this.$loading.hide();
     Object.keys(setting).forEach((currentValue)=>{
@@ -323,7 +322,10 @@ class Treebox extends BaseForm {
     return this.$treeUl;
   }
   refresh(){
-    this.$treeUl.tree('refresh');
+    let op = this.options;
+    this._getDataByUrl(op.url,{},re=>{
+      op.data = op.dataField?re[op.dataField]:re;
+    });
   }
   destroy(){
     this._removeEvent();

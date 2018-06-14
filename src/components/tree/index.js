@@ -83,6 +83,16 @@ class Tree {
       value: arr.join(',')
     };
   }
+  getTitle(val){
+    let op = this.options,
+      tree = this.tree,
+      arr = [];
+    val.split(',').forEach(value => {
+      let node = tree.getNodeByParam(op.idField, value);
+      node && arr.push(node[op.valueField]);
+    });
+    return arr.join(',');
+  }
   getChecked(checked){
     let op = this.options, chkboxType = op.chkboxType;
     let nodes = this.tree.getCheckedNodes(checked);

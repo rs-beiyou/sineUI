@@ -174,7 +174,7 @@ class Treebox extends BaseForm {
     let $treeValue = this.$treeValue,$placeholder = this.$placeholder,
       $input = this.$input, $tree = this.$tree;
     newVal = this.$treeUl.tree('load',newVal);
-    this.titleVal = this.$treeUl.tree('data').key;
+    this.titleVal = this.$treeUl.tree('getTitle', String(newVal));
     if (op.chkStyle) {
       let nva = newVal !== '' ? String(newVal).split(',') : [],
         va = val && val !== '' ? String(val).split(',') : [];
@@ -226,7 +226,6 @@ class Treebox extends BaseForm {
   }
   _onCheck(){
     let obj = this.$treeUl.tree('data');
-    this.titleVal = obj.key;
     this.options.value = obj.value;
   }
   _beforeSingleClick(treeId, treeNode){

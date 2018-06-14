@@ -222,7 +222,8 @@ import _ from '../../utils/util';
         if (op.multiple) {
           let va = newVal !== '' ? String(newVal).split(',') : [],
             vac = val && val !== '' ? String(val).split(',') : [],
-            sbd = this.selectboxDom;
+            sbd = this.selectboxDom,
+            newArr = vac;
           let arr1 = _.compare(va, vac);
           let arr2 = _.compare(vac, va);
           if (va.length > 0) {
@@ -230,19 +231,23 @@ import _ from '../../utils/util';
             op.clearable && this.$selection.addClass('si-show-clear');
           }
           arr1.forEach(key => {
-            sbd[key] && sbd[key].$selectbox.addClass('si-selectbox-item-selected');
-            this._addTag(key, sbd[key].text);
+            if(sbd[key]){
+              sbd[key].$selectbox.addClass('si-selectbox-item-selected') && this._addTag(key, sbd[key].text);
+              newArr.push(key);
+            }
           });
           arr2.forEach(key => {
-            sbd[key] && sbd[key].$selectbox.removeClass('si-selectbox-item-selected');
-            this.tagsDom[key].remove();
-            delete this.tagsDom[key];
+            if(sbd[key]){
+              sbd[key].$selectbox.removeClass('si-selectbox-item-selected');
+              this.tagsDom[key].remove();
+              delete this.tagsDom[key];
+            }
           });
           if (va.length === 0) {
             $placeholder.show();
             op.clearable && this.$selection.removeClass('si-show-clear');
           }
-          this.$input.val(newVal);
+          this.$input.val(newArr.join(','));
         } else {
           let va = newVal && String(newVal) || '',
             vac = val && String(val) || '',
@@ -350,6 +355,12 @@ import _ from '../../utils/util';
         arr.push(item[op.keyField]);
       });
       return arr.join(',');
+    }
+    refresh(){
+      let op = this.options;
+      this._getDataByUrl(op.url,{},re=>{
+        op.data = op.dataField?re[op.dataField]:re;
+      });
     }
     destroy(){
       this._removeEvent();

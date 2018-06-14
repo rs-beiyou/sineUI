@@ -65,10 +65,10 @@
 
     let dimension = this.dimension();
 
-    this.$element
-      .removeClass('collapse')
-      .addClass('collapsing')[dimension](0)
-      .attr('aria-expanded', true);
+    this.$element[dimension](0)
+    this.$element.removeClass('collapse')
+    this.$element.addClass('collapsing')
+    this.$element.attr('aria-expanded', true);
 
     this.$trigger
       .removeClass('collapsed')
@@ -91,7 +91,7 @@
 
     this.$element
       .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize]);
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize]-this.$element.outerHeight());
   };
 
   Collapse.prototype.hide = function() {
@@ -102,8 +102,7 @@
     if (startEvent.isDefaultPrevented()) return;
 
     let dimension = this.dimension();
-
-    this.$element[dimension](this.$element[dimension]())[0].offsetHeight;
+    this.$element[dimension](this.$element[dimension]());
 
     this.$element
       .addClass('collapsing')

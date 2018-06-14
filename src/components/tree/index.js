@@ -42,21 +42,23 @@ class Tree {
     this.tree.reAsyncChildNodes(null,'refresh');
   }
   load(data){
-    let op = this.options, key = op.idField, tree = this.tree;
+    let op = this.options, key = op.idField, tree = this.tree, newval = '';
     if(op.chkStyle){
+      let arr = [];
       tree.checkAllNodes(false);
       if(data&&typeof data==='string'){
         data.split(',').forEach(n=>{
           let node = tree.getNodeByParam(key, n);
-          node&&tree.checkNode(node,true,false);//父子节点的勾选联动;
+          node&&arr.push(n)&&tree.checkNode(node,true,false);//父子节点的勾选联动;
         });
       }
-      return;
-    }
-    if(typeof data==='string' || typeof data==='number'){
+      newval = arr.join(',');
+    }else if(typeof data==='string' || typeof data==='number'){
       let node = tree.getNodeByParam(key, data);
       node?tree.selectNode(node):tree.cancelSelectedNode(node);
+      newval = data;
     }
+    return newval;
   }
   data(){
     let op = this.options,

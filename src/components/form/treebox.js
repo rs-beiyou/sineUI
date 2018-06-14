@@ -174,12 +174,8 @@ class Treebox extends BaseForm {
     if(!this.inited)return false;
     let $treeValue = this.$treeValue,$placeholder = this.$placeholder,
       $input = this.$input, $tree = this.$tree;
-    this.$treeUl.tree('load',newVal);
+    newVal = this.$treeUl.tree('load',newVal);
     this.titleVal = this.$treeUl.tree('data').key;
-    if(this.titleVal === ''&& newVal!=op.pIdValue){
-      op.value = '';
-      return;
-    }
     if (op.chkStyle) {
       let nva = newVal !== '' ? String(newVal).split(',') : [],
         va = val && val !== '' ? String(val).split(',') : [];
@@ -208,6 +204,9 @@ class Treebox extends BaseForm {
         $treeValue.text(this.titleVal).show();
         op.clearable&&val===''&&$tree.addClass('si-show-clear');
       }
+    }
+    if(newVal!=='' && this.titleVal === ''&& newVal!=op.pIdValue){
+      newVal = '';
     }
     $input.val(newVal).trigger('valid.change').trigger('change');
   }
@@ -322,6 +321,9 @@ class Treebox extends BaseForm {
   }
   getTree(){
     return this.$treeUl;
+  }
+  refresh(){
+    this.$treeUl.tree('refresh');
   }
   destroy(){
     this._removeEvent();

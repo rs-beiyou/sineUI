@@ -601,7 +601,7 @@ class Filebox extends BaseForm {
           if(op.readonly || op.disabled){
             item = this._addFileItem({name:r.oldname}, r.id, true, false, false);
           }else{
-            item = this._addFileItem({name:r.oldname}, r.id, true, true, false);
+            item = this._addFileItem({name:r.oldname}, r.id, true, true, true);
           }
           if (i == 0) {
             $fileList.html(item);

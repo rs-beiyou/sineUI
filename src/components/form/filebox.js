@@ -545,7 +545,7 @@ class Filebox extends BaseForm {
       let remove_i = document.createElement('i');
       $(remove_i).addClass('fa fa-remove fa-fw');
       let $load_span = $(load_span), $remove_span = $(remove_span);
-      $load_span.addClass('file-loading').html('<i class="fa fa-spinner fa-fw fa-spin"></i>');
+      $load_span.addClass('si-file-loading').html('<i class="fa fa-spinner fa-fw fa-spin"></i>');
       $remove_span.attr('title', '删除').data({'toggle':'tooltip','placement':'bottom'}).tooltip().addClass('si-file-remove').append(remove_i).on('click',()=> {
         $remove_span.hide();
         $load_span.show();

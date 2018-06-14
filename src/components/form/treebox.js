@@ -406,7 +406,8 @@ Treebox.DEFAULTS = {
   expandAll: false,
   data: null,
   dataField: null,
-  url :''
+  url :'',
+  transfer: false
 };
 
 let old = $.fn.treebox;

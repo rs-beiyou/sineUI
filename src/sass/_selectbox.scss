@@ -29,7 +29,7 @@
     @extend .si-overflow-el;
 }
 .si-selectbox-visible {
-    .form-control-icon:first-of-type {
+    .si-form-control-icon:first-of-type {
         -webkit-transform: rotate(180deg);
         -ms-transform: rotate(180deg);
         transform: rotate(180deg);

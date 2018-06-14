@@ -1,17 +1,8 @@
 .si-combobox {
     width: 100%;
-    .si-combobox-combo{
-        cursor: pointer;
-        height: auto;
-        min-height: $input-height-small;
-        position: relative;
-        &.has-icon-right{
-            .form-control{
-                padding-right: 24px;
-                &[readonly]{
-                    cursor: pointer;
-                }
-            }
+    &.si-combobox-visible{
+        .si-form-control-icon:first-of-type{
+            transform: rotate(180deg);
         }
     }
     &.si-form-readonly {
@@ -33,19 +24,28 @@
             }
         }
     }
-    .si-combobox-loading{
+    .si-combobox-combo{
+        cursor: pointer;
+        height: auto;
+        min-height: $input-height-small;
         position: relative;
-        width: 100%;
-        text-align: center;
-        color: $brand-primary;
-        font-size: $font-size-small;
-        padding: 8px 0;
+        &.has-icon-right{
+            .form-control{
+                padding-right: 24px;
+                &[readonly]{
+                    cursor: pointer;
+                }
+            }
+        }
     }
 }
-.si-combobox-visible{
-    .form-control-icon:first-of-type{
-        transform: rotate(180deg);
-    }
+.si-combobox-loading{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    color: $brand-primary;
+    font-size: $font-size-small;
+    padding: 8px 0;
 }
 .si-combobox-dropdown{
     position: absolute;
@@ -109,7 +109,6 @@
                 display: inline-block;
             }
         }
-        
     }
 }
 .si-combobox-item-active{

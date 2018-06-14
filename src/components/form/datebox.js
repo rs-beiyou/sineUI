@@ -26,8 +26,8 @@ class Datebox extends BaseForm{
       $input = $(_input);
       $datetion = $(_datetion);
       $clear = $(_clear);
-      $(_calendar).addClass(`${this.lastOptions.icon} form-control-icon`);
-      $clear.addClass(`${this.lastOptions.clearIcon} form-control-icon`);
+      $(_calendar).addClass(`${this.lastOptions.icon} si-form-control-icon`);
+      $clear.addClass(`${this.lastOptions.clearIcon} si-form-control-icon`);
       $input.addClass('form-control has-icon-right');
       $datetion.addClass('si-datebox-datetion').append(_calendar).append(_clear);
       $datebox.addClass('si-datebox').append(_input).append(_datetion);

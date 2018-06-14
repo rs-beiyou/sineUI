@@ -21,12 +21,12 @@
     }
 }
 
-.form-block {
+.si-form-block {
     margin-bottom: 18px;
     display: block;
 }
 
-.form-group .form-block {
+.form-group .si-form-block {
     margin-bottom: 0;
 }
 
@@ -83,7 +83,7 @@ input[type="checkbox"] {
     }
 }
 
-.form-block .help-block {
+.si-form-block .help-block {
     position: absolute;
     margin: 0;
     font-size: $font-size-small;
@@ -112,7 +112,7 @@ input[type="checkbox"] {
     }
 }
 
-.form-control-icon {
+.si-form-control-icon {
     position: absolute;
     top: 50%;
     right: 8px;
@@ -140,7 +140,7 @@ input[type="checkbox"] {
     background-color: $dropdown-bg;
 }
 .si-show-clear:hover {
-    .form-control-icon {
+    .si-form-control-icon {
         &:first-of-type {
             display: none;
         }
@@ -150,7 +150,7 @@ input[type="checkbox"] {
     }
 }
 .si-form-readonly:hover,.si-form-disabled:hover {
-    .form-control-icon {
+    .si-form-control-icon {
         &:first-of-type {
             display: inline-block;
         }
@@ -160,7 +160,7 @@ input[type="checkbox"] {
     }
 }
 .form-inline{
-    .form-block{
+    .si-form-block{
         display: inline-block;
         &>.form-control{
             width: 100%;
@@ -174,7 +174,7 @@ input[type="checkbox"] {
     .control-label{
         float: none !important;
     }
-    .form-block{
+    .si-form-block{
         display: block;
         float: none !important;
     }
@@ -191,7 +191,7 @@ input[type="checkbox"] {
     .form-group{
         margin-bottom: 12px;
     }
-    .form-block{
+    .si-form-block{
         display: inline-block;
     }
     &:after{
@@ -217,7 +217,7 @@ input[type="checkbox"] {
     .si-checkbox,.si-radiobox{
         margin: 6px 0 5px;
     }
-    .form-block{
+    .si-form-block{
         margin-bottom: 10px;
     }
 }

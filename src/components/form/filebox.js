@@ -58,6 +58,7 @@ class Filebox extends BaseForm {
     }
   }
   _setValue(newVal){
+    this.$input.val(newVal);
     this.loadData(newVal);
   }
   _initDialog(){
@@ -431,22 +432,22 @@ class Filebox extends BaseForm {
       $uploadedSize = $(uploadedSize),
       $totalSize = $(totalSize),
       $itemPercent = $(itemPercent);
-    $item.addClass('uploader-queue-item').attr('id', 'fileupload'+file.id);
-    $(itemTitle).addClass('uploader-filename').html(file.name);
-    $uploadedSize.addClass('uploaded-size').html('0');
-    $totalSize.addClass('total-size').html(WebUploader.formatSize(file.size));
-    $(itemSize).addClass('uploader-progress-num').append(uploadedSize).append(' / ').append(totalSize);
-    $itemPercent.addClass('uploader-percent').html('0%');
+    $item.addClass('si-uploader-queue-item').attr('id', 'fileupload'+file.id);
+    $(itemTitle).addClass('si-uploader-filename').html(file.name);
+    $uploadedSize.addClass('si-uploaded-size').html('0');
+    $totalSize.addClass('si-total-size').html(WebUploader.formatSize(file.size));
+    $(itemSize).addClass('si-uploader-progress-num').append(uploadedSize).append(' / ').append(totalSize);
+    $itemPercent.addClass('si-uploader-percent').html('0%');
     $(itemIcon).addClass('fa fa-remove');
-    $(itemButton).attr('title', '删除').addClass('delfileBtn').append(itemIcon);
+    $(itemButton).attr('title', '删除').addClass('si-delfile-btn').append(itemIcon);
     $itemDescInput.addClass('btsp-textbox').attr('data-options', '{label:\'文件描述：\',inputWidth:\'200px\'}');
     $(itemDescContent).addClass('form-group form-group-sm').append(itemDescInput);
     $(itemDesc).addClass('form-columns').css('padding','0').append(itemDescContent);
-    $itemProgressBar.addClass('uploader-progress-bar');
-    $itemProgressDesc.addClass('uploader-progress-desc').html('等待上传...');
-    $(itemProgress).addClass('uploader-progress').append(itemProgressBar);
-    $(itemLeft).addClass('uploader-item-left');
-    $(itemRight).addClass('uploader-item-right').append(itemTitle).append(itemButton).append(itemDesc).append(itemProgress);
+    $itemProgressBar.addClass('si-uploader-progress-bar');
+    $itemProgressDesc.addClass('si-uploader-progress-desc').html('等待上传...');
+    $(itemProgress).addClass('si-uploader-progress').append(itemProgressBar);
+    $(itemLeft).addClass('si-uploader-item-left');
+    $(itemRight).addClass('si-uploader-item-right').append(itemTitle).append(itemButton).append(itemDesc).append(itemProgress);
     $item.append(itemLeft).append(itemRight);
     uploader.makeThumb( file, ( error, ret )=> {
       let pic = null;
@@ -537,7 +538,7 @@ class Filebox extends BaseForm {
       name_span = document.createElement('span'),
       remove_span, download_span, load_span,
       valueArr = this.valueArr;
-    $(name_span).addClass('file-name').html(file.name).attr('title', file.name).data({'toggle':'tooltip','placement':'bottom'}).tooltip();
+    $(name_span).addClass('si-file-name').html(file.name).attr('title', file.name).data({'toggle':'tooltip','placement':'bottom'}).tooltip();
     if (hasRemove) {
       load_span = document.createElement('span');
       remove_span = document.createElement('span');
@@ -545,7 +546,7 @@ class Filebox extends BaseForm {
       $(remove_i).addClass('fa fa-remove fa-fw');
       let $load_span = $(load_span), $remove_span = $(remove_span);
       $load_span.addClass('file-loading').html('<i class="fa fa-spinner fa-fw fa-spin"></i>');
-      $remove_span.attr('title', '删除').data({'toggle':'tooltip','placement':'bottom'}).tooltip().addClass('file-remove').append(remove_i).on('click',()=> {
+      $remove_span.attr('title', '删除').data({'toggle':'tooltip','placement':'bottom'}).tooltip().addClass('si-file-remove').append(remove_i).on('click',()=> {
         $remove_span.hide();
         $load_span.show();
         if (removeFromServer) {
@@ -565,11 +566,11 @@ class Filebox extends BaseForm {
       download_span = document.createElement('span');
       let download_i = document.createElement('i');
       $(download_i).addClass('fa fa-download fa-fw');
-      $(download_span).attr('title', '下载').data({'toggle':'tooltip','placement':'bottom'}).tooltip().addClass('file-download').append(download_i).on('click', ()=> {
+      $(download_span).attr('title', '下载').data({'toggle':'tooltip','placement':'bottom'}).tooltip().addClass('si-file-download').append(download_i).on('click', ()=> {
         this.downloadFile(id);
       });
     }
-    $(li).addClass('file-list-item clearfix').append(name_span).append(load_span).append(remove_span).append(download_span);
+    $(li).addClass('si-file-list-item').append(name_span).append(load_span).append(remove_span).append(download_span);
     return li;
   }
   getFileList(id, fn){

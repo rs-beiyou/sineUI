@@ -1,24 +1,22 @@
 <div class="container-fluid" id="demo-page">
     <article class="si-article">
-        <p class="si-info"></p>
-        <div class="si-callout info">
-            <div class="si-callout-title"></div>
-        </div>
+        <p class="si-info">面板。</p>
         <h4>代码示例<i class="fa fa-code"></i></h4>
         <section class="code-box">
             <section class="code-box-demo">
-                <div class="panel">
-                    <div class="panel-heading">123</div>
-                    <div class="panel-body">qwe</div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">标题</div>
+                    <div class="panel-body">内容</div>
+                    <div class="panel-footer">底部</div>
                 </div>
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
-                    <!-- 组件名 -->
+                    基础面板使用
                 </div>
                 <div>
                     <p>
-                        <!-- 组件描述 -->
+                        一个完整的面板包括头、内容和底。
                     </p>
                 </div>
                 <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
@@ -34,15 +32,34 @@
         </section>
         <section class="code-box">
             <section class="code-box-demo">
-                <!-- 组件demo -->
+                <div class="panel panel-primary">
+                    <div class="panel-heading">标题</div>
+                    <div class="panel-body">内容</div>
+                </div>
+                <div class="panel panel-success">
+                    <div class="panel-heading">标题</div>
+                    <div class="panel-body">内容</div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">标题</div>
+                    <div class="panel-body">内容</div>
+                </div>
+                <div class="panel panel-warning">
+                    <div class="panel-heading">标题</div>
+                    <div class="panel-body">内容</div>
+                </div>
+                <div class="panel panel-danger">
+                    <div class="panel-heading">标题</div>
+                    <div class="panel-body">内容</div>
+                </div>
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
-                    <!-- 组件名 -->
+                    其他情景
                 </div>
                 <div>
                     <p>
-                        <!-- 组件描述 -->
+                        共六种情景可选。
                     </p>
                 </div>
                 <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
@@ -52,6 +69,104 @@
             <!-- 组件代码 -->
           </code></pre>
                 <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <div class="panel panel-default">
+                    <div class="panel-heading" data-toggle="collapse" data-target="#collapseExample1">默认折叠</div>
+                    <div class="panel-body collapse" id="collapseExample1">内容</div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" data-toggle="collapse" data-target="#collapseExample2">默认展开</div>
+                    <div class="panel-body in" id="collapseExample2">内容</div>
+                </div>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    可收缩面板
+                </div>
+                <div>
+                    <p>
+                        利用<a href="/components/collapse"><code>collapse</code></a>，实现可收缩。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+            <!-- 组件代码 -->
+          </code></pre>
+                <div class="code-box-wrapper-close">
+                    <i class="fa fa-angle-double-up"></i>
+                </div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Collapsible Group Item #1
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Collapsible Group Item #2
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Collapsible Group Item #3
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    可收缩面板
+                </div>
+                <div>
+                    <p>
+                        利用<a href="/components/collapse"><code>collapse</code></a>，实现可收缩。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+            <!-- 组件代码 -->
+          </code></pre>
+                <div class="code-box-wrapper-close">
+                    <i class="fa fa-angle-double-up"></i>
+                </div>
             </section>
         </section>
     </article>

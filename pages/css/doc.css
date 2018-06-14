@@ -26,12 +26,12 @@ label .btn {
     margin-bottom: 0;
 }
 
-.si-article h4 {
+.si-article>h4 {
     margin: 15px 0;
     color: #555;
 }
 
-.si-article h4 i {
+.si-article>h4 i {
     margin-left: 5px;
     color: #999;
 }
@@ -136,7 +136,7 @@ label .btn {
     clear: both;
 }
 
-.code-box-demo>.form-block:last-of-type {
+.code-box-demo>.si-form-block:last-of-type {
     margin-bottom: 0;
 }
 

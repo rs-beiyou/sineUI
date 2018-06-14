@@ -122,7 +122,7 @@ export default class BaseForm {
     if (!this.$formBlock) {
       let _formBlock = document.createElement('div');
       $formBlock = $(_formBlock);
-      $formBlock.addClass('form-block');
+      $formBlock.addClass('si-form-block');
       this.$fragment.append(_formBlock);
       this.$formBlock = $formBlock;
     } else {

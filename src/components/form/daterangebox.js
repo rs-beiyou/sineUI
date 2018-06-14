@@ -35,8 +35,8 @@ class Daterangebox extends BaseForm{
       $inputEnd = $(_inputEnd);
       $inputBegin.attr('type','hidden');
       $inputEnd.attr('type','hidden');
-      $(_calendar).addClass(`${this.lastOptions.icon} form-control-icon`);
-      $clear.addClass(`${this.lastOptions.clearIcon} form-control-icon`);
+      $(_calendar).addClass(`${this.lastOptions.icon} si-form-control-icon`);
+      $clear.addClass(`${this.lastOptions.clearIcon} si-form-control-icon`);
       $input.addClass('form-control has-icon-right');
       $datetion.addClass('si-datebox-datetion').append(_inputBegin).append(_inputEnd).append(_calendar).append(_clear);
       $datebox.addClass('si-datebox').append(_input).append(_datetion);

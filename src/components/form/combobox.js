@@ -49,8 +49,8 @@ class Combobox extends BaseForm {
         'type': 'text'
       }).addClass('form-control');
       $comboValue.addClass('si-combobox-value').hide();
-      $comboIcon.addClass(`${this.lastOptions.icon} form-control-icon`);
-      $clear.addClass(`${this.lastOptions.clearIcon} form-control-icon`);
+      $comboIcon.addClass(`${this.lastOptions.icon} si-form-control-icon`);
+      $clear.addClass(`${this.lastOptions.clearIcon} si-form-control-icon`);
       $combo.derection().addClass('si-combobox-combo has-icon-right').append(_comboValue).append(_placeholder).append(_comboIcon).append(_clear);
       $(_loadingIcon).addClass(`${this.lastOptions.loadingIcon}`);
       $loading.addClass('si-combobox-loading').append(_loadingIcon).append('<br>').append('加载中...');

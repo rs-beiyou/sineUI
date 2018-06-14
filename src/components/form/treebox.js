@@ -46,8 +46,8 @@ class Treebox extends BaseForm {
       $input.attr('type','hidden');
       $placeholder.addClass('si-placeholder');
       $treeValue.addClass('si-treebox-value').hide();
-      $treeIcon.addClass(`${this.lastOptions.icon} form-control-icon`);
-      $clear.addClass(`${this.lastOptions.clearIcon} form-control-icon`);
+      $treeIcon.addClass(`${this.lastOptions.icon} si-form-control-icon`);
+      $clear.addClass(`${this.lastOptions.clearIcon} si-form-control-icon`);
       $tree.derection().addClass('form-control si-treebox-tree has-icon-right').append(_treeValue).append(_placeholder).append(_treeIcon).append(_clear);
       $treeUl.addClass('ztree').attr('id',this.randomString);
       $(_loadingIcon).addClass(`${this.lastOptions.loadingIcon}`);
@@ -174,7 +174,7 @@ class Treebox extends BaseForm {
     if(!this.inited)return false;
     let $treeValue = this.$treeValue,$placeholder = this.$placeholder,
       $input = this.$input, $tree = this.$tree;
-    this.$treeUl.tree('load',newVal);
+    newVal = this.$treeUl.tree('load',newVal);
     this.titleVal = this.$treeUl.tree('data').key;
     if (op.chkStyle) {
       let nva = newVal !== '' ? String(newVal).split(',') : [],
@@ -182,7 +182,8 @@ class Treebox extends BaseForm {
       let titleArr = this.titleVal ? this.titleVal.split(',') : [];
       let arr1 = _.compare(nva, va);
       let arr2 = _.compare(va, nva);
-      newVal&&$placeholder.hide();
+      //未找到节点，作空处理
+      this.titleVal&&$placeholder.hide();
       arr1.forEach((key) => {
         this._addTag(key, titleArr[nva.findIndex(k=>k===key)]);
       });
@@ -193,7 +194,8 @@ class Treebox extends BaseForm {
       !newVal&&$placeholder.show()&&op.clearable&&val!==''&&$tree.removeClass('si-show-clear');
       op.clearable&&val===''&&$tree.addClass('si-show-clear');
     }else{
-      if(newVal===''){
+      if(this.titleVal===''){
+        //未找到节点，作空处理
         $treeValue.text('').hide();
         $placeholder.show();
         op.clearable&&val!==''&&$tree.removeClass('si-show-clear');
@@ -202,6 +204,9 @@ class Treebox extends BaseForm {
         $treeValue.text(this.titleVal).show();
         op.clearable&&val===''&&$tree.addClass('si-show-clear');
       }
+    }
+    if(newVal!=='' && this.titleVal === ''&& newVal!=op.pIdValue){
+      newVal = '';
     }
     $input.val(newVal).trigger('valid.change').trigger('change');
   }
@@ -314,6 +319,12 @@ class Treebox extends BaseForm {
   getKey(){
     return this.titleVal;
   }
+  getTree(){
+    return this.$treeUl;
+  }
+  refresh(){
+    this.$treeUl.tree('refresh');
+  }
   destroy(){
     this._removeEvent();
     this.$treeUl.tree('destroy');
@@ -389,7 +400,7 @@ Treebox.DEFAULTS = {
   valueField:'listname',
   idField: 'id',
   pIdField: 'parentid',
-  pIdValue: '-1',
+  pIdValue: -1,
   expandAll: false,
   data: null,
   dataField: null,

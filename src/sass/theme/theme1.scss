@@ -128,7 +128,7 @@ body{
 }
 .si-page.si-page-top-hide{
     .si-page-header{
-        transform: translateY(-90%);
+        transform: translateY(-50px);
         &:hover{
             transform: translateY(0);
         }

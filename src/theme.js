@@ -6,6 +6,8 @@ import {
   launchFullscreen
 } from 'src/components/fullscreen/browerFullscreen.js';
 
+import _ from './utils/util';
+
 $(function () {
   let $wintop = $(window.top.document),
     $win = $(window),
@@ -13,17 +15,24 @@ $(function () {
   if(!window.top.$wintop)window.top.$wintop = $wintop;
   let $page = $wintop.find('.si-page');
   let $full = $('.browerFullscreen');
-  window.onscroll = function () {
+  let hiding = false;
+  window.onscroll = _.debounce(function () {
+    if(hiding)return;
     let after = $win.scrollTop();
-    if (after <= 10) {
+    if (after <= 20) {
       $page.removeClass('si-page-top-hide');
+      before = after;
       return;
     }
     if (before < after) {
       $page.addClass('si-page-top-hide');
+      hiding = true;
+      setTimeout(() => {
+        hiding = false;
+      }, 400);
     }
     before = after;
-  };
+  }, 50);
   $wintop.on('click', '.browerFullscreen', () => {
     launchFullscreen(window.top.document.documentElement);
   });

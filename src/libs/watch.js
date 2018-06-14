@@ -13,7 +13,7 @@ export default class Watch {
   observe(obj, path) {
     if (obj && typeof obj === 'object') {
       this.observeObject(obj, path);
-      Array.isArray(obj) && this.observeArray(obj, path);
+      // Array.isArray(obj) && this.observeArray(obj, path);
     }
   }
 

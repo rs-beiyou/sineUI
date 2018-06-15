@@ -552,12 +552,12 @@ class Filebox extends BaseForm {
         if (removeFromServer) {
           this.deleteFile(id, ()=> {
             $(li).remove();
-            _.delete(valueArr, id);
+            _.delete(valueArr, String(id));
             this.$input.val(valueArr.join(';')).trigger('change');
           });
         } else {
           $(li).remove();
-          _.delete(valueArr, id);
+          _.delete(valueArr, String(id));
           this.$input.val(valueArr.join(';')).trigger('change');
         }
       });

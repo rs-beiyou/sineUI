@@ -110,7 +110,9 @@ class Datebox extends BaseForm{
     let op = this.options;
     !op.readonly&&!op.disabled&&!this.inited&&this.initDate();
     this.$input.val(newVal?_.formatDate(new Date(newVal),op.format):'');
-    this.inited&&this.$input.daterangepicker('elementChanged').trigger('valid.change').trigger('change');
+    this.inited&&this.$input.daterangepicker('elementChanged');
+    !this.firstVal && this.$input.trigger('valid.change').trigger('change');
+    this.firstVal = false;
     if(newVal!==''&&val===''){
       this.$datebox.addClass('si-show-clear');
     }

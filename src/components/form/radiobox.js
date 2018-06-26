@@ -100,7 +100,8 @@ class Radiobox extends BaseForm {
         cbd = this.radioboxDom;
       cbd[va] && cbd[va].$radiobox.addClass('si-radiobox-checked');
       cbd[vac] && cbd[vac].$radiobox.removeClass('si-radiobox-checked') && cbd[vac].$input.attr('checked', false);
-      this.$input.val(newVal).trigger('change').trigger('valid.change');
+      !this.firstVal && this.$input.val(newVal).trigger('change').trigger('valid.change');
+      this.firstVal = false;
     }
   }
   _setAttachList(newVal) {

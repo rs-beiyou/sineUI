@@ -11,7 +11,7 @@ class Filebox extends BaseForm {
   constructor(el, options) {
     super(el, options, Filebox.DEFAULTS);
     this.className = 'Filebox';
-    this.curIndex = '';
+    this.curIndex = 0;
     this.state = '';
     this.fileArr = [];
     this.valueArr = []; //已上传返回value值
@@ -58,7 +58,8 @@ class Filebox extends BaseForm {
     }
   }
   _setValue(newVal){
-    this.$input.val(newVal);
+    !this.firstVal && this.$input.val(newVal);
+    this.firstVal = false;
     this.loadData(newVal);
   }
   _initDialog(){
@@ -94,6 +95,8 @@ class Filebox extends BaseForm {
         },
         end:()=>{
           this.$dialogContent.remove();
+          this.fileArr = [];
+          this.curIndex = 0;
         }
       });
     });
@@ -147,6 +150,7 @@ class Filebox extends BaseForm {
   _initUploader() {
     let op = this.options,
       upop = op.fileLoader;
+    // this.uploadNumber = 0;
     WebUploader.Uploader.unRegister('custom');
     WebUploader.Uploader.register({
       name: 'custom',
@@ -330,6 +334,8 @@ class Filebox extends BaseForm {
           'ext': file.ext,
           'size': file.size
         },upop.formData||{}),res => {
+          // let $item = this.$fileQueue.find('#fileupload'+file.id);
+          // let index = $item.index();
           if(res==-1){
             file.$progressDesc.html('上传失败！').css('color','red');
             return;
@@ -338,8 +344,8 @@ class Filebox extends BaseForm {
           if(!this.hasInited()){
             this.$uploadBtn.hide();
           }
-          valueArr.push(res);
-          this.$input.val(valueArr.join(';')).trigger('change');
+          valueArr.push(String(res));
+          this.$input.val(valueArr.join(';')).trigger('valid.change').trigger('change');
           let re;
           if(upop.uploadSuccess){
             re = upop.uploadSuccess(file, res);
@@ -350,8 +356,8 @@ class Filebox extends BaseForm {
         });
       }else{
         file.$progressDesc.html('上传成功！').css('color','#0099FF');
-        valueArr.push(response);
-        this.$input.val(valueArr.join(';')).trigger('change');
+        valueArr.push(String(response));
+        this.$input.val(valueArr.join(';')).trigger('valid.change').trigger('change');
         let re;
         if(upop.uploadSuccess){
           re = upop.uploadSuccess(file, response);
@@ -553,12 +559,12 @@ class Filebox extends BaseForm {
           this.deleteFile(id, ()=> {
             $(li).remove();
             _.delete(valueArr, String(id));
-            this.$input.val(valueArr.join(';')).trigger('change');
+            this.$input.val(valueArr.join(';')).trigger('valid.change').trigger('change');
           });
         } else {
           $(li).remove();
           _.delete(valueArr, String(id));
-          this.$input.val(valueArr.join(';')).trigger('change');
+          this.$input.val(valueArr.join(';')).trigger('valid.change').trigger('change');
         }
       });
     }

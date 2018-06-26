@@ -280,7 +280,7 @@
       config.zIndex = zIndex;
 
       that.$modal = $(document.createElement('div'))
-        .addClass(doms[0] + (' layui-layer-' + ready.type[config.type]) + (((config.type == 0 || config.type == 2) && !config.shade) ? ' layui-layer-border' : '') + ' ' + (config.skin || ''))
+        .addClass(doms[0] + (' layui-layer-' + ready.type[config.type]) + (((config.type == 0 || config.type == 2) && !config.shade) ? '' : '') + ' ' + (config.skin || ''))
         .attr('id', doms[0] + times)
         .attr('type', ready.type[config.type])
         .attr('times', times)

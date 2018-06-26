@@ -15,7 +15,7 @@ class Tree {
       check: {
         enable: !!op.chkStyle,
         chkStyle: op.chkStyle,
-        chkboxType: {'Y':op.chkboxType==='link'&&'ps'||'', 'N':op.chkboxType==='link'&&'ps'||''},
+        chkboxType: typeof op.chkboxType==='string'?{'Y':op.chkboxType==='link'?'ps':'', 'N':op.chkboxType==='link'?'ps':''}:Object.assign({'Y':'','N':''},op.chkboxType||{}),
       },
       async: {
         enable: !!op.url,
@@ -156,7 +156,7 @@ function Plugin(option){
 }
 Tree.DEFAULTS = {
   method:'post',
-  chkStyle:'radio',
+  chkStyle:'',
   chkboxType:'',
   valueField:'listname',
   idField: 'id',

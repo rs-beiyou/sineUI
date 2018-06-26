@@ -171,9 +171,6 @@ input[type="checkbox"] {
     .form-group{
         padding: 0 8px;
     }
-    .control-label{
-        float: none !important;
-    }
     .si-form-block{
         display: block;
         float: none !important;
@@ -183,7 +180,6 @@ input[type="checkbox"] {
     padding-top: 10px;
     zoom: 1;
     .control-label{
-        float: left;
         text-align: right;
         line-height: 30px;
         font-weight: normal;

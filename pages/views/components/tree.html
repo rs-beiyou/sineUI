@@ -1,4 +1,4 @@
-<div class="container-fluid" id="demo-page">
+<div class="container-fluid" id="tree-page">
     <article class="si-article">
         <p class="si-info">树形控件。多用于组织架构、文件结构、国家地区等，可完整展现其层级关系。</p>
         <div class="si-callout info">
@@ -7,22 +7,26 @@
         <h4>代码示例<i class="fa fa-code"></i></h4>
         <section class="code-box">
             <section class="code-box-demo">
-                <ul id="treeDemo" class="ztree"></ul>
+                <ul id="treeDemo1" class="ztree"></ul>
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
-                    <!-- 组件名 -->
+                    基础使用
                 </div>
                 <div>
                     <p>
-                        <!-- 组件描述 -->
+                        最简单用法，可选中、展开。
                     </p>
                 </div>
                 <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
             </section>
             <section class="code-box-wrapper">
-                <pre><code>
-            <!-- 组件代码 -->
+                <pre><code class="language-markup">
+&lt;ul id="treeDemo1" class="ztree"&gt;&lt;/ul&gt;
+          </code><code class="language-javascript">
+$('#treeDemo1').tree({
+    url: 'pages/data/data2.json'
+})
           </code></pre>
                 <div class="code-box-wrapper-close">
                     <i class="fa fa-angle-double-up"></i>
@@ -31,39 +35,62 @@
         </section>
         <section class="code-box">
             <section class="code-box-demo">
-                <!-- 组件demo -->
+                <ul id="treeDemo2" class="ztree"></ul>
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
-                    <!-- 组件名 -->
+                    父子级联（全级联）
                 </div>
                 <div>
                     <p>
-                        <!-- 组件描述 -->
+                    全级联：父子勾选与取消勾选都会相互影响。
                     </p>
                 </div>
                 <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
             </section>
             <section class="code-box-wrapper">
-                <pre><code>
-            <!-- 组件代码 -->
-          </code></pre>
+                <pre><code class="language-markup">
+&lt;ul id="treeDemo2" class="ztree"&gt;&lt;/ul&gt;
+            </code><code class="language-javascript">
+$('#treeDemo2').tree({
+    url: 'pages/data/data2.json'
+    chkStyle: 'checkbox',
+    chkboxType: 'link'
+    //或者
+    //chkboxType: {Y:'ps',N:'ps'}
+})
+            </code></pre>
+                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <ul id="treeDemo3" class="ztree"></ul>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    父子级联（勾选级联）
+                </div>
+                <div>
+                    <p>
+                    勾选级联：父子勾选会相互影响，取消勾选不会相互影响。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;ul id="treeDemo3" class="ztree"&gt;&lt;/ul&gt;
+            </code><code class="language-javascript">
+$('#treeDemo3').tree({
+    url: 'pages/data/data2.json'
+    chkStyle: 'checkbox',
+    chkboxType: {Y:'ps',N:''}
+})
+            </code></pre>
                 <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
             </section>
         </section>
     </article>
 </div>
-<script>
-    $('#treeDemo').tree({
-        method:'get',
-        url: 'pages/data/data2.json',
-        chkStyle: 'checkbox',
-        chkboxType: 'link',
-        callback:{
-            onAsyncSuccess: function(){
-                console.log(this.getZTreeObj('treeDemo'))
-            }
-        }
-    });
-    
-</script>
+<script src="/pages/js/tree/index.js"></script>

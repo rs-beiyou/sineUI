@@ -202,7 +202,8 @@ class Combobox extends BaseForm {
     this.options.clearable && newVal && this.$combo.addClass('si-show-clear');
     this.options.clearable && !newVal && this.$combo.removeClass('si-show-clear');
     this.$placeholder.val(keyArr.join(' / '));
-    this.$input.val(newVal).trigger('valid.change').trigger('change');
+    !this.firstVal && this.$input.val(newVal).trigger('valid.change').trigger('change');
+    this.firstVal = false;
   }
   _beforeInitCombo(da, val){
     let op = this.options;

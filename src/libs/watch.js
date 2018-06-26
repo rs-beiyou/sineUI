@@ -1,9 +1,10 @@
 import { hasProto } from '../utils/env';
 
 export default class Watch {
-  constructor(obj, callback) {
+  constructor(obj, callback, includeArray) {
     this.obj = obj;
     this.callback = callback;
+    this.includeArray = includeArray
     //监听obj，初始监听路径为[]
     this.observe(obj, []);
   }
@@ -13,7 +14,7 @@ export default class Watch {
   observe(obj, path) {
     if (obj && typeof obj === 'object') {
       this.observeObject(obj, path);
-      // Array.isArray(obj) && this.observeArray(obj, path);
+      this.includeArray && Array.isArray(obj) && this.observeArray(obj, path);
     }
   }
 

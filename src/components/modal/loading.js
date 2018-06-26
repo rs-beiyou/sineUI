@@ -1,5 +1,6 @@
-import layer from 'libs/layer/layer.js';
 import 'libs/layer/theme/default/layer.css';
+
+import layer from 'libs/layer/layer.js';
 $.extend({
 
   //loading
@@ -25,5 +26,5 @@ $.extend({
   },
   loadingClose: function() {
     layer.closeAll('loading');
-  },
+  }
 });

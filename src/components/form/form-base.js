@@ -4,6 +4,7 @@ export default class BaseForm {
     this.$element = $(el);
     this.lastOptions = options;
     this.options = $.extend(true, {}, DEFAULTS);
+    this.firstVal = !!options.value;
   }
   _initForm() {
     this._defineReactive();
@@ -11,6 +12,7 @@ export default class BaseForm {
     this._setFormBlock();
     this['_set' + this.className]();
     this.$input.addClass('si-form-input').data('si-form-type',this.className.toLowerCase()).attr({'spellcheck':false,'autocomplete':this.lastOptions.name||'off'});
+    this.firstVal && this.$input.val(this.lastOptions.value);
     this.set(this.lastOptions);
     this._setCompile();
     this.$element.after(this.$fragment[0]).remove();
@@ -61,7 +63,7 @@ export default class BaseForm {
           break;
       }
     };
-    new Watch(op, callback.bind(this));
+    new Watch(op, callback.bind(this), false);
   }
   _setCompile(){
     let op = this.options;

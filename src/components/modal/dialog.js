@@ -29,7 +29,7 @@ $.extend({
     }
     options = $.extend({
       type: 1, //iframe弹出内容2
-      area: ['600px', '400px'], //宽高
+      area: ['620px', '400px'], //宽高
       title: '对话框',
       maxmin: true, //最大化
       fixed: true, //固定

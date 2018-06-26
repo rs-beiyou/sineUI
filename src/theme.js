@@ -29,7 +29,7 @@ $(function () {
       hiding = true;
       setTimeout(() => {
         hiding = false;
-      }, 400);
+      }, 500);
     }
     before = after;
   }, 50);

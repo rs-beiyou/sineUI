@@ -37,7 +37,8 @@ class Passwordbox extends BaseForm {
       this.$input.val(newVal);
       op.value = newVal;
     }
-    op.valid && this.$input.trigger('valid.change');
+    op.valid && !this.firstVal && this.$input.trigger('valid.change');
+    this.firstVal = false;
   }
 }
 

@@ -207,7 +207,8 @@ class Treebox extends BaseForm {
     if(newVal!=='' && this.titleVal === ''&& newVal!=op.pIdValue){
       newVal = '';
     }
-    $input.val(newVal).trigger('valid.change').trigger('change');
+    !this.firstVal && $input.val(newVal).trigger('valid.change').trigger('change');
+    this.firstVal = false;
   }
   _toogleExpand(newVal){
     this.inited&&this.$treeUl.tree('expandAll',newVal);

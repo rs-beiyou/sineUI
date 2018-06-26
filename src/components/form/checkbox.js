@@ -106,7 +106,8 @@ class Checkbox extends BaseForm {
       arr2.forEach(key => {
         cbd[key] && cbd[key].$checkbox.removeClass('si-checkbox-checked');
       });
-      this.$input.val(newVal).trigger('change').trigger('valid.change');
+      !this.firstVal && this.$input.val(newVal).trigger('change').trigger('valid.change');
+      this.firstVal = false;
     }
   }
   _setAttachList(newVal) {

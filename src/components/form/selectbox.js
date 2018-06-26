@@ -270,7 +270,8 @@ import _ from '../../utils/util';
             op.clearable && this.$selection.addClass('si-show-clear');
           }
         }
-        this.$input.trigger('valid.change').trigger('change');
+        !this.firstVal && this.$input.trigger('valid.change').trigger('change');
+        this.firstVal = false;
       }
     }
     _addTag(val, text) {

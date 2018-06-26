@@ -5,7 +5,6 @@ $("#btnJsModal").click(function() {
   $.dialog({
     title: '自定义标题',
     content: content,
-    area: ['600px', '300px'],
     success: function(obj, index) {
       console.log(index)
     },
@@ -25,31 +24,16 @@ $("#btnJsLoading").click(function() {
 
 //信息提示
 $('#btnJsInfo').click(function() {
-  $.info({
-    //title:'信息提示',
-    content: '内容内容',
-    yes: function() {
-      console.log('点击了确定')
-    }
-  });
+  $.msg('这是一条信息提示。',{icon:0});
 })
 $('#btnJsWarning').click(function() {
-  $.warning({
-    //title:'警告提示',
-    content: '内容内容'
-  });
+  $.msg('这是一条信息警告！',{icon:0});
 })
 $('#btnJsSuccess').click(function() {
-  $.success({
-    //title:'成功提示',
-    content: '内容内容'
-  });
+  $.msg('这是一条成功信息！',{icon:1});
 })
 $('#btnJsError').click(function() {
-  $.error({
-    //title:'错误提示',
-    content: '内容内容'
-  });
+  $.msg('这是一条错误信息！',{icon:2});
 })
 //确认对话框
 $('#btnJsConfirm').click(function() {

@@ -12,5 +12,5 @@ $('#treeDemo3').tree({
     method:'get',
     url: 'pages/data/data2.json',
     chkStyle: 'checkbox',
-    chkboxType: {Y:'',N:''}
+    chkboxType: {Y:'ps',N:''}
 });

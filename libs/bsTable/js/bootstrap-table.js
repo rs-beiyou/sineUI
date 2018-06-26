@@ -2899,7 +2899,9 @@
             rows = this.getSelections();
         }
         this.$selectAll.add(this.$selectAll_).prop('checked', checked);
+        this.$selectAll.closest('label')[checked ? 'addClass' : 'removeClass']('si-checkbox-checked');
         this.$selectItem.filter(':enabled').prop('checked', checked);
+        this.$selectItem.closest('label')[checked ? 'addClass' : 'removeClass']('si-checkbox-checked');
         this.updateRows();
         if (checked) {
             rows = this.getSelections();

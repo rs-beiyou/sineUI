@@ -63,22 +63,20 @@ class Form {
       throw new Error('表单（Form）插件load方法参数必须为Object对象！');
     }
     this.$element.find('input').each((i,el) => {
-      let $el = $(el), name = $el.attr('name');
-      if(name===undefined)return true;
-      let valCache;
-      if(name.includes('.')){
+      let $el = $(el), name = $el.attr('name'), type = $el.attr('type');
+      if(name===undefined || ['button','reset','submit'].includes(type))return true;
+      let valCache = obj[name];
+      if(valCache===undefined || valCache === null && name.includes('.')){
         const nameArr = name.split('.');
         valCache = obj;
         nameArr.forEach(a=>{
           valCache = valCache[a];
         });
-      }else{
-        valCache = obj[name];
       }
       if(valCache===undefined || valCache === null)return true;
       if($el.hasClass('si-form-input')){
-        let type = $el.data('si-form-type').toLowerCase();
-        $el[type]({value:valCache});
+        let former = $el.data('si-form-type').toLowerCase();
+        $el[former]({value:valCache});
         return true;
       }
       $el.val(valCache);
@@ -145,14 +143,6 @@ function Plugin(option) {
   } catch (error) {
     throw new Error(error);
   }
-  // return this.each(function() {
-  //   let $this = $(this);
-  //   let data = $this.data('si.form');
-  //   let options = $.extend({}, Form.DEFAULTS, $this.data(), typeof option == 'object' && option);
-
-  //   if (!data) $this.data('si.form', (data = new Form(this, options)));
-  //   if (typeof option == 'string') data[option](_relatedTarget);
-  // });
 }
 
 Form.DEFAULTS = {

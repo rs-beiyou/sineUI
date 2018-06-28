@@ -231,17 +231,15 @@ import _ from '../../utils/util';
             op.clearable && this.$selection.addClass('si-show-clear');
           }
           arr1.forEach(key => {
-            if(sbd[key]){
-              sbd[key].$selectbox.addClass('si-selectbox-item-selected') && this._addTag(key, sbd[key].text);
-              newArr.push(key);
-            }
+            if(!sbd[key])return true;
+            sbd[key].$selectbox.addClass('si-selectbox-item-selected') && this._addTag(key, sbd[key].text);
+            newArr.push(key);
           });
           arr2.forEach(key => {
-            if(sbd[key]){
-              sbd[key].$selectbox.removeClass('si-selectbox-item-selected');
-              this.tagsDom[key].remove();
-              delete this.tagsDom[key];
-            }
+            if(!sbd[key]) return true;
+            sbd[key].$selectbox.removeClass('si-selectbox-item-selected');
+            this.tagsDom[key].remove();
+            delete this.tagsDom[key];
           });
           if (va.length === 0) {
             $placeholder.show();

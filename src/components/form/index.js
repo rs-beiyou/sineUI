@@ -64,18 +64,24 @@ class Form {
     }
     this.$element.find('input').each((i,el) => {
       let $el = $(el), name = $el.attr('name');
-      if(name===undefined || obj[name]===undefined || obj[name] === null)return true;
+      if(name===undefined)return true;
+      let valCache;
+      if(name.includes('.')){
+        const nameArr = name.split('.');
+        valCache = obj;
+        nameArr.forEach(a=>{
+          valCache = valCache[a];
+        });
+      }else{
+        valCache = obj[name];
+      }
+      if(valCache===undefined || valCache === null)return true;
       if($el.hasClass('si-form-input')){
         let type = $el.data('si-form-type').toLowerCase();
-        $el[type]({value:obj[name]});
+        $el[type]({value:valCache});
         return true;
       }
-      $el.val(obj[name]);
-    });
-    this.$element.find('.si-form-input').each((i,el)=>{
-      let $el = $(el), name = $el.attr('name');
-      let type = $el.data('si-form-type').toLowerCase();
-      obj[name]!==undefined && $el[type]({value:obj[name]});
+      $el.val(valCache);
     });
   }
   clear(){

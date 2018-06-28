@@ -187,6 +187,7 @@ class Treebox extends BaseForm {
         this._addTag(key, titleArr[nva.findIndex(k=>k===key)]);
       });
       arr2.forEach(key => {
+        if(!this.tagsDom[key])return true;
         this.tagsDom[key].remove();
         delete this.tagsDom[key];
       });

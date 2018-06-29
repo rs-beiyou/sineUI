@@ -295,7 +295,7 @@ class Treebox extends BaseForm {
         'top': offset.top + $treebox.outerHeight(),
         'left': offset.left
       }):$dropdown.css({
-        'top': $treebox.outerHeight(),
+        // 'top': $treebox.outerHeight(),
         'left': 0
       });
     }

@@ -2,13 +2,16 @@ $('#table1').table({
     pagination: false,
     columns: [{
         field: 'id',
-        title: 'Item ID'
+        title: 'Item ID',
+        width: 100
     }, {
         field: 'name',
-        title: 'Item Name'
+        title: 'Item Name',
+        width: 300
     }, {
         field: 'price',
-        title: 'Item Price'
+        title: 'Item Price',
+        width: 300
     }],
     data: [{
         id: 1,
@@ -26,7 +29,7 @@ $('#table1').table({
 });
 
 $('#table2').table({
-    classes: 'table table-hover table-no-bordered',
+    classes: 'table-no-bordered',
     pagination: false,
     columns: [{
         field: 'id',
@@ -172,4 +175,129 @@ $('#table5').table({
             "price": '2'
         }
     ]
+});
+$('#table6').table({
+    classes: 'si-table-fixed',
+    pagination: false,
+    columns: [{
+        field: 'id',
+        title: 'Item ID',
+        width: 100
+    }, {
+        field: 'name',
+        title: 'Item Name',
+        width: 300
+    }, {
+        field: 'price',
+        title: 'Item Price',
+        width: 300
+    }],
+    data: [{
+        id: 1,
+        name: '我这句话真的很长很长，我自己都出不清楚有多少个字啊啊啊啊啊啊啊啊啊啊',
+        price: '¥ 1'
+    }, {
+        id: 2,
+        name: 'Item 2',
+        price: '我这句话真的很长很长，我自己都出不清楚有多少个字啊啊啊啊啊啊啊啊啊啊'
+    }, {
+        id: '我这句话真的很长很长，我自己都出不清楚有多少个字啊啊啊啊啊啊啊啊啊啊',
+        name: 'Item 3',
+        price: '¥ 3'
+    }]
+});
+$('#table7').table({
+    classes: 'si-table-fixed',
+    pagination: false,
+    fixedColumns: true,
+    fixedNumber: 2,
+    height: 300,
+    columns: [{
+        checkbox: true
+    }, {
+        field: 'id',
+        title: 'Item ID',
+        width: 100
+    }, {
+        field: 'name',
+        title: 'Item Name',
+        width: 300
+    }, {
+        field: 'price',
+        title: 'Item Price',
+        width: 300
+    }, {
+        field: 'id',
+        title: 'Item ID2',
+        width: 100
+    }, {
+        field: 'name',
+        title: 'Item Name2',
+        width: 300
+    }, {
+        field: 'price',
+        title: 'Item Price2',
+        width: 300
+    }, {
+        field: 'id',
+        title: 'Item ID3',
+        width: 100
+    }, {
+        field: 'name',
+        title: 'Item Name3',
+        width: 300
+    }, {
+        field: 'price',
+        title: 'Item Price3',
+        width: 300
+    }],
+    data: [{
+        id: 1,
+        name: 'Item 1',
+        price: '¥ 1'
+    }, {
+        id: 2,
+        name: 'Item 2',
+        price: '¥ 2'
+    }, {
+        id: 3,
+        name: 'Item 3',
+        price: '¥ 3'
+    }, {
+        id: 4,
+        name: 'Item 1',
+        price: '¥ 1'
+    }, {
+        id: 5,
+        name: 'Item 2',
+        price: '¥ 2'
+    }, {
+        id: 6,
+        name: 'Item 3',
+        price: '¥ 3'
+    }, {
+        id: 7,
+        name: 'Item 1',
+        price: '¥ 1'
+    }, {
+        id: 2,
+        name: 'Item 2',
+        price: '¥ 2'
+    }, {
+        id: 8,
+        name: 'Item 3',
+        price: '¥ 3'
+    }, {
+        id: 9,
+        name: 'Item 1',
+        price: '¥ 1'
+    }, {
+        id: 10,
+        name: 'Item 2',
+        price: '¥ 2'
+    }, {
+        id: 11,
+        name: 'Item 3',
+        price: '¥ 3'
+    }]
 });

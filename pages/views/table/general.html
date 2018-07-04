@@ -78,7 +78,7 @@ $('#table1').table({
 &lt;table id="table2"&gt;&lt;/table&gt;
                 </code><code class="language-javascript">
 $('#table2').table({
-    classes: 'table table-hover table-no-bordered',
+    classes: 'table-no-bordered',
     pagination: false,//取消分页
     columns: [{
         field: 'id',
@@ -288,6 +288,114 @@ $('#table5').table({
             "price": '2'
         }
     ]
+});
+            </code></pre>
+                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <table id="table6"></table>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    列定宽表格（非响应式表格）
+                </div>
+                <div>
+                    <p>
+                        可通过添加参数<code>classes: 'si-table-fixed'</code>或者直接给<code>table</code>添加<code>si-table-fixed</code>的<code>class</code>。
+                    </p>
+                    <p>定宽表格超出宽度将会被省略。</p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;table id="table6"&gt;&lt;/table&gt;
+                </code><code class="language-javascript">  
+$('#table6').table({
+    classes: 'si-table-fixed',
+    pagination: false,
+    columns: [{...}],
+    data: [{...}]
+});
+
+//或者</code><code class="language-markup">
+&lt;table class="si-table-fixed" id="table6"&gt;&lt;/table&gt;
+                </code><code class="language-javascript">  
+$('#table6').table({
+    pagination: false,
+    columns: [{...}],
+    data: [{...}]
+});</code></pre>
+                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <table id="table7"></table>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                固定列表格
+                </div>
+                <div>
+                    <p>
+                        固定列表格只支持非响应式表格。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;table id="table7"&gt;&lt;/table&gt;
+                </code><code class="language-javascript">  
+$('#table7').table({
+    classes: 'si-table-fixed',
+    pagination: false,
+    fixedColumns: true,//开启固定列
+    fixedNumber: 2,//固定列数量
+    height: 300,
+    columns: [{
+        checkbox: true
+    }, {
+        field: 'id',
+        title: 'Item ID',
+        width: 100
+    }, {
+        field: 'name',
+        title: 'Item Name',
+        width: 300
+    }, {
+        field: 'price',
+        title: 'Item Price',
+        width: 300
+    }, {
+        field: 'id',
+        title: 'Item ID2',
+        width: 100
+    }, {
+        field: 'name',
+        title: 'Item Name2',
+        width: 300
+    }, {
+        field: 'price',
+        title: 'Item Price2',
+        width: 300
+    }, {
+        field: 'id',
+        title: 'Item ID3',
+        width: 100
+    }, {
+        field: 'name',
+        title: 'Item Name3',
+        width: 300
+    }, {
+        field: 'price',
+        title: 'Item Price3',
+        width: 300
+    }],
+    data: [{...}]
 });
             </code></pre>
                 <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>

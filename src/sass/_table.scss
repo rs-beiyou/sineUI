@@ -3,3 +3,14 @@ table .bs-checkbox{
         margin: 0;
     }
 }
+table {
+    &.si-table-fixed{
+        table-layout: fixed;
+        td{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-break: break-all;
+        }
+    }
+}

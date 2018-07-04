@@ -1,4 +1,4 @@
-require('libs/bsTable/css/bootstrap-table.min.css');
+require('libs/bsTable/css/bootstrap-table.css');
 require('libs/bsTable/js/bootstrap-table');
 require('libs/bsTable/js/bootstrap-table-zh-CN.min.js');
 

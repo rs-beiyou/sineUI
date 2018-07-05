@@ -125,6 +125,9 @@ label .btn {
     border-bottom: 1px solid #e9e9e9;
     padding: 20px 16px 40px;
 }
+.code-box-demo.code-box-demo-sm{
+    padding: 10px 16px 20px;
+}
 
 .code-box-demo::before,
 .code-box-demo::after {
@@ -276,9 +279,13 @@ pre[class*="language-"] {
     padding-left: 15px;
 }
 .ul-circle li{
+    position: relative;
     list-style: disc;
     padding: 5px 0;
     font-size: 20px;
+}
+.ul-circle li.no-style{
+    list-style: none;
 }
 .ul-circle li.add{
     color: #08e073;
@@ -286,8 +293,17 @@ pre[class*="language-"] {
 .ul-circle li.cancel{
     color: #ed3f14;
 }
+.ul-circle li.warning{
+    color: #f90;
+}
 .ul-circle li.fix{
     color: #2d8cf0;
+}
+.ul-circle li>i{
+    position: absolute;
+    font-size: 15px;
+    left: -22px;
+    line-height: 30px;
 }
 .ul-circle li span{
     color: #333;

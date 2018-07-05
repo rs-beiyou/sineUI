@@ -26,7 +26,8 @@ class Datebox extends BaseForm{
       $input = $(_input);
       $datetion = $(_datetion);
       $clear = $(_clear);
-      $(_calendar).addClass(`${this.lastOptions.icon} si-form-control-icon`);
+      let $calendar = $(_calendar);
+      $calendar.addClass(`${this.lastOptions.icon} si-form-control-icon`);
       $clear.addClass(`${this.lastOptions.clearIcon} si-form-control-icon`);
       $input.addClass('form-control has-icon-right');
       $datetion.addClass('si-datebox-datetion').append(_calendar).append(_clear);
@@ -36,6 +37,7 @@ class Datebox extends BaseForm{
       this.$datebox = $datebox;
       this.$datetion = $datetion;
       this.$clear = $clear;
+      this.$calendar = $calendar;
       !this.lastOptions.readonly&&!this.lastOptions.disabled&&this.initDate();
     }
     switch (item) {
@@ -74,6 +76,9 @@ class Datebox extends BaseForm{
       op.value = picker.startDate.format(op.format);
     }).on('cancel.daterangepicker', ()=> {
       op.value = '';
+    });
+    this.$calendar.on('click', ()=>{
+      $input.trigger('click.daterangepicker');
     });
     this.$clear.on('click',()=>{
       $input.trigger('cancel.daterangepicker');

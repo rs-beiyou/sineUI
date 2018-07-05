@@ -194,7 +194,7 @@ import _ from '../../utils/util';
           'top': offset.top + $selectbox.outerHeight(),
           'left': offset.left
         }):$dropdown.css({
-          'top': $selectbox.outerHeight(),
+          // 'top': $selectbox.outerHeight(),
           'left': 0
         });
       }

@@ -2,20 +2,20 @@ html * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-overflow-scrolling: touch;
-    &::-webkit-scrollbar {
-        width: $si-scrollbar-width;
-        height: $si-scrollbar-width;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: $si-scrollbar-thumb-bg;
-        border-top: 5px solid rgba(255, 255, 255, 0);
-        border-bottom: 5px solid rgba(255, 255, 255, 0);
-        border-right: 4px solid rgba(255, 255, 255, 0);
-        border-radius: 3px;
-    }
-    &::-webkit-scrollbar-track {
-        background-color: $si-scrollbar-track-bg;
-    }
+    // &::-webkit-scrollbar {
+    //     width: $si-scrollbar-width;
+    //     height: $si-scrollbar-width;
+    // }
+    // &::-webkit-scrollbar-thumb {
+    //     background-color: $si-scrollbar-thumb-bg;
+    //     border-top: 5px solid rgba(255, 255, 255, 0);
+    //     border-bottom: 5px solid rgba(255, 255, 255, 0);
+    //     border-right: 4px solid rgba(255, 255, 255, 0);
+    //     border-radius: 3px;
+    // }
+    // &::-webkit-scrollbar-track {
+    //     background-color: $si-scrollbar-track-bg;
+    // }
 }
 
 a {
@@ -293,7 +293,7 @@ a {
         padding: 10px;
         width: 100%;
         background-color: #f8f8f8;
-        z-index: 10;
+        z-index: 100;
         -webkit-box-shadow: 0px 4px 12px -8px rgba(0, 0, 0, .25);
         box-shadow: 0px 4px 12px -8px rgba(0, 0, 0, .25);
         -webkit-transition: all .4s cubic-bezier(.22, .58, .12, .98);
@@ -310,6 +310,7 @@ a {
         font-weight: normal;
         color: #666;
         cursor: pointer;
+        line-height: 35px;
     }
     .si-nav-title {
         width: 100%;
@@ -376,18 +377,18 @@ a {
 }
 
 @media (max-width: $screen-sm-min) {
-    html * {
-        &::-webkit-scrollbar {
-            width: $si-scrollbar-width/2;
-            height: $si-scrollbar-width/2;
-        }
-        &::-webkit-scrollbar-thumb {
-            border-top: 5px solid rgba(255, 255, 255, 0);
-            border-bottom: 5px solid rgba(255, 255, 255, 0);
-            border-right: 4px solid rgba(255, 255, 255, 0);
-            border-radius: 2px;
-        }
-    }
+    // html * {
+    //     &::-webkit-scrollbar {
+    //         width: $si-scrollbar-width/2;
+    //         height: $si-scrollbar-width/2;
+    //     }
+    //     &::-webkit-scrollbar-thumb {
+    //         border-top: 5px solid rgba(255, 255, 255, 0);
+    //         border-bottom: 5px solid rgba(255, 255, 255, 0);
+    //         border-right: 4px solid rgba(255, 255, 255, 0);
+    //         border-radius: 2px;
+    //     }
+    // }
     .si-sidebar {
         -webkit-transform: translateX(-100%);
         -ms-transform: translateX(-100%);

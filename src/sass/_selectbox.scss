@@ -26,6 +26,9 @@
     cursor: pointer;
 }
 .si-selectbox-selected-value{
+    display: inline-block;
+    width: 100%;
+    vertical-align: bottom;
     @extend .si-overflow-el;
 }
 .si-selectbox-visible {

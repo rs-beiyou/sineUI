@@ -62,7 +62,7 @@ class Form {
     if(!obj||typeof obj!=='object'){
       throw new Error('表单（Form）插件load方法参数必须为Object对象！');
     }
-    this.$element.find('input').each((i,el) => {
+    this.$element.find('input, textarea').each((i,el) => {
       let $el = $(el), name = $el.attr('name'), type = $el.attr('type');
       if(name===undefined || ['button','reset','submit'].includes(type))return true;
       let valCache = obj[name];

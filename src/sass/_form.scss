@@ -91,7 +91,6 @@ input[type="checkbox"] {
 
 .si-overflow-el{
     overflow: hidden;
-    -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     white-space: nowrap;
     user-select: none;
@@ -99,6 +98,10 @@ input[type="checkbox"] {
 .si-placeholder {
     color: $input-color-placeholder;
     user-select: none;
+    display: inline-block;
+    width: 100%;
+    vertical-align: bottom;
+    @extend .si-overflow-el;
 }
 
 .form-control{

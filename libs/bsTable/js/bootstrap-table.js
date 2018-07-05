@@ -2146,26 +2146,10 @@
             that.$body.find('> tr[data-index]:eq('+trIndex+') > td:eq('+index+')').trigger(e.type);
         });
         this.$fixSelectItem = this.$fixedBodyColumns.find(sprintf('[name="%s"]', this.options.selectItemName));
-        this.$fixSelectItem.off('click').on('click', function () {
+        this.$fixSelectItem.off('click').on('click', function (event) {
+            event.stopImmediatePropagation();
             var trIndex = $(this).closest('tr').data('index');
             that.$body.find('> tr[data-index]:eq('+trIndex+')').find(sprintf('[name="%s"]', that.options.selectItemName)).click();
-        });
-
-        this.$body.children().off('mouseenter mouseleave')
-        .on('mouseenter', function(){
-            var trIndex = $(this).data('index');
-            that.$fixedBodyColumns.children('tr:eq('+trIndex+')').addClass('si-table-row-hover');
-        }).on('mouseleave',function(){
-            var trIndex = $(this).data('index');
-            that.$fixedBodyColumns.children('tr:eq('+trIndex+')').removeClass('si-table-row-hover');
-        })
-        this.$fixedBodyColumns.children().off('mouseenter mouseleave')
-        .on('mouseenter', function(){
-            var trIndex = $(this).data('index');
-            that.$body.children('tr:eq('+trIndex+')').addClass('si-table-row-hover');
-        }).on('mouseleave',function(){
-            var trIndex = $(this).data('index');
-            that.$body.children('tr:eq('+trIndex+')').removeClass('si-table-row-hover');
         });
     };
 
@@ -2361,7 +2345,7 @@
         fixedBody.scrollHeight > fixedBody.clientHeight + this.$header.outerHeight() ?
             getScrollBarWidth() : 0;
 
-        this.$el.css('margin-top', -this.$header.outerHeight());
+        this.$el.css('margin-top', -this.$header.outerHeight() - 1);
 
         focused = $(':focus');
         if (focused.length > 0) {
@@ -2522,7 +2506,7 @@
         // TODO: it's probably better improving the layout than binding to scroll event
 
         that.trigger('scroll-body');
-        this.$tableBody.off('scroll').on('scroll', function () {
+        this.$tableBody.off('scroll.bs').on('scroll.bs', function () {
             if (that.options.showHeader && that.options.height) {
               that.$tableHeader.scrollLeft($(this).scrollLeft());
             }
@@ -2659,10 +2643,91 @@
     };
 
     BootstrapTable.prototype.fitBodyColumns = function () {
+        var that = this;
+
+        this.resetFixedBody();
+        this.$fixedBody.show();
+
+        this.$body.find('> tr').each(function (i) {
+            that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 1);
+        });
+
+        // events
+        this.$tableHeader.off('mousewheel.bs').on('mousewheel.bs',function(event){
+            event = event.originalEvent;
+            event.preventDefault();
+            const deltaX = event.deltaX;
+            const $body = that.$tableBody[0];
+            if (deltaX > 0) {
+                $body.scrollLeft = $body.scrollLeft + 10;
+            } else {
+                $body.scrollLeft = $body.scrollLeft - 10;
+            }
+        })
+        this.$tableBody.off('scroll.fixed').on('scroll.fixed', function () {
+            // that.$fixedBody.find('table').css('top', -$(this).scrollTop());
+            that.$fixedBody[0].scrollTop = event.target.scrollTop;
+        });
+        this.$fixedBody.off('mousewheel.fixed DOMMouseScroll.fixed').on('mousewheel.fixed DOMMouseScroll.fixed', function (event) {
+            event = event.originalEvent;
+            let deltaY = event.deltaY;
+            if(!deltaY && event.detail){
+                deltaY = event.detail * 40;
+            }
+            if(!deltaY && event.wheelDeltaY){
+                deltaY = -event.wheelDeltaY;
+            }
+            if(!deltaY && event.wheelDelta){
+                deltaY = -event.wheelDelta;
+            }
+            if(!deltaY) return;
+            const body = that.$tableBody[0];
+            const currentScrollTop = body.scrollTop;
+            if (deltaY < 0 && currentScrollTop !== 0) {
+                event.preventDefault();
+            }
+            if (deltaY > 0 && body.scrollHeight - body.clientHeight > currentScrollTop) {
+                event.preventDefault();
+            }
+            //body.scrollTop += deltaY;
+            let step = 0;
+            let timeId = setInterval(()=>{
+                step += 5;
+                if(deltaY>0){
+                    body.scrollTop += 2;
+                }
+                else{
+                    body.scrollTop -= 2;
+                }
+                if(step >= Math.abs(deltaY)){
+                    clearInterval(timeId);
+                }
+            }, 5);
+        });
+        this.$body.find('> tr[data-index]').off('hover').hover(function () {
+            var index = $(this).data('index');
+            that.$fixedBody.find('tr[data-index="' + index + '"]').addClass('si-table-row-hover');
+        }, function () {
+            var index = $(this).data('index');
+            that.$fixedBody.find('tr[data-index="' + index + '"]').removeClass('si-table-row-hover');
+        });
+        this.$fixedBody.find('tr[data-index]').off('hover').hover(function () {
+            var index = $(this).data('index');
+            that.$body.find('tr[data-index="' + index + '"]').addClass('si-table-row-hover');
+        }, function () {
+            var index = $(this).data('index');
+            that.$body.find('> tr[data-index="' + index + '"]').removeClass('si-table-row-hover');
+        });
+    };
+
+    BootstrapTable.prototype.resetFixedHeader = function(){
+
+    }
+    BootstrapTable.prototype.resetFixedBody = function(){
         var that = this,
-            top = -(parseInt(this.$el.css('margin-top')) - 2),
+            top = -(parseInt(this.$el.css('margin-top'))),
             // the fixed height should reduce the scorll-x height
-            height = this.$tableBody.height();
+            height = this.$tableBody.outerHeight();
 
         if (!this.$body.find('> tr[data-index]').length) {
             this.$fixedBody.hide();
@@ -2670,7 +2735,7 @@
         }
 
         if (!this.options.height) {
-            top = this.$fixedHeader.height();
+            top = this.$fixedHeader.outerHeight()-1;
             height = height - top;
         }
 
@@ -2678,32 +2743,8 @@
             width: this.$fixedHeader.width(),
             height: height,
             top: top
-        }).show();
-
-        this.$body.find('> tr').each(function (i) {
-            that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 1);
         });
-
-        // events
-        this.$tableBody.on('scroll', function () {
-            that.$fixedBody.find('table').css('top', -$(this).scrollTop());
-        });
-        this.$body.find('> tr[data-index]').off('hover').hover(function () {
-            var index = $(this).data('index');
-            that.$fixedBody.find('tr[data-index="' + index + '"]').addClass('hover');
-        }, function () {
-            var index = $(this).data('index');
-            that.$fixedBody.find('tr[data-index="' + index + '"]').removeClass('hover');
-        });
-        this.$fixedBody.find('tr[data-index]').off('hover').hover(function () {
-            var index = $(this).data('index');
-            that.$body.find('tr[data-index="' + index + '"]').addClass('hover');
-        }, function () {
-            var index = $(this).data('index');
-            that.$body.find('> tr[data-index="' + index + '"]').removeClass('hover');
-        });
-    };
-
+    }
     BootstrapTable.prototype.getData = function (useCurrentPage) {
         var data = this.options.data;
         if (this.searchText || this.options.sortName || !$.isEmptyObject(this.filterColumns) || !$.isEmptyObject(this.filterColumnsPartial)) {
@@ -3204,30 +3245,8 @@
     };
 
     BootstrapTable.prototype.resetFixedWidth = function () {
-        try {
-            this.fitHeaderColumns();
-            var top = -(parseInt(this.$el.css('margin-top')) - 2),
-                // the fixed height should reduce the scorll-x height
-                height = this.$tableBody.height();
-
-            if (!this.$body.find('> tr[data-index]').length) {
-                this.$fixedBody.hide();
-                return;
-            }
-
-            if (!this.options.height) {
-                top = this.$fixedHeader.height();
-                height = height - top;
-            }
-
-            this.$fixedBody.css({
-                width: this.$fixedHeader.width(),
-                height: height,
-                top: top
-            });
-        } catch (error) {
-                
-        }
+        this.fitHeaderColumns();
+        this.resetFixedBody();
     }
 
     BootstrapTable.prototype.showColumn = function (field) {

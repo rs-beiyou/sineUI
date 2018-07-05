@@ -58,8 +58,8 @@
 }
 
 .fixed-table-body {
-    overflow-x: auto;
-    overflow-y: auto;
+    overflow-x: scroll;
+    overflow-y: scroll;
     height: 100%;
     border-bottom: 1px solid #ddd;
 }

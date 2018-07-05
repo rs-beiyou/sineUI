@@ -10,10 +10,18 @@ window.si.config({
     path: 'lost',
     page: 'pages/views/404.html'
   },{
-    title: '更新日志',
+    title: '更新',
     path: 'update',
-    page: 'pages/views/update.html'
-  }, {
+    children: [{
+      title: '更新日志',
+      path: 'log',
+      page: 'pages/views/update/update.html'
+    }, {
+      title: '栅格升级',
+      path: 'col-row',
+      page: 'pages/views/update/col-row-replace.html'
+    }]
+  },{
     path: 'layout',
     title: '结构',
     children: [{

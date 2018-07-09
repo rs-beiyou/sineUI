@@ -179,7 +179,20 @@ $('#table5').table({
 $('#table6').table({
     classes: 'si-table-fixed',
     pagination: false,
+    height: 300,
     columns: [{
+        field: 'id',
+        title: 'Item ID',
+        width: 100
+    }, {
+        field: 'name',
+        title: 'Item Name',
+        width: 300
+    }, {
+        field: 'price',
+        title: 'Item Price',
+        width: 300
+    }, {
         field: 'id',
         title: 'Item ID',
         width: 100
@@ -193,6 +206,30 @@ $('#table6').table({
         width: 300
     }],
     data: [{
+        id: 1,
+        name: '我这句话真的很长很长，我自己都出不清楚有多少个字啊啊啊啊啊啊啊啊啊啊',
+        price: '¥ 1'
+    }, {
+        id: 2,
+        name: 'Item 2',
+        price: '我这句话真的很长很长，我自己都出不清楚有多少个字啊啊啊啊啊啊啊啊啊啊'
+    }, {
+        id: '我这句话真的很长很长，我自己都出不清楚有多少个字啊啊啊啊啊啊啊啊啊啊',
+        name: 'Item 3',
+        price: '¥ 3'
+    }, {
+        id: 1,
+        name: '我这句话真的很长很长，我自己都出不清楚有多少个字啊啊啊啊啊啊啊啊啊啊',
+        price: '¥ 1'
+    }, {
+        id: 2,
+        name: 'Item 2',
+        price: '我这句话真的很长很长，我自己都出不清楚有多少个字啊啊啊啊啊啊啊啊啊啊'
+    }, {
+        id: '我这句话真的很长很长，我自己都出不清楚有多少个字啊啊啊啊啊啊啊啊啊啊',
+        name: 'Item 3',
+        price: '¥ 3'
+    }, {
         id: 1,
         name: '我这句话真的很长很长，我自己都出不清楚有多少个字啊啊啊啊啊啊啊啊啊啊',
         price: '¥ 1'

@@ -226,6 +226,44 @@ $('#table4').table({
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
+                定高表格
+                </div>
+                <div>
+                    <p>
+                       设置表格参数<code>height</code>即可定高，定高可固定表头。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;table id="table5"&gt;&lt;/table&gt;
+                </code><code class="language-javascript">
+$('#table5').table({
+    pagination: false,
+    height: 300,
+    columns: [{
+        field: 'id',
+        title: 'Item ID'
+    }, {
+        field: 'name',
+        title: 'Item Name'
+    }, {
+        field: 'price',
+        title: 'Item Price'
+    }],
+    data:[...]
+});                    
+            </code></pre>
+                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <table id="table6"></table>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
                 表格formatter及事件绑定
                 </div>
                 <div>
@@ -237,9 +275,9 @@ $('#table4').table({
             </section>
             <section class="code-box-wrapper">
                 <pre><code class="language-markup">
-&lt;table id="table5"&gt;&lt;/table&gt;
+&lt;table id="table6"&gt;&lt;/table&gt;
                 </code><code class="language-javascript">  
-$('#table5').table({
+$('#table6').table({
     pagination: false,
     columns: [{
         checkbox: true
@@ -295,7 +333,7 @@ $('#table5').table({
         </section>
         <section class="code-box">
             <section class="code-box-demo">
-                <table id="table6"></table>
+                <table id="table7"></table>
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
@@ -311,9 +349,9 @@ $('#table5').table({
             </section>
             <section class="code-box-wrapper">
                 <pre><code class="language-markup">
-&lt;table id="table6"&gt;&lt;/table&gt;
+&lt;table id="table7"&gt;&lt;/table&gt;
                 </code><code class="language-javascript">  
-$('#table6').table({
+$('#table7').table({
     classes: 'si-table-fixed',
     pagination: false,
     columns: [{...}],
@@ -333,7 +371,7 @@ $('#table6').table({
         </section>
         <section class="code-box">
             <section class="code-box-demo">
-                <table id="table7"></table>
+                <table id="table8"></table>
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
@@ -348,9 +386,9 @@ $('#table6').table({
             </section>
             <section class="code-box-wrapper">
                 <pre><code class="language-markup">
-&lt;table id="table7"&gt;&lt;/table&gt;
+&lt;table id="table8"&gt;&lt;/table&gt;
                 </code><code class="language-javascript">  
-$('#table7').table({
+$('#table8').table({
     classes: 'si-table-fixed',
     pagination: false,
     fixedColumns: true,//开启固定列

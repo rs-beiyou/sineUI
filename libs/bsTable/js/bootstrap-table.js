@@ -1979,9 +1979,8 @@
         }
 
         this.$body.html(trFragments);
-
         // events
-        this.options.height!==undefined && this.$tableHeader.off('mousewheel.bs DOMMouseScroll.bs').on('mousewheel.bs DOMMouseScroll.bs',function(event){
+        this.options.height!==undefined && this.$el.width()>this.$el.parent().width() && this.$tableHeader.off('mousewheel.bs DOMMouseScroll.bs').on('mousewheel.bs DOMMouseScroll.bs',function(event){
             event = event.originalEvent;
             event.preventDefault();
             const delta = event.deltaY;

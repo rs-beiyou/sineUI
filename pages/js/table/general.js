@@ -128,6 +128,79 @@ $('#table4').table({
 });
 $('#table5').table({
     pagination: false,
+    height: 300,
+    columns: [{
+        field: 'id',
+        title: 'Item ID'
+    }, {
+        field: 'name',
+        title: 'Item Name'
+    }, {
+        field: 'price',
+        title: 'Item Price'
+    }],
+    data:[
+        {
+            "id": 0,
+            "name": "Item 0",
+            "price": "$0"
+        },
+        {
+            "id": 1,
+            "name": "Item 2",
+            "price": "$1"
+        },
+        {
+            "id": 2,
+            "name": "Item 1",
+            "price": "$2"
+        },{
+            "id": 0,
+            "name": "Item 0",
+            "price": "$0"
+        },
+        {
+            "id": 1,
+            "name": "Item 2",
+            "price": "$1"
+        },
+        {
+            "id": 2,
+            "name": "Item 1",
+            "price": "$2"
+        },{
+            "id": 0,
+            "name": "Item 0",
+            "price": "$0"
+        },
+        {
+            "id": 1,
+            "name": "Item 2",
+            "price": "$1"
+        },
+        {
+            "id": 2,
+            "name": "Item 1",
+            "price": "$2"
+        },{
+            "id": 0,
+            "name": "Item 0",
+            "price": "$0"
+        },
+        {
+            "id": 1,
+            "name": "Item 2",
+            "price": "$1"
+        },
+        {
+            "id": 2,
+            "name": "Item 1",
+            "price": "$2"
+        }
+    ]
+});
+$('#table6').table({
+    pagination: false,
     columns: [{
         checkbox: true
     }, {
@@ -176,7 +249,7 @@ $('#table5').table({
         }
     ]
 });
-$('#table6').table({
+$('#table7').table({
     classes: 'si-table-fixed',
     pagination: false,
     height: 300,
@@ -243,7 +316,7 @@ $('#table6').table({
         price: '¥ 3'
     }]
 });
-$('#table7').table({
+$('#table8').table({
     classes: 'si-table-fixed',
     pagination: false,
     fixedColumns: true,

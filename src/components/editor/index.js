@@ -26,6 +26,9 @@ class Editor{
   clear(){
     this.editor.txt.clear();
   }
+  editable(flag){
+    this.editor.$textElem.attr('contenteditable', flag);
+  }
 }
 
 function Plugin(option) {

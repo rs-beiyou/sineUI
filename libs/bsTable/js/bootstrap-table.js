@@ -2724,7 +2724,7 @@
         var that = this,
             top = -(parseInt(this.$el.css('margin-top'))),
             // the fixed height should reduce the scorll-x height
-            height = this.$tableBody.height();
+            height = this.$tableBody.height() - getScrollBarWidth()||0;
 
         if (!this.$body.find('> tr[data-index]').length) {
             this.$fixedBody.hide();

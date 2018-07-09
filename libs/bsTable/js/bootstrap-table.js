@@ -1980,6 +1980,19 @@
 
         this.$body.html(trFragments);
 
+        // events
+        this.options.height!==undefined && this.$tableHeader.off('mousewheel.bs DOMMouseScroll.bs').on('mousewheel.bs DOMMouseScroll.bs',function(event){
+            event = event.originalEvent;
+            event.preventDefault();
+            const delta = event.deltaY;
+            const $body = that.$tableBody[0];
+            if (delta > 0) {
+                $body.scrollLeft = $body.scrollLeft + 20;
+            } else {
+                $body.scrollLeft = $body.scrollLeft - 20;
+            }
+        })
+
         if (!fixedScroll) {
             this.scrollTo(0);
         }
@@ -2559,7 +2572,7 @@
     // =======================
 
     BootstrapTable.prototype.resetView = function (params) {
-        var padding = 0;
+        var padding = 0, that = this;
 
         if (params && params.height) {
             this.options.height = params.height;
@@ -2603,6 +2616,19 @@
         // Assign the correct sortable arrow
         this.getCaret();
         this.$tableContainer.css('padding-bottom', padding + 'px');
+
+        // events
+        // this.$tableHeader.off('mousewheel.bs DOMMouseScroll.bs').on('mousewheel.bs DOMMouseScroll.bs',function(event){
+        //     event = event.originalEvent;
+        //     event.preventDefault();
+        //     const delta = event.deltaY;
+        //     const $body = that.$tableBody[0];
+        //     if (delta > 0) {
+        //         $body.scrollLeft = $body.scrollLeft + 20;
+        //     } else {
+        //         $body.scrollLeft = $body.scrollLeft - 20;
+        //     }
+        // })
         
         //fixedColumns
         if (!this.options.fixedColumns) {
@@ -2652,17 +2678,17 @@
         });
 
         // events
-        this.$tableHeader.off('mousewheel.bs DOMMouseScroll.bs').on('mousewheel.bs DOMMouseScroll.bs',function(event){
-            event = event.originalEvent;
-            event.preventDefault();
-            const delta = event.deltaY;
-            const $body = that.$tableBody[0];
-            if (delta > 0) {
-                $body.scrollLeft = $body.scrollLeft + 20;
-            } else {
-                $body.scrollLeft = $body.scrollLeft - 20;
-            }
-        })
+        // this.$tableHeader.off('mousewheel.bs DOMMouseScroll.bs').on('mousewheel.bs DOMMouseScroll.bs',function(event){
+        //     event = event.originalEvent;
+        //     event.preventDefault();
+        //     const delta = event.deltaY;
+        //     const $body = that.$tableBody[0];
+        //     if (delta > 0) {
+        //         $body.scrollLeft = $body.scrollLeft + 20;
+        //     } else {
+        //         $body.scrollLeft = $body.scrollLeft - 20;
+        //     }
+        // })
         this.$tableBody.off('scroll.fixed').on('scroll.fixed', function () {
             // that.$fixedBody.find('table').css('top', -$(this).scrollTop());
             that.$fixedBody[0].scrollTop = event.target.scrollTop;

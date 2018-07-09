@@ -2646,7 +2646,6 @@
         var that = this;
 
         this.resetFixedBody();
-        this.$fixedBody.show();
 
         this.$body.find('> tr').each(function (i) {
             that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 1);
@@ -2659,9 +2658,9 @@
             const delta = event.deltaY;
             const $body = that.$tableBody[0];
             if (delta > 0) {
-                $body.scrollLeft = $body.scrollLeft + 10;
+                $body.scrollLeft = $body.scrollLeft + 20;
             } else {
-                $body.scrollLeft = $body.scrollLeft - 10;
+                $body.scrollLeft = $body.scrollLeft - 20;
             }
         })
         this.$tableBody.off('scroll.fixed').on('scroll.fixed', function () {
@@ -2740,7 +2739,11 @@
             width: this.$fixedHeader.width(),
             height: height,
             top: top
-        });
+        }).show();
+
+        this.$tableBody[this.$tableBody.width()<this.$el.width()?'addClass':'removeClass']('fixed-table-body-overflowX');
+        this.$tableBody[this.$tableBody.height()<this.$el.height()?'addClass':'removeClass']('fixed-table-body-overflowY');
+        
     }
     BootstrapTable.prototype.getData = function (useCurrentPage) {
         var data = this.options.data;

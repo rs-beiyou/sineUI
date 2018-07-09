@@ -58,10 +58,16 @@
 }
 
 .fixed-table-body {
-    overflow-x: scroll;
-    overflow-y: scroll;
+    overflow-x: auto;
+    overflow-y: auto;
     height: 100%;
     border-bottom: 1px solid #ddd;
+}
+.fixed-table-body.fixed-table-body-overflowX{
+    overflow-x: scroll;
+}
+.fixed-table-body.fixed-table-body-overflowY{
+    overflow-y: scroll;
 }
 
 .fixed-table-container table {

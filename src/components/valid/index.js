@@ -69,10 +69,10 @@ class Valid{
     }
     return true;
   }
-  show(){
+  show(msg){
     let tipTarget = this.former.$formBlock;
     let events = $._data(tipTarget[0],'events');
-    tipTarget.attr('data-original-title',this.msg).tooltip({
+    tipTarget.attr('data-original-title',msg || this.msg).tooltip({
       trigger:'manual',
       placement: this.placement
     });
@@ -218,18 +218,16 @@ class Valid{
   //自定义校验，支持正则和远程校验
   custom(){
     let val = this.$el.val(),
-      regex = this.options.regex,
-      url = this.options.url,
+      op = this.options,
       name = this.former.options.name||_.randomString();
-    if(val==='')return;
-    if(regex){
-      this.pass = new RegExp(regex).test(val);
-      this.msg = '输入不符合规则！';
-    }else if(url){
+    if(op.regex){
+      this.pass = new RegExp(op.regex).test(val);
+      this.msg = op.msg || '输入不符合规则！';
+    }else if(op.url){
       this.customUrlFn = this.customUrlFn||_.debounce(()=>{
         $.ajax({
           type: 'post',
-          url: url,
+          url: op.url,
           data: {
             [name]:val
           },
@@ -246,16 +244,21 @@ class Valid{
         });
       },1000);
       this.customUrlFn();
+    }else if(op.fn){
+      if(typeof op.fn === 'function'){
+        this.pass = op.fn(val);
+        this.msg = op.msg || '输入不符合规则！';
+      }
     }
   }
 }
 
-let allowedMethods = ['check'];
+let allowedMethods = ['check','show','hide'];
 let allowedType = ['email','int','postcode','id','length','float','range','tel','mobile','phone','number','url','custom'];
 
 function Plugin(option, former){
   try {
-    let value;
+    let value, args = Array.prototype.slice.call(arguments, 1);
     this.each(function(){
       let $this = $(this),
         data = $this.data('si.valid'),
@@ -281,7 +284,7 @@ function Plugin(option, former){
           if (!data) {
             return;
           }
-          value = data[option].apply(data);
+          value = data[option].apply(data, args);
           if (option === 'destroy') {
             $this.removeData('si.valid');
           }

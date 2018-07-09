@@ -77,6 +77,7 @@ class Sine {
     $.ajax({
       url: url,
       dataType: 'text',
+      cache: false,
       beforeSend: () => {
         this._showLoadingBar('50%');
         this.loadTimer = setInterval(() => {

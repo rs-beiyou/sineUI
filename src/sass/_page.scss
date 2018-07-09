@@ -147,7 +147,7 @@ a {
         padding-bottom: 10px;
         width: $sidebar-width;
         z-index: 4;
-        overflow-y: scroll;
+        overflow-y: auto;
         .nav {
             margin-top: 15px;
             -webkit-transition: all 300ms linear;
@@ -282,7 +282,7 @@ a {
     bottom: 0;
     right: 0;
     opacity: 0;
-    overflow: scroll;
+    overflow: auto;
     background-color: $si-main-panel-bg;
     -webkit-transition: margin-left .3s ease-in-out;
     -o-transition: margin-left .3s ease-in-out;
@@ -320,7 +320,7 @@ a {
     }
     .si-container {
         padding: 65px 0 10px;
-        overflow: scroll;
+        overflow: auto;
         margin: 0 auto;
         max-width: $si-container-max-width;
     }

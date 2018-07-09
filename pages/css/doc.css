@@ -224,7 +224,7 @@ label .btn {
 }
 
 pre[class*="language-"] {
-    overflow: scroll;
+    overflow: auto;
 }
 
 .code-box-demo table.code-box-table {

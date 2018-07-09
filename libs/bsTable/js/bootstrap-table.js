@@ -2653,12 +2653,12 @@
         });
 
         // events
-        this.$tableHeader.off('mousewheel.bs').on('mousewheel.bs',function(event){
+        this.$tableHeader.off('mousewheel.bs DOMMouseScroll.bs').on('mousewheel.bs DOMMouseScroll.bs',function(event){
             event = event.originalEvent;
             event.preventDefault();
-            const deltaX = event.deltaX;
+            const delta = event.deltaY;
             const $body = that.$tableBody[0];
-            if (deltaX > 0) {
+            if (delta > 0) {
                 $body.scrollLeft = $body.scrollLeft + 10;
             } else {
                 $body.scrollLeft = $body.scrollLeft - 10;
@@ -2720,14 +2720,11 @@
         });
     };
 
-    BootstrapTable.prototype.resetFixedHeader = function(){
-
-    }
     BootstrapTable.prototype.resetFixedBody = function(){
         var that = this,
             top = -(parseInt(this.$el.css('margin-top'))),
             // the fixed height should reduce the scorll-x height
-            height = this.$tableBody.outerHeight();
+            height = this.$tableBody.height();
 
         if (!this.$body.find('> tr[data-index]').length) {
             this.$fixedBody.hide();

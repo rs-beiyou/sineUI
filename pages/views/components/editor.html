@@ -23,7 +23,37 @@
             <section class="code-box-wrapper">
                 <pre><code class="language-markup">
 &lt;div id="editor"&gt;&lt;/div&gt;
+            </code><code class="language-javascript">
 $('#editor').editor();
+                  </code></pre>
+                <div class="code-box-wrapper-close">
+                    <i class="fa fa-angle-double-up"></i>
+                </div>
+            </section>
+        </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <div id="editor2"></div>
+                <button id="disabled" style="margin-top: 10px;" type="button" class="btn btn-primary">点击禁用</button>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    禁用编辑器
+                </div>
+                <div>
+                    <p>
+                        调用<code>editable</code>方法。
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;div id="editor2"&gt;&lt;/div&gt;
+            </code><code class="language-javascript">
+$('#editor2').editor();
+$('#editor2').editor('editable',true);//禁用
+$('#editor2').editor('editable',false);//解禁
             </code></pre>
                 <div class="code-box-wrapper-close">
                     <i class="fa fa-angle-double-up"></i>
@@ -33,5 +63,14 @@ $('#editor').editor();
     </article>
 </div>
 <script>
+    var $editor2 = $("#editor2");
     $("#editor").editor();
+    $editor2.editor();
+
+    $('#disabled').click(function(){
+        var $this = $(this), disabled = $this.data('disabled');
+        $editor2.editor('editable',!!disabled);
+        $(this).html(disabled?'点击禁用':'点击解禁');
+        $this.data('disabled', !disabled);
+    })
 </script>

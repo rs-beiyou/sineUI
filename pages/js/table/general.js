@@ -519,3 +519,99 @@ $('#table8').table({
         price: '¥ 3'
     }]
 });
+
+$('#table9').table({
+    pagination: false,//取消分页
+    classes:'si-table-fixed',
+    height: 300,
+    fixedColumns: true,
+    fixedNumber: 2,
+    columns: [[{
+        field: 'id',
+        title: 'Item ID',
+        colspan: 8,
+        align: 'center',
+        width: 1600
+    }], [{
+        field: 'name',
+        title: 'Item Name',
+        align: 'center',
+        width: 200
+    }, {
+        field: 'price',
+        title: 'Item Price',
+        align: 'center',
+        width: 200
+    },{
+        field: 'name',
+        title: 'Item Name',
+        align: 'center',
+        width: 200
+    }, {
+        field: 'price',
+        title: 'Item Price',
+        align: 'center',
+        width: 200
+    },{
+        field: 'name',
+        title: 'Item Name',
+        align: 'center',
+        width: 200
+    }, {
+        field: 'price',
+        title: 'Item Price',
+        align: 'center',
+        width: 200
+    },{
+        field: 'name',
+        title: 'Item Name',
+        align: 'center',
+        width: 200
+    }, {
+        field: 'price',
+        title: 'Item Price',
+        align: 'center',
+        width: 200
+    }]],
+    data: [{
+        id: 2,
+        name: 'Item 2',
+        price: '¥ 2'
+    }, {
+        id: 3,
+        name: 'Item 3',
+        price: '¥ 3'
+    },{
+        id: 2,
+        name: 'Item 2',
+        price: '¥ 2'
+    }, {
+        id: 3,
+        name: 'Item 3',
+        price: '¥ 3'
+    },{
+        id: 2,
+        name: 'Item 2',
+        price: '¥ 2'
+    }, {
+        id: 3,
+        name: 'Item 3',
+        price: '¥ 3'
+    },{
+        id: 2,
+        name: 'Item 2',
+        price: '¥ 2'
+    }, {
+        id: 3,
+        name: 'Item 3',
+        price: '¥ 3'
+    },{
+        id: 2,
+        name: 'Item 2',
+        price: '¥ 2'
+    }, {
+        id: 3,
+        name: 'Item 3',
+        price: '¥ 3'
+    }]
+});

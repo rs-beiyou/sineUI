@@ -439,6 +439,55 @@ $('#table8').table({
                 <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
             </section>
         </section>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <table id="table9"></table>
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    和并列表格
+                </div>
+                <div>
+                    <p>表格头合并功能，多用于数据分类统计的表格中。</p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+&lt;table id="table9"&gt;&lt;/table&gt;
+                </code><code class="language-javascript">
+$('#table9').table({
+    pagination: false,//取消分页
+    columns: [{
+        field: 'id',
+        title: 'Item ID'
+    }, {
+        field: 'name',
+        title: 'Item Name'
+    }, {
+        field: 'price',
+        title: 'Item Price'
+    }],
+    data: [{
+        id: 1,
+        name: 'Item 1',
+        price: '¥ 1'
+    }, {
+        id: 2,
+        name: 'Item 2',
+        price: '¥ 2'
+    }, {
+        id: 3,
+        name: 'Item 3',
+        price: '¥ 3'
+    }]
+});                    
+            </code></pre>
+                <div class="code-box-wrapper-close">
+                    <i class="fa fa-angle-double-up"></i>
+                </div>
+            </section>
+        </section>
     </article>
 </div>
 <script src="pages/js/table/general.js"></script>

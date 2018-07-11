@@ -240,6 +240,7 @@ import _ from '../../utils/util';
             sbd[key].$selectbox.removeClass('si-selectbox-item-selected');
             this.tagsDom[key].remove();
             delete this.tagsDom[key];
+            _.delete(newArr, key);
           });
           if (va.length === 0) {
             $placeholder.show();
@@ -280,12 +281,7 @@ import _ from '../../utils/util';
       let _tagClose = document.createElement('i');
       $(_tagClose).addClass('fa fa-close si-tag-close').on('click', (e) => {
         let valueArr = op.value.split(',');
-        for (let i = 0, len = valueArr.length; i < len; i++) {
-          if (valueArr[i] === val) {
-            valueArr.splice(i, 1);
-            break;
-          }
-        }
+        _.delete(valueArr, val);
         op.value = valueArr.join(',');
         e.stopPropagation();
       });

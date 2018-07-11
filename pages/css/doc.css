@@ -226,7 +226,9 @@ label .btn {
 pre[class*="language-"] {
     overflow: auto;
 }
-
+.code-demo {
+    padding: 0 8px;
+}
 .code-box-demo table.code-box-table {
     font-family: Consolas,Menlo,Courier,monospace;
     font-size: 12px;

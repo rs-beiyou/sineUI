@@ -80,6 +80,9 @@
     margin: 0;
     border-left: 1px solid #ddd
 }
+.fixed-table-container thead th.rowspan-border {
+    border-right: 1px solid #ddd;
+}
 
 .fixed-table-container thead th:focus {
     outline: transparent solid 0
@@ -330,9 +333,9 @@ div.fixed-table-scroll-outer {
     border-right: 1px solid transparent;
 }
 
-.fixed-table-body-columns{
+/* .fixed-table-body-columns{
     border-bottom: 1px solid #ddd;
-}
+} */
 
 .fixed-table-body-columns table {
     position: absolute;

@@ -220,3 +220,8 @@ input[type="checkbox"] {
         margin-bottom: 10px;
     }
 }
+@media (max-width: $screen-sm-min) {
+    .form-columns .control-label{
+        text-align: left;
+    }
+}

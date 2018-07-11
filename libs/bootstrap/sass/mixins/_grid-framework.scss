@@ -14,16 +14,16 @@
     // Prevent columns from collapsing when empty
     min-height: 1px;
     // Inner gutter via padding
-    padding-left:  ceil(($grid-gutter-width / 2));
-    padding-right: floor(($grid-gutter-width / 2));
+    // padding-left:  ceil(($grid-gutter-width / 2));
+    // padding-right: floor(($grid-gutter-width / 2));
   }
   #{$list2} {
     position: relative;
     // Prevent columns from collapsing when empty
     min-height: 1px;
     // Inner gutter via padding
-    padding-left:  0;
-    padding-right: 0;
+    // padding-left:  0;
+    // padding-right: 0;
   }
 }
 

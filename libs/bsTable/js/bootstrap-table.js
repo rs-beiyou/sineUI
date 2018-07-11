@@ -874,6 +874,9 @@
                     column.checkbox || column.radio ?
                         sprintf(' class="bs-checkbox %s"', column['class'] || '') :
                         class_,
+                    column.rowspan ?
+                        sprintf(' class="rowspan-border %s"', column['class'] || '') :
+                        class_,
                     sprintf(' style="%s"', halign + style),
                     sprintf(' rowspan="%s"', column.rowspan),
                     sprintf(' colspan="%s"', column.colspan),
@@ -2455,6 +2458,7 @@
             falign = sprintf('text-align: %s; ', column.falign ? column.falign : column.align);
             valign = sprintf('vertical-align: %s; ', column.valign);
 
+
             style = calculateObjectValue(null, that.options.footerStyle);
 
             if (style && style.css) {
@@ -2664,7 +2668,7 @@
                 .find('.fht-cell').width($this.innerWidth());
             headerWidth += $this.outerWidth();
         });
-        this.$fixedHeader.width(headerWidth + 1).show();
+        this.$fixedHeader.width(headerWidth).show();
     };
 
     BootstrapTable.prototype.fitBodyColumns = function () {

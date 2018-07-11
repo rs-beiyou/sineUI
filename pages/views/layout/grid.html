@@ -1,1 +1,68 @@
-<div></div>
+<div class="container-fluid">
+    <article class="si-article">
+        <p class="si-info">布局的栅格化系统：sineUI采用了24栅格系统，将区域进行24等分，可以比较精细的应对大部分的业务布局场景。</p>
+        <div class="si-callout info">
+            <div class="si-callout-title">原理概述</div>
+            <ul>
+                <li>通过给标签添加<code>class</code>来完成布局，基于行<code>row</code>和列<code>col</code>来定义区块。</li>
+                <li>添加类<code>row</code>在水平方向创建一行。</li>
+                <li>添加类<code>col-sm-24</code>（响应式：lg > md > sm > xs）定义列，内容放置在列中。</li>
+                <li>如果一个row中的col总和超过 24，那么多余的col会作为一个整体另起一行排列。</li>
+            </ul>
+        </div>
+        <h4>设计理念<i class="fa fa-bookmark-o"></i></h4>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <div class="doc-row row">
+                    <div class="doc-col col-md-24">24：100%</div>
+                </div>
+                <div class="doc-row row light">
+                    <div class="doc-col col-md-16">16：66.66%</div>
+                    <div class="doc-col col-md-8 light">8：33.33%</div>
+                </div>
+                <div class="doc-row row">
+                    <div class="doc-col col-md-12">12：50%</div>
+                    <div class="doc-col col-md-12 light">12：50%</div>
+                </div>
+                <div class="doc-row row light">
+                    <div class="doc-col col-md-8">8：33.33%</div>
+                    <div class="doc-col col-md-8 light">8：33.33%</div>
+                    <div class="doc-col col-md-8">8：33.33%</div>
+                </div>
+                <div class="doc-row row">
+                    <div class="doc-col col-md-6">6：25%</div>
+                    <div class="doc-col col-md-6 light">6：25%</div>
+                    <div class="doc-col col-md-6">6：25%%</div>
+                    <div class="doc-col col-md-6 light">6：25%</div>
+                </div>
+            </section>
+        </section>
+        <h4>代码示例<i class="fa fa-code"></i></h4>
+        <section class="code-box">
+            <section class="code-box-demo">
+                <!-- 组件demo -->
+            </section>
+            <section class="code-box-meta">
+                <div class="code-box-title">
+                    <!-- 组件名 -->
+                </div>
+                <div>
+                    <p>
+                        <!-- 组件描述 -->
+                    </p>
+                </div>
+                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
+            </section>
+            <section class="code-box-wrapper">
+                <pre><code class="language-markup">
+            <!-- 组件html代码 -->
+            </code><code class="language-javascript">
+            <!-- 组件js代码 -->
+            </code></pre>
+                <div class="code-box-wrapper-close">
+                    <i class="fa fa-angle-double-up"></i>
+                </div>
+            </section>
+        </section>
+    </article>
+</div>

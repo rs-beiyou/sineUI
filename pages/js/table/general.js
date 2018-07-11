@@ -525,13 +525,26 @@ $('#table9').table({
     classes:'si-table-fixed',
     height: 300,
     fixedColumns: true,
-    fixedNumber: 2,
+    fixedNumber: 3,
     columns: [[{
-        field: 'id',
-        title: 'Item ID',
-        colspan: 8,
+        title: '#',
+        formatter:function(){
+            return Math.random().toFixed(2)*100
+        },
+        valign: 'middle',
+        rowspan: 2,
         align: 'center',
-        width: 1600
+        width: 60
+    }, {
+        title: 'Item-1',
+        colspan: 2,
+        align: 'center',
+        width: 400
+    }, {
+        title: 'Item-2',
+        colspan: 6,
+        align: 'center',
+        width: 1200
     }], [{
         field: 'name',
         title: 'Item Name',
@@ -544,7 +557,7 @@ $('#table9').table({
         width: 200
     },{
         field: 'name',
-        title: 'Item Name',
+        title: 'Item Name111',
         align: 'center',
         width: 200
     }, {

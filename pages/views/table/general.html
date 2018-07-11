@@ -445,7 +445,7 @@ $('#table8').table({
             </section>
             <section class="code-box-meta">
                 <div class="code-box-title">
-                    和并列表格
+                    合并列表格
                 </div>
                 <div>
                     <p>表格头合并功能，多用于数据分类统计的表格中。</p>
@@ -458,29 +458,71 @@ $('#table8').table({
                 </code><code class="language-javascript">
 $('#table9').table({
     pagination: false,//取消分页
-    columns: [{
-        field: 'id',
-        title: 'Item ID'
+    classes:'si-table-fixed',
+    height: 300,
+    fixedColumns: true,
+    fixedNumber: 3,
+    columns: [[{
+        title: '#',
+        formatter:function(){
+            return Math.random().toFixed(2)*100
+        },
+        valign: 'middle',
+        rowspan: 2,
+        align: 'center',
+        width: 60
     }, {
+        title: 'Item-1',
+        colspan: 2,
+        align: 'center',
+        width: 400
+    }, {
+        title: 'Item-2',
+        colspan: 6,
+        align: 'center',
+        width: 1200
+    }], [{
         field: 'name',
-        title: 'Item Name'
+        title: 'Item Name',
+        align: 'center',
+        width: 200
     }, {
         field: 'price',
-        title: 'Item Price'
-    }],
-    data: [{
-        id: 1,
-        name: 'Item 1',
-        price: '¥ 1'
+        title: 'Item Price',
+        align: 'center',
+        width: 200
+    },{
+        field: 'name',
+        title: 'Item Name111',
+        align: 'center',
+        width: 200
     }, {
-        id: 2,
-        name: 'Item 2',
-        price: '¥ 2'
+        field: 'price',
+        title: 'Item Price',
+        align: 'center',
+        width: 200
+    },{
+        field: 'name',
+        title: 'Item Name',
+        align: 'center',
+        width: 200
     }, {
-        id: 3,
-        name: 'Item 3',
-        price: '¥ 3'
-    }]
+        field: 'price',
+        title: 'Item Price',
+        align: 'center',
+        width: 200
+    },{
+        field: 'name',
+        title: 'Item Name',
+        align: 'center',
+        width: 200
+    }, {
+        field: 'price',
+        title: 'Item Price',
+        align: 'center',
+        width: 200
+    }]],
+    data: [...]
 });                    
             </code></pre>
                 <div class="code-box-wrapper-close">

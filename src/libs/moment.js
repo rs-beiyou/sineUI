@@ -1,3 +1,7 @@
+/**
+ * @author ocobo(zhangming)
+ * @description A class for Date dealing
+ */
 export default class Moment {
   constructor(config, fmt) {
     if(this.isMoment(config)){

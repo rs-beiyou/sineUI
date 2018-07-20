@@ -34,7 +34,7 @@ module.exports = merge(webpackBaseConfig, {
       allChunks: true
     }),
     new WebpackBundleSizeAnalyzerPlugin('./plain-report.txt'),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     // new BundleAnalyzerPlugin()
     new CompressionPlugin({
       asset: '[path].gz[query]',

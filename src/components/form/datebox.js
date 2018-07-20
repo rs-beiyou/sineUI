@@ -1,8 +1,7 @@
-import 'libs/daterangepicker/daterangepicker.css';
-import 'libs/daterangepicker/daterangepicker.js';
+import 'libs/datepicker/datepicker.css';
+import 'libs/datepicker/datepicker';
 
 import BaseForm from './form-base';
-import _ from '../../utils/util';
 
 class Datebox extends BaseForm{
   constructor(el, options){
@@ -56,7 +55,7 @@ class Datebox extends BaseForm{
         this._setValue(newVal, val);
         break;
       case 'width':
-        $input.css('width', newVal);
+        $datebox.css('width', newVal);
         break;
     }
   }
@@ -114,7 +113,7 @@ class Datebox extends BaseForm{
   _setValue(newVal, val){
     let op = this.options;
     !op.readonly&&!op.disabled&&!this.inited&&this.initDate();
-    this.$input.val(newVal?_.formatDate(new Date(newVal),op.format):'');
+    this.$input.val(newVal?newVal:'');
     this.inited&&this.$input.daterangepicker('elementChanged');
     !this.firstVal && this.$input.trigger('valid.change').trigger('change');
     this.firstVal = false;

@@ -11,9 +11,9 @@ import 'src/components/editor';
 import 'src/components/fullscreen';
 import './theme';
 
-import Sine from 'src/components/sine';
 import _ from 'src/utils/util';
+import si from 'src/components/sine';
 
-window.sine = Sine;
-window.si = Sine;
+window.sine = si;
+window.si = si;
 window._si = _;

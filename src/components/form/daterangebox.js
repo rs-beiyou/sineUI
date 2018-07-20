@@ -1,9 +1,8 @@
-import 'libs/daterangepicker/daterangepicker.css';
-import 'libs/daterangepicker/daterangepicker';
+import 'libs/datepicker/datepicker.css';
+import 'libs/datepicker/datepicker';
 
 import BaseForm from './form-base';
-// import moment from 'libs/daterangepicker/moment.min.js';
-import moment from 'moment';
+import Moment from 'src/libs/moment';
 
 class Daterangebox extends BaseForm{
   constructor(el, options){
@@ -73,7 +72,7 @@ class Daterangebox extends BaseForm{
         this._setValue(newVal, val);
         break;
       case 'width':
-        $input.css('width', newVal);
+        $datebox.css('width', newVal);
         break;
     }
   }
@@ -196,20 +195,20 @@ function Plugin(option) {
 
 Daterangebox.ranges = {
   '今天': [
-    moment().startOf(0, 'day'), moment().endOf('day')
+    new Moment().startOf('day'), new Moment().endOf('day')
   ],
   '最近7日': [
-    moment().subtract(6,'days').startOf('day'),
-    moment().endOf(0,'day')
+    new Moment().subtract(6,'day').startOf('day'),
+    new Moment().endOf('day')
   ],
   '最近三个月': [
-    //moment().startOf("month"), moment().endOf("month")
-    moment().subtract(3, 'month').startOf('month'),
-    moment().subtract(1, 'month').endOf('month')
+    //new Moment().startOf("month"), new Moment().endOf("month")
+    new Moment().subtract(3, 'month').startOf('month'),
+    new Moment().subtract(1, 'month').endOf('month')
   ],
   '最近一年': [
-    moment().subtract(12, 'month').startOf('day'),
-    moment().endOf(0,'day')
+    new Moment().subtract(12, 'month').startOf('day'),
+    new Moment().endOf('day')
   ]
 };
   

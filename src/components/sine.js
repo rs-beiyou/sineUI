@@ -128,21 +128,14 @@ class Sine {
       opacity: 1
     });
     if (this.currPageUrl) {
-      this.$content.css({
-        opacity: 0
-      });
       if (w == '100%') {
-        this.$content.addClass('si-loading').css({
-          opacity: 1
-        });
+        this.$content.addClass('si-loading');
         setTimeout(() => {
           this.$content.removeClass('si-loading');
         }, Number.parseFloat(this.$content.css('transition-duration')) * 1000);
       }
     } else {
-      this.$content.addClass('si-loading').css({
-        opacity: 1
-      });
+      this.$content.addClass('si-loading');
       setTimeout(() => {
         this.$content.removeClass('si-loading');
       }, Number.parseFloat(this.$content.css('transition-duration')) * 1000);

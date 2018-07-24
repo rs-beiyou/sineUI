@@ -1,4 +1,4 @@
-import 'core-js/fn/symbol/index';
+import 'core-js/es6/symbol';
 import 'core-js/fn/symbol/iterator';
 import 'core-js/fn/object/assign';
 import 'core-js/fn/object/keys';

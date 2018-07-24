@@ -2692,7 +2692,7 @@
         //         $body.scrollLeft = $body.scrollLeft - 20;
         //     }
         // })
-        this.$tableBody.off('scroll.fixed').on('scroll.fixed', function () {
+        this.$tableBody.off('scroll.fixed').on('scroll.fixed', function (event) {
             // that.$fixedBody.find('table').css('top', -$(this).scrollTop());
             that.$fixedBody[0].scrollTop = event.target.scrollTop;
         });

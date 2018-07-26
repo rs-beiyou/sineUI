@@ -8,7 +8,7 @@
         color: $gray-light;
         .si-radiobox-inner {
             border-color: $input-bg-disabled;
-            &::after {
+            &:after {
                 background-color: $input-bg-disabled;
                 -webkit-animation-name: none;
                 animation-name: none;
@@ -28,7 +28,7 @@
 .si-radiobox-checked {
     .si-radiobox-inner {
         border-color: $input-border-focus;
-        &::after {
+        &:after {
             background-color: $input-border-focus;
             -webkit-transform: scale(1);
             -ms-transform: scale(1);
@@ -48,7 +48,7 @@
     -webkit-transition: border-color, background-color .2s ease-in-out;
     -o-transition: border-color, background-color .2s ease-in-out;
     transition: border-color, background-color .2s ease-in-out;
-    &::after {
+    &:after {
         content: "";
         display: table;
         width: 8px;

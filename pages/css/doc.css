@@ -129,13 +129,13 @@ label .btn {
     padding: 10px 16px 20px;
 }
 
-.code-box-demo::before,
-.code-box-demo::after {
+.code-box-demo:before,
+.code-box-demo:after {
     content: "";
     display: table;
 }
 
-.code-box-demo::after {
+.code-box-demo:after {
     clear: both;
 }
 

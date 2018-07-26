@@ -11,7 +11,7 @@
 
 .control-label {
     font-weight: normal;
-    &.si-form-required::before{
+    &.si-form-required:before{
         content: '*';
         display: inline-block;
         margin-right: 4px;

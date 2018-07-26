@@ -6,7 +6,7 @@
         .si-checkbox-inner {
             border-color: $input-bg-disabled;
             background-color: $input-bg-disabled;
-            &::after {
+            &:after {
                 -webkit-animation-name: none;
                 animation-name: none;
             }
@@ -35,7 +35,7 @@
     -webkit-transition: border-color, background-color .2s ease-in-out;
     -o-transition: border-color, background-color .2s ease-in-out;
     transition: border-color, background-color .2s ease-in-out;
-    &::after {
+    &:after {
         content: "";
         display: table;
         width: 4px;
@@ -70,7 +70,7 @@
     .si-checkbox-inner {
         border-color: $input-border-focus;
         background-color: $input-border-focus;
-        &::after {
+        &:after {
             -webkit-transform: rotate(45deg) scale(1);
             -ms-transform: rotate(45deg) scale(1);
             transform: rotate(45deg) scale(1);

@@ -76,7 +76,7 @@ a {
     z-index: $zindex-sidebar;
     -webkit-box-shadow: $sidebar-box-shadow;
     box-shadow: $sidebar-box-shadow;
-    &::before {
+    &:before {
         content: '';
         display: block;
         position: absolute;
@@ -90,7 +90,7 @@ a {
         position: relative;
         padding: 15px;
         z-index: 4;
-        &::after {
+        &:after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -112,7 +112,7 @@ a {
     .user {
         padding: 10px 0;
         position: relative;
-        &::after {
+        &:after {
             content: '';
             position: absolute;
             bottom: 0;

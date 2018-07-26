@@ -90,7 +90,7 @@
     }
     .si-selectbox-item-selected {
         color: $dropdown-link-active-bg;
-        &::after {
+        &:after {
             content: '\f00c';
             font-family: FontAwesome;
             float: right;

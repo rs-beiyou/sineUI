@@ -2134,7 +2134,7 @@
         this.$fixedBodyColumns.html('');
         this.$body.find('> tr[data-index]').each(function () {
             var $tr = $(this).clone(),
-                $tds = $tr.find('td');
+                $tds = $tr.find('td').clone();
 
             $tr.html('');
             var end = that.options.fixedNumber;
@@ -2143,7 +2143,7 @@
                 --rowspan;
             }
             for (var i = 0; i < end; i++) {
-                $tr.append($tds.eq(i).clone());
+                $tr.append($tds.eq(i));
             }
             that.$fixedBodyColumns.append($tr);
             

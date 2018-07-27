@@ -37,7 +37,6 @@
     transition: border-color, background-color .2s ease-in-out;
     &:after {
         content: "";
-        display: table;
         width: 4px;
         height: 8px;
         position: absolute;

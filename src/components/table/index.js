@@ -154,11 +154,14 @@ class Table {
   getPage(){
     return this.$el.bootstrapTable('getPage');
   }
+  resetView(option){
+    return this.$el.bootstrapTable('resetView', option);
+  }
 }
 let allowedMethods = [
   'initTable','refresh','load','reload','selected','checkAll','uncheckAll',
   'check','uncheck','append','getData','updateRow','getRowByUniqueId','removeSelected',
-  'hideColumn','showColumn','refreshColumns','getPage'
+  'hideColumn','showColumn','refreshColumns','getPage','resetView'
 ];
 function Plugin(option){
   try {
@@ -202,7 +205,7 @@ Table.DEFAULTS = {
   sidePagination: 'server',
   striped: true, //是否显示行间隔色
   pageNumber: 1,
-  pageSize: 20,
+  pageSize: 10,
   pageList: [10, 20, 30, 50],
   showSerialNumber: false
 };

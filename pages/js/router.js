@@ -129,6 +129,22 @@ window.si.config({
       path: 'api',
       page: 'pages/views/modal/api.html'
     }]
+  }, {
+    path: 'pages',
+    title: '页面',
+    children: [{
+      title: '数据列表',
+      path: 'list',
+      page: 'pages/views/pages/list.html'
+    }]
+  }, {
+    path: 'skills',
+    title: '技巧规范',
+    children: [{
+      title: '组件联动',
+      path: 'componentLinker',
+      page: 'pages/views/skills/componentLinker.html'
+    }]
   }],
   redirect: 'home',
   lost: 'lost',

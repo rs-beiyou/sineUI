@@ -2760,8 +2760,10 @@
         }
         if (!this.options.height) {
             height = height - top;
+        }else{
+            this.$el.css('margin-top',-top);
         }
-        this.$el.css('margin-top',-top);
+        
         this.$fixedBody.css({
             width: this.$fixedHeader.width(),
             height: height,

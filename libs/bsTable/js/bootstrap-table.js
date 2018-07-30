@@ -2359,8 +2359,7 @@
         scrollWidth = fixedBody.scrollWidth > fixedBody.clientWidth &&
         fixedBody.scrollHeight > fixedBody.clientHeight + this.$header.outerHeight() ?
             getScrollBarWidth() : 0;
-
-        this.$el.css('margin-top', -this.$header.outerHeight() - 1);
+        this.$el.css('margin-top', -this.$header.outerHeight() -1);
 
         focused = $(':focus');
         if (focused.length > 0) {
@@ -2676,9 +2675,9 @@
 
         this.resetFixedBody();
 
-        this.$body.find('> tr').each(function (i) {
-            that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 1);
-        });
+        // this.$body.find('> tr').each(function (i) {
+        //     that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 1);
+        // });
 
         // events
         // this.$tableHeader.off('mousewheel.bs DOMMouseScroll.bs').on('mousewheel.bs DOMMouseScroll.bs',function(event){
@@ -2750,7 +2749,8 @@
 
     BootstrapTable.prototype.resetFixedBody = function(){
         var that = this,
-            top = -(parseInt(this.$el.css('margin-top'))),
+            // top = -(parseInt(this.$el.css('margin-top'))),
+            top = this.$fixedHeader.height(),
             // the fixed height should reduce the scorll-x height
             height = this.$tableBody.height() - getScrollBarWidth()||0;
 
@@ -2758,12 +2758,10 @@
             this.$fixedBody.hide();
             return;
         }
-
         if (!this.options.height) {
-            top = this.$fixedHeader.outerHeight()-1;
             height = height - top;
         }
-
+        this.$el.css('margin-top',-top);
         this.$fixedBody.css({
             width: this.$fixedHeader.width(),
             height: height,

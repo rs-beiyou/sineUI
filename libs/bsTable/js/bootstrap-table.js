@@ -1986,12 +1986,12 @@
         this.options.height!==undefined && this.$el.width()>this.$el.parent().width() && this.$tableHeader.off('mousewheel.bs DOMMouseScroll.bs').on('mousewheel.bs DOMMouseScroll.bs',function(event){
             event = event.originalEvent;
             event.preventDefault();
-            const delta = event.deltaY;
+            const delta = event.wheelDelta;
             const $body = that.$tableBody[0];
-            if (delta > 0) {
-                $body.scrollLeft = $body.scrollLeft + 20;
+            if (delta < 0) {
+                $body.scrollLeft = $body.scrollLeft + 30;
             } else {
-                $body.scrollLeft = $body.scrollLeft - 20;
+                $body.scrollLeft = $body.scrollLeft - 30;
             }
         })
 

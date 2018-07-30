@@ -9,6 +9,7 @@ import 'src/components/modal';
 import 'src/components/table';
 import 'src/components/editor';
 import 'src/components/fullscreen';
+import 'src/components/component/componentLinker';
 import './theme';
 
 import _ from 'src/utils/util';

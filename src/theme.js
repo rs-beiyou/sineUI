@@ -13,8 +13,8 @@ $(function () {
     $win = $(window),
     before = $win.scrollTop();
   if(!window.top.$wintop)window.top.$wintop = $wintop;
-  let $page = $wintop.find('.si-page');
   let $full = $('.browerFullscreen');
+  let $page = $wintop.find('.si-page');
   let hiding = false;
   window.onscroll = _.debounce(function () {
     if(hiding)return;

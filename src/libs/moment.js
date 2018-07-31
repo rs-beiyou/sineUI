@@ -18,7 +18,7 @@ export default class Moment {
     this._d = new Date()
   }
   init ([year,month,day,hour,minute,second]) {
-    this._d = new Date(`${year}-${month ? month+1 : 1}-${day || 1} ${hour || 0}:${minute || 0}:${second || 0}`)
+    this._d = new Date(`${year}/${month ? month+1 : 1}/${day || 1} ${hour || 0}:${minute || 0}:${second || 0}`)
     return this
   }
   isValid () {

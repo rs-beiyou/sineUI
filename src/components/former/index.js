@@ -32,7 +32,7 @@ function plugin(option) {
         if(allowedMethods.includes(option)){
           new Former(this)[option]();
         }else{
-          value = $this[$this.data('si-form-type')](option, args);
+          value = $this[$this.data('si-form-type')](args[0]);
         }
       }
       if (typeof option === 'object') {

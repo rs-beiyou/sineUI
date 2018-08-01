@@ -254,8 +254,7 @@ import _ from '../../utils/util';
             $selectValue = this.$selectValue;
           if (va === '' && vac !== '') {
             $selectValue.text('');
-            sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
-            op.clearable && this.$selection.removeClass('si-show-clear');
+            sbd[vac] && sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
             this.$input.val(va).removeData('key');
             $placeholder.show();
             $selectValue.hide();
@@ -263,11 +262,14 @@ import _ from '../../utils/util';
           if (sbd[va]) {
             this.$input.val(va).data('key', sbd[va].text);
             $selectValue.text(sbd[va].text);
-            vac === '' && $placeholder.hide() && $selectValue.show();
-            vac !== '' && sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
             sbd[va].$selectbox.addClass('si-selectbox-item-selected');
-            op.clearable && this.$selection.addClass('si-show-clear');
+          } else {
+            this.$input.val(va).data('key', va);
+            $selectValue.text(va);
           }
+          vac === '' && $placeholder.hide() && $selectValue.show();
+          va !== '' && vac !== '' && sbd[vac] && sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
+          op.clearable && this.$selection.addClass('si-show-clear');
         }
         !this.firstVal && this.$input.trigger('valid.change').trigger('change');
         this.firstVal = false;

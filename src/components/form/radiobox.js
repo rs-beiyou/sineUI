@@ -94,14 +94,18 @@ class Radiobox extends BaseForm {
     }
   }
   _setValue(newVal, val) {
-    if (this.radioboxDom) {
+    if (this.radioboxDom && !this.dataReloading) {
       let va = newVal,
         vac = val,
         cbd = this.radioboxDom;
       cbd[va] && cbd[va].$radiobox.addClass('si-radiobox-checked');
       cbd[vac] && cbd[vac].$radiobox.removeClass('si-radiobox-checked') && cbd[vac].$input.attr('checked', false);
-      !this.firstVal && this.$input.val(newVal).trigger('change').trigger('valid.change');
+    }
+    val!==undefined && this.$input.val(newVal);
+    if (this.firstVal) {
       this.firstVal = false;
+    } else {
+      val!==undefined && this.$input.trigger('valid.change').trigger('change');
     }
   }
   _setAttachList(newVal) {

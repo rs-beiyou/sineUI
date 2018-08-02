@@ -56,6 +56,7 @@ export default class BaseForm {
         case 'url':
           this._getDataByUrl(newVal,{},re=>{
             op.data = op.dataField?re[op.dataField]:re;
+            this.dataReloading = false;
           });
           break;
         case 'valid':
@@ -160,6 +161,9 @@ export default class BaseForm {
     });
   }
   set(option) {
+    if(option && option.url){
+      this.dataReloading = true;
+    }
     this.className === 'Filebox' ? $.extend(true, this.options, option) : Object.assign(this.options, option);
   }
   create(el){

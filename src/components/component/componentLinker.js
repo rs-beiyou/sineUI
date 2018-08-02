@@ -18,9 +18,20 @@ class ComponentLinker{
   }
   init () {
     let op = this.option;
-    this.trigger = typeof op.trigger === 'object' ? op.trigger : $(op.trigger);
-    this.follower = typeof op.follower === 'object' ? op.follower : $(op.follower);
-    this.trigger.on(op.event, this.callback.bind(this));
+    this.follower = typeof op.follower === 'string' ? $(op.follower) : op.follower;
+    if(Object.prototype.toString.call(op.trigger) === '[object Array]' && Object.prototype.toString.call(op.event) === '[object Array]'){
+      this.trigger = this.trigger.map(element => {
+        return typeof element === 'string' ? $(element) : element;
+      });
+      this.trigger.forEach((element, index) => {
+        element = typeof element === 'string' ? $(element) : element;
+        element.on(op.event[index], this.callback.bind(this));
+      });
+    }
+    if (typeof op.trigger === 'string') {
+      this.trigger = $(op.trigger);
+      this.trigger.on(op.event, this.callback.bind(this));
+    }
     op.immediate && this.callback();
   }
   callback () {
@@ -31,7 +42,7 @@ class ComponentLinker{
 ComponentLinker.DEFAULTS = {
   trigger: null,
   follower: null,
-  event: '',
+  event: null,
   immediate: true,
   callback: null
 };

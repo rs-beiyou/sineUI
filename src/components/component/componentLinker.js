@@ -20,7 +20,7 @@ class ComponentLinker{
     let op = this.option;
     this.follower = typeof op.follower === 'string' ? $(op.follower) : op.follower;
     if(Object.prototype.toString.call(op.trigger) === '[object Array]' && Object.prototype.toString.call(op.event) === '[object Array]'){
-      this.trigger = this.trigger.map(element => {
+      this.trigger = op.trigger.map(element => {
         return typeof element === 'string' ? $(element) : element;
       });
       this.trigger.forEach((element, index) => {

@@ -13,8 +13,7 @@ import 'src/components/component/componentLinker';
 import './theme';
 
 import _ from 'src/utils/util';
-import si from 'src/components/sine';
+import Sine from 'src/components/sine';
 
-window.sine = si;
-window.si = si;
-window._si = _;
+window.Sine = Sine;
+window._sine = _;

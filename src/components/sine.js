@@ -1,7 +1,8 @@
 import './parser';
+import themeInit from '../theme';
 
 class Sine {
-  constructor() {
+  constructor(options) {
     this.currPageUrl = null;
     this.$body = $('body');
     this.$page = $('.si-page');
@@ -9,13 +10,18 @@ class Sine {
     this.$container = $('.si-container');
     this.loadTimer = null;
     this.hasRouter = false;
-    this.options = Sine.DEFAULTS;
+    this.options = Object.assign({}, Sine.DEFAULTS, options || {});
     this.pathArr = [];
+    this.init();
   }
   init() {
     this._initLoadingBar();
     this.options.router != null ? this._initRouter() : null;
+    this.initTheme();
     return this;
+  }
+  initTheme () {
+    themeInit(this.options);
   }
   config(options) {
     Object.assign(this.options, options || {});
@@ -157,9 +163,8 @@ Sine.DEFAULTS = {
   router: null,
   beforeEach: null,
   afterEach: null,
-  redirect: null
+  redirect: null,
+  scrollToHide: true
 };
 
-let si = new Sine();
-
-export default si;
+export default Sine;

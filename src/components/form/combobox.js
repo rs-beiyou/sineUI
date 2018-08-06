@@ -137,73 +137,79 @@ class Combobox extends BaseForm {
   }
   _setValue(newVal,val){
     let levelUlArr = this.levelUlArr, _data = this._data, keyArr = this.keyArr;
-    if(levelUlArr.length===0)return;
-    let valArr = val?val.split(','):[],
-      newValArr = newVal?newVal.split(','):[],
-      length1 = valArr.length,
-      length2 = newValArr.length,
-      maxLen = length1>length2?length1:length2;
-  
-    if(valArr[0]!==newValArr[0]){
-      let da = _data[0][newValArr[0]],
-        old_da = _data[0][valArr[0]];
-      for(let m= 1;m<levelUlArr.length;m++){
-        levelUlArr[m].remove();
-      }
-      levelUlArr.length>1&&levelUlArr.splice(1,levelUlArr.length-1);
-      if(!newVal){
-        keyArr.splice(0,keyArr.length);
-        old_da&&old_da.$li.removeClass('si-combobox-item-active');
+    if(levelUlArr.length>0 && !this.dataReloading){
+      let valArr = val?val.split(','):[],
+        newValArr = newVal?newVal.split(','):[],
+        length1 = valArr.length,
+        length2 = newValArr.length,
+        maxLen = length1>length2?length1:length2;
+    
+      if(valArr[0]!==newValArr[0]){
+        let da = _data[0][newValArr[0]],
+          old_da = _data[0][valArr[0]];
+        for(let m= 1;m<levelUlArr.length;m++){
+          levelUlArr[m].remove();
+        }
+        levelUlArr.length>1&&levelUlArr.splice(1,levelUlArr.length-1);
+        if(!newVal){
+          keyArr.splice(0,keyArr.length);
+          old_da&&old_da.$li.removeClass('si-combobox-item-active');
+        }else{
+          keyArr.splice(0,keyArr.length,da.title);
+          old_da&&old_da.$li.removeClass('si-combobox-item-active');
+          da&&da.$li.addClass('si-combobox-item-active');
+          this._beforeInitCombo(da, newValArr[0]);
+        }
       }else{
-        keyArr.splice(0,keyArr.length,da.title);
-        old_da&&old_da.$li.removeClass('si-combobox-item-active');
-        da&&da.$li.addClass('si-combobox-item-active');
-        this._beforeInitCombo(da, newValArr[0]);
-      }
-    }else{
-      for(let i=1;i<maxLen;i++){
-        let da1 = _data[i][newValArr[i]],
-          old_da1 = _data[i][valArr[i]];
+        for(let i=1;i<maxLen;i++){
+          let da1 = _data[i][newValArr[i]],
+            old_da1 = _data[i][valArr[i]];
 
-        if(!newValArr[i]){
-          let le = levelUlArr.length;
-          for(let n= i+1;n<le;n++){
-            levelUlArr[n].remove();
-            delete _data[n];
+          if(!newValArr[i]){
+            let le = levelUlArr.length;
+            for(let n= i+1;n<le;n++){
+              levelUlArr[n].remove();
+              delete _data[n];
+            }
+            le>i&&levelUlArr.splice(i+1,le-i);
+            keyArr.splice(i,keyArr.length-i);
+            this._beforeInitCombo(da1, newValArr[i]);
+            break;
           }
-          le>i&&levelUlArr.splice(i+1,le-i);
-          keyArr.splice(i,keyArr.length-i);
-          this._beforeInitCombo(da1, newValArr[i]);
-          break;
-        }
-        
-        if(!valArr[i]&&newValArr[i]){
-          keyArr.splice(i,keyArr.length-i,da1.title);
-          da1&&da1.$li.addClass('si-combobox-item-active');
-          this._beforeInitCombo(da1, newValArr[i]);
-          continue;
-        }
-        
-        if(newValArr[i]!==valArr[i]){
-          let le = levelUlArr.length;
-          for(let o= i+1;o<le;o++){
-            levelUlArr[o].remove();
-            delete _data[o];
+          
+          if(!valArr[i]&&newValArr[i]){
+            keyArr.splice(i,keyArr.length-i,da1.title);
+            da1&&da1.$li.addClass('si-combobox-item-active');
+            this._beforeInitCombo(da1, newValArr[i]);
+            continue;
           }
-          le>i&&levelUlArr.splice(i+1,le-i);
-          keyArr.splice(i,keyArr.length-i,da1.title);
-          old_da1&&old_da1.$li.removeClass('si-combobox-item-active');
-          da1&&da1.$li.addClass('si-combobox-item-active');
-          this._beforeInitCombo(da1, newValArr[i]);
-          break;
+          
+          if(newValArr[i]!==valArr[i]){
+            let le = levelUlArr.length;
+            for(let o= i+1;o<le;o++){
+              levelUlArr[o].remove();
+              delete _data[o];
+            }
+            le>i&&levelUlArr.splice(i+1,le-i);
+            keyArr.splice(i,keyArr.length-i,da1.title);
+            old_da1&&old_da1.$li.removeClass('si-combobox-item-active');
+            da1&&da1.$li.addClass('si-combobox-item-active');
+            this._beforeInitCombo(da1, newValArr[i]);
+            break;
+          }
         }
       }
+      this.options.clearable && newVal!=='' && this.$combo.addClass('si-show-clear');
+      this.options.clearable && newVal==='' && this.$combo.removeClass('si-show-clear');
+      this.$placeholder.val(keyArr.join(' / '));
     }
-    this.options.clearable && newVal && this.$combo.addClass('si-show-clear');
-    this.options.clearable && !newVal && this.$combo.removeClass('si-show-clear');
-    this.$placeholder.val(keyArr.join(' / '));
-    !this.firstVal && this.$input.val(newVal).trigger('valid.change').trigger('change');
-    this.firstVal = false;
+    
+    val!==undefined && this.$input.val(newVal);
+    if (this.firstVal) {
+      this.firstVal = false;
+    } else {
+      val!==undefined && this.$input.trigger('valid.change').trigger('change');
+    }
   }
   _beforeInitCombo(da, val){
     let op = this.options;

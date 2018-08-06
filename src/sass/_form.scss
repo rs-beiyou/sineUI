@@ -26,9 +26,9 @@
     display: block;
 }
 
-.form-group .si-form-block {
-    margin-bottom: 0;
-}
+// .form-group .si-form-block {
+//     margin-bottom: 0;
+// }
 
 .form-attach {
     position: absolute;
@@ -206,7 +206,8 @@ input[type="checkbox"] {
     }
 }
 .si-checkbox,.si-radiobox{
-    margin: 8px 0 7px;
+    margin: 7px 0 8px;
+    min-height: 19px;
     label{
         margin-bottom: 0;
     }

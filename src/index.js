@@ -9,4 +9,6 @@ import 'src/components/table';
 import 'src/components/editor';
 import 'src/components/fullscreen';
 import 'src/components/component/componentLinker';
-import './theme';
+import Sine from 'src/components/sine.config';
+
+window.Sine = Sine;

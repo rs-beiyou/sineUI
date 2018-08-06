@@ -1,6 +1,8 @@
 var $container = $('.si-container');
 var $siTitle = $('#si-breadcrumb-home');
-window.si.config({
+
+new Sine({
+  scrollToHide: false,
   router: [{
     title: '首页',
     path: 'home',

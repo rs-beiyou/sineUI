@@ -216,14 +216,13 @@ import _ from '../../utils/util';
       }, Number.parseFloat($dropdown.css('animation-duration')) * 1000);
     }
     _setValue(newVal, val) {
-      if (this.selectboxDom) {
+      if (this.selectboxDom && !this.dataReloading) {
         let op = this.options;
         let $placeholder = this.$placeholder;
         if (op.multiple) {
           let va = newVal !== '' ? String(newVal).split(',') : [],
             vac = val && val !== '' ? String(val).split(',') : [],
-            sbd = this.selectboxDom,
-            newArr = vac;
+            sbd = this.selectboxDom;
           let arr1 = _.compare(va, vac);
           let arr2 = _.compare(vac, va);
           if (va.length > 0) {
@@ -233,20 +232,17 @@ import _ from '../../utils/util';
           arr1.forEach(key => {
             if(!sbd[key])return true;
             sbd[key].$selectbox.addClass('si-selectbox-item-selected') && this._addTag(key, sbd[key].text);
-            newArr.push(key);
           });
           arr2.forEach(key => {
             if(!sbd[key]) return true;
             sbd[key].$selectbox.removeClass('si-selectbox-item-selected');
             this.tagsDom[key].remove();
             delete this.tagsDom[key];
-            _.delete(newArr, key);
           });
           if (va.length === 0) {
             $placeholder.show();
             op.clearable && this.$selection.removeClass('si-show-clear');
           }
-          this.$input.val(newArr.join(','));
         } else {
           let va = newVal && String(newVal) || '',
             vac = val && String(val) || '',
@@ -255,24 +251,28 @@ import _ from '../../utils/util';
           if (va === '' && vac !== '') {
             $selectValue.text('');
             sbd[vac] && sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
-            this.$input.val(va).removeData('key');
+            this.$input.removeData('key');
             $placeholder.show();
             $selectValue.hide();
           }
           if (sbd[va]) {
-            this.$input.val(va).data('key', sbd[va].text);
+            this.$input.data('key', sbd[va].text);
             $selectValue.text(sbd[va].text);
             sbd[va].$selectbox.addClass('si-selectbox-item-selected');
           } else {
-            this.$input.val(va).data('key', va);
             $selectValue.text(va);
           }
           vac === '' && $placeholder.hide() && $selectValue.show();
           va !== '' && vac !== '' && sbd[vac] && sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
-          op.clearable && this.$selection.addClass('si-show-clear');
+          op.clearable && newVal!=='' && this.$selection.addClass('si-show-clear');
+          op.clearable && newVal==='' && this.$selection.removeClass('si-show-clear');
         }
-        !this.firstVal && this.$input.trigger('valid.change').trigger('change');
+      }
+      val!==undefined && this.$input.val(newVal);
+      if (this.firstVal) {
         this.firstVal = false;
+      } else {
+        val!==undefined && this.$input.trigger('valid.change').trigger('change');
       }
     }
     _addTag(val, text) {

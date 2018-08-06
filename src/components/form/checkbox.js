@@ -94,7 +94,7 @@ class Checkbox extends BaseForm {
     }
   }
   _setValue(newVal, val) {
-    if (this.checkboxDom) {
+    if (this.checkboxDom && !this.dataReloading) {
       let va = newVal !== '' ? String(newVal).split(',') : [],
         vac = val !== '' ? String(val).split(',') : [],
         cbd = this.checkboxDom;
@@ -106,8 +106,12 @@ class Checkbox extends BaseForm {
       arr2.forEach(key => {
         cbd[key] && cbd[key].$checkbox.removeClass('si-checkbox-checked');
       });
-      !this.firstVal && this.$input.val(newVal).trigger('change').trigger('valid.change');
+    }
+    val!==undefined && this.$input.val(newVal);
+    if (this.firstVal) {
       this.firstVal = false;
+    } else {
+      val!==undefined && this.$input.trigger('valid.change').trigger('change');
     }
   }
   _setAttachList(newVal) {

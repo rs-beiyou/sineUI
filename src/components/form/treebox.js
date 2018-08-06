@@ -170,46 +170,53 @@ class Treebox extends BaseForm {
   }
   _setValue(newVal,val){
     let op = this.options;
-    if(!this.inited)return false;
-    let $treeValue = this.$treeValue,$placeholder = this.$placeholder,
-      $input = this.$input, $tree = this.$tree;
-    newVal = this.$treeUl.tree('load',newVal);
-    this.titleVal = this.$treeUl.tree('getTitle', String(newVal));
-    if (op.chkStyle) {
-      let nva = newVal !== '' ? String(newVal).split(',') : [],
-        va = val && val !== '' ? String(val).split(',') : [];
-      let titleArr = this.titleVal ? this.titleVal.split(',') : [];
-      let arr1 = _.compare(nva, va);
-      let arr2 = _.compare(va, nva);
-      //未找到节点，作空处理
-      this.titleVal&&$placeholder.hide();
-      arr1.forEach((key) => {
-        this._addTag(key, titleArr[nva.findIndex(k=>k===key)]);
-      });
-      arr2.forEach(key => {
-        if(!this.tagsDom[key])return true;
-        this.tagsDom[key].remove();
-        delete this.tagsDom[key];
-      });
-      !newVal&&$placeholder.show()&&op.clearable&&val!==''&&$tree.removeClass('si-show-clear');
-      op.clearable&&val===''&&$tree.addClass('si-show-clear');
-    }else{
-      if(this.titleVal===''){
+    if(this.inited && !this.dataReloading){
+      let $treeValue = this.$treeValue,
+        $placeholder = this.$placeholder,
+        $tree = this.$tree;
+      newVal = this.$treeUl.tree('load',newVal);
+      this.titleVal = this.$treeUl.tree('getTitle', String(newVal));
+      if (op.chkStyle) {
+        let nva = newVal !== '' ? String(newVal).split(',') : [],
+          va = val && val !== '' ? String(val).split(',') : [];
+        let titleArr = this.titleVal ? this.titleVal.split(',') : [];
+        let arr1 = _.compare(nva, va);
+        let arr2 = _.compare(va, nva);
         //未找到节点，作空处理
-        $treeValue.text('').hide();
-        $placeholder.show();
-        op.clearable&&val!==''&&$tree.removeClass('si-show-clear');
-      }else{
-        $placeholder.hide();
-        $treeValue.text(this.titleVal).show();
+        this.titleVal&&$placeholder.hide();
+        arr1.forEach((key) => {
+          this._addTag(key, titleArr[nva.findIndex(k=>k===key)]);
+        });
+        arr2.forEach(key => {
+          if(!this.tagsDom[key])return true;
+          this.tagsDom[key].remove();
+          delete this.tagsDom[key];
+        });
+        !newVal&&$placeholder.show()&&op.clearable&&val!==''&&$tree.removeClass('si-show-clear');
         op.clearable&&val===''&&$tree.addClass('si-show-clear');
+      }else{
+        if(this.titleVal===''){
+          //未找到节点，作空处理
+          $treeValue.text('').hide();
+          $placeholder.show();
+          op.clearable&&val!==''&&$tree.removeClass('si-show-clear');
+        }else{
+          $placeholder.hide();
+          $treeValue.text(this.titleVal).show();
+          op.clearable&&val===''&&$tree.addClass('si-show-clear');
+        }
       }
+      // if(newVal!=='' && this.titleVal === ''&& newVal!=op.pIdValue){
+      //   newVal = '';
+      // }
     }
-    if(newVal!=='' && this.titleVal === ''&& newVal!=op.pIdValue){
-      newVal = '';
+    
+    val!==undefined && this.$input.val(newVal);
+    if (this.firstVal) {
+      this.firstVal = false;
+    } else {
+      val!==undefined && this.$input.trigger('valid.change').trigger('change');
     }
-    !this.firstVal && $input.val(newVal).trigger('valid.change').trigger('change');
-    this.firstVal = false;
   }
   _toogleExpand(newVal){
     this.inited&&this.$treeUl.tree('expandAll',newVal);

@@ -33,7 +33,6 @@ module.exports = merge(webpackBaseConfig, {
       filename: 'css/[name].min.css',
       allChunks: true
     }),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',

@@ -30,7 +30,7 @@ $document.on('click', '.code-box-wrapper-close', function() {
   $backToTop.on('click', function() {
     $mainPanel.animate({ scrollTop: '0px' }, 200);
   });
-  $mainPanel.on('scroll', window._si.throttle(function() {
+  $mainPanel.on('scroll', window._sine.throttle(function() {
     var scrolltop = $(this).scrollTop();
     if (!backToTopShow && scrolltop > 300) {
       backToTopShow = true;

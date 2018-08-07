@@ -1983,7 +1983,8 @@
 
         this.$body.html(trFragments);
         // events
-        this.$el.width()>this.$el.parent().width() && this.$tableHeader.off('mousewheel.bs DOMMouseScroll.bs').on('mousewheel.bs DOMMouseScroll.bs',function(event){
+        this.$tableHeader.off('mousewheel.bs DOMMouseScroll.bs');
+        this.$el.width()>this.$el.parent().width() && this.$tableHeader.on('mousewheel.bs DOMMouseScroll.bs',function(event){
             event = event.originalEvent;
             event.preventDefault();
             const delta = event.wheelDelta;
@@ -2108,8 +2109,8 @@
                         name = key.substring(0, index),
                         el = key.substring(index + 1),
                         func = events[key];
-
-                    $td.find(el).off(name).on(name, function (e) {
+                    var $tar = el ? $td.find(el) : $td;
+                    $tar.off(name).on(name, function (e) {
                         var index = $tr.data('index'),
                             row = that.data[index],
                             value = row[field];
@@ -2695,7 +2696,8 @@
             // that.$fixedBody.find('table').css('top', -$(this).scrollTop());
             that.$fixedBody[0].scrollTop = event.target.scrollTop;
         });
-        this.$fixedBody.off('mousewheel.fixed DOMMouseScroll.fixed').on('mousewheel.fixed DOMMouseScroll.fixed', function (event) {
+        this.$fixedBody.off('mousewheel.fixed DOMMouseScroll.fixed');
+        this.$tableBody.hasClass('fixed-table-body-overflowY') && this.$fixedBody.on('mousewheel.fixed DOMMouseScroll.fixed', function (event) {
             event = event.originalEvent;
             let deltaY = event.deltaY;
             if(!deltaY && event.detail){
@@ -2752,7 +2754,8 @@
             // top = -(parseInt(this.$el.css('margin-top'))),
             top = this.$fixedHeader.height(),
             // the fixed height should reduce the scorll-x height
-            height = this.$tableBody.height() - getScrollBarWidth()||0;
+            height = this.$tableBody.height() - getScrollBarWidth()||0,
+            bodyHeight = this.$body.height();
 
         if (!this.$body.find('> tr[data-index]').length) {
             this.$fixedBody.hide();
@@ -2766,7 +2769,7 @@
         
         this.$fixedBody.css({
             width: this.$fixedHeader.width(),
-            height: height,
+            height: height > bodyHeight ? bodyHeight : height,
             top: top
         }).show();
 

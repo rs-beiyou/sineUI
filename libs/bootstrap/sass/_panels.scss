@@ -5,11 +5,15 @@
 
 // Base class
 .panel {
-  margin-bottom: $line-height-computed;
+  margin-bottom: $line-height-computed / 2;
   background-color: $panel-bg;
   border: 1px solid transparent;
   border-radius: $panel-border-radius;
-  @include box-shadow(0 0 2px rgba(0,0,0,.2));
+  // @include box-shadow(0 0 2px rgba(0,0,0,.2));
+  transition: box-shadow .3s ease-in-out;
+  &:hover{
+    @include box-shadow(0 2px 7px rgba(0,0,0,.15));
+  }
 }
 
 // Panel contents
@@ -23,6 +27,10 @@
   padding: $panel-heading-padding;
   border-bottom: 1px solid transparent;
   @include border-top-radius(($panel-border-radius - 1));
+
+  &.collapsed{
+    border-bottom: none;
+  }
 
   > .dropdown .dropdown-toggle {
     color: inherit;
@@ -220,7 +228,7 @@
 // the help of our collapse JavaScript plugin.
 
 .panel-group {
-  margin-bottom: $line-height-computed;
+  margin-bottom: $line-height-computed / 2;
 
   // Tighten up margin so it's only between panels
   .panel {

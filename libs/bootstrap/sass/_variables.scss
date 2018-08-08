@@ -28,6 +28,10 @@ $link-hover-decoration: none !default; //== Typography
 //## Font, line-height, and color for body text, headings, and more.
 $font-family-sans-serif: "Helvetica Neue",
 Helvetica,
+"PingFang SC",
+"Hiragino Sans GB",
+"Microsoft YaHei",
+"微软雅黑",
 Arial,
 sans-serif !default;
 $font-family-serif: Georgia,
@@ -78,9 +82,9 @@ $padding-xs-vertical: 1px !default;
 $padding-xs-horizontal: 5px !default;
 $line-height-large: 1.3333333 !default; // extra decimals for Win 8.1 Chrome
 $line-height-small: 1.5 !default;
-$border-radius-base: 4px !default;
-$border-radius-large: 6px !default;
-$border-radius-small: 3px !default; //** Global color for active items (e.g., navs or dropdowns).
+$border-radius-base: 3px !default;
+$border-radius-large: 5px !default;
+$border-radius-small: 2px !default; //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color: #fff !default; //** Global background color for active items (e.g., navs or dropdowns).
 $component-active-bg: $brand-primary !default; //** Width of the `border` for generating carets that indicate dropdowns.
 $caret-width-base: 4px !default; //** Carets increase slightly in size for larger components.
@@ -100,7 +104,7 @@ $table-border-color: #ddd !default; //== Buttons
 $btn-font-weight: normal !default;
 $btn-default-color: #555 !default;
 $btn-default-bg: #fff !default;
-$btn-default-border: #ccc !default;
+$btn-default-border: #ddd !default;
 $btn-primary-color: #fff !default;
 $btn-primary-bg: $brand-primary !default;
 $btn-primary-border: darken($btn-primary-bg, 5%) !default;

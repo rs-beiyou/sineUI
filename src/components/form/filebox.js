@@ -385,13 +385,15 @@ class Filebox extends BaseForm {
     });
   }
   error(){
-    this.uploader.on('error', type=> {
+    this.uploader.on('error', (type, should, file)=> {
       switch(type){
         case 'Q_EXCEED_NUM_LIMIT': $.msg('文件数量超出限制');
-          break; 
-        case 'Q_EXCEED_SIZE_LIMIT': $.msg('文件大小超出限制');
           break;
-        case 'Q_TYPE_DENIED': $.msg('文件类型不支持');
+        case 'Q_EXCEED_SIZE_LIMIT': $.msg('文件总大小超出限制，最大 '+WebUploader.formatSize(should));
+          break;
+        case 'Q_TYPE_DENIED': $.msg('文件类型不支持 '+ type.ext);
+          break;
+        case 'F_EXCEED_SIZE': $.msg(file.name+' 大小超出限制，最大 '+WebUploader.formatSize(should));
           break;
       }
     });

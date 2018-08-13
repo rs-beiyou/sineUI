@@ -12,8 +12,11 @@ import 'src/components/fullscreen';
 import 'src/components/component/componentLinker';
 import './theme';
 
+import Router from 'src/components/router';
 import _ from 'src/utils/util';
-import Sine from 'src/components/sine';
+import Sine from 'src/components/sine/index';
+
+Sine.use(Router);
 
 window.Sine = Sine;
 window._sine = _;

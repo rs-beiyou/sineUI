@@ -1,0 +1,22 @@
+.si-loading-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  transition: width .2s linear;
+  &.si-loading-bar-color-primary {
+    background-color: $si-loading-bar-color;
+  }
+  &.si-loading-bar-color-success {
+    background-color: $si-loading-bar-color-success;
+  }
+  &.si-loading-bar-color-info {
+    background-color: $si-loading-bar-color-info;
+  }
+  &.si-loading-bar-color-danger {
+    background-color: $si-loading-bar-color-danger;
+  }
+  &.si-loading-bar-color-warning {
+    background-color: $si-loading-bar-color-warning;
+  }
+}

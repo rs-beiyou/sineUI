@@ -171,8 +171,11 @@ class Checkbox extends BaseForm {
     $list.html(fragment);
   }
   getKey(){
-    let op = this.options,
-      valueArr = op.value !== '' && op.value.split(',') || [],
+    let op = this.options;
+    if(op.value === ''){
+      return '';
+    }
+    let valueArr = op.value.split(','),
       arr = [];
     op.data.filter(item=>{
       return valueArr.includes(item[op.valueField]);

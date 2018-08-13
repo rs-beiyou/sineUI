@@ -25,14 +25,14 @@ let allowedMethods = ['hide','show'];
 
 function plugin(option) {
   try {
-    let value, args = Array.prototype.slice.call(arguments, 1);
+    let value, args = Array.prototype.slice.call(arguments, 0);
     this.each(function() {
       let $this = $(this);
-      if (typeof option === 'string') {
+      if (typeof method === 'string') {
         if(allowedMethods.includes(option)){
           new Former(this)[option]();
         }else{
-          value = $this[$this.data('si-form-type')](args[0]);
+          value = $this[$this.data('si-form-type')].apply($this, args);
         }
       }
       if (typeof option === 'object') {

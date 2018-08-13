@@ -80,7 +80,7 @@ export default class BaseForm {
             return;
           }
           op.value = val;
-        }).on('input propertychange',()=>{
+        }).on('input',()=>{
           if(this.cpLock)return;
           let val = this.$input.val();
           if(val === op.value){
@@ -88,6 +88,16 @@ export default class BaseForm {
           }
           op.value = val;
         });
+        //IE9下不触发退格/删除/剪切输入事件
+        if (navigator.userAgent.indexOf('MSIE 9') > -1) {
+          this.$input.on('cut',() => {
+            this.$input.trigger('input');
+          }).on('keyup',e => {
+            if (e.keyCode === 46 || e.keyCode === 8) {
+              this.$input.trigger('input');
+            }
+          });
+        }
       });
     }
   }

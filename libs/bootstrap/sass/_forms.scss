@@ -42,7 +42,9 @@ label {
 input[type="search"] {
     @include box-sizing(border-box);
 }
-
+input::-ms-clear{
+    display: none;
+}
 // Position radios and checkboxes better
 input[type="radio"],
 input[type="checkbox"] {

@@ -1,15 +1,14 @@
-let content = '<table><tr><td>表格</td><td><p>测试下弹窗的内容<br>加上html后</p></td></tr></table><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>'
-
 //第一部分
 $("#btnJsModal").click(function() {
   $.dialog({
     title: '自定义标题',
-    content: content,
-    success: function(obj, index) {
-      console.log(index)
+    content: '内容',
+    btn: ['按钮一','按钮二'],
+    yes: function(){
+
     },
-    cancel: function() {
-      console.log('关闭窗口');
+    btn2: function(){
+      console.log('222222')
     }
   });
 });

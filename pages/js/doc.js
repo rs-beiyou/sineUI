@@ -1,16 +1,6 @@
 var $document = $(document);
-$('.sidebar-background').css('background', 'url(./static/image/sidebar-2.jpg)');
+$('.sidebar-background').css('background', 'url(/static/image/sidebar-2.jpg)');
 $('.si-sidebar').find('[data-toggle="tooltip"]').tooltip();
-$.ajax({
-  url: './pages/data/sidebar.json',
-  dataType: 'json',
-  success: function(data) {
-    $('.si-sidebar').sidebar({
-      controler: '.si-strap',
-      data: data
-    });
-  }
-});
 //code-box
 $document.on('click', '.code-expand-icon', function() {
   var $codeBox = $(this).parents('.code-box');

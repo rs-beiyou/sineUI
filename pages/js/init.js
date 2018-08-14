@@ -4,10 +4,16 @@ var $siTitle = $('#si-breadcrumb-home');
 new Sine({
   el: '.si-container',
   scrollToHide: false,
+  siderbar: {
+    el: '.si-sidebar',
+    controler: '.si-strap',
+    url: '/pages/data/sidebar.json'
+  },
   router: {
+    mode: 'history',
     routes: [{
       title: '首页',
-      path: 'home',
+      path: '',
       page: 'pages/views/index.html'
     }, {
       title: '404',
@@ -150,7 +156,7 @@ new Sine({
         page: 'pages/views/skills/componentLinker.html'
       }]
     }],
-    redirect: 'home',
+    redirect: '',
     lost: 'lost',
     beforeEach: function(){
       this.$body.loadingbar('start');

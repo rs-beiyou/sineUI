@@ -343,8 +343,16 @@ import _ from '../../utils/util';
       $dropdown.html(ul);
     }
     getKey(){
-      let op = this.options,
-        valueArr = op.value !== '' && op.value.split(',') || [],
+      let op = this.options;
+      if(op.value === ''){
+        return '';
+      }
+      if(!op.multiple){
+        return op.data.filter(item=>{
+          return op.value === item[op.valueField];
+        })[0][op.keyField];
+      }
+      let valueArr = op.value.split(','),
         arr = [];
       op.data.filter(item=>{
         return valueArr.includes(item[op.valueField]);
@@ -368,34 +376,36 @@ import _ from '../../utils/util';
   function Plugin(option) {
     try {
       let value, args = Array.prototype.slice.call(arguments, 1);
-      let $this = $(this),
-        dataSet = $this.data(),
-        data = dataSet['si.selectbox'];
-      if (typeof option === 'string') {
-        if (!data) {
-          return;
-        }
-        value = data[option].apply(data, args);
-        if (option === 'destroy') {
-          $this.removeData('si.selectbox');
-        }
-      }
-      if(typeof option === 'object'&& data){
-        data.set(option);
-      }
-      if (!data) {
-        let options = $.extend( {} , Selectbox.DEFAULTS, typeof option === 'object' && option);
-        let datakeys = Object.keys(dataSet);
-        let defaultkeys = Object.keys(options);
-        defaultkeys.forEach((key) => {
-          let lowkey = key.toLocaleLowerCase();
-          if (datakeys.includes(lowkey)) {
-            options[key] = dataSet[lowkey];
+      this.each(function(){
+        let $this = $(this),
+          dataSet = $this.data(),
+          data = dataSet['si.selectbox'];
+        if (typeof option === 'string') {
+          if (!data) {
+            return;
           }
-        });
-        data = new Selectbox(this, options);
-        data.$input.data('si.selectbox', data);
-      }
+          value = data[option].apply(data, args);
+          if (option === 'destroy') {
+            $this.removeData('si.selectbox');
+          }
+        }
+        if(typeof option === 'object'&& data){
+          data.set(option);
+        }
+        if (!data) {
+          let options = $.extend( {} , Selectbox.DEFAULTS, typeof option === 'object' && option);
+          let datakeys = Object.keys(dataSet);
+          let defaultkeys = Object.keys(options);
+          defaultkeys.forEach((key) => {
+            let lowkey = key.toLocaleLowerCase();
+            if (datakeys.includes(lowkey)) {
+              options[key] = dataSet[lowkey];
+            }
+          });
+          data = new Selectbox(this, options);
+          data.$input.data('si.selectbox', data);
+        }
+      });
       return typeof value === 'undefined' ? this : value;
     } catch (error) {
       throw new Error(error);

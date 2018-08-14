@@ -3,7 +3,6 @@
     "name": "布局",
     "subName": "Layout",
     "pid": "-1",
-    "url": "",
     "icon": "fa fa-th-large",
     "children": [{
       "id": "10",
@@ -26,7 +25,6 @@
     "name": "组件",
     "subName": "Components",
     "pid": "-1",
-    "url": "",
     "icon": "fa fa-th",
     "children": [{
       "id": "20",
@@ -84,7 +82,6 @@
     "name": "表格",
     "subName": "Table",
     "pid": "-1",
-    "url": "",
     "icon": "fa fa-table",
     "children": [{
       "id": "30",
@@ -100,7 +97,6 @@
     "name": "表单",
     "subName": "Form",
     "pid": "-1",
-    "url": "",
     "icon": "fa fa-list-alt",
     "children": [{
       "id": "40",
@@ -179,7 +175,6 @@
     "name": "路由",
     "subName": "Router",
     "pid": "-1",
-    "url": "",
     "icon": "fa fa-chrome",
     "children": [{
       "id": "50",
@@ -195,7 +190,6 @@
     "name": "对话框",
     "subName": "Modal",
     "pid": "-1",
-    "url": "",
     "icon": "fa fa-window-maximize",
     "children": [{
       "id": "60",
@@ -238,7 +232,7 @@
       "id": "80",
       "name": "组件联动",
       "subName": "ComponentLinker",
-      "pid": "7",
+      "pid": "8",
       "url": "skills/componentLinker",
       "icon": "fa fa-file-o"
     }]

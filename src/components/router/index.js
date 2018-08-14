@@ -12,7 +12,17 @@ class Router{
     this.options.mode === 'history' ? this.initHistory() : this.initHash();
   }
   initHistory(){
-
+    let routes = this.options.routes;
+    let pathname = window.location.pathname;
+    let arr;
+    if (pathname === '/') {
+      arr = [''];
+    }
+    this.pathArr = [];
+    arr = pathname.split('/').filter((item)=>{
+      return item !== '';
+    });
+    this._localPage(arr, routes);
   }
   initHash(){
     this._initHash();
@@ -27,9 +37,9 @@ class Router{
     }
     this.pathArr = [];
     let hashArr = hash[1] === '/' ? hash.replace(/#\/(^#\/)*/, '$1').split('/') : hash.replace(/#([^#]*)(#.*)?/, '$1').split('/');
-    this._localHash(hashArr, routes);
+    this._localPage(hashArr, routes);
   }
-  _localHash(hashArr, routes) {
+  _localPage(hashArr, routes) {
     for (let i = 0, len = routes.length; i < len; i++) {
       if (routes[i].path == hashArr.join('/')) {
         if (routes[i].page) {
@@ -45,7 +55,7 @@ class Router{
         hashArr.shift();
         if (Array.isArray(routes[i].children)) {
           this.pathArr.push(routes[i]);
-          this._localHash(hashArr, routes[i].children);
+          this._localPage(hashArr, routes[i].children);
         } else {
           throw new Error('Router children for ' + hashArr[0] + ' must be an array.');
         }
@@ -57,12 +67,12 @@ class Router{
     let url = typeof from === 'string' ? from : typeof from == 'object' ? from.page : null;
     if (url === null) return;
     if (url.indexOf('.') == -1) {
-      window.location.hash = '#' + from;
+      window.location.hash = '#/' + from;
       return;
     }
     op.beforeEach && op.beforeEach.call(this, from);
     $.ajax({
-      url: url,
+      url: url[0]==='/'?url:'/'+url,
       dataType: 'text',
       cache: false,
       complete: (xhr) => {
@@ -94,7 +104,7 @@ class Router{
   }
 }
 
-Router.DEFAULTS = {
+Router.options = {
   mode: 'hash',
   el: 'body',
   routes: null,
@@ -105,6 +115,5 @@ Router.DEFAULTS = {
 };
 
 Router.install = install;
-Router.options = Object.assign({}, Router.DEFAULTS);
 
 export default Router;

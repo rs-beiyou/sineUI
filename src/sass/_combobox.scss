@@ -76,8 +76,6 @@
     line-height: $headings-line-height;
     color: $dropdown-link-color;
     overflow: hidden;
-    -webkit-transition: background .2s ease-in-out;
-    -o-transition: background .2s ease-in-out;
     transition: background .2s ease-in-out;
     font-size: $font-size-small;
     &:hover {

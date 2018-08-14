@@ -33,8 +33,6 @@
 }
 .si-selectbox-visible {
     .si-form-control-icon:first-of-type {
-        -webkit-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
         transform: rotate(180deg);
     }
 }
@@ -47,8 +45,6 @@
     line-height: $headings-line-height;
     color: $dropdown-link-color;
     overflow: hidden;
-    -webkit-transition: background .2s ease-in-out;
-    -o-transition: background .2s ease-in-out;
     transition: background .2s ease-in-out;
     &:hover {
         background: $dropdown-link-hover-bg;

@@ -10,7 +10,6 @@
             border-color: $input-bg-disabled;
             &:after {
                 background-color: $input-bg-disabled;
-                -webkit-animation-name: none;
                 animation-name: none;
             }
         }
@@ -30,8 +29,6 @@
         border-color: $input-border-focus;
         &:after {
             background-color: $input-border-focus;
-            -webkit-transform: scale(1);
-            -ms-transform: scale(1);
             transform: scale(1);
         }
     }
@@ -45,8 +42,6 @@
     left: 0;
     border: 1px solid $input-border;
     border-radius: 50%;
-    -webkit-transition: border-color, background-color .2s ease-in-out;
-    -o-transition: border-color, background-color .2s ease-in-out;
     transition: border-color, background-color .2s ease-in-out;
     &:after {
         content: "";
@@ -56,11 +51,7 @@
         top: 2px;
         left: 2px;
         border-radius: 50%;
-        -webkit-transform: scale(0);
-        -ms-transform: scale(0);
         transform: scale(0);
-        -webkit-transition: all .2s ease-in-out;
-        -o-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out
     }
 }

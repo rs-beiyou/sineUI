@@ -5,12 +5,7 @@
     line-height: 22px;
     background-color: $switch-bg;
     border: 1px solid $switch-bg;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
     cursor: pointer;
     border-radius: $switch-border-radius;
@@ -26,8 +21,6 @@
         margin-left: 1px;
         cursor: pointer;
         background-color: $switch-after-bg;
-        -webkit-transition: margin-left .2s ease-in-out, width .2s ease-in-out;
-        -o-transition: margin-left .2s ease-in-out, width .2s ease-in-out;
         transition: margin-left .2s ease-in-out, width .2s ease-in-out;
     }
     &:active:after {

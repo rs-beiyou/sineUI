@@ -7,6 +7,13 @@ module.exports = {
     bootstrap: './src/bootstrap.config.js',
     theme: './src/theme.js'
   },
+  devServer: {
+    historyApiFallback: {
+      rewrites: [
+        { from: /^\/$/ , to: '/index.html' }
+      ]
+    }
+  },
   module: {
     rules: [{
       test: /\.js$/,

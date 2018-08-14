@@ -13,7 +13,9 @@ class Sine {
   }
   init() {
     this.$body.loadingbar();
-    this.options.beforeCreated && this.options.beforeCreated.call(this);
+    this.options.beforeCreated.length > 0 && this.options.beforeCreated.forEach(fn => {
+      fn.call(this);
+    });
     this.initTheme();
     return this;
   }
@@ -24,16 +26,16 @@ class Sine {
     Object.assign(this.options, options || {});
   }
 }
-Sine.DEFAULTS = {
+Sine.options = {
   scrollToHide: true,
   router: null,
-  beforeCreated: null,
-  created: null,
-  destroyed: null
+  siderbar: null,
+  beforeCreated: [],
+  created: [],
+  destroyed: []
 };
 
 Sine.use = use;
 Sine.mixin = mixin;
-Sine.options = Object.assign({}, Sine.DEFAULTS);
 
 export default Sine;

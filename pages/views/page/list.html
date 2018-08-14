@@ -2,39 +2,41 @@
     <p class="si-info">简单的数据展示查询页面。使用<a href="/skills/componentLinker"><code>组件联动器</code></a>将查询面板与表格高度联动。</p>
     <div class="panel panel-info">
         <div class="panel-heading" data-toggle="collapse" data-target="#collapseExample1">查询条件</div>
-        <div class="panel-body in" id="collapseExample1">
-            <form class="form-columns form-group-sm">
-                <input class="btsp-textbox" data-options="id:'a',name:'a',label:'姓名：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'">
-                <input class="btsp-radiobox" data-options="id:'c',name:'c',label:'性别：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8',
-                    data: [{
-                        key:'男',
-                        value: '1'
-                    },{
-                        key:'女',
-                        value: '0'
-                    }]">
-                <input class="btsp-datebox" data-options="id:'d',name:'d',label:'生日：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'">
-                <input class="btsp-daterangebox" data-options="id:'e',name:'e',label:'任务日期：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'">
-                <input class="btsp-selectbox" data-options="id:'f',name:'f',label:'某选项：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8',url: '/pages/data/data4.json',dataField:'list'">
-                <input class="btsp-switchbox" data-options="id:'g',name:'g',label:'是否婚配：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'">
-                <input class="btsp-checkbox" data-options="id:'b',name:'b',label:'爱好：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-20',
-                    data: [{
-                        key:'打篮球',
-                        value: '1'
-                    },{
-                        key:'踢足球',
-                        value: '2'
-                    },{
-                        key:'电脑游戏',
-                        value: '3'
-                    },{
-                        key:'读书',
-                        value: '4'
-                    },{
-                        key:'玩手机',
-                        value: '5'
-                    }]">
-            </form>
+        <div id="collapseExample1" class="in">
+            <div class="panel-body">
+                <form class="form-columns form-group-sm">
+                    <input class="btsp-textbox" data-options="id:'a',name:'a',label:'姓名：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'">
+                    <input class="btsp-radiobox" data-options="id:'c',name:'c',label:'性别：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8',
+                        data: [{
+                            key:'男',
+                            value: '1'
+                        },{
+                            key:'女',
+                            value: '0'
+                        }]">
+                    <input class="btsp-datebox" data-options="id:'d',name:'d',label:'生日：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'">
+                    <input class="btsp-daterangebox" data-options="id:'e',name:'e',label:'任务日期：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'">
+                    <input class="btsp-selectbox" data-options="id:'f',name:'f',label:'某选项：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8',url: '/pages/data/data4.json',dataField:'list'">
+                    <input class="btsp-switchbox" data-options="id:'g',name:'g',label:'是否婚配：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'">
+                    <input class="btsp-checkbox" data-options="id:'b',name:'b',label:'爱好：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-20',
+                        data: [{
+                            key:'打篮球',
+                            value: '1'
+                        },{
+                            key:'踢足球',
+                            value: '2'
+                        },{
+                            key:'电脑游戏',
+                            value: '3'
+                        },{
+                            key:'读书',
+                            value: '4'
+                        },{
+                            key:'玩手机',
+                            value: '5'
+                        }]">
+                </form>
+            </div>
         </div>
     </div>
     <table id="table"></table>

@@ -74,7 +74,6 @@ class Router{
     $.ajax({
       url: url[0]==='/'?url:'/'+url,
       dataType: 'text',
-      cache: false,
       complete: (xhr) => {
         if (xhr.status === 404) {
           this.load(op.lost ? op.lost : op.redirect);

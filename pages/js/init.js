@@ -140,12 +140,12 @@ new Sine({
         page: 'pages/views/modal/api.html'
       }]
     }, {
-      path: 'pages',
+      path: 'page',
       title: '页面',
       children: [{
         title: '数据列表',
         path: 'list',
-        page: 'pages/views/pages/list.html'
+        page: 'pages/views/page/list.html'
       }]
     }, {
       path: 'skills',

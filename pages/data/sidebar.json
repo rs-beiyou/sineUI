@@ -210,7 +210,7 @@
   {
     "id": "7",
     "name": "页面",
-    "subName": "Pages",
+    "subName": "Page",
     "pid": "-1",
     "icon": "fa fa-book",
     "children": [{
@@ -218,7 +218,7 @@
       "name": "数据列表",
       "subName": "list",
       "pid": "7",
-      "url": "pages/list",
+      "url": "page/list",
       "icon": "fa fa-file-o"
     }]
   },

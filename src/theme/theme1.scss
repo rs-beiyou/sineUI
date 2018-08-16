@@ -143,6 +143,9 @@ body{
         position: fixed;
         top: $page-header-height*0.1;
     }
+    .si-page-mark{
+        top: $page-header-height*0.1;
+    }
 }
 .si-page.si-page-left-hide{
     .si-page-sider{

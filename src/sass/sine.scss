@@ -4,7 +4,6 @@
 @import "mixins"; // Reset and dependencies
 @import "normalize";
 @import "fontAwesome/sass/font-awesome.scss"; // Core CSS
-@import "base";
 @import "scaffolding";
 @import "type";
 @import "code";
@@ -43,3 +42,4 @@
 @import "timeline";
 @import "fullscreen";
 @import "loadingbar";
+@import "base";

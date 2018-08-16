@@ -1,4 +1,4 @@
-import themeInit from '../theme';
+import themeInit from '../theme/theme1/theme';
 class Sine{
   constructor (option) {
     this.options = Object.assign({}, Sine.DEFAULTS, option || {});

@@ -207,7 +207,8 @@ Table.DEFAULTS = {
   pageNumber: 1,
   pageSize: 10,
   pageList: [10, 20, 30, 50],
-  showSerialNumber: false
+  showSerialNumber: false,
+  iconSize: 'sm'
 };
 let old = $.fn.table;
 

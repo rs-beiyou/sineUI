@@ -3,9 +3,9 @@ const path = require('path');
 module.exports = {
   // 入口：要进行处理的实例（js）
   entry: {
-    sine: './src/main.js',
-    bootstrap: './src/bootstrap.config.js',
-    theme: './src/theme.js'
+    sine: './src/main.js'
+    // bootstrap: './src/bootstrap.config.js',
+    // theme: './src/theme.js'
   },
   devServer: {
     historyApiFallback: {

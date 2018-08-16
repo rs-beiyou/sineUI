@@ -1,4 +1,4 @@
-import 'src/sass/theme/theme1.scss';
+import 'src/theme/theme1.scss';
 import '../static/image/photograph.jpeg';
 
 // import {

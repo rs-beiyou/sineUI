@@ -10,8 +10,7 @@ const packageInfo = require('./package.json');
 module.exports = merge(webpackBaseConfig, {
   // 入口：要进行处理的实例（js）
   entry: {
-    sine: './src/index.js',
-    bootstrap: './src/bootstrap.config.js'
+    sine: './src/index.js'
   },
   output: {
     path: path.join(__dirname, './release'),

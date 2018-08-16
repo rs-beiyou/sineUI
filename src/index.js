@@ -19,6 +19,8 @@ import 'src/components/component/tab';
 import 'src/components/component/transition';
 import 'src/components/component/button';
 
+import 'src/theme/theme1/theme';
+
 import Sine from 'src/components/sine.config';
 
 window.Sine = Sine;

@@ -1,12 +1,11 @@
-import 'src/theme/theme1.scss';
-import '../static/image/photograph.jpeg';
+import './theme.scss';
 
 // import {
 //   checkFull,
 //   launchFullscreen
 // } from 'src/components/fullscreen/browerFullscreen.js';
 
-import _ from './utils/util';
+import _ from 'src/utils/util';
 
 const themeInit = function (siop) {
   let $wintop = $(window.top.document),

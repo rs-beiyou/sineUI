@@ -65,9 +65,9 @@
 
     let dimension = this.dimension();
 
-    this.$element[dimension](0)
-    this.$element.removeClass('collapse')
-    this.$element.addClass('collapsing')
+    this.$element[dimension](0);
+    this.$element.removeClass('collapse');
+    this.$element.addClass('collapsing');
     this.$element.attr('aria-expanded', true);
 
     this.$trigger

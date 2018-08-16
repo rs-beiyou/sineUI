@@ -1,5 +1,5 @@
 import '../parser';
-import themeInit from '../../theme';
+import themeInit from 'src/theme/theme1/theme';
 import '../loadingBar';
 import use from './use';
 import mixin from './mixin';

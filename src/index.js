@@ -9,6 +9,16 @@ import 'src/components/table';
 import 'src/components/editor';
 import 'src/components/fullscreen';
 import 'src/components/component/componentLinker';
+
+import 'src/components/collapse';
+import 'src/components/dropdown';
+
+import 'src/components/component/tooltip';
+import 'src/components/component/popover';
+import 'src/components/component/tab';
+import 'src/components/component/transition';
+import 'src/components/component/button';
+
 import Sine from 'src/components/sine.config';
 
 window.Sine = Sine;

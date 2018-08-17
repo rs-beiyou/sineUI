@@ -959,7 +959,7 @@
         this.$selectAll.off('click').on('click', function () {
                 var checked = $(this).prop('checked');
                 that[checked ? 'checkAll' : 'uncheckAll']();
-                that.updateSelected();
+                // that.updateSelected();
             });
         //fixedColumns
         if (!this.options.fixedColumns) {
@@ -2292,6 +2292,9 @@
 
         this.$selectAll.add(this.$selectAll_).prop('checked', checkAll);
         this.$selectAll.closest('label')[checkAll ? 'addClass' : 'removeClass']('si-checkbox-checked');
+        if(this.options.height){
+            this.$tableHeader.find('.bs-checkbox label')[checkAll ? 'addClass' : 'removeClass']('si-checkbox-checked');
+        }
         if(this.options.fixedColumns){
             this.$fixedHeaderColumns.find('.bs-checkbox label')[checkAll ? 'addClass' : 'removeClass']('si-checkbox-checked');
             var $fixedBodyColumns = this.$fixedBodyColumns;
@@ -3155,14 +3158,23 @@
     };
 
     BootstrapTable.prototype.checkAll_ = function (checked) {
-        var rows;
+        var rows, _this= this;
         if (!checked) {
             rows = this.getSelections();
         }
         this.$selectAll.add(this.$selectAll_).prop('checked', checked);
         this.$selectAll.closest('label')[checked ? 'addClass' : 'removeClass']('si-checkbox-checked');
-        this.$selectItem.filter(':enabled').prop('checked', checked);
-        this.$selectItem.closest('label')[checked ? 'addClass' : 'removeClass']('si-checkbox-checked');
+        this.options.height && this.$tableHeader.find('.bs-checkbox label')[checked ? 'addClass' : 'removeClass']('si-checkbox-checked');
+        if(this.options.fixedColumns){
+            this.$fixedHeaderColumns.find('.bs-checkbox label')[checked ? 'addClass' : 'removeClass']('si-checkbox-checked');
+        }
+        this.$selectItem.each(function (index) {
+            var $this = $(this);
+            $this.prop('checked', checked);
+            $this.closest('label')[checked ? 'addClass' : 'removeClass']('si-checkbox-checked');
+            $this.closest('tr')[checked ? 'addClass' : 'removeClass']('selected');
+            _this.$fixedBodyColumns && _this.$fixedBodyColumns.children('tr:eq('+index+')').find('.bs-checkbox label')[checked ? 'addClass' : 'removeClass']('si-checkbox-checked');
+        });
         this.updateRows();
         if (checked) {
             rows = this.getSelections();

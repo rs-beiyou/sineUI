@@ -7,6 +7,7 @@ $pagination-color: $pagination-active-border;
 $pagination-hover-border: $state-info-border;
 $pagination-hover-bg: lighten($state-info-bg, 5%);
 $pagination-hover-color: $pagination-active-border;
+$pagination-disabled-border: $state-info-border;
 
 .fixed-table-container {
     border-color: $state-info-border !important;

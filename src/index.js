@@ -1,4 +1,5 @@
-import 'src/sass/index.scss';
+import 'src/sass/theme-pack/sine.scss';
+import 'src/sass/theme-pack/sine-info.scss';
 import 'src/utils/polyfill';
 import 'src/components/component/tag';
 import 'src/components/parser';

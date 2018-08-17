@@ -1,3 +1,3 @@
 wangeditor: 145.28 KB (15.9%)
-core-js: 42.6 KB (4.66%)
-<self>: 727.13 KB (79.5%)
+core-js: 42.6 KB (4.65%)
+<self>: 727.4 KB (79.5%)

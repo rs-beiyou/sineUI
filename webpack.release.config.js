@@ -14,9 +14,9 @@ module.exports = merge(webpackBaseConfig, {
   },
   output: {
     path: path.join(__dirname, './release'),
-    // path: '/Users/zhangming/eclipse-workspace/zzsoft5.0/webapp/script/static/libs/sineui',
+    // path: '/Users/zhangming/eclipse-workspace/sjgl/webapp/script/static/libs/sineui',
     publicPath: '../',
-    filename: 'js/[name].min.js'
+    filename: `js/[name]-${packageInfo.version}.min.js`
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
@@ -27,9 +27,8 @@ module.exports = merge(webpackBaseConfig, {
         warnings: false
       }
     }),
-    
     new ExtractTextPlugin({
-      filename: 'css/[name].min.css',
+      filename: 'css/[name]-' + packageInfo.version + '.min.css',
       allChunks: true
     }),
     new CompressionPlugin({
@@ -37,7 +36,7 @@ module.exports = merge(webpackBaseConfig, {
       algorithm: 'gzip',
       test: /\.css$|\.js$|\.html$/,
       threshold: 0,
-      minRatio: 1
+      minRatio: 0.8
     }),
     new WebpackZipPlugin({
       initialFile: './release',//需要打包的文件夹(一般为dist)

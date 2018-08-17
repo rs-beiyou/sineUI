@@ -1,4 +1,4 @@
-import 'src/sass/sine.scss';
+import 'src/sass/theme-pack/dev.scss';
 import 'src/utils/polyfill';
 import 'src/components/component/tag';
 import 'src/components/parser';

@@ -1,7 +1,7 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
-const fs = require('fs');
-const packageInfo = require('./package.json');
+// const fs = require('fs');
+// const packageInfo = require('./package.json');
 
 const styleLoaders = [{
   loader: 'css-loader',
@@ -16,25 +16,25 @@ const styleLoaders = [{
   loader: 'sass-loader'
 }];
 
-const THEME_PATH = './src/sass/theme-pack';
+// const THEME_PATH = './src/sass/theme-pack';
 
-const resolveToThemeStaticPath = fileName => path.resolve(THEME_PATH, fileName);
-const themeFileNameSet = fs.readdirSync(path.resolve(THEME_PATH)).filter(fileName => fileName.includes('sine-'));
-const themePaths = themeFileNameSet.map(resolveToThemeStaticPath);
-const getThemeName = fileName => `${path.basename(fileName, path.extname(fileName))}-${packageInfo.version}`;
-// 全部 ExtractLessS 的集合
-const themesExtractSassSet = themeFileNameSet.map(fileName => new ExtractTextPlugin('css/'+ getThemeName(fileName) +'.min.css'));
-// 主题 Loader 的集合
-const themeLoaderSet = themeFileNameSet.map((fileName, index) => {
-  return {
-    test: /\.(css|scss)$/,
-    include: resolveToThemeStaticPath(fileName),
-    loader: themesExtractSassSet[index].extract({
-      use: styleLoaders,
-      fallback: 'style-loader'
-    })
-  };
-});
+// const resolveToThemeStaticPath = fileName => path.resolve(THEME_PATH, fileName);
+// const themeFileNameSet = fs.readdirSync(path.resolve(THEME_PATH)).filter(fileName => fileName.includes('sine-'));
+// const themePaths = themeFileNameSet.map(resolveToThemeStaticPath);
+// const getThemeName = fileName => `${path.basename(fileName, path.extname(fileName))}-${packageInfo.version}`;
+// // 全部 ExtractSass 的集合
+// const themesExtractSassSet = themeFileNameSet.map(fileName => new ExtractTextPlugin('css/'+ getThemeName(fileName) +'.min.css'));
+// // 主题 Loader 的集合
+// const themeLoaderSet = themeFileNameSet.map((fileName, index) => {
+//   return {
+//     test: /\.(css|scss)$/,
+//     include: resolveToThemeStaticPath(fileName),
+//     loader: themesExtractSassSet[index].extract({
+//       use: styleLoaders,
+//       fallback: 'style-loader'
+//     })
+//   };
+// });
 
 module.exports = {
   // 入口：要进行处理的实例（js）
@@ -60,7 +60,7 @@ module.exports = {
     },
     {
       test: /\.(scss|css)$/,
-      exclude: themePaths,
+      // exclude: themePaths,
       use: ExtractTextPlugin.extract({
         use: styleLoaders,
         fallback: 'style-loader'
@@ -90,12 +90,12 @@ module.exports = {
       test: /\.(html|tpl)$/,
       loader: 'html-loader'
     },
-    ...themeLoaderSet
+    // ...themeLoaderSet
     ]
   },
-  plugins: [
-    ...themesExtractSassSet,
-  ],
+  // plugins: [
+  //    //...themesExtractSassSet,
+  // ],
   resolve: {
     alias: {
       libs: path.resolve(__dirname, './libs'),

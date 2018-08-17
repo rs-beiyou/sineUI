@@ -1,6 +1,9 @@
 @import "../variables";
-@import "../page";
 @import "../mixins"; // Reset and dependencies
+
+// @import "../themes/info";
+
+@import "../page";
 @import "../normalize";
 @import "../fontAwesome/sass/font-awesome.scss"; // Core CSS
 @import "../scaffolding";

@@ -229,7 +229,7 @@ class Valid{
           type: 'post',
           url: op.url,
           data: {
-            [name]:val
+            [name]:this.$el.val()
           },
           async: false,
           timeout: 3000,

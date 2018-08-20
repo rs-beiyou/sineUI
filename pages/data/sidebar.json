@@ -18,6 +18,20 @@
       "pid": "1",
       "url": "layout/grid",
       "icon": "fa fa-hashtag"
+    }, {
+      "id": "12",
+      "name": "面板",
+      "subName": "Panel",
+      "pid": "1",
+      "url": "layout/panel",
+      "icon": "fa fa-window-restore"
+    }, {
+      "id": "13",
+      "name": "卡片",
+      "subName": "Card",
+      "pid": "1",
+      "url": "layout/card",
+      "icon": "fa fa-credit-card"
     }]
   },
   {
@@ -68,13 +82,6 @@
       "pid": "2",
       "url": "components/editor",
       "icon": "fa fa-tags"
-    },{
-      "id": "26",
-      "name": "面板",
-      "subName": "Panel",
-      "pid": "2",
-      "url": "components/panel",
-      "icon": "fa fa-window-restore"
     }]
   },
   {

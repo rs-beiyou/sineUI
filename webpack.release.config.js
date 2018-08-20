@@ -4,7 +4,7 @@ const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-// const WebpackZipPlugin =require('webpack-zip-plugin');
+const WebpackZipPlugin =require('webpack-zip-plugin');
 const packageInfo = require('./package.json');
 
 module.exports = merge(webpackBaseConfig, {
@@ -38,10 +38,10 @@ module.exports = merge(webpackBaseConfig, {
       threshold: 0,
       minRatio: 0.8
     }),
-    // new WebpackZipPlugin({
-    //   initialFile: './release',//需要打包的文件夹(一般为dist)
-    //   endPath: './static/release',  //打包到对应目录（一般为当前目录'./'）
-    //   zipName: `${packageInfo.name}-${packageInfo.version}.zip` //打包生成的文件名
-    // })
+    new WebpackZipPlugin({
+      initialFile: './release',//需要打包的文件夹(一般为dist)
+      endPath: './static/release',  //打包到对应目录（一般为当前目录'./'）
+      zipName: `${packageInfo.name}-${packageInfo.version}.zip` //打包生成的文件名
+    })
   ]
 });

@@ -7,12 +7,12 @@ new Sine({
   siderbar: {
     el: '.si-sidebar',
     controler: '.si-strap',
-    url: '/pages/data/sidebar.json'
+    url: '/pages/data/sidebar.json?20180818'
   },
   router: {
     mode: 'history',
     routes: [{
-      title: '首页',
+      title: 'SineUI',
       path: '',
       page: 'pages/views/index.html'
     }, {
@@ -42,6 +42,14 @@ new Sine({
         title: '栅格',
         path: 'grid',
         page: 'pages/views/layout/grid.html'
+      }, {
+        title: '面板',
+        path: 'panel',
+        page: 'pages/views/layout/panel.html'
+      }, {
+        title: '卡片',
+        path: 'card',
+        page: 'pages/views/layout/card.html'
       }]
     }, {
       path: 'form',
@@ -91,10 +99,6 @@ new Sine({
       path: 'components',
       title: '组件',
       children: [{
-        title: '面板',
-        path: 'panel',
-        page: 'pages/views/components/panel.html'
-      }, {
         title: '按钮',
         path: 'buttons',
         page: 'pages/views/components/buttons.html'

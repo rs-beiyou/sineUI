@@ -28,7 +28,7 @@ function plugin(option) {
     let value, args = Array.prototype.slice.call(arguments, 0);
     this.each(function() {
       let $this = $(this);
-      if (typeof method === 'string') {
+      if (typeof option === 'string') {
         if(allowedMethods.includes(option)){
           new Former(this)[option]();
         }else{

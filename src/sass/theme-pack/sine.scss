@@ -1,7 +1,7 @@
 @import "../variables";
 @import "../mixins"; // Reset and dependencies
 
-// @import "../themes/info";
+@import "../themes/info";
 
 @import "../page";
 @import "../normalize";
@@ -44,3 +44,4 @@
 @import "../fullscreen";
 @import "../loadingbar";
 @import "../base";
+@import "../popup";

@@ -4,15 +4,16 @@ const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer').WebpackBundleSizeAnalyzerPlugin;
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const packageInfo = require('./package.json');
 
 module.exports = merge(webpackBaseConfig, {
   output: {
     path: path.join(__dirname, './dist'),
     publicPath: '../',
-    filename: 'js/[name].min.js'
+    filename: `js/[name]-${packageInfo.version}.min.js`
   },
   plugins: [
     // new HtmlWebpackPlugin({
@@ -30,12 +31,11 @@ module.exports = merge(webpackBaseConfig, {
       }
     }),
     new ExtractTextPlugin({
-      filename: 'css/[name].min.css',
+      filename: `css/[name]-${packageInfo.version}.min.css`,
       allChunks: true
     }),
     new WebpackBundleSizeAnalyzerPlugin('./plain-report.txt'),
-    // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    // new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin(),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',

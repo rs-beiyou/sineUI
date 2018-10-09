@@ -1,5 +1,4 @@
 import 'src/sass/theme-pack/sine.scss';
-// import 'src/sass/theme-pack/sine-info.scss';
 import 'src/utils/polyfill';
 import 'src/components/component/tag';
 import 'src/components/parser';
@@ -13,6 +12,7 @@ import 'src/components/component/componentLinker';
 
 import 'src/components/collapse';
 import 'src/components/dropdown';
+import 'src/components/popup';
 
 import 'src/components/component/tooltip';
 import 'src/components/component/popover';

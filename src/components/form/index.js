@@ -99,7 +99,7 @@ class Form {
     let obj = {};
     $el.serializeArray().forEach(da => {
       Object.assign(obj,{
-        [da.name]:da.value.replace(/\n|\r\n/g, '<br>')
+        [da.name]:da.value.trim().replace(/\n|\r\n/g, '<br>')
       });
     });
     return obj;

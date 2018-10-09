@@ -1,6 +1,7 @@
 @import "../variables";
 @import "../page";
 @import "../mixins"; // Reset and dependencies
+@import "../themes/info";
 @import "../normalize";
 @import "../fontAwesome/sass/font-awesome.scss"; // Core CSS
 @import "../scaffolding";
@@ -28,7 +29,7 @@
 @import "../utilities";
 @import "../responsive-utilities";
 @import "../transition";
-@import "../doc-page";
+@import "../doc-page";//doc-demo样式
 @import "../tag";
 @import "../treebox";
 @import "../filebox";
@@ -42,3 +43,4 @@
 @import "../fullscreen";
 @import "../loadingbar";
 @import "../base";
+@import "../popup";

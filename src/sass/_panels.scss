@@ -5,6 +5,7 @@
 
 // Base class
 .panel {
+  position: relative;
   margin-bottom: $line-height-computed / 2;
   background-color: $panel-bg;
   border: 1px solid transparent;
@@ -219,6 +220,9 @@
     border: 0;
     margin-bottom: 0;
   }
+  > .si-popup{
+    border-top: none;
+  }
 }
 
 
@@ -256,7 +260,6 @@
     }
   }
 }
-
 
 // Contextual variations
 .panel-default {

@@ -1,0 +1,12 @@
+.si-popup{
+    position: absolute;
+    z-index: 1000;
+    background-color: #fff;
+    display: none;
+    width: 100%;
+    border: 1px solid transparent;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    margin-top: 1px;
+    @include box-shadow(0 1px 6px rgba(0,0,0,.2));
+}

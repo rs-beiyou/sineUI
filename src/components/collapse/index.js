@@ -6,13 +6,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * ======================================================================== */
 
-/* jshint latedef: false */
-
 + function($) {
-  'use strict';
-
-  // COLLAPSE PUBLIC CLASS DEFINITION
-  // ================================
 
   let Collapse = function(element, options) {
     this.$element = $(element);
@@ -64,11 +58,10 @@
     }
 
     let dimension = this.dimension();
-
-    this.$element[dimension](0);
-    this.$element.removeClass('collapse');
-    this.$element.addClass('collapsing');
-    this.$element.attr('aria-expanded', true);
+    this.$element[dimension](0)
+      .addClass('collapsing')
+      .removeClass('collapse')
+      .attr('aria-expanded', true);
 
     this.$trigger
       .removeClass('collapsed')
@@ -77,12 +70,10 @@
     this.transitioning = 1;
 
     let complete = function() {
-      this.$element
-        .removeClass('collapsing')
-        .addClass('collapse in')[dimension]('');
+      this.$element.removeClass('collapsing').addClass('in')[dimension]('');
+      
       this.transitioning = 0;
-      this.$element
-        .trigger('shown.bs.collapse');
+      this.$element.trigger('shown.bs.collapse');
     };
 
     if (!$.support.transition) return complete.call(this);
@@ -104,9 +95,7 @@
     let dimension = this.dimension();
     this.$element[dimension](this.$element[dimension]());
 
-    this.$element
-      .addClass('collapsing')
-      .removeClass('collapse in')
+    this.$element.addClass('collapsing').removeClass('in')
       .attr('aria-expanded', false);
 
     this.$trigger
@@ -125,11 +114,10 @@
 
     if (!$.support.transition) return complete.call(this);
 
-    this.$element[dimension](0)
-      .one('bsTransitionEnd', $.proxy(complete, this))
+    this.$element[dimension](0);
+    this.$element.one('bsTransitionEnd', $.proxy(complete, this))
       .emulateTransitionEnd(Collapse.TRANSITION_DURATION);
   };
-
   Collapse.prototype.toggle = function() {
     this[this.$element.hasClass('in') ? 'hide' : 'show']();
   };

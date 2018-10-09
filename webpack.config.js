@@ -6,14 +6,19 @@ const path = require('path');
 const styleLoaders = [{
   loader: 'css-loader',
   options: {
-    minimize: true
+    minimize: {
+      safe: true
+    }
   }
 },
 {
   loader: 'postcss-loader'
 },
 {
-  loader: 'sass-loader'
+  loader: 'sass-loader',
+  options: {
+    precision: 10
+  }
 }];
 
 // const THEME_PATH = './src/sass/theme-pack';

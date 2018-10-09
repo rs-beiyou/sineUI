@@ -13,6 +13,7 @@ import 'src/components/component/componentLinker';
 
 import 'src/components/collapse';
 import 'src/components/dropdown';
+import 'src/components/popup';
 
 import 'src/components/component/tooltip';
 import 'src/components/component/popover';

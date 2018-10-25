@@ -296,9 +296,16 @@ class Combobox extends BaseForm {
         'left': transfer ? offset.left : 0
       });
     }else{
-      transfer&&$dropdown.css({
+      // transfer&&$dropdown.css({
+      //   'top': offset.top + $combobox.outerHeight(),
+      //   'left': offset.left
+      // });
+      transfer?$dropdown.css({
         'top': offset.top + $combobox.outerHeight(),
         'left': offset.left
+      }):$dropdown.css({
+        'top': $combobox.outerHeight(),
+        'left': 0
       });
     }
     $dropdown.show().addClass(className);

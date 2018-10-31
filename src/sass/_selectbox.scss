@@ -75,13 +75,16 @@
 }
 .si-selectbox-multiple {
     .si-selectbox-selection {
-        height: auto;
-        min-height: $input-height-base;
+        .si-selectbox-tagarea{
+            height: 100%;
+            overflow: auto;
+        }
         .si-tag {
             margin: 0 4px 0 0;
             height: auto;
-            line-height: normal;
+            line-height: 16px;
             user-select: none;
+            vertical-align: bottom;
         }
     }
     .si-selectbox-item-selected {
@@ -90,8 +93,6 @@
             content: '\f00c';
             font-family: FontAwesome;
             float: right;
-            font-size: 13px;
-            line-height: $headings-line-height;
         }
     }
 }

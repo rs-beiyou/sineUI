@@ -96,9 +96,15 @@ import _ from '../../utils/util';
           break;
         case 'multiple':
           if (newVal) {
+            let tagArea = document.createElement('div');
+            let $tagArea = $(tagArea);
+            $tagArea.addClass('si-selectbox-tagarea').hide();
+            $selection.append(tagArea);
+            this.$tagArea = $tagArea;
             $selectbox.removeClass('si-selectbox-single').addClass('si-selectbox-multiple');
             op.transfer&&$dropdown.removeClass('si-selectbox-single').addClass('si-selectbox-multiple');
           } else {
+            this.$tagArea.remove();
             $selectbox.removeClass('si-selectbox-multiple').addClass('si-selectbox-single');
             op.transfer&&$dropdown.removeClass('si-selectbox-multiple').addClass('si-selectbox-single');
           }
@@ -158,6 +164,7 @@ import _ from '../../utils/util';
     _removeEvent(){
       $(document).off(`click.si.selectbox.${this.randomString}`);
       this.$selection.off('click.si.selectbox');
+      this._removeTagEvent();
     }
     _toogle(){
       if (this.opened) {
@@ -223,10 +230,15 @@ import _ from '../../utils/util';
           let va = newVal !== '' ? String(newVal).split(',') : [],
             vac = val && val !== '' ? String(val).split(',') : [],
             sbd = this.selectboxDom;
+          let $tagArea = this.$tagArea;
           let arr1 = _.compare(va, vac);
           let arr2 = _.compare(vac, va);
           if (va.length > 0) {
-            $placeholder.hide();
+            if (vac.length === 0) {
+              $placeholder.hide();
+              $tagArea.show();
+              this._addTagEvent();
+            }
             op.clearable && this.$selection.addClass('si-show-clear');
           }
           arr1.forEach(key => {
@@ -240,8 +252,10 @@ import _ from '../../utils/util';
             delete this.tagsDom[key];
           });
           if (va.length === 0) {
+            $tagArea.hide();
             $placeholder.show();
             op.clearable && this.$selection.removeClass('si-show-clear');
+            this._removeTagEvent();
           }
         } else {
           let va = newVal && String(newVal) || '',
@@ -276,22 +290,29 @@ import _ from '../../utils/util';
       }
     }
     _addTag(val, text) {
-      let op = this.options;
       this.tagsDom = this.tagsDom || {};
       let _tag = document.createElement('div');
       let _tagText = document.createElement('span');
       let _tagClose = document.createElement('i');
-      $(_tagClose).addClass('fa fa-close si-tag-close').on('click', (e) => {
+      $(_tagClose).addClass('fa fa-close si-tag-close').data('tag.value', val);
+      $(_tagText).addClass('si-tag-text').text(text);
+      let $tag = $(_tag);
+      $tag.addClass('si-tag si-tag-checked').append(_tagText).append(_tagClose);
+      this.$tagArea.append(_tag);
+      this.tagsDom[val] = $tag;
+    }
+    _addTagEvent() {
+      let op = this.options;
+      this.$tagArea.on('click', '.si-tag-close', function(e) {
+        let val = $(this).data('tag.value');
         let valueArr = op.value.split(',');
         _.delete(valueArr, val);
         op.value = valueArr.join(',');
         e.stopPropagation();
       });
-      $(_tagText).addClass('si-tag-text').text(text);
-      let $tag = $(_tag);
-      $tag.addClass('si-tag si-tag-checked').append(_tagText).append(_tagClose);
-      this.$selection.append(_tag);
-      this.tagsDom[val] = $tag;
+    }
+    _removeTagEvent() {
+      this.$tagArea.off('click');
     }
     _setAttachList(newVal) {
       this.selectboxDom = {};
@@ -323,6 +344,7 @@ import _ from '../../utils/util';
         let val = $(e.target).data('value');
         if (this.readonlyArr.includes(val)) return;
         if (op.multiple) {
+          if(val === '') return;
           let valueArr = op.value !== '' && op.value.split(',') || [];
           if (valueArr.includes(val)) {
             for (let i = 0, len = valueArr.length; i < len; i++) {

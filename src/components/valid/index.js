@@ -12,6 +12,8 @@ class Valid{
     this.init();
   }
   init(){
+    let op = this.options;
+    this.typeArr = op.type ? op.type.split(',').filter(item => allowedType.includes(item)) : [];
     if(this.options.required){
       this.former.$label&&this.former.$label.addClass('si-form-required');
     }
@@ -40,20 +42,15 @@ class Valid{
   }
   valid(){
     let op = this.options;
+    let typeArr = this.typeArr;
     if(op.required){
       this.isNotEmpty();
       if(!this.checkPass())return false;
     }
-    if(op.type){
-      let typeArr = op.type.split(',');
-      for(let i=0,le=typeArr.length;i<le;i++){
-        const type = typeArr[i];
-        if(!allowedType.includes(type)){
-          throw new Error(`没有${type}校验类型！`);
-        }
-        this[type]();
-        if(!this.checkPass())return false;
-      }
+    for(let i=0,le=typeArr.length;i<le;i++){
+      const type = typeArr[i];
+      this[type]();
+      if(!this.checkPass())return false;
     }
     return true;
   }
@@ -104,7 +101,7 @@ class Valid{
   isNotEmpty(){
     let val = this.$el.val();
     this.pass = val!==null&&val!=='';
-    this.msg = this.options.msg||'不能为空';
+    this.msg = this.typeArr.length === 0 && this.options.msg ? this.options.msg : '必填哦～';
   }
   //长度校验
   length(){
@@ -226,7 +223,7 @@ class Valid{
     }else if(op.url){
       this.customUrlFn = this.customUrlFn||_.debounce(()=>{
         $.ajax({
-          type: 'post',
+          type: 'get',
           url: op.url,
           data: {
             [name]:this.$el.val()
@@ -236,17 +233,18 @@ class Valid{
           success: re=>{
             if(!re){
               this.pass = false;
-              this.msg = '输入不符合规则！';
+              this.msg = op.msg || '输入不符合规则！';
             }else{
               this.pass = true;
             }
+            this.checkPass();
           }
         });
       },1000);
       this.customUrlFn();
     }else if(op.fn){
       if(typeof op.fn === 'function'){
-        this.pass = op.fn(val);
+        this.pass = !!op.fn(val);
         this.msg = op.msg || '输入不符合规则！';
       }
     }

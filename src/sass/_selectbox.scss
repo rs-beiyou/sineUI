@@ -74,19 +74,6 @@
     }
 }
 .si-selectbox-multiple {
-    .si-selectbox-selection {
-        .si-selectbox-tagarea{
-            height: 100%;
-            overflow: auto;
-        }
-        .si-tag {
-            margin: 0 4px 0 0;
-            height: auto;
-            line-height: 16px;
-            user-select: none;
-            vertical-align: bottom;
-        }
-    }
     .si-selectbox-item-selected {
         color: $dropdown-link-active-bg;
         &:after {

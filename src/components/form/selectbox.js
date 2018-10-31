@@ -98,7 +98,7 @@ import _ from '../../utils/util';
           if (newVal) {
             let tagArea = document.createElement('div');
             let $tagArea = $(tagArea);
-            $tagArea.addClass('si-selectbox-tagarea').hide();
+            $tagArea.addClass('si-tagarea').hide();
             $selection.append(tagArea);
             this.$tagArea = $tagArea;
             $selectbox.removeClass('si-selectbox-single').addClass('si-selectbox-multiple');
@@ -308,7 +308,7 @@ import _ from '../../utils/util';
         let valueArr = op.value.split(',');
         _.delete(valueArr, val);
         op.value = valueArr.join(',');
-        e.stopPropagation();
+        document.all ? e.cancelBubble=true : e.stopPropagation();
       });
     }
     _removeTagEvent() {

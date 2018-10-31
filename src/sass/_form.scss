@@ -135,7 +135,17 @@ output {
     fieldset[disabled] & {
         cursor: $cursor-disabled;
     }
-    // [converter] extracted textarea& to textarea.form-control
+    .si-tagarea{
+        height: 100%;
+        overflow: auto;
+    }
+    .si-tag {
+        margin: 0 4px 0 0;
+        height: auto;
+        line-height: 16px;
+        user-select: none;
+        vertical-align: bottom;
+    }
 }
 
 // Reset height for `textarea`s

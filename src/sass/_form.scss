@@ -711,6 +711,8 @@ input[type="checkbox"] {
     box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
     background-color: $dropdown-bg;
 }
+// .si-dropdown-transfer{
+// }
 .si-show-clear:hover {
     .si-form-control-icon {
         &:first-of-type {
@@ -774,6 +776,7 @@ input[type="checkbox"] {
     }
     .si-form-block{
         display: inline-block;
+        vertical-align: top;
     }
     @include clearfix();
 }

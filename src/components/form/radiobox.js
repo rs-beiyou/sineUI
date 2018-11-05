@@ -161,6 +161,9 @@ class Radiobox extends BaseForm {
       return op.value === item[op.valueField];
     })[0][op.keyField];
   }
+  getData() {
+    return this.options.data;
+  }
 }
 
 function Plugin(option) {

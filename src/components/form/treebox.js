@@ -59,7 +59,7 @@ class Treebox extends BaseForm {
       $tree.append(_tagArea);
       $treebox.addClass('si-treebox').append(_input).append(_tree);
       if(this.lastOptions.transfer){
-        $dropdown.addClass('si-treebox-dropdown-transfer');
+        $dropdown.addClass('si-dropdown-transfer');
         $('body').append(_dropdown);
       }else{
         $treebox.append(_dropdown);
@@ -341,6 +341,9 @@ class Treebox extends BaseForm {
   }
   getKey(){
     return this.titleVal;
+  }
+  getData() {
+    return this.options.data;
   }
   getTree(){
     return this.$treeUl;

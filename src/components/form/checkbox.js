@@ -184,6 +184,9 @@ class Checkbox extends BaseForm {
     });
     return arr.join(',');
   }
+  getData() {
+    return this.options.data;
+  }
 }
 
 function Plugin(option) {

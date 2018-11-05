@@ -57,7 +57,7 @@ class Combobox extends BaseForm {
       $dropdown.addClass('si-dropdown si-combobox-dropdown').hide().append(_loading);
       $combobox.addClass('si-combobox').append(_input).append(_combo);
       if(this.lastOptions.transfer){
-        $dropdown.addClass('si-combobox-dropdown-transfer');
+        $dropdown.addClass('si-dropdown-transfer');
         $('body').append(_dropdown);
       }else{
         $combobox.append(_dropdown);
@@ -327,6 +327,9 @@ class Combobox extends BaseForm {
   }
   getKey(){
     return this.keyArr.join(',');
+  }
+  getData() {
+    return this.options.data;
   }
   destroy(){
     this._removeEvent();

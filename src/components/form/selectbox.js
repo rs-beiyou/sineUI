@@ -48,7 +48,7 @@ import _ from '../../utils/util';
         $selection.derection().addClass('form-control si-selectbox-selection has-icon-right').append(_selectValue).append(_placeholder).append(_cert).append(_clear);
         $selectbox.addClass('si-selectbox si-selectbox-single').append(_input).append(_selection);
         if(this.lastOptions.transfer){
-          $dropdown.addClass('si-selectbox-single si-selectbox-dropdown-transfer');
+          $dropdown.addClass('si-selectbox-single si-dropdown-transfer');
           $('body').append(_dropdown);
         }else{
           $selectbox.append(_dropdown);
@@ -382,6 +382,9 @@ import _ from '../../utils/util';
         arr.push(item[op.keyField]);
       });
       return arr.join(',');
+    }
+    getData() {
+      return this.options.data;
     }
     refresh(){
       let op = this.options;

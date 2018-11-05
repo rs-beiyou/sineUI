@@ -33,7 +33,8 @@ $.extend({
       title: '对话框',
       maxmin: true, //最大化
       fixed: true, //固定
-      scrollbar: false
+      scrollbar: false,
+      zIndex: 500
     }, options || {});
     layer.open(options);
   },

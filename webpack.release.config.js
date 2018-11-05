@@ -1,4 +1,4 @@
-const path = require('path');
+// const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.config.js');
@@ -10,11 +10,12 @@ const packageInfo = require('./package.json');
 module.exports = merge(webpackBaseConfig, {
   // 入口：要进行处理的实例（js）
   entry: {
-    sine: './src/index.js'
+    sine: './src/index.js',
+    'sine-info': 'src/info.js'
   },
   output: {
-    path: path.join(__dirname, './release'),
-    // path: '/Users/zhangming/eclipse-workspace/sjgl/webapp/script/static/libs/sineui',
+    // path: path.join(__dirname, './release'),
+    path: '/Users/zhangming/eclipse-workspace/sjgl/webapp/script/static/libs/sineui',
     publicPath: '../',
     filename: `js/[name]-${packageInfo.version}.min.js`
   },

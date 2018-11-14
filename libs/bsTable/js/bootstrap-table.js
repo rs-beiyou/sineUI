@@ -2080,10 +2080,12 @@
             that.updateSelected();
             that.trigger(checked ? 'check' : 'uncheck', row, $this);
         });
-
         $.each(this.header.events, function (i, events) {
             if (!events) {
                 return;
+            }
+            if (that.options.fixedColumns && i < that.options.fixedNumber) {
+                return
             }
             // fix bug, if events is defined with namespace
             if (typeof events === 'string') {
@@ -2167,6 +2169,48 @@
             var trIndex = $(this).closest('tr').data('index');
             that.$body.find('> tr[data-index]:eq('+trIndex+')').find(sprintf('[name="%s"]', that.options.selectItemName)).click();
         });
+        this.header.events.forEach(function(events, i){
+            if (!events) {
+                return;
+            }
+            if (i >= that.options.fixedNumber) {
+                return true
+            }
+            // fix bug, if events is defined with namespace
+            if (typeof events === 'string') {
+                events = calculateObjectValue(null, events);
+            }
+
+            var field = that.header.fields[i],
+                fieldIndex = $.inArray(field, that.getVisibleFields());
+
+            if (fieldIndex === -1) {
+                return;
+            }
+
+            if (that.options.detailView && !that.options.cardView) {
+                fieldIndex += 1;
+            }
+
+            for (var key in events) {
+                that.$fixedBodyColumns.find('>tr:not(.no-records-found)').each(function () {
+                    var $tr = $(this),
+                        $td = $tr.find(that.options.cardView ? '.card-view' : 'td').eq(fieldIndex),
+                        index = key.indexOf(' '),
+                        name = key.substring(0, index),
+                        el = key.substring(index + 1),
+                        func = events[key];
+                    var $tar = el ? $td.find(el) : $td;
+                    $tar.off(name).on(name, function (e) {
+                        var index = $tr.data('index'),
+                            row = that.data[index],
+                            value = row[field];
+
+                        func.apply(this, [e, value, row, index]);
+                    });
+                });
+            }
+        })
     };
 
     BootstrapTable.prototype.initServer = function (silent, query, url) {

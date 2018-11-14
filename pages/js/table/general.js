@@ -327,7 +327,17 @@ $('#table8').table({
     }, {
         field: 'id',
         title: 'Item ID',
-        width: 100
+        width: 80,
+        align: 'center',
+        events: {
+            'click .btn-info': function(e, value, row, index){
+                $.msg(value);
+                e.stopPropagation();//防勾选
+            }
+        },
+        formatter: function(value, row, index, field){
+            return '<button class="btn btn-info btn-xs">查看</button>'
+        }
     }, {
         field: 'name',
         title: 'Item Name',

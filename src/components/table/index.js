@@ -148,20 +148,23 @@ class Table {
   showColumn(field){
     this.$el.bootstrapTable('showColumn', field);
   }
-  refreshColumns(option){
-    this.$el.bootstrapTable('refreshColumns',option);
-  }
+  // refreshColumns(option){
+  //   this.$el.bootstrapTable('refreshColumns',option);
+  // }
   getPage(){
     return this.$el.bootstrapTable('getPage');
   }
   resetView(option){
     return this.$el.bootstrapTable('resetView', option);
   }
+  refreshOptions(option){
+    return this.$el.bootstrapTable('refreshOptions', option);
+  }
 }
 let allowedMethods = [
   'initTable','refresh','load','reload','selected','checkAll','uncheckAll',
   'check','uncheck','append','getData','updateRow','getRowByUniqueId','removeSelected',
-  'hideColumn','showColumn','refreshColumns','getPage','resetView'
+  'hideColumn','showColumn','getPage','resetView','refreshOptions'
 ];
 function Plugin(option){
   try {
@@ -185,7 +188,10 @@ function Plugin(option){
       }
       if (!data) {
         $this.data('si.table', (data = new Table(this, options)));
+      } else if (data && typeof option === 'object') {
+        data.refreshOptions(option).apply(data);
       }
+      
     });
     return typeof value === 'undefined' ? this : value;
   } catch (error) {

@@ -1,4 +1,4 @@
-// const path = require('path');
+const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.config.js');
@@ -14,8 +14,8 @@ module.exports = merge(webpackBaseConfig, {
     'sine-info': 'src/info.js'
   },
   output: {
-    // path: path.join(__dirname, './release'),
-    path: '/Users/zhangming/eclipse-workspace/sjgl/webapp/script/static/libs/sineui',
+    path: path.join(__dirname, './release'),
+    // path: '/Users/zhangming/eclipse-workspace/sjgl/webapp/script/static/libs/sineui',
     publicPath: '../',
     filename: `js/[name]-${packageInfo.version}.min.js`
   },

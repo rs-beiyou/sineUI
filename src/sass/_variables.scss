@@ -563,6 +563,7 @@ $si-loading-bar-color-danger: $brand-danger;
 $si-loading-bar-color-info: $brand-info;
 
 $sidebar-width: 260px;
+$sidebar-zIndex: 200;
 $sidebar-font-color: #3C4858;
 $sidebar-icon-color: #a9afbb;
 $sidebar-bg: #ffffff;
@@ -579,18 +580,18 @@ $si-container-max-width-xl:1200px !default;
 
 //theme
 $page-bg: #fff;
-$page-header-zIndex: 1000;
+$page-header-zIndex: 400;
 $page-header-height: 60px;
 $page-nav-bg: #2d8cf0;
 $page-nav-shadow: 0 1px 5px rgba(0,0,0,.08);
 $page-mark-height: 40px;
 $page-mark-bg: #fff;
 $page-mark-shadow:  0 1px 5px rgba(0,0,0,.08);
-$page-mark-zIndex: 800;
+$page-mark-zIndex: 300;
 $page-sider-width: 210px;
 $page-sider-bg: #fafdfd;
 $page-sider-shadow: 0 1px 1px -12px rgba(0,0,0,.42), 0 4px 10px 0 rgba(0,0,0,.12), 0 1px 1px -5px rgba(0,0,0,.2);
-$page-sider-zIndex: 900;
+$page-sider-zIndex: 300;
 $page-sider-topbar-height: 30px;
 $page-sider-topbar-bg: #f3f3f3;
 

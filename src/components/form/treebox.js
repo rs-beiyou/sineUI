@@ -2,6 +2,7 @@ import '../tree';
 
 import BaseForm from './form-base';
 import _ from '../../utils/util';
+import Popper from 'popper.js/dist/umd/popper.js';
 
 class Treebox extends BaseForm {
   constructor(el, options) {
@@ -26,6 +27,7 @@ class Treebox extends BaseForm {
         _treebox = this.create('div'),
         _tree = this.create('div'),
         _placeholder = this.create('div'),
+        _tagArea = this.create('div'),
         _dropdown = this.create('div'),
         _treeValue = this.create('div'),
         _treeIcon = this.create('i'),
@@ -42,20 +44,23 @@ class Treebox extends BaseForm {
       let $loading = $(_loading);
       let $treeUl = $(_ul);
       let $treeIcon = $(_treeIcon);
+      let $tagArea = $(_tagArea);
       $clear = $(_clear);
       $input.attr('type','hidden');
       $placeholder.addClass('si-placeholder');
       $treeValue.addClass('si-treebox-value').hide();
       $treeIcon.addClass(`${this.lastOptions.icon} si-form-control-icon`);
       $clear.addClass(`${this.lastOptions.clearIcon} si-form-control-icon`);
-      $tree.derection().addClass('form-control si-treebox-tree has-icon-right').append(_treeValue).append(_placeholder).append(_treeIcon).append(_clear);
+      $tree.addClass('form-control si-treebox-tree has-icon-right').append(_treeValue).append(_placeholder).append(_treeIcon).append(_clear);
       $treeUl.addClass('ztree').attr('id',this.randomString);
       $(_loadingIcon).addClass(`${this.lastOptions.loadingIcon}`);
       $loading.addClass('si-treebox-loading').append(_loadingIcon).append('<br>').append('加载中...');
       $dropdown.addClass('si-dropdown si-treebox-dropdown').hide().append(_ul).append(_loading);
+      $tagArea.addClass('si-tagarea').hide();
+      $tree.append(_tagArea);
       $treebox.addClass('si-treebox').append(_input).append(_tree);
       if(this.lastOptions.transfer){
-        $dropdown.addClass('si-treebox-dropdown-transfer');
+        $dropdown.addClass('si-dropdown-transfer');
         $('body').append(_dropdown);
       }else{
         $treebox.append(_dropdown);
@@ -65,6 +70,7 @@ class Treebox extends BaseForm {
       this.$treebox = $treebox,
       this.$tree = $tree,
       this.$placeholder = $placeholder,
+      this.$tagArea = $tagArea,
       this.$dropdown = $dropdown,
       this.$treeValue = $treeValue,
       this.$clear = $clear;
@@ -118,6 +124,29 @@ class Treebox extends BaseForm {
   _removeEvent(){
     $(document).off(`click.si.treebox.${this.randomString}`);
     this.$tree.off('click.si.treebox');
+  }
+  _initPopper() {
+    if (this.popper) {
+      this.popper.update();
+    } else {
+      this.popper = new Popper(this.$tree, this.$dropdown, {
+        modifiers: {
+          computeStyle:{
+            gpuAcceleration: false
+          },
+          preventOverflow :{
+            boundariesElement: 'window'
+          }
+        },
+        onCreate: () => {
+          this.derection = this.popper.popper.getAttribute('x-placement');
+        },
+        onUpdate: () => {
+          if (!this.popper) return;
+          this.derection = this.popper.popper.getAttribute('x-placement');
+        }
+      });
+    }
   }
   _toogle(){
     if (this.opened) {
@@ -173,7 +202,8 @@ class Treebox extends BaseForm {
     if(this.inited && !this.dataReloading){
       let $treeValue = this.$treeValue,
         $placeholder = this.$placeholder,
-        $tree = this.$tree;
+        $tree = this.$tree,
+        $tagArea = this.$tagArea;
       newVal = this.$treeUl.tree('load',newVal);
       this.titleVal = this.$treeUl.tree('getTitle', String(newVal));
       if (op.chkStyle) {
@@ -182,8 +212,11 @@ class Treebox extends BaseForm {
         let titleArr = this.titleVal ? this.titleVal.split(',') : [];
         let arr1 = _.compare(nva, va);
         let arr2 = _.compare(va, nva);
+        if (this.titleVal && val === '') {
+          this._addTagEvent();
+        }
         //未找到节点，作空处理
-        this.titleVal&&$placeholder.hide();
+        this.titleVal&&$placeholder.hide()&&$tagArea.show();
         arr1.forEach((key) => {
           this._addTag(key, titleArr[nva.findIndex(k=>k===key)]);
         });
@@ -192,7 +225,7 @@ class Treebox extends BaseForm {
           this.tagsDom[key].remove();
           delete this.tagsDom[key];
         });
-        !newVal&&$placeholder.show()&&op.clearable&&val!==''&&$tree.removeClass('si-show-clear');
+        !newVal&&$tagArea.hide()&&$placeholder.show()&&op.clearable&&val!==''&&$tree.removeClass('si-show-clear')&&this._removeTagEvent();
         op.clearable&&val===''&&$tree.addClass('si-show-clear');
       }else{
         if(this.titleVal===''){
@@ -253,12 +286,21 @@ class Treebox extends BaseForm {
     return false;
   }
   _addTag(val, text) {
-    let op = this.options;
     this.tagsDom = this.tagsDom || {};
     let _tag = document.createElement('div');
     let _tagText = document.createElement('span');
     let _tagClose = document.createElement('i');
-    $(_tagClose).addClass('fa fa-close si-tag-close').on('click', (e) => {
+    $(_tagClose).addClass('fa fa-close si-tag-close').data('tag.value', val);
+    $(_tagText).addClass('si-tag-text').text(text);
+    let $tag = $(_tag);
+    $tag.addClass('si-tag si-tag-checked').append(_tagText).append(_tagClose);
+    this.$tagArea.append(_tag);
+    this.tagsDom[val] = $tag;
+  }
+  _addTagEvent() {
+    let op = this.options;
+    this.$tagArea.on('click', '.si-tag-close', function(e) {
+      let val = $(this).data('tag.value');
       let valueArr = op.value.split(',');
       for (let i = 0, len = valueArr.length; i < len; i++) {
         if (valueArr[i] === val) {
@@ -269,11 +311,9 @@ class Treebox extends BaseForm {
       op.value = valueArr.join(',');
       document.all ? e.cancelBubble=true : e.stopPropagation();
     });
-    $(_tagText).addClass('si-tag-text').text(text);
-    let $tag = $(_tag);
-    $tag.addClass('si-tag si-tag-checked').append(_tagText).append(_tagClose);
-    this.$tree.append(_tag);
-    this.tagsDom[val] = $tag;
+  }
+  _removeTagEvent() {
+    this.$tagArea.off('click');
   }
   _open(){
     if (this.opened) return;
@@ -283,29 +323,11 @@ class Treebox extends BaseForm {
     this.opened = true;
     let $treebox = this.$treebox,
       $dropdown = this.$dropdown,
-      $tree = this.$tree,
-      transfer = this.options.transfer;
-    let offset = $treebox.offset();
-    let realHright = $dropdown.outerHeight() + Number($dropdown.css('margin-top').replace('px', '')) + Number($dropdown.css('margin-bottom').replace('px', ''));
-    let derection = realHright <= $tree.derection('check').bottomDistance ? 'bottom' : 'top';
+      $tree = this.$tree;
     $treebox.addClass('si-treebox-visible');
     $dropdown.width($tree.outerWidth());
-    this.derection = derection;
-    let className = derection === 'top'? 'slide-up-in' : 'slide-down-in';
-    if(derection==='top'){
-      $dropdown.css({
-        'top': transfer ? offset.top - realHright : -realHright,
-        'left': transfer ? offset.left : 0
-      });
-    }else{
-      transfer?$dropdown.css({
-        'top': offset.top + $treebox.outerHeight(),
-        'left': offset.left
-      }):$dropdown.css({
-        // 'top': $treebox.outerHeight(),
-        'left': 0
-      });
-    }
+    this._initPopper();
+    let className = this.derection === 'top'? 'slide-up-in' : 'slide-down-in';
     $dropdown.show().addClass(className);
     setTimeout(() => {
       $dropdown.removeClass(className);
@@ -326,6 +348,9 @@ class Treebox extends BaseForm {
   getKey(){
     return this.titleVal;
   }
+  getData() {
+    return this.options.data;
+  }
   getTree(){
     return this.$treeUl;
   }
@@ -339,6 +364,7 @@ class Treebox extends BaseForm {
     this._removeEvent();
     this.$treeUl.tree('destroy');
     this.options.transfer&&this.$dropdown.remove();
+    this.popper && this.popper.destroy();
   }
 }
 

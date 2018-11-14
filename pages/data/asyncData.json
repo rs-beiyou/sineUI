@@ -1,0 +1,21 @@
+[{
+  "id": 1,
+  "listname": "请问1",
+  "isParent": true
+},{
+  "id": 2,
+  "listname": "请问2",
+  "isParent": true
+},{
+  "id": 3,
+  "listname": "请问3",
+  "isParent": false
+},{
+  "id": 4,
+  "listname": "请问4",
+  "isParent": true
+},{
+  "id": 5,
+  "listname": "请问5",
+  "isParent": false
+}]

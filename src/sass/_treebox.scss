@@ -3,13 +3,6 @@
     width: 100%;
     .si-treebox-tree{
         cursor: pointer;
-        height: auto;
-        .si-tag {
-            margin: 1px 4px 1px 0;
-            height: auto;
-            line-height: normal;
-            user-select: none;
-        }
     }
     &.si-form-readonly {
         .si-treebox-tree {

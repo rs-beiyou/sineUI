@@ -8,6 +8,7 @@
 */
 // Follow the UMD template https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js
 import Moment from 'src/libs/moment';
+import Popper from 'popper.js/dist/umd/popper.js';
 // const new Moment = require('./new Moment.min.js');
 ! function(window, undefined) {
     var DateRangePicker = function(element, options, cb) {
@@ -1028,63 +1029,102 @@ import Moment from 'src/libs/moment';
             };
         },
         move: function() {
-            var parentOffset = { top: 0, left: 0 },
-                containerTop;
-            
-            var maxDis = this.derection();
-            var maxHeight = maxDis.bottomDistance,
-                realHeight = this.container.outerHeight(),
-                realWidth = this.container.outerWidth(),
-                maxWidth = maxDis.rightDistance;
-            this.drops = maxHeight>=realHeight ? "down" : "up";
-            if (this.drops == 'up'){
-            		containerTop = this.element.offset().top - realHeight;
-            }else{
-            		containerTop = this.element.offset().top + this.element.outerHeight();
-            }
-            this.container[this.drops == 'up' ? 'addClass' : 'removeClass']('dropup');
-
-            this.opens = maxWidth>=realWidth ? "right" : "left";
-            this.opens==='left'?this.container.addClass('opensleft').removeClass('opensright'):this.container.addClass('opensright').removeClass('opensleft');
-            
-            if (this.opens == 'right') {
-                this.container.css({
-                    top: containerTop,
-                    right: maxWidth - realWidth,
-                    left: 'auto'
-                });
-                if (this.container.offset().left < 0) {
-                    this.container.css({
-                        right: 'auto',
-                        left: 9
-                    });
-                }
-            } else if (this.opens == 'center') {
-                this.container.css({
-                    top: containerTop,
-                    left: this.element.offset().left - parentOffset.left + this.element.outerWidth() / 2
-                            - this.container.outerWidth() / 2,
-                    right: 'auto'
-                });
-                if (this.container.offset().left < 0) {
-                    this.container.css({
-                        right: 'auto',
-                        left: 9
-                    });
-                }
+            var $container = this.container
+            if (this.popper) {
+                this.popper.update();
+                let className = this.drops === 'bottom-start' ? 'slide-down-in' : 'slide-up-in';
+                $container.show().addClass(className);
+                setTimeout(() => {
+                    $container.removeClass(className);
+                }, Number.parseFloat($container.css('animation-duration')) * 1000);
             } else {
-                this.container.css({
-                    top: containerTop,
-                    right: maxWidth - this.element.outerWidth(),
-                    left: 'auto'
+                this.popper = new Popper(this.element, $container, {
+                    placement: 'bottom-start',
+                    modifiers: {
+                        computeStyle:{
+                            gpuAcceleration: false
+                        },
+                        preventOverflow :{
+                          boundariesElement: 'window'
+                        }
+                    },
+                    onCreate: () => {
+                        this.drops = this.popper.popper.getAttribute('x-placement');
+                        let className = this.drops === 'bottom-start' ? 'slide-down-in' : 'slide-up-in';
+                        $container.show().addClass(className);
+                        setTimeout(() => {
+                            $container.removeClass(className);
+                        }, Number.parseFloat($container.css('animation-duration')) * 1000);
+                    },
+                    onUpdate: () => {
+                        if (!this.popper) return;
+                        this.drops = this.popper.popper.getAttribute('x-placement');
+                    }
                 });
-                if (this.container.offset().left + this.container.outerWidth() > $(window).width()) {
-                    this.container.css({
-                        left: 'auto',
-                        right: 0
-                    });
-                }
             }
+
+            // var parentOffset = { top: 0, left: 0 },
+            //     containerTop;
+            
+            // var maxDis = this.derection();
+            // var maxHeight = maxDis.bottomDistance,
+            //     realHeight = this.container.outerHeight(),
+            //     realWidth = this.container.outerWidth(),
+            //     maxWidth = maxDis.rightDistance;
+            // this.drops = maxHeight>=realHeight ? "bottom" : "top";
+            // if (this.drops == 'top'){
+            // 		containerTop = this.element.offset().top - realHeight;
+            // }else{
+            // 		containerTop = this.element.offset().top + this.element.outerHeight();
+            // }
+            // this.container[this.drops == 'top' ? 'addClass' : 'removeClass']('dropup');
+
+            // this.opens = maxWidth>=realWidth ? "right" : "left";
+            // this.opens==='left'?this.container.addClass('opensleft').removeClass('opensright'):this.container.addClass('opensright').removeClass('opensleft');
+            
+            // if (this.opens == 'right') {
+            //     this.container.css({
+            //         top: containerTop,
+            //         right: maxWidth - realWidth,
+            //         left: 'auto'
+            //     });
+            //     if (this.container.offset().left < 0) {
+            //         this.container.css({
+            //             right: 'auto',
+            //             left: 9
+            //         });
+            //     }
+            // } else if (this.opens == 'center') {
+            //     this.container.css({
+            //         top: containerTop,
+            //         left: this.element.offset().left - parentOffset.left + this.element.outerWidth() / 2
+            //                 - this.container.outerWidth() / 2,
+            //         right: 'auto'
+            //     });
+            //     if (this.container.offset().left < 0) {
+            //         this.container.css({
+            //             right: 'auto',
+            //             left: 9
+            //         });
+            //     }
+            // } else {
+            //     this.container.css({
+            //         top: containerTop,
+            //         right: maxWidth - this.element.outerWidth(),
+            //         left: 'auto'
+            //     });
+            //     if (this.container.offset().left + this.container.outerWidth() > $(window).width()) {
+            //         this.container.css({
+            //             left: 'auto',
+            //             right: 0
+            //         });
+            //     }
+            // }
+            // let className = this.drops === 'down' ? 'slide-down-in' : 'slide-up-in';
+            // this.container.show().addClass(className);
+            // setTimeout(() => {
+            //     this.container.removeClass(className);
+            // }, Number.parseFloat(this.container.css('animation-duration')) * 1000);
         },
 
         show: function(e) {
@@ -1115,7 +1155,7 @@ import Moment from 'src/libs/moment';
                 left: 0,
                 top: 0,
                 right: 'auto'
-            }).show();
+            });
             this.move();
             this.element.trigger('show.daterangepicker', this);
             this.isShowing = true;
@@ -1139,7 +1179,11 @@ import Moment from 'src/libs/moment';
 
             $(document).off('.daterangepicker');
             $(window).off('.daterangepicker');
-            this.container.hide();
+            let className = this.drops === 'top-start'? 'slide-up-out' : 'slide-down-out';
+            this.container.addClass(className);
+            setTimeout(() => {
+                this.container.hide().removeClass(className);
+            }, Number.parseFloat(this.container.css('animation-duration')) * 1000);
             this.element.trigger('hide.daterangepicker', this);
             this.isShowing = false;
         },
@@ -1606,6 +1650,7 @@ import Moment from 'src/libs/moment';
             this.container.remove();
             this.element.off('.daterangepicker');
             this.element.removeData();
+            this.popper && this.popper.destory();
         }
 
     };

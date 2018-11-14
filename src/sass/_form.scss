@@ -135,7 +135,17 @@ output {
     fieldset[disabled] & {
         cursor: $cursor-disabled;
     }
-    // [converter] extracted textarea& to textarea.form-control
+    .si-tagarea{
+        height: 100%;
+        overflow: auto;
+    }
+    .si-tag {
+        margin: 0 4px 0 0;
+        height: auto;
+        line-height: 16px;
+        user-select: none;
+        vertical-align: bottom;
+    }
 }
 
 // Reset height for `textarea`s
@@ -701,6 +711,8 @@ input[type="checkbox"] {
     box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
     background-color: $dropdown-bg;
 }
+// .si-dropdown-transfer{
+// }
 .si-show-clear:hover {
     .si-form-control-icon {
         &:first-of-type {
@@ -709,6 +721,14 @@ input[type="checkbox"] {
         &:last-of-type {
             display: inline-block;
         }
+    }
+}
+.si-form-readonly, .si-form-disabled{
+    .si-tag{
+        cursor: $cursor-disabled;
+    }
+    .si-tag-close{
+        display: none;
     }
 }
 .si-form-readonly:hover,.si-form-disabled:hover {
@@ -748,7 +768,7 @@ input[type="checkbox"] {
     zoom: 1;
     .control-label{
         text-align: right;
-        line-height: 30px;
+        line-height: 34px;
         font-weight: normal;
     }
     .form-group{
@@ -756,6 +776,7 @@ input[type="checkbox"] {
     }
     .si-form-block{
         display: inline-block;
+        vertical-align: top;
     }
     @include clearfix();
 }
@@ -766,7 +787,7 @@ input[type="checkbox"] {
     }
 }
 .si-checkbox,.si-radiobox{
-    margin: 7px 0 8px;
+    margin: 7px 0;
     min-height: 19px;
     label{
         margin-bottom: 0;
@@ -774,6 +795,9 @@ input[type="checkbox"] {
 }
 .form-group-sm{
     font-size: $font-size-small;
+    .control-label{
+        line-height: 30px;
+    }
     .si-checkbox,.si-radiobox{
         margin: 6px 0 5px;
     }

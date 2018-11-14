@@ -2,13 +2,14 @@ import './derection';
 
 import BaseForm from './form-base';
 import _ from '../../utils/util';
+import Popper from 'popper.js/dist/umd/popper.js';
 
 (function($) {
   class Selectbox extends BaseForm {
     constructor(el, options) {
       super(el, options, Selectbox.DEFAULTS);
       this.className = 'Selectbox';
-      this.derection = '';
+      this.derection = 'bottom';
       this.randomString = _.randomString();
       this._initForm();
     }
@@ -45,10 +46,10 @@ import _ from '../../utils/util';
         $input.attr('type', 'hidden');
         $selectValue.addClass('si-selectbox-selected-value').hide();
         $dropdown.addClass('si-dropdown si-selectbox-dropdown').hide();
-        $selection.derection().addClass('form-control si-selectbox-selection has-icon-right').append(_selectValue).append(_placeholder).append(_cert).append(_clear);
+        $selection.addClass('form-control si-selectbox-selection has-icon-right').append(_selectValue).append(_placeholder).append(_cert).append(_clear);
         $selectbox.addClass('si-selectbox si-selectbox-single').append(_input).append(_selection);
         if(this.lastOptions.transfer){
-          $dropdown.addClass('si-selectbox-single si-selectbox-dropdown-transfer');
+          $dropdown.addClass('si-selectbox-single si-dropdown-transfer');
           $('body').append(_dropdown);
         }else{
           $selectbox.append(_dropdown);
@@ -96,9 +97,15 @@ import _ from '../../utils/util';
           break;
         case 'multiple':
           if (newVal) {
+            let tagArea = document.createElement('div');
+            let $tagArea = $(tagArea);
+            $tagArea.addClass('si-tagarea').hide();
+            $selection.append(tagArea);
+            this.$tagArea = $tagArea;
             $selectbox.removeClass('si-selectbox-single').addClass('si-selectbox-multiple');
             op.transfer&&$dropdown.removeClass('si-selectbox-single').addClass('si-selectbox-multiple');
           } else {
+            this.$tagArea.remove();
             $selectbox.removeClass('si-selectbox-multiple').addClass('si-selectbox-single');
             op.transfer&&$dropdown.removeClass('si-selectbox-multiple').addClass('si-selectbox-single');
           }
@@ -155,9 +162,33 @@ import _ from '../../utils/util';
       $(document).on(`click.si.selectbox.${this.randomString}`, this._close.bind(this));
       this.$selection.on('click.si.selectbox', this._toogle.bind(this));
     }
-    _removeEvent(){
+    _removeEvent() {
       $(document).off(`click.si.selectbox.${this.randomString}`);
       this.$selection.off('click.si.selectbox');
+      this._removeTagEvent();
+    }
+    _initPopper() {
+      if (this.popper) {
+        this.popper.update();
+      } else {
+        this.popper = new Popper(this.$selection, this.$dropdown, {
+          modifiers: {
+            computeStyle:{
+              gpuAcceleration: false
+            },
+            preventOverflow :{
+              boundariesElement: 'window'
+            }
+          },
+          onCreate: () => {
+            this.derection = this.popper.popper.getAttribute('x-placement');
+          },
+          onUpdate: () => {
+            if (!this.popper) return;
+            this.derection = this.popper.popper.getAttribute('x-placement');
+          }
+        });
+      }
     }
     _toogle(){
       if (this.opened) {
@@ -175,29 +206,11 @@ import _ from '../../utils/util';
       this.opened = true;
       let $selectbox = this.$selectbox,
         $dropdown = this.$dropdown,
-        $selection = this.$selection,
-        transfer = this.options.transfer;
-      let offset = $selection.offset();
-      let realHright = $dropdown.outerHeight() + Number($dropdown.css('margin-top').replace('px', '')) + Number($dropdown.css('margin-bottom').replace('px', ''));
-      let derection = realHright <= $selection.derection('check').bottomDistance ? 'bottom' : 'top';
+        $selection = this.$selection;
       $selectbox.addClass('si-selectbox-visible');
       $dropdown.width($selection.outerWidth());
-      this.derection = derection;
-      let className = derection === 'top'? 'slide-up-in' : 'slide-down-in';
-      if(derection==='top'){
-        $dropdown.css({
-          'top': transfer ? offset.top - realHright : -realHright,
-          'left': transfer ? offset.left : 0
-        });
-      }else{
-        transfer?$dropdown.css({
-          'top': offset.top + $selectbox.outerHeight(),
-          'left': offset.left
-        }):$dropdown.css({
-          // 'top': $selectbox.outerHeight(),
-          'left': 0
-        });
-      }
+      this._initPopper();
+      let className = this.derection === 'bottom' ? 'slide-down-in' : 'slide-up-in';
       $dropdown.show().addClass(className);
       setTimeout(() => {
         $dropdown.removeClass(className);
@@ -223,10 +236,15 @@ import _ from '../../utils/util';
           let va = newVal !== '' ? String(newVal).split(',') : [],
             vac = val && val !== '' ? String(val).split(',') : [],
             sbd = this.selectboxDom;
+          let $tagArea = this.$tagArea;
           let arr1 = _.compare(va, vac);
           let arr2 = _.compare(vac, va);
           if (va.length > 0) {
-            $placeholder.hide();
+            if (vac.length === 0) {
+              $placeholder.hide();
+              $tagArea.show();
+              this._addTagEvent();
+            }
             op.clearable && this.$selection.addClass('si-show-clear');
           }
           arr1.forEach(key => {
@@ -240,8 +258,10 @@ import _ from '../../utils/util';
             delete this.tagsDom[key];
           });
           if (va.length === 0) {
+            $tagArea.hide();
             $placeholder.show();
             op.clearable && this.$selection.removeClass('si-show-clear');
+            this._removeTagEvent();
           }
         } else {
           let va = newVal && String(newVal) || '',
@@ -276,22 +296,29 @@ import _ from '../../utils/util';
       }
     }
     _addTag(val, text) {
-      let op = this.options;
       this.tagsDom = this.tagsDom || {};
       let _tag = document.createElement('div');
       let _tagText = document.createElement('span');
       let _tagClose = document.createElement('i');
-      $(_tagClose).addClass('fa fa-close si-tag-close').on('click', (e) => {
-        let valueArr = op.value.split(',');
-        _.delete(valueArr, val);
-        op.value = valueArr.join(',');
-        e.stopPropagation();
-      });
+      $(_tagClose).addClass('fa fa-close si-tag-close').data('tag.value', val);
       $(_tagText).addClass('si-tag-text').text(text);
       let $tag = $(_tag);
       $tag.addClass('si-tag si-tag-checked').append(_tagText).append(_tagClose);
-      this.$selection.append(_tag);
+      this.$tagArea.append(_tag);
       this.tagsDom[val] = $tag;
+    }
+    _addTagEvent() {
+      let op = this.options;
+      this.$tagArea.on('click', '.si-tag-close', function(e) {
+        let val = $(this).data('tag.value');
+        let valueArr = op.value.split(',');
+        _.delete(valueArr, val);
+        op.value = valueArr.join(',');
+        document.all ? e.cancelBubble=true : e.stopPropagation();
+      });
+    }
+    _removeTagEvent() {
+      this.$tagArea && this.$tagArea.off('click');
     }
     _setAttachList(newVal) {
       this.selectboxDom = {};
@@ -323,6 +350,7 @@ import _ from '../../utils/util';
         let val = $(e.target).data('value');
         if (this.readonlyArr.includes(val)) return;
         if (op.multiple) {
+          if(val === '') return;
           let valueArr = op.value !== '' && op.value.split(',') || [];
           if (valueArr.includes(val)) {
             for (let i = 0, len = valueArr.length; i < len; i++) {
@@ -361,6 +389,9 @@ import _ from '../../utils/util';
       });
       return arr.join(',');
     }
+    getData() {
+      return this.options.data;
+    }
     refresh(){
       let op = this.options;
       this._getDataByUrl(op.url,{},re=>{
@@ -370,6 +401,7 @@ import _ from '../../utils/util';
     destroy(){
       this._removeEvent();
       this.options.transfer&&this.$dropdown.remove();
+      this.popper && this.popper.destroy();
     }
   }
 

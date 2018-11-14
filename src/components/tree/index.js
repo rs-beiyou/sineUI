@@ -20,7 +20,9 @@ class Tree {
       async: {
         enable: !!op.url,
         url: op.url,
-        type: op.method
+        type: op.method,
+        autoParam: op.autoParam || [op.idField],
+        otherParam: op.otherParam || {}
       },
       data: {
         key: {
@@ -155,7 +157,7 @@ function Plugin(option){
   }
 }
 Tree.DEFAULTS = {
-  method:'post',
+  method:'get',
   chkStyle:'',
   chkboxType:'',
   valueField:'listname',
@@ -164,7 +166,9 @@ Tree.DEFAULTS = {
   pIdValue: '-1',
   url:null,
   data:null,
-  callback:{}
+  callback:{},
+  autoParam: null,
+  otherParam: null
 };
 let old = $.fn.tree;
 

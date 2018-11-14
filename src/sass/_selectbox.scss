@@ -74,24 +74,12 @@
     }
 }
 .si-selectbox-multiple {
-    .si-selectbox-selection {
-        height: auto;
-        min-height: $input-height-base;
-        .si-tag {
-            margin: 0 4px 0 0;
-            height: auto;
-            line-height: normal;
-            user-select: none;
-        }
-    }
     .si-selectbox-item-selected {
         color: $dropdown-link-active-bg;
         &:after {
             content: '\f00c';
             font-family: FontAwesome;
             float: right;
-            font-size: 13px;
-            line-height: $headings-line-height;
         }
     }
 }

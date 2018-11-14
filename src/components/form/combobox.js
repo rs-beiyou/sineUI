@@ -1,10 +1,11 @@
 import BaseForm from './form-base';
 import _ from '../../utils/util';
+import Popper from 'popper.js/dist/umd/popper.js';
 class Combobox extends BaseForm {
   constructor(el, options) {
     super(el, options, Combobox.DEFAULTS);
     this.className = 'Combobox';
-    this.derection = '';
+    this.derection = 'bottom-start';
     this.randomString = _.randomString();
     this.levelUlArr = [];
     this.valueArr = [];
@@ -51,7 +52,7 @@ class Combobox extends BaseForm {
       $comboValue.addClass('si-combobox-value').hide();
       $comboIcon.addClass(`${this.lastOptions.icon} si-form-control-icon`);
       $clear.addClass(`${this.lastOptions.clearIcon} si-form-control-icon`);
-      $combo.derection().addClass('si-combobox-combo has-icon-right').append(_comboValue).append(_placeholder).append(_comboIcon).append(_clear);
+      $combo.addClass('si-combobox-combo has-icon-right').append(_comboValue).append(_placeholder).append(_comboIcon).append(_clear);
       $(_loadingIcon).addClass(`${this.lastOptions.loadingIcon}`);
       $loading.addClass('si-combobox-loading').append(_loadingIcon).append('<br>').append('加载中...');
       $dropdown.addClass('si-dropdown si-combobox-dropdown').hide().append(_loading);
@@ -126,6 +127,30 @@ class Combobox extends BaseForm {
   _removeEvent(){
     $(document).off(`click.si.combobox.${this.randomString}`);
     this.$combo.off('click.si.combobox');
+  }
+  _initPopper() {
+    if (this.popper) {
+      this.popper.update();
+    } else {
+      this.popper = new Popper(this.$combo, this.$dropdown, {
+        placement: this.derection,
+        modifiers: {
+          computeStyle:{
+            gpuAcceleration: false
+          },
+          preventOverflow :{
+            boundariesElement: 'window'
+          }
+        },
+        onCreate: () => {
+          this.derection = this.popper.popper.getAttribute('x-placement');
+        },
+        onUpdate: () => {
+          if (!this.popper) return;
+          this.derection = this.popper.popper.getAttribute('x-placement');
+        }
+      });
+    }
   }
   _setReadonly(newVal){
     newVal&&this.$combobox.addClass('si-form-readonly')&&this._removeEvent();
@@ -281,33 +306,10 @@ class Combobox extends BaseForm {
     if (this.opened) return;
     this.opened = true;
     let $combobox = this.$combobox,
-      $dropdown = this.$dropdown,
-      $combo = this.$combo,
-      transfer = this.options.transfer;
-    let offset = $combobox.offset();
-    let realHright = $dropdown.outerHeight() + Number($dropdown.css('margin-top').replace('px', '')) + Number($dropdown.css('margin-bottom').replace('px', ''));
-    let derection = realHright <= $combo.derection('check').bottomDistance ? 'bottom' : 'top';
+      $dropdown = this.$dropdown;
     $combobox.addClass('si-combobox-visible');
-    this.derection = derection;
-    let className = derection === 'top'? 'slide-up-in' : 'slide-down-in';
-    if(derection==='top'){
-      $dropdown.css({
-        'top': transfer ? offset.top - realHright : -realHright,
-        'left': transfer ? offset.left : 0
-      });
-    }else{
-      // transfer&&$dropdown.css({
-      //   'top': offset.top + $combobox.outerHeight(),
-      //   'left': offset.left
-      // });
-      transfer?$dropdown.css({
-        'top': offset.top + $combobox.outerHeight(),
-        'left': offset.left
-      }):$dropdown.css({
-        'top': $combobox.outerHeight(),
-        'left': 0
-      });
-    }
+    this._initPopper();
+    let className = this.derection === 'top-start'? 'slide-up-in' : 'slide-down-in';
     $dropdown.show().addClass(className);
     setTimeout(() => {
       $dropdown.removeClass(className);
@@ -319,7 +321,7 @@ class Combobox extends BaseForm {
     let $combobox = this.$combobox,
       $dropdown = this.$dropdown;
     $combobox.removeClass('si-combobox-visible');
-    let className = this.derection === 'top'? 'slide-up-out' : 'slide-down-out';
+    let className = this.derection === 'top-start'? 'slide-up-out' : 'slide-down-out';
     $dropdown.addClass(className);
     setTimeout(() => {
       $dropdown.hide().removeClass(className);
@@ -335,6 +337,7 @@ class Combobox extends BaseForm {
     this._removeEvent();
     this.$comboUl.combo('destroy');
     this.options.transfer&&this.$dropdown.remove();
+    this.popper && this.popper.destroy();
   }
 }
 

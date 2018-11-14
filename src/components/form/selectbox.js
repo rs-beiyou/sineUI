@@ -2,13 +2,14 @@ import './derection';
 
 import BaseForm from './form-base';
 import _ from '../../utils/util';
+import Popper from 'popper.js/dist/umd/popper.js';
 
 (function($) {
   class Selectbox extends BaseForm {
     constructor(el, options) {
       super(el, options, Selectbox.DEFAULTS);
       this.className = 'Selectbox';
-      this.derection = '';
+      this.derection = 'bottom';
       this.randomString = _.randomString();
       this._initForm();
     }
@@ -45,7 +46,7 @@ import _ from '../../utils/util';
         $input.attr('type', 'hidden');
         $selectValue.addClass('si-selectbox-selected-value').hide();
         $dropdown.addClass('si-dropdown si-selectbox-dropdown').hide();
-        $selection.derection().addClass('form-control si-selectbox-selection has-icon-right').append(_selectValue).append(_placeholder).append(_cert).append(_clear);
+        $selection.addClass('form-control si-selectbox-selection has-icon-right').append(_selectValue).append(_placeholder).append(_cert).append(_clear);
         $selectbox.addClass('si-selectbox si-selectbox-single').append(_input).append(_selection);
         if(this.lastOptions.transfer){
           $dropdown.addClass('si-selectbox-single si-dropdown-transfer');
@@ -161,10 +162,33 @@ import _ from '../../utils/util';
       $(document).on(`click.si.selectbox.${this.randomString}`, this._close.bind(this));
       this.$selection.on('click.si.selectbox', this._toogle.bind(this));
     }
-    _removeEvent(){
+    _removeEvent() {
       $(document).off(`click.si.selectbox.${this.randomString}`);
       this.$selection.off('click.si.selectbox');
       this._removeTagEvent();
+    }
+    _initPopper() {
+      if (this.popper) {
+        this.popper.update();
+      } else {
+        this.popper = new Popper(this.$selection, this.$dropdown, {
+          modifiers: {
+            computeStyle:{
+              gpuAcceleration: false
+            },
+            preventOverflow :{
+              boundariesElement: 'window'
+            }
+          },
+          onCreate: () => {
+            this.derection = this.popper.popper.getAttribute('x-placement');
+          },
+          onUpdate: () => {
+            if (!this.popper) return;
+            this.derection = this.popper.popper.getAttribute('x-placement');
+          }
+        });
+      }
     }
     _toogle(){
       if (this.opened) {
@@ -182,29 +206,11 @@ import _ from '../../utils/util';
       this.opened = true;
       let $selectbox = this.$selectbox,
         $dropdown = this.$dropdown,
-        $selection = this.$selection,
-        transfer = this.options.transfer;
-      let offset = $selection.offset();
-      let realHright = $dropdown.outerHeight() + Number($dropdown.css('margin-top').replace('px', '')) + Number($dropdown.css('margin-bottom').replace('px', ''));
-      let derection = realHright <= $selection.derection('check').bottomDistance ? 'bottom' : 'top';
+        $selection = this.$selection;
       $selectbox.addClass('si-selectbox-visible');
       $dropdown.width($selection.outerWidth());
-      this.derection = derection;
-      let className = derection === 'top'? 'slide-up-in' : 'slide-down-in';
-      if(derection==='top'){
-        $dropdown.css({
-          'top': transfer ? offset.top - realHright : -realHright,
-          'left': transfer ? offset.left : 0
-        });
-      }else{
-        transfer?$dropdown.css({
-          'top': offset.top + $selectbox.outerHeight(),
-          'left': offset.left
-        }):$dropdown.css({
-          'top': $selectbox.outerHeight(),
-          'left': 0
-        });
-      }
+      this._initPopper();
+      let className = this.derection === 'bottom' ? 'slide-down-in' : 'slide-up-in';
       $dropdown.show().addClass(className);
       setTimeout(() => {
         $dropdown.removeClass(className);
@@ -312,7 +318,7 @@ import _ from '../../utils/util';
       });
     }
     _removeTagEvent() {
-      this.$tagArea.off('click');
+      this.$tagArea && this.$tagArea.off('click');
     }
     _setAttachList(newVal) {
       this.selectboxDom = {};
@@ -395,6 +401,7 @@ import _ from '../../utils/util';
     destroy(){
       this._removeEvent();
       this.options.transfer&&this.$dropdown.remove();
+      this.popper && this.popper.destroy();
     }
   }
 

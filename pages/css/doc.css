@@ -26,6 +26,10 @@ a code[class*="language-"]{
     margin-bottom: 5px;
 }
 
+td .btn{
+    margin-bottom: 0;
+}
+
 label .btn {
     margin-bottom: 0;
 }

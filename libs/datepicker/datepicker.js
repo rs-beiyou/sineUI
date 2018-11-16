@@ -1028,7 +1028,7 @@ import Popper from 'popper.js/dist/umd/popper.js';
                 rightDistance: maxWidth - (left > 0? left :0)
             };
         },
-        move: function() {
+        move: function(immediately) {
             var $container = this.container
             if (this.popper) {
                 this.popper.update();
@@ -1049,6 +1049,7 @@ import Popper from 'popper.js/dist/umd/popper.js';
                         }
                     },
                     onCreate: () => {
+                        if(immediately === false) return;
                         this.drops = this.popper.popper.getAttribute('x-placement');
                         let className = this.drops === 'bottom-start' ? 'slide-down-in' : 'slide-up-in';
                         $container.show().addClass(className);
@@ -1120,11 +1121,6 @@ import Popper from 'popper.js/dist/umd/popper.js';
             //         });
             //     }
             // }
-            // let className = this.drops === 'down' ? 'slide-down-in' : 'slide-up-in';
-            // this.container.show().addClass(className);
-            // setTimeout(() => {
-            //     this.container.removeClass(className);
-            // }, Number.parseFloat(this.container.css('animation-duration')) * 1000);
         },
 
         show: function(e) {
@@ -1217,7 +1213,7 @@ import Popper from 'popper.js/dist/umd/popper.js';
                 left:0,
                 right: 'auto'
             }).addClass('show-calendar');
-            this.move();
+            this.move(false);
             this.element.trigger('showCalendar.daterangepicker', this);
         },
 

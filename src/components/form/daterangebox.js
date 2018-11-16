@@ -48,6 +48,7 @@ class Daterangebox extends BaseForm{
       this.$inputBegin = $inputBegin;
       this.$inputEnd = $inputEnd;
       this.$calendar = $calendar;
+      // !this.lastOptions.readonly&&!this.lastOptions.disabled&&this.initDate();
       setTimeout(()=>{
         !this.options.readonly&&!this.options.disabled&&this.initDate();
       });

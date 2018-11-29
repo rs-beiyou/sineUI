@@ -1,6 +1,6 @@
 .si-popup{
     position: absolute;
-    z-index: 1000;
+    z-index: $zindex-popup;
     background-color: #fff;
     display: none;
     width: 100%;

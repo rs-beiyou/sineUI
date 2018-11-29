@@ -98,9 +98,19 @@ class Form {
     }
     let obj = {};
     $el.serializeArray().forEach(da => {
-      Object.assign(obj,{
-        [da.name]:da.value.trim().replace(/\n|\r\n/g, '<br>')
-      });
+      let value = da.value.trim().replace(/\n|\r\n/g, '<br>');
+      if (obj[da.name]!== undefined) {
+        if (Array.isArray(obj[da.name])){
+          obj[da.name].push(value);
+        }else {
+          obj[da.name] = [obj[da.name], value];
+        }
+      } else {
+        obj[da.name] = value;
+      }
+      // Object.assign(obj,{
+      //   [da.name]:da.value.trim().replace(/\n|\r\n/g, '<br>')
+      // });
     });
     return obj;
   }

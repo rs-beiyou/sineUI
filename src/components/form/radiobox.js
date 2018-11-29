@@ -1,5 +1,6 @@
 import BaseForm from './form-base';
 import _ from '../../utils/util';
+import { Log } from '../../libs/log';
 class Radiobox extends BaseForm {
   constructor(el, options) {
     super(el, options, Radiobox.DEFAULTS);
@@ -105,7 +106,11 @@ class Radiobox extends BaseForm {
     if (this.firstVal) {
       this.firstVal = false;
     } else {
-      val!==undefined && this.$input.trigger('valid.change').trigger('change');
+      try {
+        val!==undefined && this.$input.trigger('valid.change').trigger('change');
+      } catch (error) {
+        Log.error(error);
+      }
     }
   }
   _setAttachList(newVal) {

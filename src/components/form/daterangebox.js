@@ -3,6 +3,7 @@ import 'libs/datepicker/datepicker';
 
 import BaseForm from './form-base';
 import Moment from 'src/libs/moment';
+import { Log } from '../../libs/log';
 
 class Daterangebox extends BaseForm{
   constructor(el, options){
@@ -133,7 +134,11 @@ class Daterangebox extends BaseForm{
     !op.readonly&&!op.disabled&&!this.inited&&this.initDate();
     this.$input.val(newVal);
     this.inited&&this.$input.daterangepicker('elementChanged');
-    !this.firstVal && this.$input.trigger('valid.change').trigger('change');
+    try {
+      !this.firstVal && this.$input.trigger('valid.change').trigger('change');
+    } catch (error) {
+      Log.error(error);
+    }
     this.firstVal = false;
     if(newVal!==''){
       let valArr = newVal.split(this.options.separator);

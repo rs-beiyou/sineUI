@@ -1,4 +1,5 @@
 import BaseForm from './form-base';
+import { Log } from '../../libs/log';
 class Textbox extends BaseForm {
   constructor(el, options) {
     super(el, options, Textbox.DEFAULTS);
@@ -43,7 +44,11 @@ class Textbox extends BaseForm {
       this.$input.val(newVal);
       op.value = newVal;
     }
-    op.valid && !this.firstVal && this.$input.trigger('valid.change');
+    try {
+      op.valid && !this.firstVal && this.$input.trigger('valid.change');
+    } catch (error) {
+      Log.error(error);
+    }
     this.firstVal = false;
   }
 }

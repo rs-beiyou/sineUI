@@ -15,6 +15,7 @@ class Tree {
       check: {
         enable: !!op.chkStyle,
         chkStyle: op.chkStyle,
+        radioType: op.radioType,
         chkboxType: typeof op.chkboxType==='string'?{'Y':op.chkboxType==='link'?'ps':'', 'N':op.chkboxType==='link'?'ps':''}:Object.assign({'Y':'','N':''},op.chkboxType||{}),
       },
       async: {
@@ -160,6 +161,7 @@ Tree.DEFAULTS = {
   method:'get',
   chkStyle:'',
   chkboxType:'',
+  radioType: 'all',
   valueField:'listname',
   idField: 'id',
   pIdField: 'parentid',

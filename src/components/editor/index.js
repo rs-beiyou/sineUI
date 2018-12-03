@@ -70,7 +70,7 @@ Editor.DEFAULTS = {
   onchange: null,
   onfocus: null,
   onblur: null,
-  zIndex: 10000,
+  zIndex: 100,
   menus:[
     'head',  // 标题
     'bold',  // 粗体

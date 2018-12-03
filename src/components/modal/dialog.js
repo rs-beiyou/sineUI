@@ -34,7 +34,7 @@ $.extend({
       maxmin: true, //最大化
       fixed: true, //固定
       scrollbar: false,
-      zIndex: 500
+      zIndex: 1000
     }, options || {});
     layer.open(options);
   },

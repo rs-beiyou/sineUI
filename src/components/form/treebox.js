@@ -3,6 +3,7 @@ import '../tree';
 import BaseForm from './form-base';
 import _ from '../../utils/util';
 import Popper from 'popper.js/dist/umd/popper.js';
+import { Log } from '../../libs/log';
 
 class Treebox extends BaseForm {
   constructor(el, options) {
@@ -239,16 +240,17 @@ class Treebox extends BaseForm {
           op.clearable&&val===''&&$tree.addClass('si-show-clear');
         }
       }
-      // if(newVal!=='' && this.titleVal === ''&& newVal!=op.pIdValue){
-      //   newVal = '';
-      // }
     }
     
     val!==undefined && this.$input.val(newVal);
     if (this.firstVal) {
       this.firstVal = false;
     } else {
-      val!==undefined && this.$input.trigger('valid.change').trigger('change');
+      try {
+        val!==undefined && this.$input.trigger('valid.change').trigger('change');
+      } catch (error) {
+        Log.error(error);
+      }
     }
   }
   _toogleExpand(newVal){

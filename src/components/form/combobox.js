@@ -1,6 +1,7 @@
 import BaseForm from './form-base';
 import _ from '../../utils/util';
 import Popper from 'popper.js/dist/umd/popper.js';
+import { Log } from '../../libs/log';
 class Combobox extends BaseForm {
   constructor(el, options) {
     super(el, options, Combobox.DEFAULTS);
@@ -233,7 +234,11 @@ class Combobox extends BaseForm {
     if (this.firstVal) {
       this.firstVal = false;
     } else {
-      val!==undefined && this.$input.trigger('valid.change').trigger('change');
+      try {
+        val!==undefined && this.$input.trigger('valid.change').trigger('change');
+      } catch (error) {
+        Log.error(error);
+      }
     }
   }
   _beforeInitCombo(da, val){
@@ -332,6 +337,9 @@ class Combobox extends BaseForm {
   }
   getData() {
     return this.options.data;
+  }
+  getObj() {
+    return this;
   }
   destroy(){
     this._removeEvent();

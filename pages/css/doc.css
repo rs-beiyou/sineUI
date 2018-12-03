@@ -45,6 +45,7 @@ label .btn {
 }
 .si-article{
     position: relative;
+    padding: 0 8px;
 }
 
 .si-article>h4 {

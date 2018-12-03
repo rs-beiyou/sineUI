@@ -1,4 +1,5 @@
 import BaseForm from './form-base';
+import { Log } from '../../libs/log';
 
 class Passwordbox extends BaseForm {
   constructor(el, options) {
@@ -37,7 +38,11 @@ class Passwordbox extends BaseForm {
       this.$input.val(newVal);
       op.value = newVal;
     }
-    op.valid && !this.firstVal && this.$input.trigger('valid.change');
+    try {
+      op.valid && !this.firstVal && this.$input.trigger('valid.change');
+    } catch (error) {
+      Log.error(error);
+    }
     this.firstVal = false;
   }
 }

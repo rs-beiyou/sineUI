@@ -2,7 +2,7 @@ import 'libs/datepicker/datepicker.css';
 import 'libs/datepicker/datepicker';
 
 import BaseForm from './form-base';
-
+import { Log } from '../../libs/log';
 class Datebox extends BaseForm{
   constructor(el, options){
     super(el, options, Datebox.DEFAULTS);
@@ -115,14 +115,18 @@ class Datebox extends BaseForm{
     !op.readonly&&!op.disabled&&!this.inited&&this.initDate();
     this.$input.val(newVal?newVal:'');
     this.inited&&this.$input.daterangepicker('elementChanged');
-    !this.firstVal && this.$input.trigger('valid.change').trigger('change');
-    this.firstVal = false;
     if(newVal!==''&&val===''){
       this.$datebox.addClass('si-show-clear');
     }
     if(newVal===''){
       this.$datebox.removeClass('si-show-clear');
     }
+    try {
+      !this.firstVal && this.$input.trigger('valid.change').trigger('change');
+    } catch (error) {
+      Log.error(error);
+    }
+    this.firstVal = false;
   }
   destroy(){
     this.$clear.off('click');

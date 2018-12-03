@@ -6,6 +6,7 @@ import BaseForm from './form-base';
 import WebUploader from 'libs/webuploader/webuploader.js';
 import _ from '../../utils/util';
 import uploaderFlash from 'libs/webuploader/Uploader.swf';
+import { Log } from '../../libs/log';
 
 class Filebox extends BaseForm {
   constructor(el, options) {
@@ -345,7 +346,11 @@ class Filebox extends BaseForm {
             this.$uploadBtn.hide();
           }
           valueArr.push(String(res));
-          this.$input.val(valueArr.join(';')).trigger('valid.change').trigger('change');
+          try {
+            this.$input.val(valueArr.join(';')).trigger('valid.change').trigger('change');
+          } catch (error) {
+            Log.error(error);
+          }
           let re;
           if(upop.uploadSuccess){
             re = upop.uploadSuccess(file, res);
@@ -357,7 +362,11 @@ class Filebox extends BaseForm {
       }else{
         file.$progressDesc.html('上传成功！').css('color','#0099FF');
         valueArr.push(String(response));
-        this.$input.val(valueArr.join(';')).trigger('valid.change').trigger('change');
+        try {
+          this.$input.val(valueArr.join(';')).trigger('valid.change').trigger('change');
+        } catch (error) {
+          Log.error(error);
+        }
         let re;
         if(upop.uploadSuccess){
           re = upop.uploadSuccess(file, response);

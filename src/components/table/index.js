@@ -160,11 +160,14 @@ class Table {
   refreshOptions(option){
     return this.$el.bootstrapTable('refreshOptions', option);
   }
+  destroy(){
+    this.$el.bootstrapTable('destroy');
+  }
 }
 let allowedMethods = [
   'initTable','refresh','load','reload','selected','checkAll','uncheckAll',
   'check','uncheck','append','getData','updateRow','getRowByUniqueId','removeSelected',
-  'hideColumn','showColumn','getPage','resetView','refreshOptions'
+  'hideColumn','showColumn','getPage','resetView','refreshOptions','destroy'
 ];
 function Plugin(option){
   try {

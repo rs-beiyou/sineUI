@@ -3,3 +3,5 @@ node_modules/
 .vscode
 _config.yml
 /release/
+/static/release/
+/dist/

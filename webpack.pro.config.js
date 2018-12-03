@@ -4,8 +4,8 @@ const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.config.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer').WebpackBundleSizeAnalyzerPlugin;
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const packageInfo = require('./package.json');
 
@@ -16,12 +16,7 @@ module.exports = merge(webpackBaseConfig, {
     filename: `js/[name]-${packageInfo.version}.min.js`
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   filename: 'index.html',
-    //   title: 'sineUI',
-    //   template: 'src/template/index.html',
-    //   inject:true
-    // }),
+    new CleanWebpackPlugin('dist'),
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false,  
@@ -35,7 +30,7 @@ module.exports = merge(webpackBaseConfig, {
       allChunks: true
     }),
     new WebpackBundleSizeAnalyzerPlugin('./plain-report.txt'),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',

@@ -15,7 +15,7 @@ module.exports = merge(webpackBaseConfig, {
     'sine-info': 'src/info.js'
   },
   output: {
-    path: path.join(__dirname, `./release/sineUI-${packageInfo.version}`),
+    path: path.join(__dirname, `./release/sine-${packageInfo.version}`),
     // path: '/Users/zhangming/eclipse-workspace/sjgl/webapp/script/static/libs/sineui',
     publicPath: '../',
     filename: `js/[name]-${packageInfo.version}.min.js`
@@ -42,7 +42,7 @@ module.exports = merge(webpackBaseConfig, {
       minRatio: 0.8
     }),
     new WebpackZipPlugin({
-      initialFile: `./release/sineUI-${packageInfo.version}`,//需要打包的文件夹(一般为dist)
+      initialFile: `./release/sine-${packageInfo.version}`,//需要打包的文件夹(一般为dist)
       endPath: './static/release',  //打包到对应目录（一般为当前目录'./'）
       zipName: `${packageInfo.name}-${packageInfo.version}.zip` //打包生成的文件名
     })

@@ -7,6 +7,7 @@ class Table {
   constructor(el, options){
     this.options = options;
     this.$el = $(el);
+    this.toolbarData = [];
     this.init();
   }
   init(){
@@ -19,7 +20,8 @@ class Table {
       toolbar = op.toolbar,
       toolbarObj = document.createDocumentFragment();
 
-    if(toolbar){
+    if(toolbar && Object.prototype.toString.call(toolbar) === '[object Array]'){
+      this.toolbarData = toolbar;
       for (let i = 0; i < toolbar.length; i++) {
         let toolItem = toolbar[i],
           btn = document.createElement('button');
@@ -148,9 +150,6 @@ class Table {
   showColumn(field){
     this.$el.bootstrapTable('showColumn', field);
   }
-  // refreshColumns(option){
-  //   this.$el.bootstrapTable('refreshColumns',option);
-  // }
   getPage(){
     return this.$el.bootstrapTable('getPage');
   }
@@ -158,6 +157,9 @@ class Table {
     return this.$el.bootstrapTable('resetView', option);
   }
   refreshOptions(option){
+    this.options.toolbar = option.toolbar ? option.toolbar : this.toolbarData;
+    this.initToolbar();
+    option.toolbar = this.options.toolbar;
     return this.$el.bootstrapTable('refreshOptions', option);
   }
   destroy(){

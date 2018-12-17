@@ -3274,7 +3274,7 @@
 
     BootstrapTable.prototype.destroy = function () {
         this.$el.insertBefore(this.$container);
-        $(this.options.toolbar).insertBefore(this.$el);
+        typeof this.options.toolbar === 'string' && $(this.options.toolbar).insertBefore(this.$el);
         this.$container.next().remove();
         this.$container.remove();
         this.$el.html(this.$el_.html())

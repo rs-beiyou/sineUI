@@ -196,7 +196,6 @@ function Plugin(option){
       } else if (data && typeof option === 'object') {
         data.refreshOptions(option).apply(data);
       }
-      
     });
     return typeof value === 'undefined' ? this : value;
   } catch (error) {

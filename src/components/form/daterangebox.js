@@ -5,21 +5,21 @@ import BaseForm from './form-base';
 import Moment from 'src/libs/moment';
 import { Log } from '../../libs/log';
 
-class Daterangebox extends BaseForm{
-  constructor(el, options){
+class Daterangebox extends BaseForm {
+  constructor(el, options) {
     super(el, options, Daterangebox.DEFAULTS);
     this.className = 'Daterangebox';
     this.inited = false;
     this._initForm();
   }
-  _setDaterangebox(item, newVal, val){
+  _setDaterangebox(item, newVal, val) {
     let $input = this.$input,
       $datebox = this.$datebox,
       $datetion = this.$datetion,
       $clear = this.$clear,
       $inputBegin = this.$inputBegin,
       $inputEnd = this.$inputEnd;
-    if(!this.$input){
+    if (!this.$input) {
       let _input = document.createElement('input'),
         _datebox = document.createElement('div'),
         _datetion = document.createElement('div'),
@@ -34,13 +34,21 @@ class Daterangebox extends BaseForm{
       $inputBegin = $(_inputBegin);
       $inputEnd = $(_inputEnd);
       let $calendar = $(_calendar);
-      $inputBegin.attr('type','hidden');
-      $inputEnd.attr('type','hidden');
+      $inputBegin.attr('type', 'hidden');
+      $inputEnd.attr('type', 'hidden');
       $calendar.addClass(`${this.lastOptions.icon} si-form-control-icon`);
       $clear.addClass(`${this.lastOptions.clearIcon} si-form-control-icon`);
       $input.addClass('form-control has-icon-right');
-      $datetion.addClass('si-datebox-datetion').append(_inputBegin).append(_inputEnd).append(_calendar).append(_clear);
-      $datebox.addClass('si-datebox').append(_input).append(_datetion);
+      $datetion
+        .addClass('si-datebox-datetion')
+        .append(_inputBegin)
+        .append(_inputEnd)
+        .append(_calendar)
+        .append(_clear);
+      $datebox
+        .addClass('si-datebox')
+        .append(_input)
+        .append(_datetion);
       this.$formBlock.append(_datebox);
       this.$input = $input;
       this.$datebox = $datebox;
@@ -50,8 +58,8 @@ class Daterangebox extends BaseForm{
       this.$inputEnd = $inputEnd;
       this.$calendar = $calendar;
       // !this.lastOptions.readonly&&!this.lastOptions.disabled&&this.initDate();
-      setTimeout(()=>{
-        !this.options.readonly&&!this.options.disabled&&this.initDate();
+      setTimeout(() => {
+        !this.options.readonly && !this.options.disabled && this.initDate();
       });
     }
     switch (item) {
@@ -78,81 +86,92 @@ class Daterangebox extends BaseForm{
         break;
     }
   }
-  initDate(){
-    let op = this.options, $input = this.$input;
-    $input.daterangepicker({
-      showDropdowns: true,
-      autoUpdateInput: false,
-      singleDatePicker: false,
-      autoApply: true,
-      locale: {
-        format: op.format,
-        separator: op.separator
-      },
-      minDate: op.minDate,
-      maxDate: op.maxDate,
-      ranges: op.ranges&&Daterangebox.ranges
-    }).on('apply.daterangepicker', (ev, picker)=> {
-      op.value = `${picker.startDate.format(op.format)}${this.options.separator}${picker.endDate.format(op.format)}`;
-    }).on('cancel.daterangepicker', ()=> {
-      op.value = '';
-    });
-    this.$calendar.on('click', ()=>{
+  initDate() {
+    let op = this.options,
+      $input = this.$input;
+    $input
+      .daterangepicker({
+        showDropdowns: true,
+        autoUpdateInput: false,
+        singleDatePicker: false,
+        autoApply: true,
+        timePicker: op.format.includes('hh'),
+        timePickerSeconds: op.format.includes('ss'),
+        locale: {
+          format: op.format,
+          separator: op.separator
+        },
+        minDate: op.minDate,
+        maxDate: op.maxDate,
+        ranges: op.ranges && Daterangebox.ranges
+      })
+      .on('apply.daterangepicker', (ev, picker) => {
+        op.value = `${picker.startDate.format(op.format)}${
+          this.options.separator
+        }${picker.endDate.format(op.format)}`;
+      })
+      .on('cancel.daterangepicker', () => {
+        op.value = '';
+      });
+    this.$calendar.on('click', () => {
       $input.trigger('click.daterangepicker');
     });
-    this.$clear.on('click',()=>{
+    this.$clear.on('click', () => {
       $input.trigger('cancel.daterangepicker');
     });
     this.inited = true;
   }
-  _setReadonly(newVal){
-    let $input = this.$input, $datebox = this.$datebox;
-    if(newVal){
+  _setReadonly(newVal) {
+    let $input = this.$input,
+      $datebox = this.$datebox;
+    if (newVal) {
       $datebox.addClass('si-form-readonly');
-      $input.attr('readonly',true);
-      this.inited&&this.destroy();
-    }else{
+      $input.attr('readonly', true);
+      this.inited && this.destroy();
+    } else {
       $datebox.removeClass('si-form-readonly');
       $input.removeAttr('readonly');
       this.initDate();
     }
   }
-  _setDisabled(newVal){
-    let $input = this.$input, $datebox = this.$datebox;
-    if(newVal){
+  _setDisabled(newVal) {
+    let $input = this.$input,
+      $datebox = this.$datebox;
+    if (newVal) {
       $datebox.addClass('si-form-disabled');
-      $input.attr('disabled',true);
-      this.inited&&this.destroy();
-    }else{
+      $input.attr('disabled', true);
+      this.inited && this.destroy();
+    } else {
       $datebox.removeClass('si-form-disabled');
       $input.removeAttr('disabled');
       this.initDate();
     }
   }
-  _setValue(newVal){
+  _setValue(newVal) {
     let op = this.options;
-    !op.readonly&&!op.disabled&&!this.inited&&this.initDate();
+    !op.readonly && !op.disabled && !this.inited && this.initDate();
     this.$input.val(newVal);
-    this.inited&&this.$input.daterangepicker('elementChanged');
+    this.inited && this.$input.daterangepicker('elementChanged');
     try {
       !this.firstVal && this.$input.trigger('valid.change').trigger('change');
     } catch (error) {
       Log.error(error);
     }
     this.firstVal = false;
-    if(newVal!==''){
+    if (newVal !== '') {
       let valArr = newVal.split(this.options.separator);
       this.$inputBegin.val(valArr[0]);
       this.$inputEnd.val(valArr[1]);
       this.$datebox.addClass('si-show-clear');
     }
-    if(newVal===''){
+    if (newVal === '') {
       this.$inputBegin.val('');
       this.$inputEnd.val('');
+      this.$input.daterangepicker('elementClear');
       this.$datebox.removeClass('si-show-clear');
     }
   }
-  destroy(){
+  destroy() {
     this.$clear.off('click');
     this.$input.daterangepicker('remove');
     this.inited = false;
@@ -160,13 +179,14 @@ class Daterangebox extends BaseForm{
 }
 function Plugin(option) {
   try {
-    let value, args = Array.prototype.slice.call(arguments, 1);
-    
-    this.each(function(){
+    let value,
+      args = Array.prototype.slice.call(arguments, 1);
+
+    this.each(function() {
       let $this = $(this),
         dataSet = $this.data(),
         data = dataSet['si.daterangebox'];
-        
+
       if (typeof option === 'string') {
         if (!data) {
           return;
@@ -176,14 +196,18 @@ function Plugin(option) {
           $this.removeData('si.daterangebox');
         }
       }
-      if(typeof option === 'object'&& data){
+      if (typeof option === 'object' && data) {
         data.set(option);
       }
       if (!data) {
-        let options = $.extend( {} , Daterangebox.DEFAULTS, typeof option === 'object' && option);
+        let options = $.extend(
+          {},
+          Daterangebox.DEFAULTS,
+          typeof option === 'object' && option
+        );
         let datakeys = Object.keys(dataSet);
         let defaultkeys = Object.keys(options);
-        defaultkeys.forEach((key) => {
+        defaultkeys.forEach(key => {
           let lowkey = key.toLocaleLowerCase();
           if (datakeys.includes(lowkey)) {
             options[key] = dataSet[lowkey];
@@ -200,24 +224,22 @@ function Plugin(option) {
 }
 
 Daterangebox.ranges = {
-  '今天': [
-    new Moment().startOf('day'), new Moment().endOf('day')
-  ],
-  '最近7日': [
-    new Moment().subtract(6,'day').startOf('day'),
+  今天: [new Moment().startOf('day'), new Moment().endOf('day')],
+  最近7日: [
+    new Moment().subtract(6, 'day').startOf('day'),
     new Moment().endOf('day')
   ],
-  '最近三个月': [
+  最近三个月: [
     //new Moment().startOf("month"), new Moment().endOf("month")
     new Moment().subtract(3, 'month').startOf('month'),
     new Moment().subtract(1, 'month').endOf('month')
   ],
-  '最近一年': [
+  最近一年: [
     new Moment().subtract(12, 'month').startOf('day'),
     new Moment().endOf('day')
   ]
 };
-  
+
 Daterangebox.DEFAULTS = {
   hasSurface: false,
   label: '',
@@ -239,8 +261,8 @@ Daterangebox.DEFAULTS = {
   ranges: false,
   minDate: '',
   maxDate: '',
-  icon:'fa fa-calendar-o fa-fw',
-  clearIcon:'fa fa-times-circle fa-fw'
+  icon: 'fa fa-calendar-o fa-fw',
+  clearIcon: 'fa fa-times-circle fa-fw'
 };
 let old = $.fn.daterangebox;
 

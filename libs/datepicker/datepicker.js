@@ -41,9 +41,9 @@ import Popper from 'popper.js/dist/umd/popper.js';
         if (this.element.hasClass('pull-right'))
             this.opens = 'left';
 
-        this.drops = 'down';
+        this.drops = 'bottom-start';
         if (this.element.hasClass('dropup'))
-            this.drops = 'up';
+            this.drops = 'top-start';
 
         this.buttonClasses = 'btn btn-sm';
         this.applyClass = 'btn-success';
@@ -1016,18 +1016,6 @@ import Popper from 'popper.js/dist/umd/popper.js';
             }
 
         },
-        derection:function(){
-            var maxHeight = window.innerHeight||document.documentElement.clientHeight;
-            var maxWidth = window.innerWidth||document.documentElement.clientWidth;
-            var offset = this.element.offset();
-            var height = this.element.outerHeight();
-            var top = offset.top + height - this.docEl.scrollTop();
-            var left = offset.left - this.docEl.scrollLeft();
-            return {
-                bottomDistance: maxHeight - (top > 0? top :0),
-                rightDistance: maxWidth - (left > 0? left :0)
-            };
-        },
         move: function(immediately) {
             var $container = this.container
             if (this.popper) {
@@ -1063,64 +1051,6 @@ import Popper from 'popper.js/dist/umd/popper.js';
                     }
                 });
             }
-
-            // var parentOffset = { top: 0, left: 0 },
-            //     containerTop;
-            
-            // var maxDis = this.derection();
-            // var maxHeight = maxDis.bottomDistance,
-            //     realHeight = this.container.outerHeight(),
-            //     realWidth = this.container.outerWidth(),
-            //     maxWidth = maxDis.rightDistance;
-            // this.drops = maxHeight>=realHeight ? "bottom" : "top";
-            // if (this.drops == 'top'){
-            // 		containerTop = this.element.offset().top - realHeight;
-            // }else{
-            // 		containerTop = this.element.offset().top + this.element.outerHeight();
-            // }
-            // this.container[this.drops == 'top' ? 'addClass' : 'removeClass']('dropup');
-
-            // this.opens = maxWidth>=realWidth ? "right" : "left";
-            // this.opens==='left'?this.container.addClass('opensleft').removeClass('opensright'):this.container.addClass('opensright').removeClass('opensleft');
-            
-            // if (this.opens == 'right') {
-            //     this.container.css({
-            //         top: containerTop,
-            //         right: maxWidth - realWidth,
-            //         left: 'auto'
-            //     });
-            //     if (this.container.offset().left < 0) {
-            //         this.container.css({
-            //             right: 'auto',
-            //             left: 9
-            //         });
-            //     }
-            // } else if (this.opens == 'center') {
-            //     this.container.css({
-            //         top: containerTop,
-            //         left: this.element.offset().left - parentOffset.left + this.element.outerWidth() / 2
-            //                 - this.container.outerWidth() / 2,
-            //         right: 'auto'
-            //     });
-            //     if (this.container.offset().left < 0) {
-            //         this.container.css({
-            //             right: 'auto',
-            //             left: 9
-            //         });
-            //     }
-            // } else {
-            //     this.container.css({
-            //         top: containerTop,
-            //         right: maxWidth - this.element.outerWidth(),
-            //         left: 'auto'
-            //     });
-            //     if (this.container.offset().left + this.container.outerWidth() > $(window).width()) {
-            //         this.container.css({
-            //             left: 'auto',
-            //             right: 0
-            //         });
-            //     }
-            // }
         },
 
         show: function(e) {
@@ -1206,14 +1136,14 @@ import Popper from 'popper.js/dist/umd/popper.js';
             this.hide();
             this.element.trigger('outsideClick.daterangepicker', this);
         },
-
         showCalendars: function() {
-            this.container.css({
-                top:0,
-                left:0,
-                right: 'auto'
-            }).addClass('show-calendar');
-            this.move(false);
+            this.container.addClass('show-calendar');
+            // this.container.css({
+            //     top:0,
+            //     left:0,
+            //     right: 'auto'
+            // }).addClass('show-calendar');
+            // this.move(false);
             this.element.trigger('showCalendar.daterangepicker', this);
         },
 
@@ -1616,6 +1546,27 @@ import Popper from 'popper.js/dist/umd/popper.js';
 
             if (this.singleDatePicker || start === null || end === null) {
                 start = new Moment(this.element.val(), this.locale.format);
+                end = start;
+            }
+
+            if (!start.isValid() || !end.isValid()) return;
+            this.setStartDate(start);
+            this.setEndDate(end);
+            this.updateView();
+        },
+
+        elementClear: function() {
+            
+            var start = null,
+                end = null;
+            
+            if (!this.singleDatePicker) {
+                start = new Moment(new Date(), this.locale.format);
+                end = new Moment(new Date(), this.locale.format);
+            }
+
+            if (this.singleDatePicker || start === null || end === null) {
+                start = new Moment(new Date(), this.locale.format);
                 end = start;
             }
 

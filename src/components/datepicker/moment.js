@@ -148,6 +148,7 @@ export default class Moment {
     switch (units) {
       case 'year':
         this._d = new Date(this._d.setFullYear(this._d.getFullYear() + num));
+        break;
       case 'month':
         this._d = new Date(this._d.setMonth(this._d.getMonth() + num));
         break;

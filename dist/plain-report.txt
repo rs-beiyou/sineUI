@@ -1,0 +1,5 @@
+wangeditor: 145.28 KB (14.4%)
+popper.js: 83.49 KB (8.28%)
+core-js: 42.85 KB (4.25%)
+webpack: 509 B (0.0493%)
+<self>: 735.79 KB (73.0%)

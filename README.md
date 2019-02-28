@@ -1,9 +1,9 @@
-
 # sineUI
-## 基于bootstrap的前端实现
+
+![sineUI](/static/image/sineui.png)
 预览地址：<a href="https://www.sineui.info" target="_blank">sineUI</a>
 
-``` bash
+```bash
 # install dependencies
 npm install
 

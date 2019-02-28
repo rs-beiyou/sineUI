@@ -152,12 +152,6 @@ class Daterangebox extends BaseForm {
     !op.readonly && !op.disabled && !this.inited && this.initDate();
     this.$input.val(newVal);
     this.inited && this.$input.daterangepicker('elementChanged');
-    try {
-      !this.firstVal && this.$input.trigger('valid.change').trigger('change');
-    } catch (error) {
-      Log.error(error);
-    }
-    this.firstVal = false;
     if (newVal !== '') {
       let valArr = newVal.split(this.options.separator);
       this.$inputBegin.val(valArr[0]);
@@ -170,6 +164,12 @@ class Daterangebox extends BaseForm {
       this.$input.daterangepicker('elementClear');
       this.$datebox.removeClass('si-show-clear');
     }
+    try {
+      !this.firstVal && this.$input.trigger('valid.change').trigger('change');
+    } catch (error) {
+      Log.error(error);
+    }
+    this.firstVal = false;
   }
   destroy() {
     this.$clear.off('click');

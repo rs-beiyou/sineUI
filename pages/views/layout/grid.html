@@ -1,189 +1,231 @@
 <div class="container-fluid">
-    <article class="si-article">
-        <p class="si-info">布局的栅格化系统：sineUI采用了24栅格系统，将区域进行24等分，可以比较精细的应对大部分的业务布局场景。</p>
-        <div class="si-callout info">
-            <div class="si-callout-title">原理概述</div>
-            <ul>
-                <li>通过给标签添加<code>class</code>来完成布局，基于行<code>row</code>和列<code>col</code>来定义区块。</li>
-                <li>添加类<code>row</code>在水平方向创建一行。</li>
-                <li>添加类<code>col-sm-24</code>（响应式：lg > md > sm > xs）定义列，内容放置在列中。</li>
-                <li>如果一个row中的col总和超过 24，那么多余的col会作为一个整体另起一行排列。</li>
-            </ul>
+  <article class="si-article">
+    <p class="si-info">
+      布局的栅格化系统：sineUI采用了24栅格系统，将区域进行24等分，可以比较精细的应对大部分的业务布局场景。
+    </p>
+    <div class="si-callout info">
+      <div class="si-callout-title">原理概述</div>
+      <ul>
+        <li>
+          通过给标签添加<code>class</code>来完成布局，基于行<code>row</code>和列<code>col</code>来定义区块。
+        </li>
+        <li>添加类<code>row</code>在水平方向创建一行。</li>
+        <li>
+          添加类<code>col-sm-24</code>（响应式：lg > md > sm >
+          xs）定义列，内容放置在列中。
+        </li>
+        <li>
+          如果一个row中的col总和超过
+          24，那么多余的col会作为一个整体另起一行排列。
+        </li>
+      </ul>
+    </div>
+    <h4>设计理念<i class="fa fa-bookmark-o"></i></h4>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <div class="doc-row row">
+          <div class="doc-col col-md-24">24：100%</div>
         </div>
-        <h4>设计理念<i class="fa fa-bookmark-o"></i></h4>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <div class="doc-row row">
-                    <div class="doc-col col-md-24">24：100%</div>
-                </div>
-                <div class="doc-row row light">
-                    <div class="doc-col col-md-16">16：66.66%</div>
-                    <div class="doc-col col-md-8 light">8：33.33%</div>
-                </div>
-                <div class="doc-row row">
-                    <div class="doc-col col-md-12">12：50%</div>
-                    <div class="doc-col col-md-12 light">12：50%</div>
-                </div>
-                <div class="doc-row row light">
-                    <div class="doc-col col-md-8">8：33.33%</div>
-                    <div class="doc-col col-md-8 light">8：33.33%</div>
-                    <div class="doc-col col-md-8">8：33.33%</div>
-                </div>
-                <div class="doc-row row">
-                    <div class="doc-col col-md-6">6：25%</div>
-                    <div class="doc-col col-md-6 light">6：25%</div>
-                    <div class="doc-col col-md-6">6：25%</div>
-                    <div class="doc-col col-md-6 light">6：25%</div>
-                </div>
-            </section>
-        </section>
-        <h4>代码示例<i class="fa fa-code"></i></h4>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <!-- 组件demo -->
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    基础栅格
-                </div>
-                <div>
-                    <p>
-                       简单的水平排列布局。
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
+        <div class="doc-row row light">
+          <div class="doc-col col-md-16">16：66.66%</div>
+          <div class="doc-col col-md-8 light">8：33.33%</div>
+        </div>
+        <div class="doc-row row">
+          <div class="doc-col col-md-12">12：50%</div>
+          <div class="doc-col col-md-12 light">12：50%</div>
+        </div>
+        <div class="doc-row row light">
+          <div class="doc-col col-md-8">8：33.33%</div>
+          <div class="doc-col col-md-8 light">8：33.33%</div>
+          <div class="doc-col col-md-8">8：33.33%</div>
+        </div>
+        <div class="doc-row row">
+          <div class="doc-col col-md-6">6：25%</div>
+          <div class="doc-col col-md-6 light">6：25%</div>
+          <div class="doc-col col-md-6">6：25%</div>
+          <div class="doc-col col-md-6 light">6：25%</div>
+        </div>
+      </section>
+    </section>
+    <h4>代码示例<i class="fa fa-code"></i></h4>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <div class="doc-row sm row">
+          <div class="doc-col col-md-6">col-md-6</div>
+          <div class="doc-col col-md-6 light">col-md-6</div>
+          <div class="doc-col col-md-6">col-md-6</div>
+          <div class="doc-col col-md-6 light">col-md-6</div>
+        </div>
+      </section>
+      <section class="code-box-meta">
+        <div class="code-box-title">
+          基础栅格
+        </div>
+        <div>
+          <p>
+            简单的水平排列布局。
+          </p>
+        </div>
+        <span
+          class="code-icon code-expand-icon"
+          title="代码"
+          data-toggle="tooltip"
+          data-placement="top"
+          ><i class="fa fa-code"></i
+        ></span>
+      </section>
+      <section class="code-box-wrapper">
+        <pre><code class="language-markup">&lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;col-md-6&lt;/div&gt;
+    &lt;div class="col-md-6"&gt;col-md-6&lt;/div&gt;
+    &lt;div class="col-md-6"&gt;col-md-6&lt;/div&gt;
+    &lt;div class="col-md-6"&gt;col-md-6&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <div class="code-box-wrapper-close">
+          <i class="fa fa-angle-double-up"></i>
+        </div>
+      </section>
+    </section>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <div class="doc-row sm row">
+          <div class="doc-col col-md-4">.col-md-4</div>
+          <div class="doc-col col-md-4 col-md-offset-4">
+            .col-md-4 .col-md-offset-4
+          </div>
+        </div>
+        <div class="doc-row sm row">
+          <div class="doc-col col-md-4 col-md-offset-4">
+            .col-md-4 .col-md-offset-4
+          </div>
+          <div class="doc-col col-md-4 col-md-offset-4">
+            .col-md-4 .col-md-offset-4
+          </div>
+        </div>
+      </section>
+      <section class="code-box-meta">
+        <div class="code-box-title">
+          列偏移
+        </div>
+        <div>
+          <p>
+            使用<code>.col-(lg/md/sm)-offset-*</code>类可以将列向右侧偏移。这些类实际是通过使用
+            * 选择器为当前元素增加了左侧的边距<code>margin</code>。
+          </p>
+          <p>
+            例如，<code>.col-md-offset-4</code> 类将
+            <code>.col-md-4</code> 元素向右侧偏移了 4
+            个列<code>column</code>的宽度。
+          </p>
+        </div>
+        <span
+          class="code-icon code-expand-icon"
+          title="代码"
+          data-toggle="tooltip"
+          data-placement="top"
+          ><i class="fa fa-code"></i
+        ></span>
+      </section>
+      <section class="code-box-wrapper">
+        <pre><code class="language-markup">
+&lt;div class="row"&gt;
+    &lt;div class="col-md-4"&gt;.col-md-4&lt;/div&gt;
+    &lt;div class="col-md-4 col-md-offset-4"&gt;.col-md-4 .col-md-offset-4&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+    &lt;div class="col-md-4 col-md-offset-4"&gt;.col-md-4 .col-md-offset-4&lt;/div&gt;
+    &lt;div class="col-md-4 col-md-offset-4"&gt;.col-md-4 .col-md-offset-4&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <div class="code-box-wrapper-close">
+          <i class="fa fa-angle-double-up"></i>
+        </div>
+      </section>
+    </section>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <div class="doc-row sm row">
+          <div class="doc-col col-md-9 col-md-push-7 light">
+            col-md-9 col-md-push-7
+          </div>
+          <div class="doc-col col-md-6 col-md-pull-9">
+            col-md-6 col-md-pull-9
+          </div>
+        </div>
+      </section>
+      <section class="code-box-meta">
+        <div class="code-box-title">
+          列排序
+        </div>
+        <div>
+          <p><code>push</code>栅格向右移动格数</p>
+          <p><code>pull</code>栅格向左移动格数</p>
+        </div>
+        <span
+          class="code-icon code-expand-icon"
+          title="代码"
+          data-toggle="tooltip"
+          data-placement="top"
+          ><i class="fa fa-code"></i
+        ></span>
+      </section>
+      <section class="code-box-wrapper">
+        <pre><code class="language-markup">&lt;div class="doc-row sm row"&gt;
+    &lt;div class="doc-col col-md-9 col-md-push-7 light"&gt;col-md-9 col-md-push-7&lt;/div&gt;
+    &lt;div class="doc-col col-md-6 col-md-pull-9"&gt;col-md-6 col-md-pull-9&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <div class="code-box-wrapper-close">
+          <i class="fa fa-angle-double-up"></i>
+        </div>
+      </section>
+    </section>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <div class="row">
+          <div class="col-xs-24 col-sm-12 col-md-6">
+            col-xs-24 col-sm-12 col-md-6
+          </div>
+          <div class="col-xs-24 col-sm-12 col-md-6">
+            col-xs-24 col-sm-12 col-md-6
+          </div>
+          <div class="col-xs-24 col-sm-12 col-md-6">
+            col-xs-24 col-sm-12 col-md-6
+          </div>
+          <div class="col-xs-24 col-sm-12 col-md-6">
+            col-xs-24 col-sm-12 col-md-6
+          </div>
+        </div>
+      </section>
+      <section class="code-box-meta">
+        <div class="code-box-title">
+          响应式栅格
+        </div>
+        <div>
+          <p>
+            响应式栅格以应对不同的屏幕尺寸，按照适应尺寸，从小到大共四种选择：<code>xs</code>、<code>sm</code>、<code>md</code>、<code>lg</code>。
+          </p>
+          <p><code>.col-xs-</code>：超小屏幕 手机 (<768px)</p>
+          <p><code>.col-sm-</code>：小屏幕 平板 (≥768px)</p>
+          <p><code>.col-md-</code>：中等屏幕 桌面显示器 (≥992px)</p>
+          <p><code>.col-lg-</code>：大屏幕 大桌面显示器 (≥1200px)</p>
+        </div>
+        <span
+          class="code-icon code-expand-icon"
+          title="代码"
+          data-toggle="tooltip"
+          data-placement="top"
+          ><i class="fa fa-code"></i
+        ></span>
+      </section>
+      <section class="code-box-wrapper">
+        <pre><code class="language-markup">
             <!-- 组件html代码 -->
             </code><code class="language-javascript">
             <!-- 组件js代码 -->
             </code></pre>
-                <div class="code-box-wrapper-close">
-                    <i class="fa fa-angle-double-up"></i>
-                </div>
-            </section>
-        </section>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <!-- 组件demo -->
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    列嵌套
-                </div>
-                <div>
-                    <p>
-                       简单的水平排列布局。
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
-            <!-- 组件html代码 -->
-            </code><code class="language-javascript">
-            <!-- 组件js代码 -->
-            </code></pre>
-                <div class="code-box-wrapper-close">
-                    <i class="fa fa-angle-double-up"></i>
-                </div>
-            </section>
-        </section>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <!-- 组件demo -->
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    列排序
-                </div>
-                <div>
-                    <p>
-                       简单的水平排列布局。
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
-            <!-- 组件html代码 -->
-            </code><code class="language-javascript">
-            <!-- 组件js代码 -->
-            </code></pre>
-                <div class="code-box-wrapper-close">
-                    <i class="fa fa-angle-double-up"></i>
-                </div>
-            </section>
-        </section>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <!-- 组件demo -->
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    左右偏移
-                </div>
-                <div>
-                    <p>
-                       简单的水平排列布局。
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
-            <!-- 组件html代码 -->
-            </code><code class="language-javascript">
-            <!-- 组件js代码 -->
-            </code></pre>
-                <div class="code-box-wrapper-close">
-                    <i class="fa fa-angle-double-up"></i>
-                </div>
-            </section>
-        </section>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <div class="row">
-                    <div class="col-xs-24 col-sm-12 col-md-6">col-xs-24 col-sm-12 col-md-6</div>
-                    <div class="col-xs-24 col-sm-12 col-md-6">col-xs-24 col-sm-12 col-md-6</div>
-                    <div class="col-xs-24 col-sm-12 col-md-6">col-xs-24 col-sm-12 col-md-6</div>
-                    <div class="col-xs-24 col-sm-12 col-md-6">col-xs-24 col-sm-12 col-md-6</div>
-                </div>
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    响应式栅格
-                </div>
-                <div>
-                    <p>
-                        响应式栅格以应对不同的屏幕尺寸，按照适应尺寸，从小到大共四种选择：<code>xs</code>、<code>sm</code>、<code>md</code>、<code>lg</code>。
-                    </p>
-                    <p>
-                        <code>.col-xs-</code>：超小屏幕 手机 (<768px)
-                    </p>
-                    <p>
-                        <code>.col-sm-</code>：小屏幕 平板 (≥768px)
-                    </p>
-                    <p>
-                        <code>.col-md-</code>：中等屏幕 桌面显示器 (≥992px)
-                    </p>
-                    <p>
-                        <code>.col-lg-</code>：大屏幕 大桌面显示器 (≥1200px)
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
-            <!-- 组件html代码 -->
-            </code><code class="language-javascript">
-            <!-- 组件js代码 -->
-            </code></pre>
-                <div class="code-box-wrapper-close">
-                    <i class="fa fa-angle-double-up"></i>
-                </div>
-            </section>
-        </section>
-    </article>
+        <div class="code-box-wrapper-close">
+          <i class="fa fa-angle-double-up"></i>
+        </div>
+      </section>
+    </section>
+  </article>
 </div>

@@ -1,62 +1,111 @@
 <div class="container-fluid" id="general-form-page">
-    <article class="si-article">
-        <p class="si-info">具有数据收集、校验和提交功能的表单，包含复选框、单选框、输入框、下拉选择框等元素。</p>
-        <div class="si-callout info">
-            <div class="si-callout-title">我们为表单提供了以下两种排列方式：</div>
-            <ul>
-                <li>水平排列（<code>form-inline</code>、<code>form-columns</code>）：标签和表单控件水平排列；</li>
-                <li>垂直排列（<code>form-vertical</code>）：标签和表单控件上下垂直排列；</li>
-            </ul>
+  <article class="si-article">
+    <p class="si-info">
+      具有数据收集、校验和提交功能的表单，包含复选框、单选框、输入框、下拉选择框等元素。
+    </p>
+    <div class="si-callout info">
+      <div class="si-callout-title">我们为表单提供了以下两种排列方式：</div>
+      <ul>
+        <li>
+          水平排列（<code>form-inline</code>、<code>form-columns</code>）：标签和表单控件水平排列；
+        </li>
+        <li>
+          垂直排列（<code>form-vertical</code>）：标签和表单控件上下垂直排列；
+        </li>
+      </ul>
+    </div>
+    <h4>代码示例<i class="fa fa-code"></i></h4>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <form class="form-inline form-group-sm" id="form1">
+          <input
+            class="btsp-textbox"
+            data-options="label:'文本框：',inputWidth:'170px',name:'a',valid:{required:true}"
+          />
+          <input
+            class="btsp-selectbox"
+            data-options="label:'下拉框：',inputWidth:'170px',name:'b',width:'170px',data:[{key:'请选择',value:''},{key:'选项1',value:'1'},{key:'选项2',value:'2'}],valid:{required:true}"
+          />
+          <input
+            class="btsp-checkbox"
+            data-options="label:'多选：',inputWidth:'170px',name:'c',data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}],valid:{required:true}"
+          />
+        </form>
+      </section>
+      <section class="code-box-meta">
+        <div class="code-box-title">
+          行内排列（form-inline）
         </div>
-        <h4>代码示例<i class="fa fa-code"></i></h4>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <form class="form-inline form-group-sm" id="form1">
-                    <input class="btsp-textbox" data-options="label:'文本框：',inputWidth:'170px',name:'a',valid:{required:true}">
-                    <input class="btsp-selectbox" data-options="label:'下拉框：',inputWidth:'170px',name:'b',width:'170px',data:[{key:'请选择',value:''},{key:'选项1',value:'1'},{key:'选项2',value:'2'}],valid:{required:true}">
-                    <input class="btsp-checkbox" data-options="label:'多选：',inputWidth:'170px',name:'c',data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}],valid:{required:true}">
-                </form>
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    行内排列（form-inline）
-                </div>
-                <div>
-                    <p>
-                        水平排列的一种形式。
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
+        <div>
+          <p>
+            水平排列的一种形式。
+          </p>
+        </div>
+        <span
+          class="code-icon code-expand-icon"
+          title="代码"
+          data-toggle="tooltip"
+          data-placement="top"
+          ><i class="fa fa-code"></i
+        ></span>
+      </section>
+      <section class="code-box-wrapper">
+        <pre><code class="language-markup">
 &lt;form class="form-inline form-group-sm"&gt;
     &lt;input class="btsp-textbox" data-options="id:'a',inputWidth:'170px',name:'a'"&gt;
     &lt;input class="btsp-selectbox" data-options="id:'c',inputWidth:'170px',name:'c',width:'150px',data:[{key:'请选择',value:''},{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
     &lt;input class="btsp-checkbox" data-options="id:'b',inputWidth:'170px',name:'b',data:[{key:'选项1',value:'1'},{key:'选项2',value:'2'}]"&gt;
 &lt;/form&gt;</code></pre>
-                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
-            </section>
-        </section>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <form class="form-columns form-group-sm">
-                        <input class="btsp-textbox" data-options="id:'a',name:'a',label:'姓名：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'">
-                        <input class="btsp-radiobox" data-options="id:'c',name:'c',label:'性别：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8',
+        <div class="code-box-wrapper-close">
+          <i class="fa fa-angle-double-up"></i>
+        </div>
+      </section>
+    </section>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <form class="form-columns form-group-sm">
+          <input
+            class="btsp-textbox"
+            data-options="id:'a',name:'a',label:'姓名：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'"
+          />
+          <input
+            class="btsp-radiobox"
+            data-options="id:'c',name:'c',label:'性别：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8',
                             data: [{
                                 key:'男',
                                 value: '1'
                             },{
                                 key:'女',
                                 value: '0'
-                            }]">
-                        <input class="btsp-datebox" data-options="id:'d',name:'d',label:'生日：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'">
-                        <input class="btsp-daterangebox" data-options="id:'e',name:'e',label:'任务日期：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'">
-                        <input class="btsp-selectbox" data-options="id:'f',name:'f',label:'某选项：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8',url: '/pages/data/data4.json',dataField:'list'">
-                        <input class="btsp-selectbox" data-options="id:'g',name:'g',label:'多选：',multiple: true,labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8',url: '/pages/data/data4.json',dataField:'list'">
-                        <input class="btsp-switchbox" data-options="id:'h',name:'h',label:'是否结婚：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'">
-                        <input class="btsp-treebox" data-options="label:'权限：',inputWidth:'300px',url: '/pages/data/data2.json',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'">
-                        <input class="btsp-checkbox" data-options="id:'j',name:'j',label:'爱好：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-20',
+                            }]"
+          />
+          <input
+            class="btsp-datebox"
+            data-options="id:'d',name:'d',label:'生日：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'"
+          />
+          <input
+            class="btsp-daterangebox"
+            data-options="id:'e',name:'e',label:'任务日期：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'"
+          />
+          <input
+            class="btsp-selectbox"
+            data-options="id:'f',name:'f',label:'某选项：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8',url: '/pages/data/data4.json',dataField:'list'"
+          />
+          <input
+            class="btsp-selectbox"
+            data-options="id:'g',name:'g',label:'多选：',multiple: true,labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8',url: '/pages/data/data4.json',dataField:'list'"
+          />
+          <input
+            class="btsp-switchbox"
+            data-options="id:'h',name:'h',label:'是否结婚：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'"
+          />
+          <input
+            class="btsp-treebox"
+            data-options="label:'权限：',inputWidth:'300px',url: '/pages/data/data2.json',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-8'"
+          />
+          <input
+            class="btsp-checkbox"
+            data-options="id:'j',name:'j',label:'爱好：',labelWidth: 'col-xs-12 col-sm-6 col-md-3',inputWidth: 'col-xs-24 col-sm-16 col-md-20',
                             data: [{
                                 key:'打篮球',
                                 value: '1'
@@ -72,25 +121,30 @@
                             },{
                                 key:'玩手机',
                                 value: '5'
-                            }]">
-                </form>
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    网格模式（form-columns)（一对多）
-                </div>
-                <div>
-                    <p>
-                        form添加<code>form-columns</code>类开启网格模式。
-                    </p>
-                    <p>
-                        
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
+                            }]"
+          />
+        </form>
+      </section>
+      <section class="code-box-meta">
+        <div class="code-box-title">
+          网格模式（form-columns)（一对多）
+        </div>
+        <div>
+          <p>
+            form添加<code>form-columns</code>类开启网格模式。
+          </p>
+          <p></p>
+        </div>
+        <span
+          class="code-icon code-expand-icon"
+          title="代码"
+          data-toggle="tooltip"
+          data-placement="top"
+          ><i class="fa fa-code"></i
+        ></span>
+      </section>
+      <section class="code-box-wrapper">
+        <pre><code class="language-markup">
 &lt;form class="form-columns form-group-sm"&gt;
         &lt;input class="btsp-textbox" data-options="id:'a',name:'a',label:'姓名：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-8'"&gt;
         &lt;input class="btsp-radiobox" data-options="id:'c',name:'c',label:'性别：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-8',
@@ -124,27 +178,44 @@
             }]"&gt;
 &lt;/form&gt;
                 </code></pre>
-                <div class="code-box-wrapper-close">
-                    <i class="fa fa-angle-double-up"></i>
-                </div>
-            </section>
-        </section>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <form class="form-columns form-group-sm">
-                    <input class="btsp-textbox" data-options="label:'姓名：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20'">
-                    <input class="btsp-datebox" data-options="label:'生日：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20'">
-                    <input class="btsp-daterangebox" data-options="label:'任务日期：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20'">
-                    <input class="btsp-selectbox" data-options="label:'某选项：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20',url: '/pages/data/data4.json',dataField:'list'">
-                    <input class="btsp-radiobox" data-options="label:'性别：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20',
+        <div class="code-box-wrapper-close">
+          <i class="fa fa-angle-double-up"></i>
+        </div>
+      </section>
+    </section>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <form class="form-columns form-group-sm">
+          <input
+            class="btsp-textbox"
+            data-options="label:'姓名：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20'"
+          />
+          <input
+            class="btsp-datebox"
+            data-options="label:'生日：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20'"
+          />
+          <input
+            class="btsp-daterangebox"
+            data-options="label:'任务日期：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20'"
+          />
+          <input
+            class="btsp-selectbox"
+            data-options="label:'某选项：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20',url: '/pages/data/data4.json',dataField:'list'"
+          />
+          <input
+            class="btsp-radiobox"
+            data-options="label:'性别：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20',
                         data: [{
                             key:'男',
                             value: '1'
                         },{
                             key:'女',
                             value: '0'
-                        }]">
-                    <input class="btsp-checkbox" data-options="label:'爱好：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20',
+                        }]"
+          />
+          <input
+            class="btsp-checkbox"
+            data-options="label:'爱好：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20',
                         data: [{
                             key:'打篮球',
                             value: '1'
@@ -157,22 +228,29 @@
                         },{
                             key:'读书',
                             value: '4'
-                        }]">
-                </form>
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    网格模式（form-columns)（一对一）
-                </div>
-                <div>
-                    <p>
-                        form添加<code>form-columns</code>类开启网格模式。
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
+                        }]"
+          />
+        </form>
+      </section>
+      <section class="code-box-meta">
+        <div class="code-box-title">
+          网格模式（form-columns)（一对一）
+        </div>
+        <div>
+          <p>
+            form添加<code>form-columns</code>类开启网格模式。
+          </p>
+        </div>
+        <span
+          class="code-icon code-expand-icon"
+          title="代码"
+          data-toggle="tooltip"
+          data-placement="top"
+          ><i class="fa fa-code"></i
+        ></span>
+      </section>
+      <section class="code-box-wrapper">
+        <pre><code class="language-markup">
 &lt;form class="form-columns form-group-sm"&gt;
         &lt;input class="btsp-textbox" data-options="label:'姓名：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20'"&gt;
         &lt;input class="btsp-datebox" data-options="label:'生日：',labelWidth: 'col-xs-12 col-sm-8 col-md-4',inputWidth: 'col-xs-24 col-sm-16 col-md-20'"&gt;
@@ -202,16 +280,21 @@
             }]"&gt;
     &lt;/form&gt;
                 </code></pre>
-                <div class="code-box-wrapper-close">
-                    <i class="fa fa-angle-double-up"></i>
-                </div>
-            </section>
-        </section>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <form class="form-vertical form-group-sm">
-                    <input class="btsp-textbox" data-options="label:'姓名：',inputWidth:'300px'">
-                    <input class="btsp-checkbox" data-options="label:'爱好：',inputWidth:'400px',
+        <div class="code-box-wrapper-close">
+          <i class="fa fa-angle-double-up"></i>
+        </div>
+      </section>
+    </section>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <form class="form-vertical form-group-sm">
+          <input
+            class="btsp-textbox"
+            data-options="label:'姓名：',inputWidth:'300px'"
+          />
+          <input
+            class="btsp-checkbox"
+            data-options="label:'爱好：',inputWidth:'400px',
                         data: [{
                             key:'打篮球',
                             value: '1'
@@ -224,37 +307,68 @@
                         },{
                             key:'读书',
                             value: '4'
-                        }]">
-                    <input class="btsp-radiobox" data-options="label:'性别：',inputWidth:'300px',
+                        }]"
+          />
+          <input
+            class="btsp-radiobox"
+            data-options="label:'性别：',inputWidth:'300px',
                         data: [{
                             key:'男',
                             value: '1'
                         },{
                             key:'女',
                             value: '0'
-                        }]">
-                    <input class="btsp-datebox" data-options="label:'生日：',inputWidth:'300px'">
-                    <input class="btsp-daterangebox" data-options="label:'任务日期：',inputWidth:'300px'">
-                    <input class="btsp-switchbox" data-options="label:'是否婚配：',inputWidth:'300px'">
-                    <input class="btsp-combobox" data-options="label:'地址：',inputWidth:'300px',url: '/pages/data/data3.json'">
-                    <input class="btsp-treebox" data-options="label:'权限：',inputWidth:'300px',url: '/pages/data/data2.json'">
-                    <input class="btsp-filebox" data-options="label:'附件：',inputWidth:'300px'">
-                    <input class="btsp-textbox" data-options="multiline: true,label:'备注：',inputWidth:'300px'">
-                </form>
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    网格模式（form-columns)（一对一）
-                </div>
-                <div>
-                    <p>
-                        form添加<code>form-columns</code>类开启网格模式。
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
+                        }]"
+          />
+          <input
+            class="btsp-datebox"
+            data-options="label:'生日：',inputWidth:'300px'"
+          />
+          <input
+            class="btsp-daterangebox"
+            data-options="label:'任务日期：',inputWidth:'300px'"
+          />
+          <input
+            class="btsp-switchbox"
+            data-options="label:'是否婚配：',inputWidth:'300px'"
+          />
+          <input
+            class="btsp-combobox"
+            data-options="label:'地址：',inputWidth:'300px',url: '/pages/data/data3.json'"
+          />
+          <input
+            class="btsp-treebox"
+            data-options="label:'权限：',inputWidth:'300px',url: '/pages/data/data2.json'"
+          />
+          <input
+            class="btsp-filebox"
+            data-options="label:'附件：',inputWidth:'300px'"
+          />
+          <input
+            class="btsp-textbox"
+            data-options="multiline: true,label:'备注：',inputWidth:'300px'"
+          />
+        </form>
+      </section>
+      <section class="code-box-meta">
+        <div class="code-box-title">
+          网格模式（form-columns)（一对一）
+        </div>
+        <div>
+          <p>
+            form添加<code>form-columns</code>类开启网格模式。
+          </p>
+        </div>
+        <span
+          class="code-icon code-expand-icon"
+          title="代码"
+          data-toggle="tooltip"
+          data-placement="top"
+          ><i class="fa fa-code"></i
+        ></span>
+      </section>
+      <section class="code-box-wrapper">
+        <pre><code class="language-markup">
 &lt;form class="form-vertical form-group-sm"&gt;
     &lt;input class="btsp-textbox" data-options="label:'姓名：',inputWidth:'300px'"&gt;
     &lt;input class="btsp-checkbox" data-options="label:'爱好：',inputWidth:'400px',
@@ -288,22 +402,24 @@
     &lt;input class="btsp-textbox" data-options="multiline: true,label:'备注：',inputWidth:'300px'"&gt;
 &lt;/form&gt;
                 </code></pre>
-                <div class="code-box-wrapper-close">
-                    <i class="fa fa-angle-double-up"></i>
-                </div>
-            </section>
-        </section>
-        <section class="code-box">
-            <section class="code-box-demo">
-                    <form class="form-vertical form-group-sm">
-                        <div class="form-group col-xs-24 col-sm-12">
-                            <input class="btsp-textbox" data-options="label:'姓名：'">
-                        </div>
-                        <div class="form-group col-xs-24 col-sm-12">
-                            <input class="btsp-textbox" data-options="label:'别名：'">
-                        </div>
-                        <div class="form-group col-xs-24 col-sm-12">
-                            <input class="btsp-checkbox" data-options="label:'爱好：',
+        <div class="code-box-wrapper-close">
+          <i class="fa fa-angle-double-up"></i>
+        </div>
+      </section>
+    </section>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <form class="form-vertical form-group-sm">
+          <div class="form-group col-xs-24 col-sm-12">
+            <input class="btsp-textbox" data-options="label:'姓名：'" />
+          </div>
+          <div class="form-group col-xs-24 col-sm-12">
+            <input class="btsp-textbox" data-options="label:'别名：'" />
+          </div>
+          <div class="form-group col-xs-24 col-sm-12">
+            <input
+              class="btsp-checkbox"
+              data-options="label:'爱好：',
                                 data: [{
                                     key:'打篮球',
                                     value: '1'
@@ -316,57 +432,80 @@
                                 },{
                                     key:'读书',
                                     value: '4'
-                                }]">
-                        </div>
-                        <div class="form-group col-xs-24  col-sm-12">
-                            <input class="btsp-radiobox" data-options="label:'性别：',
+                                }]"
+            />
+          </div>
+          <div class="form-group col-xs-24  col-sm-12">
+            <input
+              class="btsp-radiobox"
+              data-options="label:'性别：',
                                 data: [{
                                     key:'男',
                                     value: '1'
                                 },{
                                     key:'女',
                                     value: '0'
-                                }]">
-                        </div>
-                        <div class="form-group col-xs-24 col-sm-12">
-                            <input class="btsp-datebox" data-options="label:'生日：'">
-                        </div>
-                        <div class="form-group col-xs-24 col-sm-12">
-                            <input class="btsp-daterangebox" data-options="label:'任务日期：'">
-                        </div>
-                        <div class="form-group col-xs-24 col-sm-12">
-                            <input class="btsp-selectbox" data-options="label:'某选项：',url: 'https://easy-mock.com/mock/58ff251d5e43ae5dbea5f48c/sineUI/list',dataField:'list'">
-                        </div>
-                        <div class="form-group col-xs-24 col-sm-12">
-                            <input class="btsp-switchbox" data-options="label:'是否婚配：'">
-                        </div>
-                        <div class="form-group col-xs-24 col-sm-12">
-                            <input class="btsp-combobox" data-options="label:'地址：',url: '/pages/data/data3.json'">
-                        </div>
-                        <div class="form-group col-xs-24 col-sm-12">
-                            <input class="btsp-treebox" data-options="label:'权限：',url: '/pages/data/data2.json'">
-                        </div>
-                        <div class="form-group col-xs-24 col-sm-24">
-                            <input class="btsp-filebox" data-options="label:'附件：'">
-                        </div>
-                        <div class="form-group col-xs-24 col-sm-24">
-                            <input class="btsp-textbox" data-options="multiline: true,label:'备注：'">
-                        </div>
-                    </form>
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    垂直排列（form-vertical）（一对多）
-                </div>
-                <div>
-                    <p>
-                        
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
+                                }]"
+            />
+          </div>
+          <div class="form-group col-xs-24 col-sm-12">
+            <input class="btsp-datebox" data-options="label:'生日：'" />
+          </div>
+          <div class="form-group col-xs-24 col-sm-12">
+            <input
+              class="btsp-daterangebox"
+              data-options="label:'任务日期：'"
+            />
+          </div>
+          <div class="form-group col-xs-24 col-sm-12">
+            <input
+              class="btsp-selectbox"
+              data-options="label:'某选项：',url: 'https://easy-mock.com/mock/58ff251d5e43ae5dbea5f48c/sineUI/list',dataField:'list'"
+            />
+          </div>
+          <div class="form-group col-xs-24 col-sm-12">
+            <input class="btsp-switchbox" data-options="label:'是否婚配：'" />
+          </div>
+          <div class="form-group col-xs-24 col-sm-12">
+            <input
+              class="btsp-combobox"
+              data-options="label:'地址：',url: '/pages/data/data3.json'"
+            />
+          </div>
+          <div class="form-group col-xs-24 col-sm-12">
+            <input
+              class="btsp-treebox"
+              data-options="label:'权限：',url: '/pages/data/data2.json'"
+            />
+          </div>
+          <div class="form-group col-xs-24 col-sm-24">
+            <input class="btsp-filebox" data-options="label:'附件：'" />
+          </div>
+          <div class="form-group col-xs-24 col-sm-24">
+            <input
+              class="btsp-textbox"
+              data-options="multiline: true,label:'备注：'"
+            />
+          </div>
+        </form>
+      </section>
+      <section class="code-box-meta">
+        <div class="code-box-title">
+          垂直排列（form-vertical）（一对多）
+        </div>
+        <div>
+          <p></p>
+        </div>
+        <span
+          class="code-icon code-expand-icon"
+          title="代码"
+          data-toggle="tooltip"
+          data-placement="top"
+          ><i class="fa fa-code"></i
+        ></span>
+      </section>
+      <section class="code-box-wrapper">
+        <pre><code class="language-markup">
 &lt;form class="form-vertical form-group-sm"&gt;
     &lt;div class="form-group col-xs-24 col-sm-12"&gt;
         &lt;input class="btsp-textbox" data-options="label:'姓名：'"&gt;
@@ -426,11 +565,52 @@
     &lt;/div&gt;
 &lt;/form&gt;
                       </code></pre>
-                <div class="code-box-wrapper-close">
-                    <i class="fa fa-angle-double-up"></i>
-                </div>
-            </section>
-        </section>
-    </article>
+        <div class="code-box-wrapper-close">
+          <i class="fa fa-angle-double-up"></i>
+        </div>
+      </section>
+    </section>
+    <h4>API<i class="fa fa-book"></i></h4>
+    <p class="si-api-title">表单操作方法</p>
+    <div class="si-callout info">
+      <pre><code class="language-javascript">$('#form').form('method-name', params)</code></pre>
+    </div>
+    <div class="si-api-box">
+      <table class="code-box-table">
+        <thead>
+          <tr>
+            <th width="150">方法名</th>
+            <th>说明</th>
+            <th>参数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>load</td>
+            <td>
+              根据表单元素 name 属性填充表格数据，支持深度填充，如 user.name
+            </td>
+            <td>表单数据对象</td>
+          </tr>
+          <tr>
+            <td>clear</td>
+            <td>
+              清空表单内容
+            </td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>data</td>
+            <td>
+              获取表单数据，同时有参数 noValid，设为 true
+              则不会进行表单校验，否则会先进性表单校验，不通过则返回
+              false，通过返回表单数据
+            </td>
+            <td>noValid</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
 </div>
 <script src="/pages/js/form/general.js" charset="utf-8"></script>

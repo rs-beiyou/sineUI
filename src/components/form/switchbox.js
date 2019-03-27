@@ -20,7 +20,10 @@ class Switchbox extends BaseForm {
       let $inner = $(_inner);
       $input.attr('type', 'hidden');
       $inner.addClass('si-switchbox-inner');
-      $switchbox.addClass('si-switchbox').append(_input).append(_inner);
+      $switchbox
+        .addClass('si-switchbox')
+        .append(_input)
+        .append(_inner);
       this.$formBlock.append(_switchbox);
       this.$input = $input;
       this.$switchbox = $switchbox;
@@ -51,7 +54,10 @@ class Switchbox extends BaseForm {
             $switchbox.removeClass('si-switchbox-checked');
           }
           try {
-            $input.val(newVal).trigger('change').trigger('valid.change');
+            $input
+              .val(newVal)
+              .trigger('change')
+              .trigger('valid.change');
           } catch (error) {
             Log.error(error);
           }
@@ -75,13 +81,14 @@ class Switchbox extends BaseForm {
 
 function Plugin(option) {
   try {
-    let value, args = Array.prototype.slice.call(arguments, 1);
-    
-    this.each(function(){
+    let value,
+      args = Array.prototype.slice.call(arguments, 1);
+
+    this.each(function() {
       let $this = $(this),
         dataSet = $this.data(),
         data = dataSet['si.switchbox'];
-        
+
       if (typeof option === 'string') {
         if (!data) {
           return;
@@ -91,14 +98,18 @@ function Plugin(option) {
           $this.removeData('si.switchbox');
         }
       }
-      if(typeof option === 'object'&& data){
+      if (typeof option === 'object' && data) {
         data.set(option);
       }
       if (!data) {
-        let options = $.extend( {} , Switchbox.DEFAULTS, typeof option === 'object' && option);
+        let options = $.extend(
+          {},
+          Switchbox.DEFAULTS,
+          typeof option === 'object' && option
+        );
         let datakeys = Object.keys(dataSet);
         let defaultkeys = Object.keys(options);
-        defaultkeys.forEach((key) => {
+        defaultkeys.forEach(key => {
           let lowkey = key.toLocaleLowerCase();
           if (datakeys.includes(lowkey)) {
             options[key] = dataSet[lowkey];

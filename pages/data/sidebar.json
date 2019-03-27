@@ -1,38 +1,36 @@
-[{
+[
+  {
     "id": "1",
     "name": "布局",
     "subName": "Layout",
     "pid": "-1",
     "icon": "fa fa-th-large",
-    "children": [{
-      "id": "10",
-      "name": "布局",
-      "subName": "Layout",
-      "pid": "1",
-      "url": "layout/layout",
-      "icon": "fa fa-th-large"
-    }, {
-      "id": "11",
-      "name": "栅格",
-      "subName": "Grid",
-      "pid": "1",
-      "url": "layout/grid",
-      "icon": "fa fa-hashtag"
-    }, {
-      "id": "12",
-      "name": "面板",
-      "subName": "Panel",
-      "pid": "1",
-      "url": "layout/panel",
-      "icon": "fa fa-window-restore"
-    }, {
-      "id": "13",
-      "name": "卡片",
-      "subName": "Card",
-      "pid": "1",
-      "url": "layout/card",
-      "icon": "fa fa-credit-card"
-    }]
+    "children": [
+      {
+        "id": "10",
+        "name": "布局",
+        "subName": "Layout",
+        "pid": "1",
+        "url": "layout/layout",
+        "icon": "fa fa-th-large"
+      },
+      {
+        "id": "11",
+        "name": "栅格",
+        "subName": "Grid",
+        "pid": "1",
+        "url": "layout/grid",
+        "icon": "fa fa-hashtag"
+      },
+      {
+        "id": "12",
+        "name": "面板",
+        "subName": "Panel",
+        "pid": "1",
+        "url": "layout/panel",
+        "icon": "fa fa-window-restore"
+      }
+    ]
   },
   {
     "id": "2",
@@ -40,49 +38,56 @@
     "subName": "Components",
     "pid": "-1",
     "icon": "fa fa-th",
-    "children": [{
-      "id": "20",
-      "name": "按钮",
-      "subName": "Button",
-      "pid": "2",
-      "url": "components/buttons",
-      "icon": "fa fa-hand-o-up"
-    }, {
-      "id": "21",
-      "name": "图标",
-      "subName": "Icons",
-      "pid": "2",
-      "url": "components/icons",
-      "icon": "fa fa-info-circle"
-    }, {
-      "id": "22",
-      "name": "颜色",
-      "subName": "Color",
-      "pid": "2",
-      "url": "components/color",
-      "icon": "fa fa-tachometer"
-    }, {
-      "id": "23",
-      "name": "标签",
-      "subName": "Tags",
-      "pid": "2",
-      "url": "components/tags",
-      "icon": "fa fa-tags"
-    }, {
-      "id": "24",
-      "name": "树",
-      "subName": "Tree",
-      "pid": "2",
-      "url": "components/tree",
-      "icon": "fa fa-code-fork"
-    },{
-      "id": "25",
-      "name": "富文本编辑器",
-      "subName": "Editor",
-      "pid": "2",
-      "url": "components/editor",
-      "icon": "fa fa-tags"
-    }]
+    "children": [
+      {
+        "id": "20",
+        "name": "按钮",
+        "subName": "Button",
+        "pid": "2",
+        "url": "components/buttons",
+        "icon": "fa fa-hand-o-up"
+      },
+      {
+        "id": "21",
+        "name": "图标",
+        "subName": "Icons",
+        "pid": "2",
+        "url": "components/icons",
+        "icon": "fa fa-info-circle"
+      },
+      {
+        "id": "22",
+        "name": "颜色",
+        "subName": "Color",
+        "pid": "2",
+        "url": "components/color",
+        "icon": "fa fa-tachometer"
+      },
+      {
+        "id": "23",
+        "name": "标签",
+        "subName": "Tags",
+        "pid": "2",
+        "url": "components/tags",
+        "icon": "fa fa-tags"
+      },
+      {
+        "id": "24",
+        "name": "树",
+        "subName": "Tree",
+        "pid": "2",
+        "url": "components/tree",
+        "icon": "fa fa-code-fork"
+      },
+      {
+        "id": "25",
+        "name": "富文本编辑器",
+        "subName": "Editor",
+        "pid": "2",
+        "url": "components/editor",
+        "icon": "fa fa-tags"
+      }
+    ]
   },
   {
     "id": "3",
@@ -90,14 +95,16 @@
     "subName": "Table",
     "pid": "-1",
     "icon": "fa fa-table",
-    "children": [{
-      "id": "30",
-      "name": "普通表格",
-      "subName": "General",
-      "pid": "3",
-      "url": "table/general",
-      "icon": ""
-    }]
+    "children": [
+      {
+        "id": "30",
+        "name": "普通表格",
+        "subName": "General",
+        "pid": "3",
+        "url": "table/general",
+        "icon": ""
+      }
+    ]
   },
   {
     "id": "4",
@@ -105,77 +112,88 @@
     "subName": "Form",
     "pid": "-1",
     "icon": "fa fa-list-alt",
-    "children": [{
-      "id": "40",
-      "name": "表单",
-      "subName": "Form",
-      "pid": "4",
-      "url": "form/form",
-      "icon": "fa fa-list-alt"
-    }, {
-      "id": "41",
-      "name": "输入框",
-      "subName": "Textbox",
-      "pid": "4",
-      "url": "form/textbox",
-      "icon": "fa fa-edit"
-    }, {
-      "id": "42",
-      "name": "选择器",
-      "subName": "Selectbox",
-      "pid": "4",
-      "url": "form/selectbox",
-      "icon": "fa fa-chevron-down"
-    }, {
-      "id": "43",
-      "name": "单选框",
-      "subName": "Radiobox",
-      "pid": "4",
-      "url": "form/radiobox",
-      "icon": "fa fa-dot-circle-o"
-    }, {
-      "id": "44",
-      "name": "多选框",
-      "subName": "Checkbox",
-      "pid": "4",
-      "url": "form/checkbox",
-      "icon": "fa fa-check-square-o"
-    }, {
-      "id": "45",
-      "name": "开关",
-      "subName": "Switchbox",
-      "pid": "4",
-      "url": "form/switchbox",
-      "icon": "fa fa-toggle-on"
-    }, {
-      "id": "46",
-      "name": "级联选择器",
-      "subName": "Combobox",
-      "pid": "4",
-      "url": "form/combobox",
-      "icon": "fa fa-map-o"
-    }, {
-      "id": "47",
-      "name": "下拉树",
-      "subName": "Treebox",
-      "pid": "4",
-      "url": "form/treebox",
-      "icon": "fa fa-code-fork"
-    }, {
-      "id": "48",
-      "name": "日历",
-      "subName": "Datebox",
-      "pid": "4",
-      "url": "form/datebox",
-      "icon": "fa fa-calendar-o"
-    }, {
-      "id": "59",
-      "name": "文件上传",
-      "subName": "Filebox",
-      "pid": "4",
-      "url": "form/filebox",
-      "icon": "fa fa-upload"
-    }]
+    "children": [
+      {
+        "id": "40",
+        "name": "表单",
+        "subName": "Form",
+        "pid": "4",
+        "url": "form/form",
+        "icon": "fa fa-list-alt"
+      },
+      {
+        "id": "41",
+        "name": "输入框",
+        "subName": "Textbox",
+        "pid": "4",
+        "url": "form/textbox",
+        "icon": "fa fa-edit"
+      },
+      {
+        "id": "42",
+        "name": "选择器",
+        "subName": "Selectbox",
+        "pid": "4",
+        "url": "form/selectbox",
+        "icon": "fa fa-chevron-down"
+      },
+      {
+        "id": "43",
+        "name": "单选框",
+        "subName": "Radiobox",
+        "pid": "4",
+        "url": "form/radiobox",
+        "icon": "fa fa-dot-circle-o"
+      },
+      {
+        "id": "44",
+        "name": "多选框",
+        "subName": "Checkbox",
+        "pid": "4",
+        "url": "form/checkbox",
+        "icon": "fa fa-check-square-o"
+      },
+      {
+        "id": "45",
+        "name": "开关",
+        "subName": "Switchbox",
+        "pid": "4",
+        "url": "form/switchbox",
+        "icon": "fa fa-toggle-on"
+      },
+      {
+        "id": "46",
+        "name": "级联选择器",
+        "subName": "Combobox",
+        "pid": "4",
+        "url": "form/combobox",
+        "icon": "fa fa-map-o"
+      },
+      {
+        "id": "47",
+        "name": "下拉树",
+        "subName": "Treebox",
+        "pid": "4",
+        "url": "form/treebox",
+        "icon": "fa fa-code-fork"
+      },
+      {
+        "id": "48",
+        "name": "日历",
+        "subName": "Datebox",
+        "pid": "4",
+        "url": "form/datebox",
+        "icon": "fa fa-calendar-o"
+      },
+      {
+        "id": "59",
+        "name": "文件上传",
+        "subName": "Filebox",
+        "pid": "4",
+        "url": "form/filebox",
+        "icon": "fa fa-upload"
+      }
+    ]
   },
   {
     "id": "5",
@@ -183,14 +201,16 @@
     "subName": "Router",
     "pid": "-1",
     "icon": "fa fa-chrome",
-    "children": [{
-      "id": "50",
-      "name": "History模式",
-      "subName": "HTML5",
-      "pid": "5",
-      "url": "",
-      "icon": "fa fa-html5"
-    }]
+    "children": [
+      {
+        "id": "50",
+        "name": "History模式",
+        "subName": "HTML5",
+        "pid": "5",
+        "url": "",
+        "icon": "fa fa-html5"
+      }
+    ]
   },
   {
     "id": "6",
@@ -198,21 +218,24 @@
     "subName": "Modal",
     "pid": "-1",
     "icon": "fa fa-window-maximize",
-    "children": [{
-      "id": "60",
-      "name": "示例",
-      "subName": "",
-      "pid": "6",
-      "url": "modal/modal",
-      "icon": ""
-    },{      
-      "id": "61",
-      "name": "API",
-      "subName": "",
-      "pid": "6",
-      "url": "modal/api",
-      "icon": ""
-    }]
+    "children": [
+      {
+        "id": "60",
+        "name": "示例",
+        "subName": "",
+        "pid": "6",
+        "url": "modal/modal",
+        "icon": ""
+      },
+      {
+        "id": "61",
+        "name": "API",
+        "subName": "",
+        "pid": "6",
+        "url": "modal/api",
+        "icon": ""
+      }
+    ]
   },
   {
     "id": "7",
@@ -220,14 +243,16 @@
     "subName": "Page",
     "pid": "-1",
     "icon": "fa fa-book",
-    "children": [{
-      "id": "70",
-      "name": "数据列表",
-      "subName": "list",
-      "pid": "7",
-      "url": "page/list",
-      "icon": "fa fa-file-o"
-    }]
+    "children": [
+      {
+        "id": "70",
+        "name": "数据列表",
+        "subName": "list",
+        "pid": "7",
+        "url": "page/list",
+        "icon": "fa fa-file-o"
+      }
+    ]
   },
   {
     "id": "8",
@@ -235,13 +260,15 @@
     "subName": "Skills",
     "pid": "-1",
     "icon": "fa fa-eercast",
-    "children": [{
-      "id": "80",
-      "name": "组件联动",
-      "subName": "ComponentLinker",
-      "pid": "8",
-      "url": "skills/componentLinker",
-      "icon": "fa fa-file-o"
-    }]
+    "children": [
+      {
+        "id": "80",
+        "name": "组件联动",
+        "subName": "ComponentLinker",
+        "pid": "8",
+        "url": "skills/componentLinker",
+        "icon": "fa fa-file-o"
+      }
+    ]
   }
 ]

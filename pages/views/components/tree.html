@@ -1,55 +1,71 @@
 <div class="container-fluid" id="tree-page">
-    <article class="si-article">
-        <p class="si-info">树形控件。多用于组织架构、文件结构、国家地区等，可完整展现其层级关系。</p>
-        <div class="si-callout info">
-           感谢<a href="https://github.com/zTree/zTree_v3" target="_blank"><i class="fa fa-github"></i>zTree</a>
+  <article class="si-article">
+    <p class="si-info">
+      树形控件。多用于组织架构、文件结构、国家地区等，可完整展现其层级关系。
+    </p>
+    <div class="si-callout info">
+      感谢<a href="https://github.com/zTree/zTree_v3" target="_blank"
+        ><i class="fa fa-github"></i>zTree</a
+      >
+    </div>
+    <h4>代码示例<i class="fa fa-code"></i></h4>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <ul id="treeDemo1" class="ztree"></ul>
+      </section>
+      <section class="code-box-meta">
+        <div class="code-box-title">
+          基础使用
         </div>
-        <h4>代码示例<i class="fa fa-code"></i></h4>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <ul id="treeDemo1" class="ztree"></ul>
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    基础使用
-                </div>
-                <div>
-                    <p>
-                        最简单用法，可选中、展开。
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
+        <div>
+          <p>
+            最简单用法，可选中、展开。
+          </p>
+        </div>
+        <span
+          class="code-icon code-expand-icon"
+          title="代码"
+          data-toggle="tooltip"
+          data-placement="top"
+          ><i class="fa fa-code"></i
+        ></span>
+      </section>
+      <section class="code-box-wrapper">
+        <pre><code class="language-markup">
 &lt;ul id="treeDemo1" class="ztree"&gt;&lt;/ul&gt;
           </code><code class="language-javascript">
 $('#treeDemo1').tree({
     url: '/pages/data/data2.json'
 })
           </code></pre>
-                <div class="code-box-wrapper-close">
-                    <i class="fa fa-angle-double-up"></i>
-                </div>
-            </section>
-        </section>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <ul id="treeDemo2" class="ztree"></ul>
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    父子级联（全级联）
-                </div>
-                <div>
-                    <p>
-                    全级联：父子勾选与取消勾选都会相互影响。
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
+        <div class="code-box-wrapper-close">
+          <i class="fa fa-angle-double-up"></i>
+        </div>
+      </section>
+    </section>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <ul id="treeDemo2" class="ztree"></ul>
+      </section>
+      <section class="code-box-meta">
+        <div class="code-box-title">
+          父子级联（全级联）
+        </div>
+        <div>
+          <p>
+            全级联：父子勾选与取消勾选都会相互影响。
+          </p>
+        </div>
+        <span
+          class="code-icon code-expand-icon"
+          title="代码"
+          data-toggle="tooltip"
+          data-placement="top"
+          ><i class="fa fa-code"></i
+        ></span>
+      </section>
+      <section class="code-box-wrapper">
+        <pre><code class="language-markup">
 &lt;ul id="treeDemo2" class="ztree"&gt;&lt;/ul&gt;
             </code><code class="language-javascript">
 $('#treeDemo2').tree({
@@ -60,26 +76,34 @@ $('#treeDemo2').tree({
     //chkboxType: {Y:'ps',N:'ps'}
 })
             </code></pre>
-                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
-            </section>
-        </section>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <ul id="treeDemo3" class="ztree"></ul>
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    父子级联（勾选级联）
-                </div>
-                <div>
-                    <p>
-                    勾选级联：父子勾选会相互影响，取消勾选不会相互影响。
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
+        <div class="code-box-wrapper-close">
+          <i class="fa fa-angle-double-up"></i>
+        </div>
+      </section>
+    </section>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <ul id="treeDemo3" class="ztree"></ul>
+      </section>
+      <section class="code-box-meta">
+        <div class="code-box-title">
+          父子级联（勾选级联）
+        </div>
+        <div>
+          <p>
+            勾选级联：父子勾选会相互影响，取消勾选不会相互影响。
+          </p>
+        </div>
+        <span
+          class="code-icon code-expand-icon"
+          title="代码"
+          data-toggle="tooltip"
+          data-placement="top"
+          ><i class="fa fa-code"></i
+        ></span>
+      </section>
+      <section class="code-box-wrapper">
+        <pre><code class="language-markup">
 &lt;ul id="treeDemo3" class="ztree"&gt;&lt;/ul&gt;
             </code><code class="language-javascript">
 $('#treeDemo3').tree({
@@ -88,26 +112,36 @@ $('#treeDemo3').tree({
     chkboxType: {Y:'ps',N:''}
 })
             </code></pre>
-                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
-            </section>
-        </section>
-        <section class="code-box">
-            <section class="code-box-demo">
-                <ul id="treeDemo4" class="ztree"></ul>
-            </section>
-            <section class="code-box-meta">
-                <div class="code-box-title">
-                    异步加载节点数据
-                </div>
-                <div>
-                    <p>
-                    异步加载：通过统一的<code>url</code>拉取数据，并通过在节点中加入参数<code>isParent: true</code>来开启节点的异步拉取子节点。
-                    </p>
-                </div>
-                <span class="code-icon code-expand-icon" title="代码" data-toggle="tooltip" data-placement="top"><i class="fa fa-code"></i></span>
-            </section>
-            <section class="code-box-wrapper">
-                <pre><code class="language-markup">
+        <div class="code-box-wrapper-close">
+          <i class="fa fa-angle-double-up"></i>
+        </div>
+      </section>
+    </section>
+    <section class="code-box">
+      <section class="code-box-demo">
+        <ul id="treeDemo4" class="ztree"></ul>
+      </section>
+      <section class="code-box-meta">
+        <div class="code-box-title">
+          异步加载节点数据
+        </div>
+        <div>
+          <p>
+            异步加载：通过统一的<code>url</code>拉取数据，并通过在节点中加入参数<code
+              >isParent: true</code
+            >来开启节点的异步拉取子节点。
+          </p>
+        </div>
+        <span
+          class="code-icon code-expand-icon"
+          title="代码"
+          data-toggle="tooltip"
+          data-placement="top"
+          ><i class="fa fa-code"></i
+        ></span>
+      </section>
+      <section class="code-box-wrapper">
+        <pre><code class="language-markup">
 &lt;ul id="treeDemo4" class="ztree"&gt;&lt;/ul&gt;
             </code><code class="language-javascript">
 $('#treeDemo4').tree({
@@ -115,188 +149,215 @@ $('#treeDemo4').tree({
     url: '/pages/data/data2.json'
 })
             </code></pre>
-                <div class="code-box-wrapper-close"><i class="fa fa-angle-double-up"></i></div>
-            </section>
-        </section>
-        <h4>API<i class="fa fa-book"></i></h4>
-        <p class="si-api-title">基础参数</p>
-        <div class="si-api-box">
-            <table class="code-box-table">
-                <thead>
-                    <tr>
-                    <th>属性</th>
-                    <th>说明</th>
-                    <th>类型</th>
-                    <th width="120">默认值</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>method</td>
-                        <td>请求方法，"get"/"post"</td>
-                        <td>String</td>
-                        <td>'get'</td>
-                    </tr>
-                    <tr>
-                        <td>chkStyle</td>
-                        <td>勾选类型，单选："radio"，复选："checkbox"，无勾选：""</td>
-                        <td>String</td>
-                        <td>''</td>
-                    </tr>
-                    <tr>
-                        <td>chkboxType</td>
-                        <td>关联类型，无关联：""，即{Y:"",N:""}；父子全关联："link"，即{Y:"ps",N:"ps"}；<br>
-                            Y 属性定义 checkbox 被勾选后的情况；<br>
-                            N 属性定义 checkbox 取消勾选后的情况； <br>
-                            "p" 表示操作会影响父级节点； <br>
-                            "s" 表示操作会影响子级节点。<br>
-                            请注意大小写，不要改变</td>
-                        <td>String/Object</td>
-                        <td>''</td>
-                    </tr>
-                    <tr>
-                        <td>radioType</td>
-                        <td>单选分组类型，全树单选："all"，树的每层级单选："level"</td>
-                        <td>String</td>
-                        <td>'all'</td>
-                    </tr>
-                    <tr>
-                        <td>valueField</td>
-                        <td>树节点显示名称的字段名</td>
-                        <td>String</td>
-                        <td>'listname'</td>
-                    </tr>
-                    <tr>
-                        <td>idField</td>
-                        <td>树节点对应 id 的字段名</td>
-                        <td>String</td>
-                        <td>'id'</td>
-                    </tr>
-                    <tr>
-                        <td>pIdField</td>
-                        <td>树节点的父节点 id 字段名</td>
-                        <td>String</td>
-                        <td>'parentid'</td>
-                    </tr>
-                    <tr>
-                        <td>pIdValue</td>
-                        <td>树节点的根节点 id 值</td>
-                        <td>String</td>
-                        <td>'-1'</td>
-                    </tr>
-                    <tr>
-                        <td>url</td>
-                        <td>远程获取树节点数据的路径</td>
-                        <td>String</td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
-                        <td>data</td>
-                        <td>树节点数据</td>
-                        <td>Array</td>
-                        <td>null</td>
-                    </tr>
-                    <tr>
-                        <td>autoParam</td>
-                        <td>异步加载时需要自动提交父节点属性的参数<br>
-                            1、将需要作为参数提交的属性名称，制作成 Array 即可，例如：["id", "name"]<br>
-                            2、可以设置提交时的参数名称，例如 server 只接受 zId、zName : ["id=zId", "name=zName"]<br>
-                            3、如果参数为方法类型，必须返回 Array 类型数据。</td>
-                        <td>Array/Function</td>
-                        <td>["id"]</td>
-                    </tr>
-                    <tr>
-                        <td>otherParam</td>
-                        <td>树所有 Ajax 请求提交的静态参数键值对<br>
-                            例：["id", "1", "name", "test"] 或 { "id":"1", "name":"test"}<br>
-                            如果参数为方法类型，必须返回 Array/JSON 类型数据。</td>
-                        <td>Array/JSON/Function</td>
-                        <td>[]</td>
-                    </tr>
-                    <tr>
-                        <td>callback</td>
-                        <td>树生命周期中的钩子函数</td>
-                        <td>Object</td>
-                        <td>{}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="code-box-wrapper-close">
+          <i class="fa fa-angle-double-up"></i>
         </div>
-        <p class="si-api-title">常用钩子函数</p>
-        <div class="si-api-box">
-            <table class="code-box-table">
-                <thead>
-                    <tr>
-                        <th width="15%">函数名</th>
-                        <th width="40%">参数</th>
-                        <th width="45%">说明</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>beforeAsync</td>
-                        <td>
-                            treeId：对应 zTree 的 treeId<br>
-                            treeNode：异步加载的父节点 JSON 数据对象<br>
-                            返回值：返回值是 true / false<br>
-                        </td>
-                        <td>异步加载之前的事件回调函数，如果返回 false，zTree 将不进行异步加载，也无法触发 onAsyncSuccess / onAsyncError 事件回调函数</td>
-                    </tr>
-                    <tr>
-                        <td>beforeCheck</td>
-                        <td>
-                            treeId：对应 zTree 的 treeId<br>
-                            treeNode：进行 勾选 或 取消勾选 的节点 JSON 数据对象<br>
-                            返回值：返回值是 true / false<br>
-                        </td>
-                        <td>用于捕获 勾选 或 取消勾选 之前的事件回调函数，并且根据返回值确定是否允许 勾选 或 取消勾选，如果返回 false，将不会改变勾选状态，并且无法触发 onCheck 事件回调函数</td>
-                    </tr>
-                    <tr>
-                        <td>onAsyncError</td>
-                        <td>
-                            treeId：对应 zTree 的 treeId<br>
-                            treeNode：进行异步加载的父节点 JSON 数据对象<br>
-                            返回值：返回值是 true / false<br>
-                        </td>
-                        <td>用于捕获异步加载出现异常错误的事件回调函数，如果设置了 beforeAsync 方法，且返回 false，将无法触发 onAsyncSuccess / onAsyncError 事件回调函数。</td>
-                    </tr>
-                    <tr>
-                        <td>onAsyncSuccess</td>
-                        <td>
-                            event：标准的 js event 对象<br>
-                            treeId：对应 zTree 的 treeId<br>
-                            treeNode：进行异步加载的父节点 JSON 数据对象<br>
-                            msg：异步获取的节点数据字符串，主要便于用户调试使用<br>
-                        </td>
-                        <td>用于捕获异步加载正常结束的事件回调函数</td>
-                    </tr>
-                    <tr>
-                        <td>onCheck</td>
-                        <td>
-                            event：标准的 js event 对象<br>
-                            treeId：对应 zTree 的 treeId<br>
-                            treeNode：进行 勾选 或 取消勾选 的节点 JSON 数据对象<br>
-                        </td>
-                        <td>用于捕获 checkbox / radio 被勾选 或 取消勾选的事件回调函数</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <p class="si-api-title">异步加载子节点</p>
-        <p>
-            对于常规树，我们将一次性获取所有层级节点数据生成，若需要异步加载子节点数据，则需要在每个节点对象中加入<code>isParent</code>字段。
-        </p>
-        <div class="si-api-box">
-            <table class="code-box-table">
-                <tbody>
-                    <tr>
-                        <td width="15%">isParent</td>
-                        <td width="40%">Booblean true / false</td>
-                        <td>对于为 true 的节点将会根据 url 进行异步请求，请求默认携带参数为当前节点 id，具体参数定义请参照基础参数中的 autoParam 和 otherParam。</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </article>
+      </section>
+    </section>
+    <h4>API<i class="fa fa-book"></i></h4>
+    <p class="si-api-title">基础参数</p>
+    <div class="si-api-box">
+      <table class="code-box-table">
+        <thead>
+          <tr>
+            <th>属性</th>
+            <th>说明</th>
+            <th>类型</th>
+            <th width="120">默认值</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>method</td>
+            <td>请求方法，"get"/"post"</td>
+            <td>String</td>
+            <td>'get'</td>
+          </tr>
+          <tr>
+            <td>chkStyle</td>
+            <td>勾选类型，单选："radio"，复选："checkbox"，无勾选：""</td>
+            <td>String</td>
+            <td>''</td>
+          </tr>
+          <tr>
+            <td>chkboxType</td>
+            <td>
+              关联类型，无关联：""，即{Y:"",N:""}；父子全关联："link"，即{Y:"ps",N:"ps"}；<br />
+              Y 属性定义 checkbox 被勾选后的情况；<br />
+              N 属性定义 checkbox 取消勾选后的情况； <br />
+              "p" 表示操作会影响父级节点； <br />
+              "s" 表示操作会影响子级节点。<br />
+              请注意大小写，不要改变
+            </td>
+            <td>String/Object</td>
+            <td>''</td>
+          </tr>
+          <tr>
+            <td>radioType</td>
+            <td>单选分组类型，全树单选："all"，树的每层级单选："level"</td>
+            <td>String</td>
+            <td>'all'</td>
+          </tr>
+          <tr>
+            <td>valueField</td>
+            <td>树节点显示名称的字段名</td>
+            <td>String</td>
+            <td>'listname'</td>
+          </tr>
+          <tr>
+            <td>idField</td>
+            <td>树节点对应 id 的字段名</td>
+            <td>String</td>
+            <td>'id'</td>
+          </tr>
+          <tr>
+            <td>pIdField</td>
+            <td>树节点的父节点 id 字段名</td>
+            <td>String</td>
+            <td>'parentid'</td>
+          </tr>
+          <tr>
+            <td>pIdValue</td>
+            <td>树节点的根节点 id 值</td>
+            <td>String</td>
+            <td>'-1'</td>
+          </tr>
+          <tr>
+            <td>url</td>
+            <td>远程获取树节点数据的路径</td>
+            <td>String</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>data</td>
+            <td>树节点数据</td>
+            <td>Array</td>
+            <td>null</td>
+          </tr>
+          <tr>
+            <td>autoParam</td>
+            <td>
+              异步加载时需要自动提交父节点属性的参数<br />
+              1、将需要作为参数提交的属性名称，制作成 Array 即可，例如：["id",
+              "name"]<br />
+              2、可以设置提交时的参数名称，例如 server 只接受 zId、zName :
+              ["id=zId", "name=zName"]<br />
+              3、如果参数为方法类型，必须返回 Array 类型数据。
+            </td>
+            <td>Array/Function</td>
+            <td>["id"]</td>
+          </tr>
+          <tr>
+            <td>otherParam</td>
+            <td>
+              树所有 Ajax 请求提交的静态参数键值对<br />
+              例：["id", "1", "name", "test"] 或 { "id":"1", "name":"test"}<br />
+              如果参数为方法类型，必须返回 Array/JSON 类型数据。
+            </td>
+            <td>Array/JSON/Function</td>
+            <td>[]</td>
+          </tr>
+          <tr>
+            <td>callback</td>
+            <td>树生命周期中的钩子函数</td>
+            <td>Object</td>
+            <td>{}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="si-api-title">常用钩子函数</p>
+    <div class="si-api-box">
+      <table class="code-box-table">
+        <thead>
+          <tr>
+            <th width="15%">函数名</th>
+            <th width="40%">参数</th>
+            <th width="45%">说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>beforeAsync</td>
+            <td>
+              treeId：对应 zTree 的 treeId<br />
+              treeNode：异步加载的父节点 JSON 数据对象<br />
+              返回值：返回值是 true / false<br />
+            </td>
+            <td>
+              异步加载之前的事件回调函数，如果返回 false，zTree
+              将不进行异步加载，也无法触发 onAsyncSuccess / onAsyncError
+              事件回调函数
+            </td>
+          </tr>
+          <tr>
+            <td>beforeCheck</td>
+            <td>
+              treeId：对应 zTree 的 treeId<br />
+              treeNode：进行 勾选 或 取消勾选 的节点 JSON 数据对象<br />
+              返回值：返回值是 true / false<br />
+            </td>
+            <td>
+              用于捕获 勾选 或 取消勾选
+              之前的事件回调函数，并且根据返回值确定是否允许 勾选 或
+              取消勾选，如果返回 false，将不会改变勾选状态，并且无法触发 onCheck
+              事件回调函数
+            </td>
+          </tr>
+          <tr>
+            <td>onAsyncError</td>
+            <td>
+              treeId：对应 zTree 的 treeId<br />
+              treeNode：进行异步加载的父节点 JSON 数据对象<br />
+              返回值：返回值是 true / false<br />
+            </td>
+            <td>
+              用于捕获异步加载出现异常错误的事件回调函数，如果设置了 beforeAsync
+              方法，且返回 false，将无法触发 onAsyncSuccess / onAsyncError
+              事件回调函数。
+            </td>
+          </tr>
+          <tr>
+            <td>onAsyncSuccess</td>
+            <td>
+              event：标准的 js event 对象<br />
+              treeId：对应 zTree 的 treeId<br />
+              treeNode：进行异步加载的父节点 JSON 数据对象<br />
+              msg：异步获取的节点数据字符串，主要便于用户调试使用<br />
+            </td>
+            <td>用于捕获异步加载正常结束的事件回调函数</td>
+          </tr>
+          <tr>
+            <td>onCheck</td>
+            <td>
+              event：标准的 js event 对象<br />
+              treeId：对应 zTree 的 treeId<br />
+              treeNode：进行 勾选 或 取消勾选 的节点 JSON 数据对象<br />
+            </td>
+            <td>用于捕获 checkbox / radio 被勾选 或 取消勾选的事件回调函数</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="si-api-title">异步加载子节点</p>
+    <p>
+      对于常规树，我们将一次性获取所有层级节点数据生成，若需要异步加载子节点数据，则需要在每个节点对象中加入<code>isParent</code>字段。
+    </p>
+    <div class="si-api-box">
+      <table class="code-box-table">
+        <tbody>
+          <tr>
+            <td width="15%">isParent</td>
+            <td width="40%">Booblean true / false</td>
+            <td>
+              对于为 true 的节点将会根据 url
+              进行异步请求，请求默认携带参数为当前节点
+              id，具体参数定义请参照基础参数中的 autoParam 和 otherParam。
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
 </div>
 <script src="/pages/js/tree/index.js"></script>

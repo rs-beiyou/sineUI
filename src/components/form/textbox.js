@@ -10,7 +10,9 @@ class Textbox extends BaseForm {
     let op = this.options;
     let $input = this.$input;
     if (!$input) {
-      let _input = this.lastOptions.multiline ? document.createElement('textarea') : document.createElement('input');
+      let _input = this.lastOptions.multiline
+        ? document.createElement('textarea')
+        : document.createElement('input');
       $input = $(_input);
       $input.addClass('form-control');
       this.$input = $input;
@@ -38,9 +40,9 @@ class Textbox extends BaseForm {
         break;
     }
   }
-  _setValue(newVal){
+  _setValue(newVal) {
     let op = this.options;
-    if(this.$input.val()!=newVal){
+    if (this.$input.val() != newVal) {
       this.$input.val(newVal);
       op.value = newVal;
     }
@@ -51,17 +53,21 @@ class Textbox extends BaseForm {
     }
     this.firstVal = false;
   }
+  destory() {
+    this.$formBlock.remove();
+  }
 }
 
 function Plugin(option) {
   try {
-    let value, args = Array.prototype.slice.call(arguments, 1);
-    
-    this.each(function(){
+    let value,
+      args = Array.prototype.slice.call(arguments, 1);
+
+    this.each(function() {
       let $this = $(this),
         dataSet = $this.data(),
         data = dataSet['si.textbox'];
-        
+
       if (typeof option === 'string') {
         if (!data) {
           return;
@@ -71,14 +77,18 @@ function Plugin(option) {
           $this.removeData('si.textbox');
         }
       }
-      if(typeof option === 'object'&& data){
+      if (typeof option === 'object' && data) {
         data.set(option);
       }
       if (!data) {
-        let options = $.extend( {} , Textbox.DEFAULTS, typeof option === 'object' && option);
+        let options = $.extend(
+          {},
+          Textbox.DEFAULTS,
+          typeof option === 'object' && option
+        );
         let datakeys = Object.keys(dataSet);
         let defaultkeys = Object.keys(options);
-        defaultkeys.forEach((key) => {
+        defaultkeys.forEach(key => {
           let lowkey = key.toLocaleLowerCase();
           if (datakeys.includes(lowkey)) {
             options[key] = dataSet[lowkey];

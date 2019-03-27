@@ -45,12 +45,20 @@ class Selectbox extends BaseForm {
       $input.attr('type', 'hidden');
       $selectValue.addClass('si-selectbox-selected-value').hide();
       $dropdown.addClass('si-dropdown si-selectbox-dropdown').hide();
-      $selection.addClass('form-control si-selectbox-selection has-icon-right').append(_selectValue).append(_placeholder).append(_cert).append(_clear);
-      $selectbox.addClass('si-selectbox si-selectbox-single').append(_input).append(_selection);
-      if(this.lastOptions.transfer){
+      $selection
+        .addClass('form-control si-selectbox-selection has-icon-right')
+        .append(_selectValue)
+        .append(_placeholder)
+        .append(_cert)
+        .append(_clear);
+      $selectbox
+        .addClass('si-selectbox si-selectbox-single')
+        .append(_input)
+        .append(_selection);
+      if (this.lastOptions.transfer) {
         $dropdown.addClass('si-selectbox-single si-dropdown-transfer');
         $('body').append(_dropdown);
-      }else{
+      } else {
         $selectbox.append(_dropdown);
       }
       this.$formBlock.append(_selectbox);
@@ -101,12 +109,22 @@ class Selectbox extends BaseForm {
           $tagArea.addClass('si-tagarea').hide();
           $selection.append(tagArea);
           this.$tagArea = $tagArea;
-          $selectbox.removeClass('si-selectbox-single').addClass('si-selectbox-multiple');
-          op.transfer&&$dropdown.removeClass('si-selectbox-single').addClass('si-selectbox-multiple');
+          $selectbox
+            .removeClass('si-selectbox-single')
+            .addClass('si-selectbox-multiple');
+          op.transfer &&
+            $dropdown
+              .removeClass('si-selectbox-single')
+              .addClass('si-selectbox-multiple');
         } else {
           this.$tagArea.remove();
-          $selectbox.removeClass('si-selectbox-multiple').addClass('si-selectbox-single');
-          op.transfer&&$dropdown.removeClass('si-selectbox-multiple').addClass('si-selectbox-single');
+          $selectbox
+            .removeClass('si-selectbox-multiple')
+            .addClass('si-selectbox-single');
+          op.transfer &&
+            $dropdown
+              .removeClass('si-selectbox-multiple')
+              .addClass('si-selectbox-single');
         }
         break;
     }
@@ -116,8 +134,8 @@ class Selectbox extends BaseForm {
       let rl = newVal,
         $selectbox = this.$selectbox;
       if (typeof rl === 'boolean') {
-        rl && $selectbox.addClass('si-form-readonly')&&this._removeEvent();
-        !rl && $selectbox.removeClass('si-form-readonly')&&this._addEvent();
+        rl && $selectbox.addClass('si-form-readonly') && this._removeEvent();
+        !rl && $selectbox.removeClass('si-form-readonly') && this._addEvent();
         return;
       }
       if (typeof rl === 'number') {
@@ -130,10 +148,12 @@ class Selectbox extends BaseForm {
         let arr1 = _.compare(newRla, rla);
         let arr2 = _.compare(rla, newRla);
         arr1.forEach(key => {
-          sbd[key] && sbd[key].$selectbox.addClass('si-selectbox-item-disabled');
+          sbd[key] &&
+            sbd[key].$selectbox.addClass('si-selectbox-item-disabled');
         });
         arr2.forEach(key => {
-          sbd[key] && sbd[key].$selectbox.removeClass('si-selectbox-item-disabled');
+          sbd[key] &&
+            sbd[key].$selectbox.removeClass('si-selectbox-item-disabled');
         });
         this.readonlyArr = newRla;
       }
@@ -143,22 +163,25 @@ class Selectbox extends BaseForm {
     if (this.selectboxDom) {
       let da = newVal,
         $selectbox = this.$selectbox;
-      da && $selectbox.addClass('si-form-disabled')&&this._removeEvent();
-      !da && $selectbox.removeClass('si-form-disabled')&&this._addEvent();
+      da && $selectbox.addClass('si-form-disabled') && this._removeEvent();
+      !da && $selectbox.removeClass('si-form-disabled') && this._addEvent();
     }
   }
-  _setSearch(){}
-  _initEvent(){
+  _setSearch() {}
+  _initEvent() {
     this._addEvent();
     let op = this.options;
-    this.$clear.on('click', (e) => {
+    this.$clear.on('click', e => {
       op.value = '';
       this.opened && this._close();
-      document.all ? e.cancelBubble=true : e.stopPropagation();
+      document.all ? (e.cancelBubble = true) : e.stopPropagation();
     });
   }
   _addEvent() {
-    $(document).on(`click.si.selectbox.${this.randomString}`, this._close.bind(this));
+    $(document).on(
+      `click.si.selectbox.${this.randomString}`,
+      this._close.bind(this)
+    );
     this.$selection.on('click.si.selectbox', this._toogle.bind(this));
   }
   _removeEvent() {
@@ -172,10 +195,10 @@ class Selectbox extends BaseForm {
     } else {
       this.popper = new Popper(this.$selection, this.$dropdown, {
         modifiers: {
-          computeStyle:{
+          computeStyle: {
             gpuAcceleration: false
           },
-          preventOverflow :{
+          preventOverflow: {
             boundariesElement: 'window'
           }
         },
@@ -189,7 +212,7 @@ class Selectbox extends BaseForm {
       });
     }
   }
-  _toogle(){
+  _toogle() {
     if (this.opened) {
       setTimeout(() => {
         this._close();
@@ -209,7 +232,8 @@ class Selectbox extends BaseForm {
     $selectbox.addClass('si-selectbox-visible');
     $dropdown.width($selection.outerWidth());
     this._initPopper();
-    let className = this.derection === 'bottom' ? 'slide-down-in' : 'slide-up-in';
+    let className =
+      this.derection === 'bottom' ? 'slide-down-in' : 'slide-up-in';
     $dropdown.show().addClass(className);
     setTimeout(() => {
       $dropdown.removeClass(className);
@@ -221,7 +245,8 @@ class Selectbox extends BaseForm {
     let $selectbox = this.$selectbox;
     let $dropdown = this.$dropdown;
     $selectbox.removeClass('si-selectbox-visible');
-    let className = this.derection === 'top'? 'slide-up-out' : 'slide-down-out';
+    let className =
+      this.derection === 'top' ? 'slide-up-out' : 'slide-down-out';
     $dropdown.addClass(className);
     setTimeout(() => {
       $dropdown.hide().removeClass(className);
@@ -247,11 +272,12 @@ class Selectbox extends BaseForm {
           op.clearable && this.$selection.addClass('si-show-clear');
         }
         arr1.forEach(key => {
-          if(!sbd[key])return true;
-          sbd[key].$selectbox.addClass('si-selectbox-item-selected') && this._addTag(key, sbd[key].text);
+          if (!sbd[key]) return true;
+          sbd[key].$selectbox.addClass('si-selectbox-item-selected') &&
+            this._addTag(key, sbd[key].text);
         });
         arr2.forEach(key => {
-          if(!sbd[key]) return true;
+          if (!sbd[key]) return true;
           sbd[key].$selectbox.removeClass('si-selectbox-item-selected');
           this.tagsDom[key].remove();
           delete this.tagsDom[key];
@@ -263,13 +289,14 @@ class Selectbox extends BaseForm {
           this._removeTagEvent();
         }
       } else {
-        let va = newVal && String(newVal) || '',
-          vac = val && String(val) || '',
+        let va = (newVal && String(newVal)) || '',
+          vac = (val && String(val)) || '',
           sbd = this.selectboxDom,
           $selectValue = this.$selectValue;
         if (va === '' && vac !== '') {
           $selectValue.text('');
-          sbd[vac] && sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
+          sbd[vac] &&
+            sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
           this.$input.removeData('key');
           $placeholder.show();
           $selectValue.hide();
@@ -282,17 +309,25 @@ class Selectbox extends BaseForm {
           $selectValue.text(va);
         }
         vac === '' && $placeholder.hide() && $selectValue.show();
-        va !== '' && vac !== '' && sbd[vac] && sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
-        op.clearable && newVal!=='' && this.$selection.addClass('si-show-clear');
-        op.clearable && newVal==='' && this.$selection.removeClass('si-show-clear');
+        va !== '' &&
+          vac !== '' &&
+          sbd[vac] &&
+          sbd[vac].$selectbox.removeClass('si-selectbox-item-selected');
+        op.clearable &&
+          newVal !== '' &&
+          this.$selection.addClass('si-show-clear');
+        op.clearable &&
+          newVal === '' &&
+          this.$selection.removeClass('si-show-clear');
       }
     }
-    val!==undefined && this.$input.val(newVal);
+    val !== undefined && this.$input.val(newVal);
     if (this.firstVal) {
       this.firstVal = false;
     } else {
       try {
-        val!==undefined && this.$input.trigger('valid.change').trigger('change');
+        val !== undefined &&
+          this.$input.trigger('valid.change').trigger('change');
       } catch (error) {
         Log.error(error);
       }
@@ -303,10 +338,17 @@ class Selectbox extends BaseForm {
     let _tag = document.createElement('div');
     let _tagText = document.createElement('span');
     let _tagClose = document.createElement('i');
-    $(_tagClose).addClass('fa fa-close si-tag-close').data('tag.value', val);
-    $(_tagText).addClass('si-tag-text').text(text);
+    $(_tagClose)
+      .addClass('fa fa-close si-tag-close')
+      .data('tag.value', val);
+    $(_tagText)
+      .addClass('si-tag-text')
+      .text(text);
     let $tag = $(_tag);
-    $tag.addClass('si-tag si-tag-checked').append(_tagText).append(_tagClose);
+    $tag
+      .addClass('si-tag si-tag-checked')
+      .append(_tagText)
+      .append(_tagClose);
     this.$tagArea.append(_tag);
     this.tagsDom[val] = $tag;
   }
@@ -317,7 +359,7 @@ class Selectbox extends BaseForm {
       let valueArr = op.value.split(',');
       _.delete(valueArr, val);
       op.value = valueArr.join(',');
-      document.all ? e.cancelBubble=true : e.stopPropagation();
+      document.all ? (e.cancelBubble = true) : e.stopPropagation();
     });
   }
   _removeTagEvent() {
@@ -337,7 +379,10 @@ class Selectbox extends BaseForm {
     for (let i = 0, len = data.length; i < len; i++) {
       let li = document.createElement('li');
       let $li = $(li);
-      $li.data('value', data[i][valueField]).addClass('si-selectbox-item').html(data[i][keyField]);
+      $li
+        .data('value', data[i][valueField])
+        .addClass('si-selectbox-item')
+        .html(data[i][keyField]);
       $ul.append(li);
       if (data[i][valueField] !== '') {
         Object.assign(selectboxDom, {
@@ -348,13 +393,13 @@ class Selectbox extends BaseForm {
         });
       }
     }
-    $ul.on('click', (e) => {
+    $ul.on('click', e => {
       e.stopPropagation();
       let val = $(e.target).data('value');
       if (this.readonlyArr.includes(val)) return;
       if (op.multiple) {
-        if(val === '') return;
-        let valueArr = op.value !== '' && op.value.split(',') || [];
+        if (val === '') return;
+        let valueArr = (op.value !== '' && op.value.split(',')) || [];
         if (valueArr.includes(val)) {
           for (let i = 0, len = valueArr.length; i < len; i++) {
             if (valueArr[i] === val) {
@@ -373,45 +418,48 @@ class Selectbox extends BaseForm {
     });
     $dropdown.html(ul);
   }
-  getKey(){
+  getKey() {
     let op = this.options;
-    if(op.value === ''){
+    if (op.value === '') {
       return '';
     }
-    if(!op.multiple){
-      return op.data.filter(item=>{
+    if (!op.multiple) {
+      return op.data.filter(item => {
         return op.value === item[op.valueField];
       })[0][op.keyField];
     }
     let valueArr = op.value.split(','),
       arr = [];
-    op.data.filter(item=>{
-      return valueArr.includes(item[op.valueField]);
-    }).forEach(item=>{
-      arr.push(item[op.keyField]);
-    });
+    op.data
+      .filter(item => {
+        return valueArr.includes(item[op.valueField]);
+      })
+      .forEach(item => {
+        arr.push(item[op.keyField]);
+      });
     return arr.join(',');
   }
   getData() {
     return this.options.data;
   }
-  refresh(){
+  refresh() {
     let op = this.options;
-    this._getDataByUrl(op.url,{},re=>{
-      op.data = op.dataField?re[op.dataField]:re;
+    this._getDataByUrl(op.url, {}, re => {
+      op.data = op.dataField ? re[op.dataField] : re;
     });
   }
-  destroy(){
+  destroy() {
     this._removeEvent();
-    this.options.transfer&&this.$dropdown.remove();
+    this.options.transfer && this.$dropdown.remove();
     this.popper && this.popper.destroy();
   }
 }
 
 function Plugin(option) {
   try {
-    let value, args = Array.prototype.slice.call(arguments, 1);
-    this.each(function(){
+    let value,
+      args = Array.prototype.slice.call(arguments, 1);
+    this.each(function() {
       let $this = $(this),
         dataSet = $this.data(),
         data = dataSet['si.selectbox'];
@@ -424,14 +472,18 @@ function Plugin(option) {
           $this.removeData('si.selectbox');
         }
       }
-      if(typeof option === 'object'&& data){
+      if (typeof option === 'object' && data) {
         data.set(option);
       }
       if (!data) {
-        let options = $.extend( {} , Selectbox.DEFAULTS, typeof option === 'object' && option);
+        let options = $.extend(
+          {},
+          Selectbox.DEFAULTS,
+          typeof option === 'object' && option
+        );
         let datakeys = Object.keys(dataSet);
         let defaultkeys = Object.keys(options);
-        defaultkeys.forEach((key) => {
+        defaultkeys.forEach(key => {
           let lowkey = key.toLocaleLowerCase();
           if (datakeys.includes(lowkey)) {
             options[key] = dataSet[lowkey];
@@ -462,7 +514,7 @@ Selectbox.DEFAULTS = {
   size: '',
   keyField: 'key',
   valueField: 'value',
-  dataField:'',
+  dataField: '',
   data: null,
   url: '',
   value: '',
@@ -471,8 +523,8 @@ Selectbox.DEFAULTS = {
   clearable: false,
   multiple: false,
   valid: false,
-  icon:'fa fa-caret-down fa-fw',
-  clearIcon:'fa fa-times-circle fa-fw'
+  icon: 'fa fa-caret-down fa-fw',
+  clearIcon: 'fa fa-times-circle fa-fw'
 };
 
 let old = $.fn.selectbox;

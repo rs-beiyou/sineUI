@@ -147,6 +147,9 @@ label .btn {
   margin: 0;
   color: #4e4e4e;
 }
+.si-callout pre code {
+  border: none;
+}
 .code-box-dark {
   background: #292929;
 }

@@ -11,7 +11,13 @@ export default class BaseForm {
     this._setFragment();
     this._setFormBlock();
     this['_set' + this.className]();
-    this.$input.addClass('si-form-input').data('si-form-type',this.className.toLowerCase()).attr({'spellcheck':false,'autocomplete':this.lastOptions.name||'off'});
+    this.$input
+      .addClass('si-form-input')
+      .data('si-form-type', this.className.toLowerCase())
+      .attr({
+        spellcheck: false,
+        autocomplete: this.lastOptions.name || 'off'
+      });
     this.firstVal && this.$input.val(this.lastOptions.value);
     this.set(this.lastOptions);
     this._setCompile();
@@ -25,7 +31,8 @@ export default class BaseForm {
       switch (key) {
         case 'label':
         case 'labelWidth':
-          this._setLabel(key, newVal);
+        case 'labelAlign':
+          this._setLabel(key, newVal, val);
           break;
         case 'id':
         case 'name':
@@ -54,49 +61,59 @@ export default class BaseForm {
           this._setFormBlock(key, newVal);
           break;
         case 'url':
-          this._getDataByUrl(newVal,{},re=>{
-            op.data = op.dataField?re[op.dataField]:re;
+          this._getDataByUrl(newVal, {}, re => {
+            op.data = op.dataField ? re[op.dataField] : re;
             this.dataReloading = false;
           });
           break;
         case 'valid':
-          this.$input.valid(typeof newVal==='string'&& newVal.includes('{')?(new Function(`return ${newVal}`))():newVal, this);
+          this.$input.valid(
+            typeof newVal === 'string' && newVal.includes('{')
+              ? new Function(`return ${newVal}`)()
+              : newVal,
+            this
+          );
           break;
       }
     };
     new Watch(op, callback.bind(this), false);
   }
-  _setCompile(){
+  _setCompile() {
     let op = this.options;
     this.cpLock = false;
-    if(this.className==='Textbox'||this.className==='Passwordbox'){
-      setTimeout(()=>{
-        this.$input.on('compositionstart',()=>{
-          this.cpLock = true;
-        }).on('compositionend',()=>{
-          this.cpLock = false;
-          let val = this.$input.val();
-          if(val === op.value){
-            return;
-          }
-          op.value = val;
-        }).on('input',()=>{
-          if(this.cpLock)return;
-          let val = this.$input.val();
-          if(val === op.value){
-            return;
-          }
-          op.value = val;
-        });
+    if (this.className === 'Textbox' || this.className === 'Passwordbox') {
+      setTimeout(() => {
+        this.$input
+          .on('compositionstart', () => {
+            this.cpLock = true;
+          })
+          .on('compositionend', () => {
+            this.cpLock = false;
+            let val = this.$input.val();
+            if (val === op.value) {
+              return;
+            }
+            op.value = val;
+          })
+          .on('input', () => {
+            if (this.cpLock) return;
+            let val = this.$input.val();
+            if (val === op.value) {
+              return;
+            }
+            op.value = val;
+          });
         //IE9下不触发退格/删除/剪切输入事件
         if (navigator.userAgent.indexOf('MSIE 9') > -1) {
-          this.$input.on('cut',() => {
-            this.$input.trigger('input');
-          }).on('keyup',e => {
-            if (e.keyCode === 46 || e.keyCode === 8) {
+          this.$input
+            .on('cut', () => {
               this.$input.trigger('input');
-            }
-          });
+            })
+            .on('keyup', e => {
+              if (e.keyCode === 46 || e.keyCode === 8) {
+                this.$input.trigger('input');
+              }
+            });
         }
       });
     }
@@ -106,12 +123,14 @@ export default class BaseForm {
       this.$fragment = $(document.createDocumentFragment());
     }
   }
-  _setLabel(item, newVal) {
+  _setLabel(item, newVal, oldVal) {
     let $label;
     if (!this.$label) {
       let _label = document.createElement('label');
       $label = $(_label);
       $label.addClass('control-label');
+      this.options.labelAlign &&
+        $label.addClass(`text-${this.options.labelAlign}`);
       this.$label = $label;
       if (this.$input) {
         this.$formBlock.before(_label);
@@ -126,7 +145,15 @@ export default class BaseForm {
         $label.html(newVal);
         break;
       case 'labelWidth':
-        newVal.includes('col-') ? $label.addClass(newVal) : newVal.includes('px') ? $label.css('width', newVal) : $label.css('width', newVal + 'px');
+        newVal.includes('col-')
+          ? $label.addClass(newVal)
+          : newVal.includes('px')
+            ? $label.css('width', newVal)
+            : $label.css('width', newVal + 'px');
+        break;
+      case 'labelAlign':
+        $label.addClass(`text-${newVal}`);
+        oldVal && $label.removeClass(`text-${oldVal}`);
         break;
     }
   }
@@ -142,7 +169,11 @@ export default class BaseForm {
       $formBlock = this.$formBlock;
     }
     if (item === 'inputWidth') {
-      newVal.includes('col-') ? $formBlock.addClass(newVal) : newVal.includes('px') ? $formBlock.css('width', newVal) : $formBlock.css('width', newVal + 'px');
+      newVal.includes('col-')
+        ? $formBlock.addClass(newVal)
+        : newVal.includes('px')
+          ? $formBlock.css('width', newVal)
+          : $formBlock.css('width', newVal + 'px');
     }
   }
   _setHelpText(item, newVal) {
@@ -160,26 +191,28 @@ export default class BaseForm {
       $helpText.text(newVal);
     }
   }
-  _getDataByUrl(newVal,data, cb) {
+  _getDataByUrl(newVal, data, cb) {
     $.ajax({
       url: newVal,
-      data:data,
+      data: data,
       method: 'get',
-      success: (re) => {
-        cb && cb(typeof re==='string' ? JSON.parse(re) : re);
+      success: re => {
+        cb && cb(typeof re === 'string' ? JSON.parse(re) : re);
       }
     });
   }
   set(option) {
-    if(option && option.url){
+    if (option && option.url) {
       this.dataReloading = true;
     }
-    this.className === 'Filebox' ? $.extend(true, this.options, option) : Object.assign(this.options, option);
+    this.className === 'Filebox'
+      ? $.extend(true, this.options, option)
+      : Object.assign(this.options, option);
   }
-  create(el){
-    return el?document.createElement(el):document.createDocumentFragment();
+  create(el) {
+    return el ? document.createElement(el) : document.createDocumentFragment();
   }
-  getValue(){
+  getValue() {
     return this.options.value;
   }
 }

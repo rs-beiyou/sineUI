@@ -2,7 +2,7 @@
   <article class="si-article">
     <p class="si-info">主要用于展示大量结构化数据。</p>
     <div class="si-callout info">
-      <div class="si-callout-title" 何时使用></div>
+      <div class="si-callout-title">何时使用</div>
       <ul>
         <li>当有大量结构化的数据需要展现时；</li>
         <li>当需要对数据进行排序、搜索、分页、自定义操作等复杂行为时。</li>
@@ -1002,13 +1002,211 @@ $('#table9').table({
           <tr>
             <td>events</td>
             <td>
-              当使用 formatter
-              做单元格格式化，可使用该参数为其添加事件
+              当使用 formatter 做单元格格式化，可使用该参数为其添加事件
             </td>
             <td>Object</td>
             <td>
               undefined
             </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="si-api-title">表格操作方法</p>
+    <div class="si-callout info">
+      <pre><code class="language-javascript">$('#table').table('method-name', params)</code></pre>
+    </div>
+    <div class="si-api-box">
+      <table class="code-box-table">
+        <thead>
+          <tr>
+            <th width="150">方法名</th>
+            <th>说明</th>
+            <th>参数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>refresh</td>
+            <td>刷新表格数据请求，可重新配置 url、query 等参数</td>
+            <td>表格请求配置</td>
+          </tr>
+          <tr>
+            <td>refreshOptions</td>
+            <td>
+              刷新表格配置
+            </td>
+            <td>表格配置</td>
+          </tr>
+          <tr>
+            <td>load</td>
+            <td>
+              加载数据进表格
+            </td>
+            <td>数组类型数据</td>
+          </tr>
+          <tr>
+            <td>reload</td>
+            <td>
+              重新加载表格数据
+            </td>
+            <td>查询参数</td>
+          </tr>
+          <tr>
+            <td>selected</td>
+            <td>获取已勾选的所有数据</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>checkAll</td>
+            <td>全选当前页数据</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>uncheckAll</td>
+            <td>全不选当前页数据</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>check</td>
+            <td>根据行序列号勾选某一条数据</td>
+            <td>行 index</td>
+          </tr>
+          <tr>
+            <td>uncheck</td>
+            <td>根据行序列号取消某一行的勾选状态</td>
+            <td>行 index</td>
+          </tr>
+          <tr>
+            <td>append</td>
+            <td>
+              在表格最后追加一条数据
+            </td>
+            <td>一条数据data</td>
+          </tr>
+          <tr>
+            <td>getData</td>
+            <td>
+              返回表格加载的所有数据，可传入 useCurrentPage 参数为 true
+              获取当前页数据
+            </td>
+            <td>useCurrentPage：true 或 false</td>
+          </tr>
+          <tr>
+            <td>updateRow</td>
+            <td>更新某一行数据</td>
+            <td>
+              需传入一个对象参数：{<br />
+              index: 待更新行序列号,<br />
+              row: 待更新数据<br />
+              }
+            </td>
+          </tr>
+          <tr>
+            <td>getRowByUniqueId</td>
+            <td>根据唯一的 id 更新某一行数据</td>
+            <td>
+              需传入一个对象参数：{<br />
+              id: 待更新行 id,<br />
+              row: 待更新数据<br />
+              }
+            </td>
+          </tr>
+          <tr>
+            <td>hideColumn</td>
+            <td>
+              隐藏列
+            </td>
+            <td>
+              field 参数名
+            </td>
+          </tr>
+          <tr>
+            <td>showColumn</td>
+            <td>
+              显示列
+            </td>
+            <td>
+              field 参数名
+            </td>
+          </tr>
+          <tr>
+            <td>removeSelected</td>
+            <td>
+              删除选中行
+            </td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="si-api-title">表格事件</p>
+    <div class="si-callout info">
+      <pre><code class="language-javascript">$('#table').table({
+    onEventName: function (arg1, arg2, ...) {
+        // ...
+    }
+})
+$('#table').on('event-name.bs.table', function (e, arg1, arg2, ...) {
+    // ...
+})</code></pre>
+    </div>
+    <div class="si-api-box">
+      <table class="code-box-table">
+        <thead>
+          <tr>
+            <th width="150">属性事件名</th>
+            <th width="150">jQuery事件名</th>
+            <th>说明</th>
+            <th>参数</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>onAll</td>
+            <td>all.bs.table</td>
+            <td>所有事件都会触发</td>
+            <td>name：事件名<br> args：事件方法参数</td>
+          </tr>
+          <tr>
+            <td>onClickRow</td>
+            <td>
+                click-row.bs.table
+            </td>
+            <td>单击行事件</td>
+            <td>row：行数据<br> $element：行所在 tr<br>field：点击的单元格属性名</td>
+          </tr>
+          <tr>
+                <td>onDblClickRow</td>
+                <td>
+                        dbl-click-row.bs.table
+                </td>
+                <td>双击行事件</td>
+                <td>row：行数据<br> $element：行所在 tr<br>field：点击的单元格属性名</td>
+          </tr>
+          <tr>
+            <td>onCheck</td>
+            <td>check.bs.table</td>
+            <td>勾选数据时触发</td>
+            <td>row：行数据<br> $element：行所在 tr</td>
+          </tr>
+          <tr>
+                <td>onUncheck</td>
+                <td>uncheck.bs.table</td>
+                <td>取消勾选数据时触发</td>
+                <td>row：行数据<br> $element：行所在 tr</td>
+              </tr>
+          <tr>
+            <td>onLoadSuccess</td>
+            <td>load-success.bs.table</td>
+            <td>远程获取数据成功后触发</td>
+            <td>data：表格数据</td>
+          </tr>
+          <tr>
+            <td>onPageChange</td>
+            <td>page-change.bs.table</td>
+            <td>改变页码或修改每页显示数量时触发</td>
+            <td>number：pageNumber <br> size：pageSize</td>
           </tr>
         </tbody>
       </table>

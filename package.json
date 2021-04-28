@@ -53,7 +53,7 @@
     "webpack": "^3.4.1",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-bundle-size-analyzer": "^2.7.0",
-    "webpack-dev-server": "^2.6.1",
+    "webpack-dev-server": "^3.1.11",
     "webpack-merge": "^4.1.0",
     "webpack-zip-plugin": "^0.1.6"
   },

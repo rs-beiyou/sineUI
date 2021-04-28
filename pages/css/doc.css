@@ -15,8 +15,7 @@ code {
   padding: 0.2em 0.4em;
   border: 1px solid #eee;
   border-radius: 3px;
-  font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono,
-    monospace;
+  font-family: Lucida Console, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
 }
 
 a code[class*='language-'] {
@@ -43,6 +42,13 @@ label .btn {
   bottom: 0;
   padding: 0 20px 10px;
   /* overflow: hidden; */
+}
+.si-footer {
+  text-align: center;
+  padding: 20px 0;
+}
+.si-footer a {
+  color: #555;
 }
 .si-article {
   position: relative;
